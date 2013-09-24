@@ -18,6 +18,7 @@ My results are challenging to the conventional wisdom that phonologization is a 
 presented: []
 published: []
 docs: [{format: "Full Dissertation ", url: "/papers/master2.pdf", local: true}]
-categories: [diss, dissertation]
+categories: [dissertation]
+display-category: "Chapter"
 comments: true
 ---
