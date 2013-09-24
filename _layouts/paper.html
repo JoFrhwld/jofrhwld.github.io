@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title>{{ page.title }}</title>
+		<link rel="stylesheet" href="{{site.baseurl}}/assets/mystyle.css">
+	</head>
+	<body>
+	<body class="oneColElsCtr">
+		<div id="container">
+			<div id = "mainContent">
+				{% assign BASE_PATH=".."%}
+				<h1>{{ page.title }}</h1>
+				<div class = "box">
+				<p>
+					{% for author in page.author %}
+						{% if author.url != null %}
+							<a href = "{{ author.url }}">{{ author.name }}</a>
+						{% else %}
+							{{ author.name}}
+						{% endif %}
+						{% if forloop.length > 1 %}
+							{% if forloop.rindex > 2 %}
+								{{ ", "}}
+							{% elsif forloop.rindex == 2 %}
+								{{" and "}}
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+					({{ page.year }})
+				</p>
+				<h3>Abstract</h3>
+				<p>
+					{{ page.abstract }}
+				</p>
+				{% if page.presented.size > 0 %}
+					<p>Presented at
+						{% for conf in page.presented %}
+							{% if conf.url != null %}
+								<a href="{{conf.url }}">{{conf.conf}}</a>
+							{% else %}
+								{{conf.conf}}
+							{% endif %}
+						{% endfor %}
+						</p>
+				{% endif %}
+				{% if page.published.size > 0 %}
+					<p> Published
+						{% for pub in page.published %}
+								{{pub}}
+						{% endfor %}
+					</p>
+				{% endif %}
+				{% if page.docs.size > 0 %}
+					<p>
+						{% for doc in page.docs %}
+							{% if doc.local == true %}
+							<a href = "{{doc.url | prepend: site.baseurl}}">
+							{% else %}
+							<a href = "{{doc.url}}">
+							{% endif %}
+							{{doc.format}}</a><br>
+						{% endfor %}
+					</p>
+				{%endif%}
+
+				</div><!--box-->
+				
+				<div>
+				<ul id="pagenav">
+					<li><a href = "{{site.baseurl}}" display=block>&larr;Home</a></li>
+					<li><a href = "{{page.categories.first | prepend: "/" | prepend: site.baseurl | append: ".html"}}">{{page.display-category | capitalize | prepend: "More " | append: "s"}}</a>
+				</ul>
+				</div>
+
+				<p>
+					{{content}}
+				</p>
+
+				{% if page.comments %}
+					{% include comments %}
+				{% endif %}
+			</div>
+		</div>
+	</body>
+	{% include analytics %}
+ </html>

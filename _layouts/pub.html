@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title>{{ page.title }}</title>
+		<link rel="stylesheet" href="{{site.baseurl}}/assets/mystyle.css">
+	</head>
+	<body>
+	<body class="oneColElsCtr">
+		<div id="container">
+			<div id = "mainContent">
+			<h1>{{ page.title }}
+				{% for post in site.posts %}
+					{% if post.categories contains page.pub_type %}
+
+					<h2>{{ post.title }}</h2>
+
+				<div class = "box">
+				<p>
+					{% for author in post.author %}
+						{% if author.url != null %}
+							<a href = "{{ author.url }}">{{ author.name }}</a>
+						{% else %}
+							{{ author.name}}
+						{% endif %}
+						{% if forloop.length > 1 %}
+							{% if forloop.rindex > 2 %}
+								{{ ", "}}
+							{% elsif forloop.rindex == 2 %}
+								{{" and "}}
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+					({{ post.year }})
+				</p>
+				<h3>Abstract</h3>
+				{% assign n_abs = post.abstract.size %}
+				{% capture small_abs %}
+					{{ post.abstract| strip_html | truncatewords: 50, '' }}
+				{% endcapture %}
+				<p>
+					{{ small_abs }}
+					{% if small_abs.size <  n_abs %}
+						<a href = "{{ post.url | prepend : site.baseurl }}" display=block>&hellip;</a>
+					{% endif %}
+				</p>
+				{% if post.presented.size > 0 %}
+					<p>Presented at
+						{% for conf in post.presented %}
+							{% if conf.url != null %}
+								<a href="{{conf.url }}">{{conf.conf}}</a>
+							{% else %}
+								{{conf.conf}}
+							{% endif %}
+						{% endfor %}
+						</p>
+				{% endif %}
+				{% if post.published.size > 0 %}
+					<p> Published
+						{% for pub in post.published %}
+								{{pub}}
+						{% endfor %}
+					</p>
+				{% endif %}
+				{% if post.docs.size > 0 %}
+					<p>
+						{% for doc in post.docs %}
+							{% if doc.local == true %}
+							<a href = "{{doc.url | prepend: site.baseurl}}">
+							{% else %}
+							<a href = "{{doc.url}}">
+							{% endif %}
+							{{doc.format}}</a><br>
+						{% endfor %}
+					</p>
+				{%endif%}
+				<a href = "{{site.baseurl}}" display=block>&larr;Home</a>
+				</div><!--box-->
+				<hr>
+				{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</body>
+	{% include analytics %}
+ </html>

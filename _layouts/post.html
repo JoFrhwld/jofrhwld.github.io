@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title>{{ page.title }}</title>
+		<link rel="stylesheet" href="{{site.baseurl}}/assets/mystyle.css">
+	</head>
+	<body class="oneColElsCtr">
+		<div id="container">
+			<div id = "mainContent">
+				<h1>{{page.title}}</h1>
+				<b>{{ page.date | date: "%B %d, %Y"}}</b>
+				<div class = "box">
+					{{ content }}
+				</div>
+				<ul id="pagenav">
+					<li><a href = "{{site.baseurl}}" display=block>&larr;Home</a></li>
+					<li><a href = "{{page.categories.first | prepend: "/" | prepend: site.baseurl | append: ".html"}}">
+					{% if page.display-category != null} %}
+						{{page.display-category | capitalize | prepend: "More " | append: "s"}}
+					{% else %}
+						{{page.categories.first | capitalize | prepend: "More " | append: "s"}}
+					{% endif %}</a>
+				</ul>
+				{% if page.comments %}
+					{% include comments %}
+				{% endif %}
+
+			</div>
+		</div>
+	</body>
+	{% include analytics %}
+ </html>
