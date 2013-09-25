@@ -132,6 +132,13 @@ table.pub th, table.pub td {
   text-align: left;
 }
 
+table.diss th, table.diss td {
+  font-size : 80%;
+  font-family :  "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial Narrow", "Arial", "Lucida Grande", sans-serif; ;
+  text-align: left;
+}
+
+
 #topnav {
 	width: 100%;
 	float: left;
