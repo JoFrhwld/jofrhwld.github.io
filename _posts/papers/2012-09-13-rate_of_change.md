@@ -14,6 +14,6 @@ presented: [{conf: "Newcastle University, School of English Literature, Language
 published: []
 docs: []
 categories: [italk]
-display-cateogry: "Invited Talk"
+display-category: "Invited Talk"
 comments: true
 ---

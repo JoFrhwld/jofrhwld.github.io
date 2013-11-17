@@ -8,6 +8,6 @@ presented: [{conf: "Penn State Center for Language Science", url: "http://cls.ps
 published: []
 docs: [{format: "Slides [PDF]", url: "http://jofrhwld.github.com/talks/PennState2011/talk/presentation/fruehwald_CLS_2011.pdf" }]
 categories: [italk]
-display-cateogry: "Invited Talk"
+display-category: "Invited Talk"
 comments: true
 ---
