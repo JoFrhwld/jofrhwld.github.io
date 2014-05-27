@@ -317,7 +317,7 @@ If you're going to plot the same things, multiple times, try to keep your axis r
 ## Try it a few different ways.
 
 ```{r dev = "svg", fig.width = 10}
-source("phila_income.R")
+source("http://jofrhwld.github.io/postgradconf_2014/phila_income.R")
 head(phila_income)
 
 ggplot(phila_income, aes(Name, value))+
