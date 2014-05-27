@@ -331,6 +331,7 @@ ggplot(phila_income, aes(Name, value))+
 ```
 
 ```{r dev = "svg"}
+  library(reshape2)
   phila_income_c <- dcast(phila_income, Name + Level ~ Gender)
   head(phila_income_c)
 
@@ -350,6 +351,12 @@ ggplot(phila_income, aes(Name, value))+
       scale_y_continuous(labels = dollar)+
       geom_abline()+
       coord_fixed()
+
+  ggplot(phila_income_c, aes(Level, Female/Male, color = Name))+
+    geom_point() + 
+    geom_line(aes(group = Name)) + 
+    geom_hline(y = 1)+
+    ylim(0.5,1)
 ```
 
 # Tools to use

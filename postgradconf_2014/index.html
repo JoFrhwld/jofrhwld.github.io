@@ -373,7 +373,8 @@ head(phila_income)</code></pre>
   xlab(&quot;County&quot;) +
     facet_wrap(~Level) </code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-12.svg" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="960" /></p>
-<pre class="r"><code>  phila_income_c &lt;- dcast(phila_income, Name + Level ~ Gender)
+<pre class="r"><code>  library(reshape2)
+  phila_income_c &lt;- dcast(phila_income, Name + Level ~ Gender)
   head(phila_income_c)</code></pre>
 <pre><code>##              Name     Level Female  Male
 ## 1    Bucks County  LessHigh  15288 27184
@@ -398,6 +399,12 @@ head(phila_income)</code></pre>
       geom_abline()+
       coord_fixed()</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-132.svg" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="672" /></p>
+<pre class="r"><code>  ggplot(phila_income_c, aes(Level, Female/Male, color = Name))+
+    geom_point() + 
+    geom_line(aes(group = Name)) + 
+    geom_hline(y = 1)+
+    ylim(0.5,1)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-133.svg" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="672" /></p>
 </div>
 </div>
 <div id="tools-to-use" class="section level1">
