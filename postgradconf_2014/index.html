@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Josef Fruehwald" />
+
+<meta name="date" content="2014-05-27" />
+
+<title>Data Visualization</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="index_files/bootstrap-3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<script src="index_files/jquery-1.10.2/jquery.min.js"></script>
+<script src="index_files/bootstrap-3.0.3/js/bootstrap.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="index_files/highlight/default.css"
+      type="text/css" />
+<script src="index_files/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+
+<div id="header">
+<h1 class="title">Data Visualization</h1>
+<h4 class="author"><em>Josef Fruehwald</em></h4>
+<h4 class="date"><em>May 27, 2014</em></h4>
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#background">Background</a></li>
+<li><a href="#visualization-goals">Visualization Goals</a><ul>
+<li><a href="#exploratory-data-visualization">Exploratory Data Visualization</a></li>
+<li><a href="#expository-data-visualization">Expository Data Visualization</a></li>
+</ul></li>
+<li><a href="#basic-visualization-principles">Basic Visualization Principles</a><ul>
+<li><a href="#immediately-eliminate-these-elements-from-your-plots">Immediately eliminate these elements from your plots</a></li>
+<li><a href="#be-parsimonious">Be Parsimonious</a></li>
+<li><a href="#map-plot-aesthetics-to-data-dimensions">Map Plot Aesthetics to Data Dimensions</a></li>
+<li><a href="#use-the-appropriate-graphical-element-for-the-data">Use the appropriate graphical element for the data</a></li>
+<li><a href="#be-consistent">Be Consistent</a></li>
+<li><a href="#try-it-a-few-different-ways.">Try it a few different ways.</a></li>
+</ul></li>
+<li><a href="#tools-to-use">Tools to use</a><ul>
+<li><a href="#r">R</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+<p>In this brief workshop, we’re going to review some basics of data visualization and statistics, and tools you can use. If you don’t know anything about statistics, there is no 60 minute presentation on earth that will be able to teach you the basics. A good introductory course might do the job for you, but the only way to be able to connect up practical statistical tools with your research needs is to learn through doing.</p>
+</div>
+<div id="background" class="section level1">
+<h1>Background</h1>
+<p>When it comes to reading about information design, it all starts with Edward Tufte’s <em>The Visual Display of Quantitative Information</em>. I have found that insights from this and other Tufte works have greatly influenced my own approaches to data visualization, specifically in terms of maintaining graphical integrity, and minimizing use of non-data “ink”.</p>
+<p>I also suggest subscribing to a few blogs on data visualization. I find that nothing inspires me to try new and better visualizations like seeing new excellent examples. The two blogs I’d suggest most highly are <a href="http://eagereyes.org/">Eager Eyes</a> and <a href="http://junkcharts.typepad.com/">Junk Charts</a>. Eager Eyes is maintained by Robert Kosara, who is an academic focusing on information visualization. Apparently they have conferences and everything. Junk Charts is maintained by Kaiser Fung, who is a professional statistician.</p>
+</div>
+<div id="visualization-goals" class="section level1">
+<h1>Visualization Goals</h1>
+<p>There are two primary reasons to visualize data.</p>
+<ol style="list-style-type: decimal">
+<li>To help yourself understand your data.</li>
+<li>To help other people understand your data.</li>
+</ol>
+<p>I’ll call the first goal “Exploratory Data Visualization” and the second goal “Expository Data Visualization”.</p>
+<div id="exploratory-data-visualization" class="section level2">
+<h2>Exploratory Data Visualization</h2>
+<p>For any kind of data analysis, this should be your workflow:</p>
+<p><img src="workflow.svg" alt="workflow" /></p>
+<p>More or less, you should always be visualizing your data <em>before</em> you do statistical analyses, so that you can really understand what you’re working with. The Anscombe quartet is a good example of why that is. Here are 4 series of data points:</p>
+<p><img src="index_files/figure-html/anscomb_plot.svg" title="plot of chunk anscomb_plot" alt="plot of chunk anscomb_plot" width="672" /></p>
+<p>If this were real data, and you were trying to figure out how some real process worked with this data, you definitely wouldn’t want to treat these 4 data series as being the “same.” But, if you just take the means and standard deviations of <code>x</code> and <code>y</code> from each series, they’re (more or less) identical. Maybe even more disturbing, the correlation of <code>x</code> and <code>y</code> is identical for every series!</p>
+<div style="width:50%;">
+<table>
+<thead>
+<tr class="header">
+<th align="left">series</th>
+<th align="right">mean(x)</th>
+<th align="right">sd(x)</th>
+<th align="right">mean(y)</th>
+<th align="right">sd(y)</th>
+<th align="right">cor(x,y)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">9</td>
+<td align="right">3.317</td>
+<td align="right">7.501</td>
+<td align="right">2.032</td>
+<td align="right">0.8164</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">9</td>
+<td align="right">3.317</td>
+<td align="right">7.501</td>
+<td align="right">2.032</td>
+<td align="right">0.8162</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">9</td>
+<td align="right">3.317</td>
+<td align="right">7.500</td>
+<td align="right">2.030</td>
+<td align="right">0.8163</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">9</td>
+<td align="right">3.317</td>
+<td align="right">7.501</td>
+<td align="right">2.031</td>
+<td align="right">0.8165</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Even worse, if you fit a linear regression to each series, the intercept, slope, p-values for the intercept and slope, and r-squared for the regression, are all more or less identical.</p>
+<div style="width:70%;">
+<table>
+<thead>
+<tr class="header">
+<th align="left">series</th>
+<th align="right">(Intercept)</th>
+<th align="right">y</th>
+<th align="right">(Intercept) p-value</th>
+<th align="right">y p-value</th>
+<th align="right">r-squared</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">-0.998</td>
+<td align="right">1.333</td>
+<td align="right">0.692</td>
+<td align="right">0.002</td>
+<td align="right">0.667</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">-0.995</td>
+<td align="right">1.332</td>
+<td align="right">0.692</td>
+<td align="right">0.002</td>
+<td align="right">0.666</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">-1.000</td>
+<td align="right">1.333</td>
+<td align="right">0.691</td>
+<td align="right">0.002</td>
+<td align="right">0.666</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">-1.004</td>
+<td align="right">1.334</td>
+<td align="right">0.690</td>
+<td align="right">0.002</td>
+<td align="right">0.667</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Most default statistical analyses of these 4 series of data wouldn’t inform you that they are meaningfully different, but the visualization immediately does. If you run stats without having visualized your data, you’re effectively flying blind. So visualize aggressively. Visualize early, and visualize often.</p>
+</div>
+<div id="expository-data-visualization" class="section level2">
+<h2>Expository Data Visualization</h2>
+<p>When your sights move towards expository visualization, that is, to communicate your research to others, it’s important to make your graphs as accurate as possible. It’s important to think of graphics you produce as a <strong>report</strong> of your data, on equal footing with the statistical analysis. Avoid thinking of a plot as a sketch, drawing, illustration, cartoon, decoration, or interpretive art piece of your data. They are merely a spacially and temporally more effective means of reporting your raw data than printing all of the raw data in its entirety.</p>
+<p>Of course, it’s impossible to simply “report” data in any format without first interpreting it. In fact, the raw data you collect in the first place is interpretive. However, insofar as there is a particular or conventional way you would publish numbers in a large table, and insofar as there are natural properties of those numbers, you want your graphic to accurately represent those properties.</p>
+<p>When thinking about numerical data, it’s important to think about properties of numbers. Numbers have order, magnitude, and what I’ll call contextual magnitude. When you read numbers printed in a table, you have an immediate sense of order and magnitude of the numbers in comparison, and your experience with whatever the numbers represent tells you the contextual magnitude. For example,</p>
+<div style="width:20%;">
+<table>
+<thead>
+<tr class="header">
+<th align="left">group</th>
+<th align="left">Measure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">B</td>
+<td align="left">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>You immediately know:</p>
+<ul>
+<li><strong>Order</strong>: The order is 2 &lt; 5, or A &lt; B</li>
+<li><strong>Magnitude</strong>: The magnitude is 5 = 2.5 * 2, or B = 2.5 * A.</li>
+<li><strong>Contextual Magnitude</strong>: This depends on what is being measured. If A and B are pubs, and the measure is the cost of a pint, then we know that B is is a bit expensive, and A is a bit cheap. If A and B are people, and the measure is their number of legs, then A is what you’d expect, and B has an unbelievably large number of legs.</li>
+</ul>
+<p>A graphic is only useful if it accurately conveys at least the order and magnitude of numbers, and ideally it would also convey the contextual magnitude as well. Here is an inaccurate plot of the numbers from above.</p>
+<pre class="r"><code>data = data.frame(Groups = c(&quot;A&quot;,&quot;B&quot;), Measure = c(2,5))
+
+ggplot(data = data, aes(Groups, Measure))+
+  geom_point(size = 5)+
+  geom_segment(aes(xend = Groups), yend = 1.75, size = 3)+
+    ylim(1.75,5) + 
+  ggtitle(&quot;Inaccurate&quot;)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-4.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="320" /></p>
+<p>In this plot, the lines start at 1.75, and go up to 2 and 5. The order is still the same, line A is still shorter than line B, but the magnitudes are way off. In the data, B is 5/2 = 2.5 times larger than A. In the graph, line B is 5-1.75 = 3.25 long, and line A is 2-1.75 = 0.25, meaning line B is now 3.25/0.25 = 13 times longer than line B.</p>
+<p>Tufte proposes measured called the <strong>“Lie Factor”</strong> of graphs like this (a loaded but appropriate term). It’s the ratio of the magnitude of the effect represented in the graph to the magnitude of the effect in the data. In this case, this graph has a Lie Factor of 13:2.5 = 5.2</p>
+<p>Now, some people might object and say something like</p>
+<blockquote>
+<p>It’s not an inaccurate plot! The y-axis is accurately labeled the numbers meant to be expressed.</p>
+</blockquote>
+<p>I warn you, this is the excuse of the charlatan! This is basic sophistry.</p>
+<p>If readers would understand your data better if they <em>ignored the graphical elements of your plot</em>, then your plot is net-negative to accurate communication, and I can only assume that accuracy was never your primary goal anyway.</p>
+<p>If you think this kind of thing never happens, here are two examples.</p>
+<p><a href="http://www.electionleaflets.org/leaflets/full/9419276288f157b409ee60682ef1b814/"><img src="figures/inaccurate.png" alt="inaccurate" /></a></p>
+<pre class="r"><code>  mp_data &lt;- data.frame(party = c(&quot;conservative&quot;, &quot;snp&quot;, &quot;lib dem&quot;, &quot;labour&quot;),
+                     mps = c(1, 7, 12, 39))
+
+  ggplot(mp_data, aes(party, mps, fill = party))+
+    geom_bar(stat = &quot;identity&quot;, color = &quot;black&quot;)+
+    xlim(&quot;conservative&quot;, &quot;snp&quot;, &quot;lib dem&quot;, &quot;labour&quot;)+
+    scale_fill_manual(values = c(&quot;blue&quot;, &quot;red2&quot;, &quot;goldenrod1&quot;,&quot;purple3&quot;))</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-5.svg" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="672" /></p>
+<p><img src="figures/drugs.png" alt="drugs" /></p>
+<pre class="r"><code>drug&lt;-data.frame( 
+  freq = rep(c(rep(&quot;1-9&quot;,2),rep(&quot;10-29&quot;,2),rep(&quot;Daily&quot;,2)),3),
+    perceive = rep(c(&quot;actual&quot;,&quot;perceived&quot;),9),
+    drug = factor(c(rep(&quot;Opiates&quot;,6), rep(&quot;Alcohol&quot;,6), rep(&quot;Cocaine&quot;,6)),
+                  level = c(&quot;Opiates&quot;, &quot;Alcohol&quot;, &quot;Cocaine&quot;)),
+    p = c(0.7,29.4,0,2.4,0,0.4,56.9,30.9,21.1,56.3,1.4,11.2,0.3,48.4,0.2,5.3,0,1.2)/100
+    )
+
+head(drug)</code></pre>
+<pre><code>##    freq  perceive    drug     p
+## 1   1-9    actual Opiates 0.007
+## 2   1-9 perceived Opiates 0.294
+## 3 10-29    actual Opiates 0.000
+## 4 10-29 perceived Opiates 0.024
+## 5 Daily    actual Opiates 0.000
+## 6 Daily perceived Opiates 0.004</code></pre>
+<pre class="r"><code>ggplot(data = drug, aes(perceive, p))+
+    geom_bar(stat = &quot;identity&quot;)+
+    facet_grid(drug~freq)+
+  ylim(0,1)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-6.svg" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="672" /></p>
+<p>The second example of the drugs data is an interesting one. It seems clear that a graphic designer laid out the graph, and never bothered to go back to make the bars reflect the data. The mocked up graph reflects what the ideal effect size would be for the author, which I think is pretty similar to the effect sizes researchers in the social sciences would like to always see. One bar is slightly less than twice as long as the other.</p>
+</div>
+</div>
+<div id="basic-visualization-principles" class="section level1">
+<h1>Basic Visualization Principles</h1>
+<p>Here are some basic principles for data visualization</p>
+<div id="immediately-eliminate-these-elements-from-your-plots" class="section level2">
+<h2>Immediately eliminate these elements from your plots</h2>
+<p>Never use any of these elements, or their combination, again.</p>
+<ul>
+<li>Pointless 3D elements.</li>
+<li>Drop Shadows</li>
+<li>Pie Charts</li>
+<li>Doughnut Charts</li>
+</ul>
+<p><a href="https://upload.wikimedia.org/wikipedia/commons/b/b4/Piecharts.svg"><img src="figures/Piecharts.svg" alt="pie" /></a></p>
+</div>
+<div id="be-parsimonious" class="section level2">
+<h2>Be Parsimonious</h2>
+<p>A plot which communicates the same data in many ways is not better than a plot which uses fewer ways, or one way. To borrow an example from Tufte, this plot is not particularly offensive:</p>
+<pre class="r"><code>ggplot(data, aes(Groups, Measure))+
+  geom_bar(aes(fill = Groups), color = &quot;black&quot;, stat = &quot;identity&quot;)+
+    geom_text(aes(y = Measure + 0.2, label = Measure))</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-7.svg" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="512" /></p>
+<p>It accurately represents the data. However, it is overly redundant. The size of the measure is indicated in 7 different ways.</p>
+<ol style="list-style-type: decimal">
+<li>The height of the left line.</li>
+<li>The height of the right line.</li>
+<li>The height of the top line.</li>
+<li>The height of the filled color.</li>
+<li>The height of the number.</li>
+<li>The value of the number.</li>
+<li>The axis labeling.</li>
+</ol>
+<p>Groups in the data are indicated twice.</p>
+<ol style="list-style-type: decimal">
+<li>The position of the bars on the x-axis.</li>
+<li>The filled colors of the bars.</li>
+</ol>
+<pre class="r"><code>ggplot(data, aes(Groups, Measure))+
+  geom_bar(stat=&quot;identity&quot;)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-8.svg" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="512" /></p>
+</div>
+<div id="map-plot-aesthetics-to-data-dimensions" class="section level2">
+<h2>Map Plot Aesthetics to Data Dimensions</h2>
+<pre class="r"><code>  head(aw_means)</code></pre>
+<pre><code>## Source: local data frame [6 x 4]
+## Groups: DOB_cat, Higher_edu
+## 
+##       DOB_cat  Higher_edu Sex    Diag
+## 1 (1888,1905] High School   f -0.7409
+## 2 (1888,1905] High School   m -1.3370
+## 3 (1905,1922] High School   f -0.8086
+## 4 (1905,1922] High School   m -1.3946
+## 5 (1905,1922]      Higher   f -0.6426
+## 6 (1905,1922]      Higher   m -0.9916</code></pre>
+<pre class="r"><code>  # Not Quite
+  ggplot(aw_means, aes(DOB_cat, Diag, color = Sex:Higher_edu)) +
+    geom_line(aes(group = Sex:Higher_edu))</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-101.svg" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="704" /></p>
+<pre class="r"><code>  # Not this either
+  ggplot(aw_means, aes(DOB_cat, Diag, linetype = Sex:Higher_edu)) +
+    geom_line(aes(group = Sex:Higher_edu))</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-102.svg" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="704" /></p>
+<pre class="r"><code>  # This is better
+  ggplot(aw_means, aes(DOB_cat, Diag, linetype = Higher_edu, color = Sex)) +
+    geom_line(aes(group = Sex:Higher_edu))</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-103.svg" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="704" /></p>
+</div>
+<div id="use-the-appropriate-graphical-element-for-the-data" class="section level2">
+<h2>Use the appropriate graphical element for the data</h2>
+<p>There are certain conventions in data graphics, and readers will assume that there are certain properties of your data given these properties’ conventional representation. Be sure that your graphical elements communicate correctly. For instance, lines indicate changes within some category across a variable with a meaningful order. So, this plot incorrectly uses a line:</p>
+<pre class="r"><code> ggplot(data, aes(Groups, Measure))+
+  geom_point()+
+    geom_line(aes(group = 1))+
+    expand_limits(y = 0)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-11.svg" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="480" /></p>
+</div>
+<div id="be-consistent" class="section level2">
+<h2>Be Consistent</h2>
+<p>If you’re going to plot the same things, multiple times, try to keep your axis ranges, aspect ratios, and color mappings consistent across plots.</p>
+</div>
+<div id="try-it-a-few-different-ways." class="section level2">
+<h2>Try it a few different ways.</h2>
+<pre class="r"><code>source(&quot;phila_income.R&quot;)
+head(phila_income)</code></pre>
+<pre><code>##              Name Gender value     Level
+## 3463 Bucks County Female 15288  LessHigh
+## 3465 Bucks County Female 43054 Bachelors
+## 3466 Bucks County Female 25788      High
+## 3467 Bucks County Female 62853  GradProf
+## 3468 Bucks County Female 33622 SomeAssoc
+## 3471 Bucks County   Male 50792 SomeAssoc</code></pre>
+<pre class="r"><code>ggplot(phila_income, aes(Name, value))+
+  geom_bar(aes(fill = Gender), position = &quot;dodge&quot;, 
+           stat = &quot;identity&quot;)+
+    coord_flip()+
+  scale_y_continuous(&quot;Income&quot;, breaks = c(0, 30000, 60000, 90000))+
+  xlab(&quot;County&quot;) +
+    facet_wrap(~Level) </code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-12.svg" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="960" /></p>
+<pre class="r"><code>  phila_income_c &lt;- dcast(phila_income, Name + Level ~ Gender)
+  head(phila_income_c)</code></pre>
+<pre><code>##              Name     Level Female  Male
+## 1    Bucks County  LessHigh  15288 27184
+## 2    Bucks County      High  25788 43593
+## 3    Bucks County SomeAssoc  33622 50792
+## 4    Bucks County Bachelors  43054 71321
+## 5    Bucks County  GradProf  62853 94877
+## 6 Delaware County  LessHigh  18346 25468</code></pre>
+<pre class="r"><code>  ggplot(phila_income_c, aes(Male, Female, color = Name, shape = Level)) +
+      geom_point()+
+      geom_line(aes(group = Name))+
+      scale_x_continuous(labels = dollar)+
+      scale_y_continuous(labels = dollar)+
+      geom_abline()+
+      coord_fixed()</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-131.svg" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="672" /></p>
+<pre class="r"><code>  ggplot(phila_income_c, aes(Male, Female, color = Name, shape = Level)) +
+      geom_point()+
+      geom_line(aes(group = Level))+
+      scale_x_continuous(labels = dollar)+
+      scale_y_continuous(labels = dollar)+
+      geom_abline()+
+      coord_fixed()</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-132.svg" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="672" /></p>
+</div>
+</div>
+<div id="tools-to-use" class="section level1">
+<h1>Tools to use</h1>
+<div id="r" class="section level2">
+<h2>R</h2>
+<ul>
+<li>R</li>
+<li>RStudio</li>
+<li>ggplot2</li>
+</ul>
+<div class="references">
+
+</div>
+</div>
+</div>
+
+
+</div>
+
+<script>
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with --self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
