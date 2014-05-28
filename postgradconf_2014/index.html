@@ -58,7 +58,9 @@
 <li><a href="#basic-visualization-principles">Basic Visualization Principles</a><ul>
 <li><a href="#immediately-eliminate-these-elements-from-your-plots">Immediately eliminate these elements from your plots</a></li>
 <li><a href="#be-parsimonious">Be Parsimonious</a></li>
-<li><a href="#map-plot-aesthetics-to-data-dimensions">Map Plot Aesthetics to Data Dimensions</a></li>
+<li><a href="#map-plot-aesthetics-to-data-dimensions">Map Plot Aesthetics to Data Dimensions</a><ul>
+<li><a href="#this-goes-for-color-as-well">This goes for color as well</a></li>
+</ul></li>
 <li><a href="#use-the-appropriate-graphical-element-for-the-data">Use the appropriate graphical element for the data</a></li>
 <li><a href="#be-consistent">Be Consistent</a></li>
 <li><a href="#try-it-a-few-different-ways.">Try it a few different ways.</a></li>
@@ -340,6 +342,12 @@ head(drug)</code></pre>
   ggplot(aw_means, aes(DOB_cat, Diag, linetype = Higher_edu, color = Sex)) +
     geom_line(aes(group = Sex:Higher_edu))</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-103.svg" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="704" /></p>
+<div id="this-goes-for-color-as-well" class="section level3">
+<h3>This goes for color as well</h3>
+<pre class="r"><code>library(RColorBrewer)
+display.brewer.all()</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-11.svg" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="672" /></p>
+</div>
 </div>
 <div id="use-the-appropriate-graphical-element-for-the-data" class="section level2">
 <h2>Use the appropriate graphical element for the data</h2>
@@ -348,7 +356,7 @@ head(drug)</code></pre>
   geom_point()+
     geom_line(aes(group = 1))+
     expand_limits(y = 0)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-11.svg" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="480" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-12.svg" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="480" /></p>
 </div>
 <div id="be-consistent" class="section level2">
 <h2>Be Consistent</h2>
@@ -372,7 +380,7 @@ head(phila_income)</code></pre>
   scale_y_continuous(&quot;Income&quot;, breaks = c(0, 30000, 60000, 90000))+
   xlab(&quot;County&quot;) +
     facet_wrap(~Level) </code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-12.svg" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="960" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-13.svg" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="960" /></p>
 <pre class="r"><code>  library(reshape2)
   phila_income_c &lt;- dcast(phila_income, Name + Level ~ Gender)
   head(phila_income_c)</code></pre>
@@ -390,7 +398,7 @@ head(phila_income)</code></pre>
       scale_y_continuous(labels = dollar)+
       geom_abline()+
       coord_fixed()</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-131.svg" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-141.svg" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="672" /></p>
 <pre class="r"><code>  ggplot(phila_income_c, aes(Male, Female, color = Name, shape = Level)) +
       geom_point()+
       geom_line(aes(group = Level))+
@@ -398,13 +406,13 @@ head(phila_income)</code></pre>
       scale_y_continuous(labels = dollar)+
       geom_abline()+
       coord_fixed()</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-132.svg" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-142.svg" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="672" /></p>
 <pre class="r"><code>  ggplot(phila_income_c, aes(Level, Female/Male, color = Name))+
     geom_point() + 
     geom_line(aes(group = Name)) + 
     geom_hline(y = 1)+
     ylim(0.5,1)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-133.svg" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-143.svg" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="672" /></p>
 </div>
 </div>
 <div id="tools-to-use" class="section level1">

@@ -297,6 +297,13 @@ ggplot(data, aes(Groups, Measure))+
 ```
 
 
+### This goes for color as well
+
+```{r dev= "svg", fig.height =10}
+library(RColorBrewer)
+display.brewer.all()
+```
+
 ## Use the appropriate graphical element for the data
 
 There are certain conventions in data graphics, and readers will assume that there are certain properties of your data given these properties' conventional representation. 
@@ -358,6 +365,9 @@ ggplot(phila_income, aes(Name, value))+
     geom_hline(y = 1)+
     ylim(0.5,1)
 ```
+
+
+
 
 # Tools to use
 
