@@ -7,13 +7,16 @@ body {
 	color: #000000;
 }
 .oneColElsCtr #container {
-	width: 46em;
+	width: 100%;
 	background: #FFFFFF;
 	margin: 0 auto; 
 	text-align: justify; 
 }
 .oneColElsCtr #mainContent {
 	padding: 0 20px;
+}
+p {
+	text-align:left ;
 }
 h1 {
 	color:  #08306B;
@@ -71,7 +74,6 @@ rcode{
 
 
 .box { 
-	margin: 5px; 
 	color: #000; 
 	background: #E6E6E6; 
 	padding: 10px; 
@@ -81,7 +83,6 @@ rcode{
 }
 
 .imgbox{
-	margin: 5px; 
 	color: #000; 
 	background: #E6E6E6; 
 	padding: 10px; 
@@ -92,14 +93,28 @@ rcode{
 }
 
 .imgbox img{
+	width: 70%;
 	border: 2px solid #acacac;	
 }
 
 
+.pubbox{
+	color: #000; 
+	background: #E6E6E6; 
+	padding: 10px; 
+	border-width: 3px;
+	border-color: black;
+	border-style: solid;
+  	font-size : 90%;
+  	font-family :  "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial Narrow", "Arial", "Lucida Grande", sans-serif; ;
+  	text-align: left;
+  	word-wrap: break-word;
+  }
+
 
 .boxrow{
-	margin: 10px;
-	padding: 3px;
+	margin: 0px;
+	padding: 0px;
 }
 
 .left {

@@ -13,24 +13,134 @@ title: Josef Fruehwald
 
 
 
+<div class = "section group">
+	<div class = "col span_1_of_3">
+		<div class = "imgbox">
+			<img src = "assets/joseff_vertical.jpg">
+		</div>
+	</div>
+	<div class = "col span_1_of_3">
+		<div class = "box">
+			<h2>About Me</h2>
+			<p>I am a Lecturer in Sociolinguistics in <a href = "http://www.lel.ed.ac.uk/">Linguistics and English Language</a>
+			 	in the <a href = "http://www.ppls.ed.ac.uk/">School of Philosophy, Psychology and Language Sciences</a> at the 
+			 	<a href = "http://www.ed.ac.uk/home">University of Edinburgh</a>.
+				My interests within linguistics are sociolinguistics, variation and change, phonetics, and phonology.
 
-<div class = "left">
-	<div class = "box">
-		<h2>About Me</h2>
-		<p>I am a Lecturer in Sociolinguistics in <a href = "http://www.lel.ed.ac.uk/">Linguistics and English Language</a>
-		 	in the <a href = "http://www.ppls.ed.ac.uk/">School of Philosophy, Psychology and Language Sciences</a> at the 
-		 	<a href = "http://www.ed.ac.uk/home">University of Edinburgh</a>. I recently finished my PhD in Linguistics
-		 	at the University of Pennsylvania.
-			My interests within linguistics are sociolinguistics, variation and change, phonetics, and phonology.
+		</div>
+	</div>
+	<div class = "col span_1_of_3">
+		<div class = "box">
+		<h3>Contact</h3>
+		<table>
+			<tr>
+				<td style="vertical-align:top">e-mail:</td>
+				<td>
+					<script language="JavaScript">
+		 		<!-- 
+
+		 		var email = "josef.frueh"; var emailHost = "ed.ac.uk"
+		 		document.write("<a href=" + "mai" + "lto:" +email +
+		 		"&#64;" + emailHost+ ">" + "<b"+">"+ email + "&#64;" + emailHost + "</"+"b>"+"</a>")
+
+			 	//-->
+				</script>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align:top">
+					phone:
+				</td>
+				<td>
+					<a href="tel:+4401316503983">+44/(0) 131 650 3983</a>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align:top">snail-mail:</td>
+				<td>Linguistics & English Language<br>
+					The University of Edinburgh<br>
+					Dugald Stewart Building<br>
+					3 Charles Street<br>
+					Edinburgh, EH8 9AD<br>
+					United Kingdom 
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align:top">
+					office:
+				</td>
+				<td>
+					Dugald Steward Building 2.11
+				</td>
+			</tr>
+		</table>
+		</div>
+	</div>
+</div>
+
+<div class = "section group">
+	<div class = "col span_1_of_3">
+		<div class = "pubbox">
+			<h3>Recent Updates</h3>
+			{% include post_list %}
+		</div>
 	</div>
 
-	<div class = "box">
-		<h3>Research</h3>
-			<p>Linguistic variation is a complex and sensitive phenomenon, and data on it can be brought to bear on
-			a number of different research questions.  For example, linguistic systems are embedded in complex social 
-			structures, so linguistic variation can be informative about social meaning.
-	  		My own research interests concern how linguistic variation can be informative about Language itself.</p>
+	<div class = "col span_1_of_3">
+		<div class = "box">
+			<details>
+			<summary>Schedule a meeting with me &rarr;</summary>
+			<iframe src="https://jofrhwld.youcanbook.me/?noframe=true&skipHeaderFooter=true" style="width:100%;height:300px;border:0px;background-color:transparent;" frameborder="0" allowtransparency="true" onload="keepInView(this);"></iframe>
+			<script>function keepInView(item) {if((document.documentElement&&document.documentElement.scrollTop)||document.body.scrollTop>item.offsetTop)item.scrollIntoView();}</script>
+
+			</details>
+		</div>
 	</div>
+	<div class = "col span_1_of_3">
+
+		<div class = "box">
+		<h3>Links</h3>
+			<p><a href = "http://www.lel.ed.ac.uk/">Linguistics and English Language</a></p>
+			<p><a href = "http://www.ppls.ed.ac.uk/">School of Philosophy, Psychology and Language Sciences</a> </p>
+			<p><a href= "rstudy/index.html">R Study Group</a></p>
+			<p><a href = "phillymotion.html">Philadelphia Language in Motion</a></p>
+			<p><a href = "avml2012/">AVML 2012 workshop on ggplot2</a></p>
+		</div>
+	</div>	
+
+</div>
+
+<div class = "section group">
+	<h2>Journal Papers</h2>
+	{% assign pub_type = "rpaper"%}
+	{% include pup_sections %}
+
+</div>
+
+
+<div class = "section group">
+	<h2>Working Papers and Proceedings</h2>
+	{% assign pub_type = "paper"%}
+	{% include pup_sections %}
+
+</div>
+
+<div class = "section group">
+	<h2>Invited Talks</h2>
+	{% assign pub_type = "italk"%}
+	{% include pup_sections %}
+
+</div>
+
+<div class = "section group">
+	<h2>Conference Talks and Presentations</h2>
+	{% assign pub_type = "talk"%}
+	{% include pup_sections %}
+</div>
+
+
+
+
 	<div class = "box">
 		<h3>Links</h3>
 		<p><a href = "http://www.lel.ed.ac.uk/">Linguistics and English Language</a></p>
@@ -95,26 +205,23 @@ title: Josef Fruehwald
 </div>
 
 <div class = "mid">
-	<div class = "box">
-		<details>
-		<summary>Schedule a meeting with me &rarr;</summary>
-		<iframe src="https://jofrhwld.youcanbook.me/?noframe=true&skipHeaderFooter=true" style="width:100%;height:300px;border:0px;background-color:transparent;" frameborder="0" allowtransparency="true" onload="keepInView(this);"></iframe>
-		<script>function keepInView(item) {if((document.documentElement&&document.documentElement.scrollTop)||document.body.scrollTop>item.offsetTop)item.scrollIntoView();}</script>
+	<div class = "col span_2_of_2">
+		<div class = "box">
+			<details>
+			<summary>Schedule a meeting with me &rarr;</summary>
+			<iframe src="https://jofrhwld.youcanbook.me/?noframe=true&skipHeaderFooter=true" style="width:100%;height:300px;border:0px;background-color:transparent;" frameborder="0" allowtransparency="true" onload="keepInView(this);"></iframe>
+			<script>function keepInView(item) {if((document.documentElement&&document.documentElement.scrollTop)||document.body.scrollTop>item.offsetTop)item.scrollIntoView();}</script>
 
-		</details>
+			</details>
+		</div>
 	</div>
+	<div class = "col span_2_of_2">
 	<div class = "box">
 		<h3>Recent Updates</h3>
 		{% include post_list %}
 	</div>
 </div>
 <a name = "papers"></a>
-<ul id="topnav">
-	<li><a href = "#home">&uarr;Home</a></li>
-	<li id = "curr">Papers and Presentations</li>
-	<li><a href = "{{ "/blog/" | prepend: site.baseurl}}">The Blog&rarr;</a></li>
-</ul>
-
 <div class = "left">
 	<div class = "box">
 		<h3>Dissertation (2013)</h3>
