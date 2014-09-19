@@ -1,0 +1,1 @@
+<img src = "assets/{% cycle 'ch2_plot_mix.png','ch3_speaker_n.png','ch5_day_plot.png','ch5_ests_by_context.png', 'ch6_basic_eys_plot.png' %}" style = "min-height:100px; width:70% ; display:block; margin-left:15%;">

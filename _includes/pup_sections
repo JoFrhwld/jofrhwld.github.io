@@ -2,10 +2,10 @@
 
 {% assign current_year = 0 %}
 {% assign loop_index = 0 %}
-{% assign n_cols = 3 %}
+{% assign n_cols = 5%}
 {% for paper in site.posts %}
 	{% if paper.categories contains pub_type %}
-		{% assign loop_index = loop_index | plus:1 %}
+		{% capture loop_index %}{{ loop_index | plus:1 }}{% endcapture %}
 		{% capture mod_count %}{{loop_index | modulo:n_cols}} {% endcapture %}
 
 		{% if mod_count == "1 " %}
@@ -14,8 +14,6 @@
 
 			<div class = "col span_1_of_{{n_cols}}">
 				<div class = "pubbox">
-				<h4>{{ paper.year }}</h4>
-
 				<b><a href = "{{paper.url | prepend: site.baseurl}}">{{paper.title}}</a></b><br>
 				{% if paper.author.size > 1 %}
 					{% for author in paper.author %}
@@ -86,18 +84,9 @@
 
 	{% endif %}
 {% endfor %}
-{% assign mod_count = loop_index | modulo:n_cols %}
-{% if mod_count != 0 %}
-	{% assign filler = n_cols | minus:mod_count %}
-	{% for remainder in (1..filler) %}
-		<div class = "col span_1_of_{{n_cols}}" >
-			<div class = "imgbox">
-				{% include img_cycle %}
+{% capture mod_count %}{{loop_index | modulo:n_cols}} {% endcapture %}
+{% if mod_cont != "0 "%}
+	</div>
+			<div style="clear:both">
 			</div>
-		</div>
-	{% endfor %}
-	</div>
-	<div style="clear:both">
-	</div>
-
 {% endif %}

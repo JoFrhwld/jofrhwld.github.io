@@ -1,17 +1,27 @@
 <!DOCTYPE html>
  <html>
-	<head>
-		<title>{{ page.title }}</title>
-		<link rel="stylesheet" href="{{site.baseurl}}/assets/mystyle.css">
-	</head>
+ 	{% include head %}
 	<body>
-	<body class="oneColElsCtr">
-		<div id="container">
-			<div id = "mainContent">
-			<h1>{{ page.title }}</h1>
-			<h2>Josef Fruehwald, 2013</h2>
+	<body>
+	<header>
+	  <a href = "{{site.baseurl}}/"class="logo"><h1>Josef Fruehwald</h1></a>
+	  	<nav class="nav-collapse">
+    		<ul>
+      			<li class="menu-item"><a href = "{{site.baseurl}}/#{{page.pub_type}}">Home</a></li>
+    		</ul>
+  		</nav>
+	</header>
+
+		<div class="container">
+				<h1>{{ page.title }}</h1>
+				<h2>Josef Fruehwald, 2013</h2>
 				{% for post in site.posts %}
 					{% if post.categories contains page.pub_type %}
+				<section>
+					<div class = "section group">
+
+						<div class = "col span_2_of_2">
+
 
 					<h2>{{ post.title }}</h2>
 
@@ -33,13 +43,21 @@
 						{% endfor %}
 					</p>
 				{%endif%}
-				<a href = "{{site.baseurl}}" display=block>&larr;Home</a>
 				</div><!--box-->
-				<hr>
+				</div>
+				</div>
+				</section>
+
+				<hr class = "style-two">
 				{% endif %}
 				{% endfor %}
-			</div>
 		</div>
+		{% include footer.html %}
+
+		<script src="{{site.baseurl}}/fixed-nav/js/fastclick.js"></script>
+		<script src="{{site.baseurl}}/fixed-nav/js/scroll.js"></script>
+		<script src="{{site.baseurl}}/fixed-nav/js/fixed-responsive-nav.js"></script>
+
 	</body>
 	{% include analytics %}
  </html>

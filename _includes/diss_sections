@@ -1,8 +1,7 @@
 
 
-{% assign current_year = 0 %}
 {% assign loop_index = 0 %}
-{% assign n_cols = 3 %}
+{% assign n_cols = 4 %}
 {% for paper in site.posts %}
 	{% if paper.categories contains pub_type %}
 		{% assign loop_index = loop_index | plus:1 %}
@@ -14,8 +13,6 @@
 
 			<div class = "col span_1_of_{{n_cols}}">
 				<div class = "pubbox">
-				<h4>{{ paper.year }}</h4>
-
 				<b><a href = "{{paper.url | prepend: site.baseurl}}">{{paper.title}}</a></b><br>
 				{% if paper.author.size > 1 %}
 					{% for author in paper.author %}

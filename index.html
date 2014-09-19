@@ -3,276 +3,330 @@ layout: main
 title: Josef Fruehwald
 ---
 
-<a name = "home"></a>
-<ul id="topnav">
-	<li id = "curr">Home</li>
-	<li><a href="#papers">&darr;Papers and Presentations</a></li>
-	<li><a href = "{{ "/eVoweluate/" | prepend: site.baseurl}}">The eVoweluate survey</a></li>
-	<li><a href = "{{ "/blog/" | prepend: site.baseurl}}">The Blog&rarr;</a></li>
-</ul>
 
+<header>
+  <a href="#home" class="logo" data-scroll><h1>{{page.title}}</h1></a>
+  <nav class="nav-collapse">
+    <ul>
+      <li class="menu-item active"><a href="#home" data-scroll>Home</a></li>
+      <li class = "menu-item"><a href="#projects" data-scroll>Projects</a></li>
+      <li class = "menu-item"><a href="#research" data-scroll>Research</a></li>
+      <li class = "menu-item"><a href="#teaching" data-scroll>Teaching</a></li>
+      <li class = "menu-item"><a href="#personal" data-scroll>Personal</a></li>      
+    </ul>
+  </nav>
+</header>
 
+<div class = "container">
 
-<div class = "section group">
-	<div class = "col span_1_of_3">
-		<div class = "imgbox">
-			<img src = "assets/joseff_vertical.jpg">
+	<section id = "home">
+		<h2>Home</h2>
+		<div class = "section group">
+			<div class = "col span_1_of_3">
+				<div class = "imgbox">
+					<img src = "assets/joseff_vertical.jpg">
+				</div>
+			</div>
+			<div class = "col span_1_of_3">
+				<div class = "box">
+					<h2>About Me</h2>
+					<p>I am a Lecturer in Sociolinguistics in <a href = "http://www.lel.ed.ac.uk/">Linguistics and English Language</a>
+					 	in the <a href = "http://www.ppls.ed.ac.uk/">School of Philosophy, Psychology and Language Sciences</a> at the 
+					 	<a href = "http://www.ed.ac.uk/home">University of Edinburgh</a>.
+						My interests within linguistics are sociolinguistics, variation and change, phonetics, and phonology.
+
+				</div>
+			</div>
+			<div class = "col span_1_of_3">
+				<div class = "box" id = "contact">
+				<h2>Contact</h2>
+				<table style="width:100%">
+					<tr>
+						<td style="vertical-align:top">e-mail:</td>
+						<td>
+							<script language="JavaScript">
+				 		<!-- 
+
+				 		var email = "josef.frueh"; var emailHost = "ed.ac.uk"
+				 		document.write("<a href=" + "mai" + "lto:" +email +
+				 		"&#64;" + emailHost+ ">" + "<b"+">"+ email + "&#64;" + emailHost + "</"+"b>"+"</a>")
+
+					 	//-->
+						</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="vertical-align:top">
+							phone:
+						</td>
+						<td>
+							<a href="tel:+4401316503983">+44/(0) 131 650 3983</a>
+						</td>
+					</tr>
+					<tr>
+						<td style="vertical-align:top">snail-mail:</td>
+						<td><p class = "addressline">Linguistics and English Language</p>
+							<p class = "addressline">The University of Edinburgh</p>
+							<p class = "addressline">Dugald Stewart Building</p>
+							<p class = "addressline">3 Charles Street</p>
+							<p class = "addressline">Edinburgh, EH8 9AD</p>
+							<p class = "addressline">United Kingdom</p>
+						</td>
+					</tr>
+					<tr>
+						<td style="vertical-align:top">
+							office:
+						</td>
+						<td>
+							Dugald Steward Building 2.11
+						</td>
+					</tr>
+				</table>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class = "col span_1_of_3">
-		<div class = "box">
-			<h2>About Me</h2>
-			<p>I am a Lecturer in Sociolinguistics in <a href = "http://www.lel.ed.ac.uk/">Linguistics and English Language</a>
-			 	in the <a href = "http://www.ppls.ed.ac.uk/">School of Philosophy, Psychology and Language Sciences</a> at the 
-			 	<a href = "http://www.ed.ac.uk/home">University of Edinburgh</a>.
-				My interests within linguistics are sociolinguistics, variation and change, phonetics, and phonology.
+
+		<div class = "section group">
+			<div class = "col span_1_of_3">
+				<div class = "pubbox">
+					<h2>Recent Updates</h2>
+					{% include post_list %}
+				</div>
+			</div>
+
+			<div class = "col span_1_of_3">
+				<div class = "box">
+					<h2>Availability</h2>
+					<details>
+					<summary>Schedule a meeting with me &rarr;</summary>
+					<iframe src="https://jofrhwld.youcanbook.me/?noframe=true&skipHeaderFooter=true" style="width:100%;height:300px;border:0px;background-color:transparent;" frameborder="0" allowtransparency="true" onload="keepInView(this);"></iframe>
+					<script>function keepInView(item) {if((document.documentElement&&document.documentElement.scrollTop)||document.body.scrollTop>item.offsetTop)item.scrollIntoView();}</script>
+					<a href = "https://jofrhwld.youcanbook.me/">Full Page</a>
+					</details>
+				</div>
+			</div>
+			<div class = "col span_1_of_3">
+
+				<div class = "box">
+				<h2>Links</h2>
+					<p><a href= "rstudy/index.html">R Study Group</a></p>
+					<p><a href = "phillymotion.html">Philadelphia Language in Motion</a></p>
+					<p><a href = "avml2012/">AVML 2012 workshop on ggplot2</a></p>
+				</div>
+			</div>	
 
 		</div>
-	</div>
-	<div class = "col span_1_of_3">
-		<div class = "box">
-		<h3>Contact</h3>
-		<table>
-			<tr>
-				<td style="vertical-align:top">e-mail:</td>
-				<td>
-					<script language="JavaScript">
-		 		<!-- 
+	</section>
 
-		 		var email = "josef.frueh"; var emailHost = "ed.ac.uk"
-		 		document.write("<a href=" + "mai" + "lto:" +email +
-		 		"&#64;" + emailHost+ ">" + "<b"+">"+ email + "&#64;" + emailHost + "</"+"b>"+"</a>")
+	<hr class = "style-two">
 
-			 	//-->
-				</script>
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align:top">
-					phone:
-				</td>
-				<td>
-					<a href="tel:+4401316503983">+44/(0) 131 650 3983</a>
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align:top">snail-mail:</td>
-				<td>Linguistics & English Language<br>
-					The University of Edinburgh<br>
-					Dugald Stewart Building<br>
-					3 Charles Street<br>
-					Edinburgh, EH8 9AD<br>
-					United Kingdom 
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align:top">
-					office:
-				</td>
-				<td>
-					Dugald Steward Building 2.11
-				</td>
-			</tr>
-		</table>
+
+	<section id = "projects">
+		<h2>Projects</h2>
+		<div class = "section group">
+			<div class = "col span_1_of_2">
+				<div class = "box">
+					<h3>The eVoweluate Survey!</h3>
+					<p>
+						The eVoweluate survey is a research project focusing on the reliability and reproducibility of manual vowel measurements. Its goals are twofold.
+					<ol>
+						<li>Quantitatively evaluate the quality of automated vowel analysis, specifically that produced by the FAVE suite.</li>
+						<li>Determine the rate of inter-annotator agreement amongst experts studying vowels.</li>
+					</ol>
+					</p>
+					<p>
+						<a href = "{{site.baseurl}}/eVoweluate">
+							<h3>Sounds interesting? You can participate here!</h3></a>
+					</p>
+
+				</div>
+			</div>
+			<div class = "col span_1_of_2">
+				<div class = "box">
+					<h3>Edinburgh Speaks</h3>
+					<p>
+						The Edinburgh Speaks project is still in the early planning stages.
+						Our goal is to learn about how people communicate in Edinburgh.
+					</p>
+					<p>
+						For more information about the project, <a href = "http://www.lel.ed.ac.uk/lel_research/edinburgh_speaks.php">see the website.</a>
+						If you'd like to contribute your own knowledge to the project as a researcher or as an Edinburgh local, <a href = "#home" data-scroll>please get in touch!</a>
+					</p>
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
+		<div class = "section group">
 
-<div class = "section group">
-	<div class = "col span_1_of_3">
-		<div class = "pubbox">
-			<h3>Recent Updates</h3>
-			{% include post_list %}
+			<div class = "col span_1_of_2">
+				<div class = "box">
+					<h3>Forced Alignment and Vowel Extraction</h3>
+					<p>
+						I help maintain the active development of the Forced Alignment and Vowel Extraction (FAVE) suite.
+					</p>
+					<p>
+						You can download <a href = "https://github.com/JoFrhwld/FAVE">the code from Github</a>, where
+						we also maintain <a href = "https://github.com/JoFrhwld/FAVE/wiki">a wiki to help new users get set up</a>. There's also <a href = "https://groups.google.com/forum/#!forum/fave-users">a nice users group</a>.
+					</p>
+				</div>
+			</div>
+			<div class = "col span_1_of_2">
+				<div class = "box">
+					<h3>Sound Change and the Phonology-Phonetics Interface</h3>
+					<p>
+						My dissertation investigated how phonetic and phonological forces guide language change in progress.
+						So far, my research in this area has mostly utilized data from the Philadelphia Neighborhood Corpus.
+					</p>
+					<p>
+						On the basis of my investigation of the data, categorical, phonological forces play a crucial role in sound changes much earlier than it is sometimes realized.
+					</p>
+				</div>
+			</div>
 		</div>
-	</div>
+	</section>
 
-	<div class = "col span_1_of_3">
-		<div class = "box">
-			<details>
-			<summary>Schedule a meeting with me &rarr;</summary>
-			<iframe src="https://jofrhwld.youcanbook.me/?noframe=true&skipHeaderFooter=true" style="width:100%;height:300px;border:0px;background-color:transparent;" frameborder="0" allowtransparency="true" onload="keepInView(this);"></iframe>
-			<script>function keepInView(item) {if((document.documentElement&&document.documentElement.scrollTop)||document.body.scrollTop>item.offsetTop)item.scrollIntoView();}</script>
-
-			</details>
-		</div>
-	</div>
-	<div class = "col span_1_of_3">
-
-		<div class = "box">
-		<h3>Links</h3>
-			<p><a href = "http://www.lel.ed.ac.uk/">Linguistics and English Language</a></p>
-			<p><a href = "http://www.ppls.ed.ac.uk/">School of Philosophy, Psychology and Language Sciences</a> </p>
-			<p><a href= "rstudy/index.html">R Study Group</a></p>
-			<p><a href = "phillymotion.html">Philadelphia Language in Motion</a></p>
-			<p><a href = "avml2012/">AVML 2012 workshop on ggplot2</a></p>
-		</div>
-	</div>	
-
-</div>
-
-<div class = "section group">
-	<h2>Journal Papers</h2>
-	{% assign pub_type = "rpaper"%}
-	{% include pub_sections %}
-
-</div>
+	<hr class = "style-two">
 
 
-<div class = "section group">
-	<h2>Working Papers and Proceedings</h2>
-	{% assign pub_type = "paper"%}
-	{% include pub_sections %}
+	<section id = "research">
+		<h2>Research</h2>
 
-</div>
+		{% assign pub_type = "dissertation"%}
+		<section id = "{{pub_type}}">
+			<h3>Dissertation<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}">&rarr;</a></h3>
+			{% include diss_sections %}
 
-<div class = "section group">
-	<h2>Invited Talks</h2>
-	{% assign pub_type = "italk"%}
-	{% include pub_sections %}
+		</section>
+		<hr class = "style-two">
 
-</div>
-
-<div class = "section group">
-	<h2>Conference Talks and Presentations</h2>
-	{% assign pub_type = "talk"%}
-	{% include pub_sections %}
-</div>
-
-
-
-
-	<div class = "box">
-		<h3>Links</h3>
-		<p><a href = "http://www.lel.ed.ac.uk/">Linguistics and English Language</a></p>
-		<p><a href = "http://www.ppls.ed.ac.uk/">School of Philosophy, Psychology and Language Sciences</a> </p>
-		<p><a href= "rstudy/index.html">R Study Group</a></p>
-		<p><a href = "phillymotion.html">Philadelphia Language in Motion</a></p>
-		<p><a href = "avml2012/">AVML 2012 workshop on ggplot2</a></p>
-	</div>	
-
-</div>
-
-<div class = "right">
-	<div class = "imgbox">
-		<img width=70% src = "assets/joseff.jpg">
-	</div>
-	<div class = "box">
-		<h3>Contact</h3>
-		<table>
-			<tr>
-				<td style="vertical-align:top">e-mail:</td>
-				<td>
-					<script language="JavaScript">
-		 		<!-- 
-
-		 		var email = "josef.frueh"; var emailHost = "ed.ac.uk"
-		 		document.write("<a href=" + "mai" + "lto:" +email +
-		 		"&#64;" + emailHost+ ">" + "<b"+">"+ email + "&#64;" + emailHost + "</"+"b>"+"</a>")
-
-			 	//-->
-				</script>
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align:top">
-					phone:
-				</td>
-				<td>
-					<a href="tel:+4401316503983">+44/(0) 131 650 3983</a>
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align:top">snail-mail:</td>
-				<td>Linguistics & English Language<br>
-					The University of Edinburgh<br>
-					Dugald Stewart Building<br>
-					3 Charles Street<br>
-					Edinburgh, EH8 9AD<br>
-					United Kingdom 
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align:top">
-					office:
-				</td>
-				<td>
-					Dugald Steward Building 2.11
-				</td>
-			</tr>
-		</table>
-	</div>
-
-</div>
-
-<div class = "mid">
-	<div class = "col span_2_of_2">
-		<div class = "box">
-			<details>
-			<summary>Schedule a meeting with me &rarr;</summary>
-			<iframe src="https://jofrhwld.youcanbook.me/?noframe=true&skipHeaderFooter=true" style="width:100%;height:300px;border:0px;background-color:transparent;" frameborder="0" allowtransparency="true" onload="keepInView(this);"></iframe>
-			<script>function keepInView(item) {if((document.documentElement&&document.documentElement.scrollTop)||document.body.scrollTop>item.offsetTop)item.scrollIntoView();}</script>
-
-			</details>
-		</div>
-	</div>
-	<div class = "col span_2_of_2">
-	<div class = "box">
-		<h3>Recent Updates</h3>
-		{% include post_list %}
-	</div>
-</div>
-<a name = "papers"></a>
-<div class = "left">
-	<div class = "box">
-		<h3>Dissertation (2013)</h3>
-		{% assign pub_type = "dissertation" %}
-		<h4>Dissertation
-			<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" id = "nav">&rarr;</a></h4>
-		{% include diss_table %}
-
-		<h4>Proposal</h4>
-		{% assign pub_type = "proposal" %}
-		{% include pub_table %}
-	</div>
-	<div class = "box">
-		{% assign pub_type = "paper"%}
-		<h3>Working Papers and Proceedings 
-			<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" id = "nav">&rarr;</a></h3>
-		{% include pub_table %}
-	</div>
-	<div class = "box">
-		{% assign pub_type = "workshop"%}
-		<h3>Workshops
-			<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" id = "nav">&rarr;</a></h3>
-
-		{% include pub_table %}
-	</div>
-
-</div>
-
-<div class = "right">
-	<div class = "box">
 		{% assign pub_type = "rpaper"%}
-		<h3>Journal Papers 
-			<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" id = "nav">&rarr;</a></h3>
+		<section id = "{{pub_type}}" class = "sub">
 
-		{% include pub_table %}
-	</div>
-	<div class = "box">
-		{% assign pub_type = "talk"%}
-		<h3>Talks and Presentations 
-			<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" id = "nav">&rarr;</a></h3>
+			<h3>Journal Papers 
+				<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}">&rarr;</a></h3>
+			{% include pub_sections %}
 
-		{% include pub_table %}
-	</div>
-	<div class = "box">
+		</section>
+
+		<hr class = "style-two">
+
+		{% assign pub_type = "paper"%}
+		<section id = "{{pub_type}}" class = "sub">
+
+			<h3>Working Papers and Proceedings
+				<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" >&rarr;</a></h3>
+			{% include pub_sections %}
+
+		</section>
+		<hr class = "style-two">
+
 		{% assign pub_type = "italk"%}
-		<h3>Invited Talks 
-			<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" id = "nav">&rarr;</a></h3>
+		<section id = "{{pub_type}}" class = "sub">
+			<h3>Invited Talks
+				<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" >&rarr;</a></h3>
+			{% include pub_sections %}
 
-		{% include pub_table %}		
-	</div>
+		</section>
+
+		<hr class = "style-two">
+		{% assign pub_type = "talk"%}
+		<section id = "{{pub_type}}" class = "sub">
+
+			<h3>Conference Talks and Presentations
+				<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" >&rarr;</a></h3>
+			{% include pub_sections %}
+		</section>
+
+		<hr class = "style-two">
+
+		{% assign pub_type = "workshop"%}
+		<section id = "{{pub_type}}" class = "sub">
+			<h3>Workshops
+				<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" >&rarr;</a></h3>
+
+			{% include pub_sections %}
+		</section>
+	</section>
+
+	<hr class = "style-two">
+
+	<section id = "teaching">
+		<h2>Teaching</h2>
+		<p>In the academic year 2014/2015, I'm organizing and teaching on the following courses.
+		<div class = "section group">
+			<div class = "col span_1_of_3">
+				<div class = "box">
+					<h3>LEL2B: Phonetic Analysis and Empirical Methods</h3>
+					<p>
+						This is a second year pre-honours course being taught in the first semester. For more information, <a href = "http://www.drps.ed.ac.uk/14-15/dpt/cxlasc08018.htm">its DRPS entry</a>.
+						If you are a student on the course, all relevant information about the course can be found
+						in <a href = "http://www.lel.ed.ac.uk/lel_students/documents/LEL2B_Handbook_2014-15.pdf">the course handbook</a>, and on Learn.
+					</p>
+				</div>
+			</div>
+			<div class = "col span_1_of_3">
+				<div class = "box">
+					<h3>Intro to Sociolinguistics</h3>
+					<p>
+						This postgraduate course taught in the first semester serves as a foundational introduction to Sociolinguistics.
+						It is a compulsory course for the MSc in Applied linguistics.
+						For more information, see <a href = "http://www.drps.ed.ac.uk/14-15/dpt/cxlasc11095.htm">its DRPS entry</a>.
+					</p>
+				</div>
+			</div>
+			<div class = "col span_1_of_3">
+				<div class = "box">
+					<h3>The Grammar of Variation</h3>
+					<p>
+						This honours course taught in the second semester will focus on how quantiative probabilities and grammatical theory can be brought together to be mutually informative.
+						There is also a practical component involving learning how to use R.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<hr class = "style-two">
+
+	<section id = "personal">
+		<h2>Personal</h2>
+		<div class = "section group">
+			<div class = "col span_1_of_3">
+				<div class = "box">
+				<h3>Twitter</h3>
+					<a class="twitter-timeline" 
+					   data-dnt="true" href="https://twitter.com/JoFrhwld" 
+					   data-widget-id="513021400680894464">
+					  Tweets by @JoFrhwld
+					 </a>
+				</div>
+			</div>
+			<div class = "col span_1_of_3">
+				<div class = "box">
+					<h3>Val Systems</h3>
+
+					<p>My linguistics and everything else blog called 
+						<a href = "http://val-systems.blogspot.co.uk/">Val Systems</a>.</p>
+					<p>
+						In Philadelphia, where I'm from, /aw/ is monopthongized before /l/, and I 
+						like to study vowels, hence the name "Val Systems."
+					</p>
+				</div>
+			</div>
+			<div class = "col span_1_of_3">
+				<div class = "box">
+					<h3>Github</h3>
+					<p>
+						I've also started blogging <a href ="https://jofrhwld.github.io/blog/">here on github</a>.
+					</p>
+					<p>
+						So far it has no name, and will be devoted to more techy things that are of 
+						less general interest than what I post to Val Systems.
+					</p>
+				</div>				
+			</div>
+		</div>
+	</section>
+	<hr class = "style-two">
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 </div>
-
-
+{% include footer.html %}

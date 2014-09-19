@@ -2,14 +2,45 @@
  <html>
 	<head>
 		<title>{{ page.title }}</title>
+		<link rel="stylesheet" href="{{site.baseurl}}/GRID/css/col.css" media="all">
+		<link rel="stylesheet" href="{{site.baseurl}}/GRID/css/2cols.css" media="all">
+		<link rel="stylesheet" href="{{site.baseurl}}/GRID/css/3cols.css" media="all">
+		<link rel="stylesheet" href="{{site.baseurl}}/GRID/css/4cols.css" media="all">
+		<link rel="stylesheet" href="{{site.baseurl}}/GRID/css/5cols.css" media="all">
+		<link rel="stylesheet" href="{{site.baseurl}}/GRID/css/6cols.css" media="all">
+		<link rel="stylesheet" href="{{site.baseurl}}/GRID/css/7cols.css" media="all">
+		<link rel="stylesheet" href="{{site.baseurl}}/GRID/css/8cols.css" media="all">
+		<link rel="stylesheet" href="{{site.baseurl}}/GRID/css/9cols.css" media="all">
+		<link rel="stylesheet" href="{{site.baseurl}}/GRID/css/10cols.css" media="all">
+		<link rel="stylesheet" href="{{site.baseurl}}/GRID/css/11cols.css" media="all">
+		<link rel="stylesheet" href="{{site.baseurl}}/GRID/css/12cols.css" media="all">
+
+		<!-- Responsive Stylesheets -->
+		<link rel="stylesheet" media="only screen and (max-width: 1024px) and (min-width: 769px)" href="{{site.baseurl}}/GRID/css/1024.css">
+		<link rel="stylesheet" media="only screen and (max-width: 768px) and (min-width: 481px)" href="{{site.baseurl}}/GRID/css/768.css">
+		<link rel="stylesheet" media="only screen and (max-width: 480px)" href="{{site.baseurl}}/GRID/css/480.css">
+
+		<link rel="stylesheet" href="{{site.baseurl}}/fixed-nav/css/styles.css">
 		<link rel="stylesheet" href="{{site.baseurl}}/assets/mystyle.css">
-	</head>
+
+	    <script src="{{site.baseurl}}/fixed-nav/js/responsive-nav.js"></script>	
+	  </head>
 	<body>
-	<body class="oneColElsCtr">
-		<div id="container">
-			<div id = "mainContent">
+	<header>
+	  <a href = "{{site.baseurl}}/"class="logo"><h1>Josef Fruehwald</h1></a>
+	  	<nav class="nav-collapse">
+    		<ul>
+      			<li class="menu-item"><a href = "{{site.baseurl}}/#{{page.categories.first}}">Home</a></li>
+      			<li class = "menu-item"><a href = "{{page.categories.first | prepend: "/" | prepend: site.baseurl | append: ".html"}}">{{page.display-category | capitalize | prepend: "More " | append: "s"}}</a></li>
+	  <!--<li class = "menu-item"><a href = "{{ "/eVoweluate/" | prepend: site.baseurl}}">The eVoweluate survey&rarr;</a></li>
+	  <li class = "menu-item"><a href = "{{ "/blog/" | prepend: site.baseurl}}">The Blog&rarr;</a></li>-->
+    		</ul>
+  		</nav>
+	</header>
+		<div class="container">
+			<section>
 				{% assign BASE_PATH=".."%}
-				<h1>{{ page.title }}</h1>
+				<h2>{{ page.title }}</h2>
 				<div class = "box">
 				<p>
 					{% for author in page.author %}
@@ -65,22 +96,17 @@
 
 				</div><!--box-->
 				
-				<div>
-				<ul id="pagenav">
-					<li><a href = "{{site.baseurl}}" display=block>&larr;Home</a></li>
-					<li><a href = "{{page.categories.first | prepend: "/" | prepend: site.baseurl | append: ".html"}}">{{page.display-category | capitalize | prepend: "More " | append: "s"}}</a>
-				</ul>
-				</div>
-
-				<p>
-					{{content}}
-				</p>
 
 				{% if page.comments %}
 					{% include comments %}
 				{% endif %}
-			</div>
+			</section>
+			<hr class = "style-two">
 		</div>
+		{%include footer.html%}
+		<script src="{{site.baseurl}}/fixed-nav/js/fastclick.js"></script>
+		<script src="{{site.baseurl}}/fixed-nav/js/scroll.js"></script>
+		<script src="{{site.baseurl}}/fixed-nav/js/fixed-responsive-nav.js"></script>
 	</body>
 	{% include analytics %}
  </html>

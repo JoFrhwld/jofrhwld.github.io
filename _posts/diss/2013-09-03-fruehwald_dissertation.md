@@ -2,7 +2,7 @@
 layout: paper
 title: "Phonological Involvement in Phonetic Change"
 year: 2013
-author: [ { name: "Josef Fruehwald", url: "http://www.ling.upenn.edu/~joseff/" }]
+author: [ { name: "Josef Fruehwald", url: "//jofrhwld.github.io/assets/" }]
 abstract: "<p>This dissertation addresses the broad question about how phonology and phonetics are interrelated, specifically how phonetic language changes, which gradually alter the phonetics of speech sounds, affect the phonological system of the language, and vice versa. Some questions I address are:<p>
 <ol style = 'list-style-type:lower-roman;'>
 <li>What aspects of speakers' knowledge of their language are changing during a phonetic change?</li>

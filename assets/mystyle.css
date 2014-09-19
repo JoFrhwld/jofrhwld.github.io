@@ -6,22 +6,27 @@ body {
 	text-align: center; 
 	color: #000000;
 }
-.oneColElsCtr #container {
-	width: 100%;
-	background: #FFFFFF;
-	margin: 0 auto; 
-	text-align: justify; 
-}
-.oneColElsCtr #mainContent {
-	padding: 0 20px;
+
+.container{
+	margin-top:70px;
+	width:90%;
+	margin-left: auto; 
+	margin-right: auto;	
 }
 p {
-	text-align:left ;
+	width: 100%;
+	text-align:left;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
 h1 {
 	color:  #08306B;
 	text-align: left;
+	margin:0;
+	padding:0;
+	font-size: 1.7em;	
 }
+
 h2 {
 	margin: 0px;
 	color: #08519C;
@@ -33,38 +38,101 @@ h3 {
 	text-align: left;
 }
 h4 {
+	margin: 0px;
 	color: #4292C6;
 	text-align: left;
 }
-
-.nav{
-	float: left;
-	width: 100%;
-	margin: 0 0 10px 0;
-}
-.nav ul{
-	list-style-type:none;
+p.addressline{
+	padding:0;
 	margin:0;
-    padding:0;
 }
 
-.nav li{
-	float: left;
+header {
+  background: #E6E6E6;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  left: 0;
+  top: 0;
+  border-bottom: 1px solid black;
 }
 
-.nav a{
-	display: block;
-	width: 60px;
+.nav-toggle:before {
+  color: #B4B4B4; /* Edit this to change the icon color */
 }
+
+.nav-collapse ul ul a {
+  background: #E6E6E6;
+}
+
+.nav-collapse a {
+  background: #E6E6E6;
+  color: #08519C;
+}
+
+.nav-collapse a:visited {
+  background: #E6E6E6;
+  color: #08519C;
+}
+
+
+.nav-collapse a:hover{
+	color: #4292C6;
+}
+
+.nav-collapse a:active,
+.nav-collapse .active a {
+  background: #B4B4B4;
+  color: #08519C;
+}
+
+@media screen and (min-width: 40em) {
+  .nav-collapse a {
+    border-left: 0px;
+  }
+}
+
+
+
+
+section{
+	width: 100%;
+	background: #FFFFFF;
+	margin-top: 10px;
+	margin-bottom: 10px;	
+	text-align: left;
+}
+
+section:before{
+  display: block; 
+  content: ""; 
+  margin-top: -55px; 
+  height: 55px; 
+  visibility: hidden;
+}
+
+
+
+section.sub{
+	width: 100%;
+	background: #FFFFFF;
+	margin-top: 5px;
+	margin-bottom: 5px;	
+	text-align: left;
+}
+
+
 
 a {
 	color: #006837;
 }
+
 a:hover {
 	color: #A6D96A;
 }
+a:active,
 a:visited{
-	color : #A50026;
+	color : #006837;
 }
 
 rcode{
@@ -80,6 +148,7 @@ rcode{
 	border-width: 3px;
 	border-color: black;
 	border-style: solid;
+	overflow: auto;
 }
 
 .imgbox{
@@ -90,6 +159,7 @@ rcode{
 	border-color: black;
 	border-style: solid;
 	text-align: center;
+	overflow: auto;
 }
 
 .imgbox img{
@@ -112,35 +182,6 @@ rcode{
   }
 
 
-.boxrow{
-	margin: 0px;
-	padding: 0px;
-}
-
-.left {
-	float: left;
-	width: 50%;
-	margin: 0 0 10px 0;
-}
-
-
-.right {
-	float: right;
-	width: 50%;
-	margin: 0 0 10px 0;
-}
-
-.mid {
-	float: left;
-	width: 100%;
-	margin: 0 0 10px 0;
-}
-
-.content {
-	text-align: left;
-	padding: 0 10px;
-}
-
 table.pub th, table.pub td {
   font-size : 80%;
   font-family :  "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial Narrow", "Arial", "Lucida Grande", sans-serif; ;
@@ -153,62 +194,36 @@ table.diss th, table.diss td {
   text-align: left;
 }
 
-
-#topnav {
-	width: 100%;
-	float: left;
-	margin: 5px 0px;
-	padding: 5px 0px;
-	list-style: none;
-}
-
-#topnav li {
-	float: left;
-	margin: 0px 10px; }
-
-#topnav li#curr {
-	float: left;
-	margin: 0px 10px;
-	color: #4292C6;
-}
-
-#topnav li a{
-	text-decoration: none;
-	display: block;
-}
-
-a#nav{
-	text-decoration: none;
-}
-
-#pagenav {
-	width: 100%;
-	float: left;
-	margin: 5px;
-	padding: 5px;
-	list-style: none;
-}
-
-#pagenav li {
-	float: left;
-	margin: 0px 10px; 
-	display: inline;
-}
-
-#pagenav li#curr {
-	float: left;
-	margin: 0px 10px;
-	color: #4292C6;
-	display: inline;
+ol {
+	list-style: decimal;
+	margin: 0 5%;
+	padding: 0 5%;
 }
 
 
-#pagenav li a{
-	text-decoration: none;
-	display: block;
-}
-
-ul#updates {
+ul.updates {
+	padding-right:0;
 	list-style: none;	
 }
+li.updates{
+	margin-right:0;
+}
 
+hr.style-two {
+    border: 0;
+    height: 1px;
+    position:relative;
+    background-image: -webkit-linear-gradient(left, rgba(8, 48, 107,0),  #08306B, rgba(8, 48, 107,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(8, 48, 107,0), #08306B, rgba(8, 48, 107,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(08, 48, 107,0),  #08306B, rgba(8, 48, 107,0)); 
+    background-image:      -o-linear-gradient(left, rgba(8, 48, 107,0),  #08306B, rgba(8, 48, 107,0)); 
+}
+
+
+.footer{
+	text-align: center;
+	margin-bottom: 10px;
+	font-size: 500%;
+	font-color: #08306B;
+;
+}
