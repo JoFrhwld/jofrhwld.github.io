@@ -181,6 +181,14 @@ rcode{
   	word-wrap: break-word;
   }
 
+h2#contact:before{
+  display: block; 
+  content: " "; 
+  margin-top: -60px; 
+  height: 60px; 
+  visibility: hidden; 
+}
+
 
 table.pub th, table.pub td {
   font-size : 80%;
