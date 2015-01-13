@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+ <html>
+
+ 	{% include head %}
+
+	<body>
+		<header>
+		  <a href = "{{site.baseurl}}/" class="logo"><h1>Josef Fruehwald</h1></a>
+		  	<nav class="nav-collapse">
+	    		<ul>
+      				<li class="menu-item"><a href = "{{site.baseurl}}/#{{page.pub_type}}">Home</a></li>
+	    		</ul>
+	  		</nav>
+		</header>
+		<div class="container">
+			<h1>{{ page.title }}</h1>
+				{% for post in site.posts %}
+					{% if post.categories contains page.pub_type %}
+
+			<section>
+				<div class = "section group">
+
+				<div class = "col span_2_of_2">
+				<h2>{{ post.title }}, {{post.year}}</h2>
+					<div class = "box">
+					<h3>Course Description</h3>
+					<p>
+					{{ post.abstract }}
+					</p>
+				</div><!--box-->
+				</div>
+				</div>
+
+			</section>
+			<hr class = "style-two">
+
+					{% endif %}
+				{% endfor %}
+			<hr class = "style-two">
+
+
+		</div>
+		{% include footer.html %}
+		<script src="{{site.baseurl}}/fixed-nav/js/fastclick.js"></script>
+		<script src="{{site.baseurl}}/fixed-nav/js/scroll.js"></script>
+		<script src="{{site.baseurl}}/fixed-nav/js/fixed-responsive-nav.js"></script>
+	</body>
+	{% include analytics %}
+ </html>
