@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>FAVE-Workshop: Part 1</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="FAVE_worshop1_files/revealjs_presentation/css/reveal.min.css"/>
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+
+
+<link rel="stylesheet" href="FAVE_worshop1_files/revealjs_presentation/css/theme/simple.css" id="theme">
+
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'FAVE_worshop1_files/revealjs_presentation/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--[if lt IE 9]>
+    <script src="FAVE_worshop1_files/revealjs_presentation/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">FAVE-Workshop: Part 1</h1>
+    <h3 class="date"></h3>
+</section>
+
+<section><section id="outline-of-the-morning" class="titleslide slide level1"><h1>Outline of the morning</h1></section><section id="outline" class="slide level2">
+<h1>Outline</h1>
+<ol type="1">
+<li>The Benefits of Automation</li>
+<li>How FAVE (roughly) Works
+<ul>
+<li>FAVE-align</li>
+<li>FAVE-extract</li>
+</ul></li>
+<li>How to use FAVE</li>
+</ol>
+</section></section>
+<section><section id="benefits-of-automation" class="titleslide slide level1"><h1>Benefits of Automation</h1></section><section id="fear-uncertainty-doubt" class="slide level2">
+<h1>Fear, Uncertainty, Doubt</h1>
+</section><section id="itll-make-mistakes" class="slide level2">
+<h1>“It’ll make mistakes!”</h1>
+</section><section id="people-make-mistakes." class="slide level2">
+<h1>People make mistakes.</h1>
+<p><img src="FAVE_worshop1_files/figure-revealjs/unnamed-chunk-2.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="614.4" /></p>
+<p>P.S., this is only data from 374 speakers out of a total possible 442 cause I couldn’t figure out how to read 68 into R.</p>
+</section><section id="f2-15543" class="slide level2">
+<h1>F2 = 15543?</h1>
+<pre><code>##    F1    F2 plt_vclass  Word
+## 1 996 15543         ay whine</code></pre>
+</section><section id="f2-f1" class="slide level2">
+<h1>F2 &lt; F1?</h1>
+<pre><code>##    F1  F2 plt_vclass Word
+## 1 822 761         oh  all</code></pre>
+</section><section id="whats-this-little-hat" class="slide level2">
+<h1>What’s this little hat?</h1>
+<p><img src="FAVE_worshop1_files/figure-revealjs/unnamed-chunk-5.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="614.4" /></p>
+</section><section id="its-all-low-vowels" class="slide level2">
+<h1>It’s all low vowels?</h1>
+<p><img src="FAVE_worshop1_files/figure-revealjs/unnamed-chunk-6.svg" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="614.4" /></p>
+</section><section id="mistakes" class="slide level2">
+<h1>Mistakes</h1>
+<ul>
+<li>Hand Measurements ≠ Error Free</li>
+</ul>
+</section><section id="its-a-black-box" class="slide level2">
+<h1>“It’s a black box!”</h1>
+</section><section id="people-are-black-boxes" class="slide level2">
+<h1>People are black boxes</h1>
+<div style="width:50%;margin-left:25%;">
+<p><img src="figures/PhrenologyPix.jpg" alt="https://en.wikipedia.org/wiki/File:PhrenologyPix.jpg" /></p>
+</div>
+</section><section id="fave" class="slide level2">
+<h1><a href="https://github.com/JoFrhwld/FAVE">FAVE</a></h1>
+<p><img src="figures/fave.png" alt="https://github.com/JoFrhwld/FAVE" /></p>
+</section><section id="its-like" class="slide level2">
+<h1>“It’s like…”</h1>
+<p><img src="figures/Monkey-gun.jpg" alt="too much" /></p>
+</section><section id="well-so-is-praat" class="slide level2">
+<h1>Well so is Praat!</h1>
+<p><img src="figures/praat.png" alt="praat" /></p>
+</section><section id="dont-stop-looking-at-and-listening-to-your-data" class="slide level2">
+<h1>Don’t stop looking at and listening to your data!</h1>
+</section><section id="positive-benefits" class="slide level2">
+<h1>Positive Benefits</h1>
+<ul>
+<li>Consistancy</li>
+<li>Replicability</li>
+</ul>
+</section><section id="when-humans-format-data-by-hand" class="slide level2">
+<h1>When humans format data by hand</h1>
+<pre><code>Diane Altwasser, 28, Calgary, AB  TS 663</code></pre>
+<p><br></p>
+<pre><code>Darcy Janzen (m), 36, Calgary, AB  TS 658</code></pre>
+<p><br></p>
+<pre><code>John Kistler, 47, m,ColoradoSprings, CO TS 147</code></pre>
+</section><section id="when-humans-curate-data-by-hand" class="slide level2">
+<h1>When humans curate data by hand</h1>
+<pre><code>AB:Calgary:DAltwasser.txt:       text/plain; charset=us-ascii
+...
+AR:LittleRock:MKemp.pln:         text/x-c++; charset=iso-8859-1
+...
+AZ:Tucson:JBrunekant.pln:        text/plain; charset=iso-8859-1
+...
+IL:Chicago:JWojcik.pln:          text/x-c; charset=us-ascii
+...
+IL:Chicago:KReynen.pln:          text/x-c++; charset=us-ascii</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">text/plain charset=iso-8859-1</th>
+<th style="text-align: right;">text/plain charset=us-ascii</th>
+<th style="text-align: right;">text/x-c charset=us-ascii</th>
+<th style="text-align: right;">text/x-c++ charset=iso-8859-1</th>
+<th style="text-align: right;">text/x-c++ charset=us-ascii</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">368</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+</section><section id="some-undeniable-benefits" class="slide level2">
+<h1>Some Undeniable Benefits</h1>
+<ul>
+<li class="fragment">It’s a bit faster.</li>
+<li class="fragment">You get more, and richer data.</li>
+</ul>
+</section><section id="dinkin-2009" class="slide level2">
+<h1>Dinkin (2009)</h1>
+<ul>
+<li>57,464 formant measurements</li>
+<li>119 speakers</li>
+<li>Average of 483 mesurements per speaker</li>
+</ul>
+</section><section id="philadelphia-neighborhood-corpus" class="slide level2">
+<h1>Philadelphia Neighborhood Corpus</h1>
+<ul>
+<li>743,802 formant measurements</li>
+<li>397 speakers</li>
+<li>Average of 1,874 measurements per speaker</li>
+<li>Average of 0.94 vowels per second.</li>
+</ul>
+</section><section id="more-data" class="slide level2">
+<h1>More Data</h1>
+<p>/ay/ followed by different /t,d/ contexts.</p>
+<div align="center" style="margin:5%;">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">faithful</th>
+<th style="text-align: left;">phrase_flap</th>
+<th style="text-align: left;">word_flap</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">D</td>
+<td style="text-align: left;">1,190</td>
+<td style="text-align: left;">384</td>
+<td style="text-align: left;">245</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">4,024</td>
+<td style="text-align: left;">524</td>
+<td style="text-align: left;">285</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section><section id="more-data-1" class="slide level2">
+<h1>More Data</h1>
+<p><img src="FAVE_worshop1_files/figure-revealjs/unnamed-chunk-13.svg" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="614.4" /></p>
+</section><section id="more-data-2" class="slide level2">
+<h1>More Data</h1>
+<p><img src="FAVE_worshop1_files/figure-revealjs/unnamed-chunk-15.svg" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="614.4" /></p>
+</section><section id="richer-data" class="slide level2">
+<h1>Richer Data</h1>
+<p><img src="figures/transcription.png" alt="transcription" /></p>
+</section><section id="richer-data-1" class="slide level2">
+<h1>Richer Data</h1>
+<p><img src="figures/alignment.png" alt="alignment" /></p>
+</section><section id="richer-data-2" class="slide level2">
+<h1>Richer Data</h1>
+<p><img src="FAVE_worshop1_files/figure-revealjs/unnamed-chunk-16.svg" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" width="614.4" /></p>
+</section><section id="reproducibility" class="slide level2">
+<h1>Reproducibility</h1>
+<p><img src="FAVE_worshop1_files/figure-revealjs/unnamed-chunk-19.svg" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" width="614.4" /></p>
+</section><section id="researcher-heuristics" class="slide level2">
+<h1>Researcher Heuristics</h1>
+<ul>
+<li class="fragment">Choosing a measurement point.</li>
+<li class="fragment">Adjusting the LPC settings.</li>
+<li class="fragment"><strong>Choosing vowels to measure or ignore.</strong></li>
+</ul>
+</section><section id="researcher-effects" class="slide level2">
+<h1>Researcher Effects</h1>
+<ul>
+<li class="fragment">How explicitly defined their heuristics are.</li>
+<li class="fragment">How strictly they enforce them.</li>
+<li class="fragment">How experienced and skilled they are.</li>
+<li class="fragment">Their recent caffiene consumption, and quality of previous night’s sleep.</li>
+</ul>
+</section><section id="automation" class="slide level2">
+<h1>Automation</h1>
+<p><em>Knowable, Explicitly Defined, Exceptionless</em></p>
+<ul>
+<li class="fragment">Measurement point selection method.</li>
+<li class="fragment">LPC parameter setting method.</li>
+<li class="fragment">Decision process for measuring a vowel or not.</li>
+</ul>
+</section><section id="automation-1" class="slide level2">
+<h1>Automation</h1>
+<p><em>Eliminated</em></p>
+<ul>
+<li class="fragment"><del>Researcher experience and skill.</del></li>
+<li class="fragment">…oops</li>
+</ul>
+</section><section id="reproducibility-1" class="slide level2">
+<h1>Reproducibility</h1>
+<embed src="http://github.com/JoFrhwld/FAVE" width="100%" height="500">
+</embed>
+</section><section id="reproducibility-2" class="slide level2">
+<h1>Reproducibility</h1>
+<p><img src="figures/log.png" alt="formantlog" /></p>
+</section></section>
+<section><section id="fave-align" class="titleslide slide level1"><h1>FAVE-align</h1></section><section id="what-is-forced-alignment" class="slide level2">
+<h1>What is Forced Alignment?</h1>
+<p>“Forced alignment” simply time aligns a transcription to some audio.</p>
+</section><section id="input" class="slide level2">
+<h1>Input</h1>
+<div style="width:50%;margin-left:25%">
+<p><strong>Audio:</strong></p>
+<p><img src="figures/wav.svg" alt="wavform" /></p>
+</div>
+<div style="width:50%;margin-left:25%">
+<p><strong>Transcription:</strong></p>
+<p><code>this is a test</code></p>
+</div>
+</section><section id="dictionary-lookup" class="slide level2">
+<h1>Dictionary Lookup</h1>
+<p><img src="figures/dict_lookup.svg" alt="dict_lookup" /></p>
+</section><section id="dictionary-lookup-1" class="slide level2">
+<h1>Dictionary Lookup</h1>
+<p><img src="figures/dict_lookup_full.svg" alt="dict_lookup" /></p>
+</section><section id="alignment" class="slide level2">
+<h1>Alignment!</h1>
+<p><img src="figures/alignment1.svg" alt="alignment" /></p>
+</section><section id="how-do-humans-align" class="slide level2">
+<h1>How do humans align?</h1>
+<p><img src="figures/human_align.svg" alt="human_align" /></p>
+<ul>
+<li>An audio-visual processing task.</li>
+</ul>
+</section><section id="how-does-fave-align" class="slide level2">
+<h1>How does FAVE-align?</h1>
+<p>A brief aside into digital signal processing.</p>
+</section><section id="a-waveform" class="slide level2">
+<h1>A Waveform</h1>
+<p><img src="FAVE_worshop1_files/figure-revealjs/unnamed-chunk-20.svg" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" width="614.4" /></p>
+</section><section id="digital-sampling" class="slide level2">
+<h1>Digital Sampling</h1>
+<p><img src="FAVE_worshop1_files/figure-revealjs/unnamed-chunk-21.svg" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" width="614.4" /></p>
+</section><section id="fourier-transform" class="slide level2">
+<h1>Fourier Transform</h1>
+<p><a href="https://commons.wikimedia.org/wiki/File:Fourier_transform_time_and_frequency_domains.gif"><img src="figures/fourier.gif" alt="fourier" /></a></p>
+</section><section id="spectrum" class="slide level2">
+<h1>Spectrum</h1>
+<p><img src="FAVE_worshop1_files/figure-revealjs/unnamed-chunk-22.svg" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="614.4" /></p>
+</section><section id="spectrum-1" class="slide level2">
+<h1>Spectrum</h1>
+<p><img src="FAVE_worshop1_files/figure-revealjs/unnamed-chunk-23.svg" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" width="614.4" /></p>
+</section><section id="fourier-transform-again" class="slide level2">
+<h1>Fourier Transform (Again!)</h1>
+<p><a href="https://commons.wikimedia.org/wiki/File:Fourier_transform_time_and_frequency_domains.gif"><img src="figures/fourier.gif" alt="fourier" /></a></p>
+</section><section id="cepstrum" class="slide level2">
+<h1>Cepstrum</h1>
+<p><img src="FAVE_worshop1_files/figure-revealjs/unnamed-chunk-24.svg" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="614.4" /></p>
+</section><section id="fave-align-uses-the-cepstrum" class="slide level2">
+<h1>FAVE-align uses the Cepstrum</h1>
+<ul>
+<li class="fragment">FAVE utilizes a variant on cepstral coefficients (Perceptual Linear Prediction coefficients).</li>
+<li class="fragment">For each window of analysis, it looks at these coefficients, the difference between this window and the window previous, and the difference between the differences.</li>
+<li class="fragment">FAVE’s decision making process is not readily comparable to your audio-visual decision making process.</li>
+</ul>
+</section><section id="fave-aligns-decision-making" class="slide level2">
+<h1>FAVE-align’s Decision Making</h1>
+</section><section id="hidden-markov-models" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm_states.svg" alt="defeat" /></p>
+</section><section id="hidden-markov-models-1" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm_increment_1.svg" alt="defeat" /></p>
+</section><section id="hidden-markov-models-2" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm_stay_1.svg" alt="defeat" /></p>
+</section><section id="hidden-markov-models-3" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm_chain_2.svg" alt="defeat" /></p>
+</section><section id="hidden-markov-models-4" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm_increment_2.svg" alt="defeat" /></p>
+</section><section id="hidden-markov-models-5" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm_stay_2.svg" alt="defeat" /></p>
+</section><section id="hidden-markov-models-6" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm_chain_3.svg" alt="defeat" /></p>
+</section><section id="hidden-markov-models-7" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm.svg" alt="defeat" /></p>
+</section><section id="hidden-markov-models-8" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm_sig1.svg" alt="defeat" /></p>
+</section><section id="hidden-markov-models-9" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm_sig2.svg" alt="defeat" /></p>
+</section><section id="hidden-markov-models-10" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm_decode.svg" alt="defeat" /></p>
+</section><section id="hidden-markov-models-11" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm_decode_2.svg" alt="defeat" /></p>
+</section><section id="hidden-markov-models-12" class="slide level2">
+<h1>Hidden Markov Models</h1>
+<p><img src="figures/hmm_segment.svg" alt="defeat" /></p>
+</section><section id="the-result" class="slide level2">
+<h1>The Result</h1>
+<p><img src="figures/alignment.png" alt="alignment" /></p>
+</section><section id="p2fa" class="slide level2">
+<h1>P2FA</h1>
+<div style="height:100%">
+<p><img src="figures/p2fa_small.png" alt="p2fa" /></p>
+</div>
+</section><section id="specs" class="slide level2">
+<h1>Specs</h1>
+<ul>
+<li>25.5 hours training data.</li>
+<li>Monophone model</li>
+<li>10 ms granularity</li>
+</ul>
+</section><section id="specs-1" class="slide level2">
+<h1>Specs</h1>
+<p>Accuracy, from Yuan &amp; Liberman (2008)</p>
+<div style="width:50%;margin-left:25%;">
+<p><img src="figures/p2fa_errors.png" alt="p2fa_errors" /></p>
+</div>
+</section><section id="specs-2" class="slide level2">
+<h1>Specs</h1>
+<p>MacKenzie &amp; Turton compared FAVE to other aligners on British English.</p>
+<div class="fragment" style="float:left;margin:5px;">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Median</th>
+<th style="text-align: right;"></th>
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;"></th>
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Max</th>
+<th style="text-align: right;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"><strong>Onset</strong></td>
+<td style="text-align: right;"><strong>Offset</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;"><strong>Onset</strong></td>
+<td style="text-align: right;"><strong>Offset</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;"><strong>Onset</strong></td>
+<td style="text-align: right;"><strong>Offset</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FAVE</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">0.019</td>
+<td style="text-align: right;">0.021</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">0.583</td>
+<td style="text-align: right;">0.588</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PLA</td>
+<td style="text-align: right;">0.015</td>
+<td style="text-align: right;">0.019</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">0.267</td>
+<td style="text-align: right;">0.252</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">55.473</td>
+<td style="text-align: right;">55.488</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SPPAS</td>
+<td style="text-align: right;">0.150</td>
+<td style="text-align: right;">0.155</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">0.504</td>
+<td style="text-align: right;">0.480</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">68.903</td>
+<td style="text-align: right;">67.408</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section><section id="variation-in-the-dictionary" class="slide level2">
+<h1>Variation in the dictionary</h1>
+<div class="fragment" align="center" style="margin:5%;">
+<h3 id="no">No</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">car</th>
+<th style="text-align: left;">walking</th>
+<th style="text-align: left;">both</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>K AA R</code></td>
+<td style="text-align: left;"><code>W AO K IH NG</code></td>
+<td style="text-align: left;"><code>B OW TH</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>K AA</code></td>
+<td style="text-align: left;"><code>W AO K IH N</code></td>
+<td style="text-align: left;"><code>B OW F</code></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p>Requires special training of forced aligner.</p>
+</div>
+</div>
+<div class="fragment" align="center" style="margin:5%;">
+<h3 id="maybe">Maybe?</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">either</th>
+<th style="text-align: left;">going to</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>AY DH ER</code></td>
+<td style="text-align: left;"><code>G OW IH NG  T UW</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>IY DH ER</code></td>
+<td style="text-align: left;"><code>G AA N AH</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section><section id="using-forced-alignment" class="slide level2">
+<h1>Using Forced Alignment</h1>
+<div style="width:100%;">
+<div style="width:49%;float:left;font-size:50%;line-height:1;">
+<p><a href = "http://www.ling.upenn.edu/~jiahong/publications/cn1.pdf"><img src = "figures/g_dropping.png" width="75%"></img></a></p>
+Yuan, J., Liberman, M., “Automatic detection of ‘g-dropping’ in American English using forced alignment,” Proceedings of 2011 IEEE Automatic Speech Recognition and Understanding Workshop, pp. 490-493.
+</div>
+<div style="width:49%;float:left;font-size:50%;line-height:1;">
+<p><a href = "http://www.ling.upenn.edu/~jiahong/publications/c06.pdf"><img src = "figures/l_vocalization.png" width="75%"></img></a></p>
+Yuan, J, Liberman, M., “Investigating /l/ variation in English through forced alignment,” Proceedings of Interspeech 2009, pp. 2215-2218.
+</div>
+</div>
+</section></section>
+<section><section id="fave-extract" class="titleslide slide level1"><h1>FAVE-extract</h1></section><section id="formant-analysis" class="slide level2">
+<h1>Formant Analysis</h1>
+<ul>
+<li class="fragment">FAVE-align tells us where in the audio vowels are.</li>
+<li class="fragment">FAVE-extract automates the vowel formant analysis.</li>
+</ul>
+</section><section id="how-do-humans-do-formant-analysis" class="slide level2">
+<h1>How do Humans do Formant Analysis?</h1>
+<div style="width:75%;margin-left:12.5;%">
+<video id="human" src="figures/human_tracking.m4v" controls>
+</video>
+</div>
+</section><section id="humans" class="slide level2">
+<h1>Humans</h1>
+<div class="fragment" style="width:50%;margin:auto auto;">
+<p><img src="figures/s1_t1.svg" alt="s1_t1" /></p>
+</div>
+<div class="fragment" style="width:50%;margin:auto auto;">
+<p><img src="figures/s2_t1.svg" alt="s2_t1" /></p>
+</div>
+<div class="fragment" style="width:50%;margin:auto auto;">
+<p><img src="figures/s1_t2.svg" alt="s2_t1" /></p>
+</div>
+</section><section id="automation-2" class="slide level2">
+<h1>Automation</h1>
+<div class="fragment" style="width:50%;margin:auto auto;">
+<p><img src="figures/s1_auto.svg" alt="s1_t1" /></p>
+</div>
+<div class="fragment" style="width:50%;margin:auto auto;">
+<p><img src="figures/s2_auto.svg" alt="s2_t1" /></p>
+</div>
+</section><section id="automating-formant-estimation" class="slide level2">
+<h1>Automating Formant Estimation</h1>
+<ul>
+<li>The bad errors are very very bad.</li>
+<li>Some small differences, any expert may disagree</li>
+</ul>
+<div style="width:100%;">
+<div class="fragment" style="float:left;margin:3%;">
+<p>4</p>
+<p><img src="figures/iy_4_2.png" width = "250"></img></p>
+</div>
+<div class="fragment" style="float:left;margin:3%;">
+<p>5</p>
+<p><img src="figures/iy_5.png" width = "250"></img></p>
+</div>
+</div>
+</section><section id="step-1-a-measurement-point" class="slide level2">
+<h1>Step 1: A Measurement Point</h1>
+<ul>
+<li class="fragment"><strong>Most Vowels:</strong> Measured at 1/3 of the duration.
+<ul>
+<li class="fragment">Evanini found this to most closely approximate human annotators’ behavior.</li>
+</ul></li>
+<li class="fragment"><strong>Complex Vowels:</strong> For vowels with a more complex trajectory, something different is done to avoid measuring in the transition from nucleus to glide.</li>
+</ul>
+</section><section id="step-1-a-measurement-point-1" class="slide level2">
+<h1>Step 1: A Measurement Point</h1>
+<div style="width:75%;margin-left:12.5%;">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Vowel</th>
+<th style="text-align: left;">Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">ay</td>
+<td style="text-align: left;">F1 Maximum</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">ey</td>
+<td style="text-align: left;">F1 Maximum</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Tuw</td>
+<td style="text-align: left;">onset</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">ow</td>
+<td style="text-align: left;">Half way between onset and F1 Maximum</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">aw</td>
+<td style="text-align: left;">Half way between onset and F1 Maximum</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section><section id="step-1-a-measurement-point-2" class="slide level2">
+<h1>Step 1: A Measurement Point</h1>
+<ul>
+<li class="fragment">In addition, padding equal to the window of the LPC analysis is added to the beginning and the end of the vowel, to ensure a formant track through the full vowel’s duration.
+<ul>
+<li class="fragment">For /ay/ 2x the window is added to the beginning.</li>
+</ul></li>
+<li class="fragment">To take into account any alignment errors, etc, any bits from the beginning and end which fall below 10% of the maximum intensity for the vowel are excluded.</li>
+</ul>
+</section><section id="other-measurement-points" class="slide level2">
+<h1>Other Measurement Points</h1>
+<p>Other supported measurement point selection methods.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>third</code></td>
+<td style="text-align: left;">Measure all vowels at 1/3 of duration</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>fourth</code></td>
+<td style="text-align: left;">Measure all vowels at 1/4 of duration</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>mid</code></td>
+<td style="text-align: left;">Measure all vowels at 1/2 of duration</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>maxint</code></td>
+<td style="text-align: left;">Measure at maximum vowel intensity</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>lennig</code></td>
+<td style="text-align: left;">Measure according to Lennig (1978)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>anae</code></td>
+<td style="text-align: left;">Measure according to the Atlas of North American English</td>
+</tr>
+</tbody>
+</table>
+</section><section id="formant-settings" class="slide level2">
+<h1>Formant Settings</h1>
+<ul>
+<li class="fragment">For each vowel token, the F1 and F2 estimates you could get for different LPC parameter settings constitute a <em>candidate set</em>.</li>
+<li class="fragment">Choose a winner based on its multivariate distance (based on F1, F2, log(B1), log(B2)) to the Atlas of North American English’s distribution for that vowel class.</li>
+<li class="fragment">Logic: If there is an LPC setting whch is produces a measurement close to the ANAE distribution for that vowel class, it’s probably ok.</li>
+</ul>
+</section><section id="formant-settings-1" class="slide level2">
+<h1>Formant Settings</h1>
+<ul>
+<li class="fragment">The ANAE distribution for a vowel class is the <em>prior</em>.</li>
+<li class="fragment">The candidate set of potential formant estimates is the <em>likelihood</em>.</li>
+<li class="fragment">The winner is the <em>posterior</em>.</li>
+</ul>
+<p><br></p>
+<ul>
+<li class="fragment">Like most worries about Bayesian reasoning, people worry that the prior might exert too strong an influence on the posterior.</li>
+<li class="fragment">Fortunately, the prior’s influence here doesn’t seem to be too strong.</li>
+</ul>
+</section><section id="fave---step-1" class="slide level2">
+<h1>FAVE - Step 1</h1>
+<p><a href="http://jofrhwld.shinyapps.io/fave_step1/"><img src="figures/fave_step1.png" alt="formants" /></a></p>
+</section><section id="fave---remeasurement" class="slide level2">
+<h1>FAVE - Remeasurement</h1>
+<p><a href="http://jofrhwld.shinyapps.io/remeasure/"><img src="figures/remeasure.png" alt="formants" /></a></p>
+</section><section id="fave---step-2" class="slide level2">
+<h1>FAVE - Step 2</h1>
+<p><a href="http://jofrhwld.shinyapps.io/fave_step2/"><img src="figures/fave_step2.png" alt="formants" /></a></p>
+</section><section id="fave---results" class="slide level2">
+<h1>FAVE - Results</h1>
+<p><a href="http://jofrhwld.shinyapps.io/fave_results/"><img src="figures/results.png" alt="results" /></a></p>
+</section></section>
+<section><section id="using-fave" class="titleslide slide level1"><h1>Using FAVE</h1></section><section id="transcription" class="slide level2">
+<h1>Transcription</h1>
+<p>We recommend using <a href="https://tla.mpi.nl/tools/tla-tools/elan/">ELAN</a></p>
+<div style="width:100%;">
+<div style="width:49%;float:left;font-size:50%;line-height:1;">
+<p><a href="http://fave.ling.upenn.edu/downloads/Transcription_guidelines_FAAV.pdf"><img src="figures/trans_guides.png" alt="transcription" /></a></p>
+</div>
+<div style="width:49%;float:left;font-size:50%;line-height:1;">
+<p><a href="http://fave.ling.upenn.edu/downloads/ELAN_Introduction.pdf"><img src="figures/elan.png" alt="elan" /></a></p>
+</div>
+</div>
+</section><section id="transcription-1" class="slide level2">
+<h1>Transcription</h1>
+<p><a href="http://fave.ling.upenn.edu/downloads/Convert_To_FAVE-align_Input.praat">From Praat</a></p>
+</section><section id="transcription-2" class="slide level2">
+<h1>Transcription</h1>
+<p>The input transcription to FAVE-align should be a tab-delimited file that looks like this:</p>
+<pre><code>
+ID  Name  start(seconds)  end(seconds)  transcriptions</code></pre>
+<p>Example:</p>
+<pre><code>
+JF  Josef Fruehwald 1.07    4.5 this is a test audio file for forced alignment
+JF  Josef Fruehwald 5.286   9.678   the word irn bru is probably not in the dictionary</code></pre>
+<ul>
+<li>Only audio between the start and end times will be considered for alignment.</li>
+<li>Only audio that is aligned will be analyzed by FAVE-extract.</li>
+</ul>
+</section><section id="fave-align-usage" class="slide level2">
+<h1>FAVE-align Usage</h1>
+<h3 id="files">Files</h3>
+<ul>
+<li>In the FAVE-align directory:
+<ul>
+<li>The audio file</li>
+<li>The transcription</li>
+</ul></li>
+</ul>
+</section><section id="fave-align-usage-1" class="slide level2">
+<h1>FAVE-align Usage</h1>
+<h3 id="out-of-dictionary-words">Out of Dictionary Words</h3>
+<ul>
+<li>If there are words in the transcription that aren’t in the CMU Dictionary, you will need to provide those transcriptions.</li>
+<li>You will need to provide transcriptions for partial words in the transcription.</li>
+</ul>
+<pre><code>python FAAValign.py -c unknown.txt transcription.txt</code></pre>
+</section><section id="fave-align-usage-2" class="slide level2">
+<h1>FAVE-align Usage</h1>
+<h3 id="out-of-dictionary-words-1">Out of Dictionary Words</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>python</code></td>
+<td style="text-align: left;"><code>FAAValign.py</code></td>
+<td style="text-align: left;"><code>-c unknown.txt</code></td>
+<td style="text-align: left;"><code>speaker.txt</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">using python</td>
+<td style="text-align: left;">the script</td>
+<td style="text-align: left;">check for unknown words and put them in <code>unknown.txt</code></td>
+<td style="text-align: left;">the transcription</td>
+</tr>
+</tbody>
+</table>
+</section><section id="fave-align-usage-3" class="slide level2">
+<h1>FAVE-align Usage</h1>
+<h3 id="provide-transcriptions">Provide Transcriptions</h3>
+<pre><code>
+IRN  AY1 R N
+BRU  B R UW1
+</code></pre>
+</section><section id="fave-align-usage-4" class="slide level2">
+<h1>FAVE-align Usage</h1>
+<h3 id="do-the-alignment">Do the alignment</h3>
+<pre><code>python FAAValign.py -i unknown.txt speaker.wav speaker.txt</code></pre>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>python</code></td>
+<td style="text-align: left;"><code>FAAValign.py</code></td>
+<td style="text-align: left;"><code>-i unknown.txt</code></td>
+<td style="text-align: left;"><code>speaker.wav</code></td>
+<td style="text-align: left;"><code>speaker.txt</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">using python</td>
+<td style="text-align: left;">the script</td>
+<td style="text-align: left;">add transcriptions in <code>unknown.txt</code> to dictionary</td>
+<td style="text-align: left;">the audio</td>
+<td style="text-align: left;">the transcription</td>
+</tr>
+</tbody>
+</table>
+</section><section id="fave-extract-usage" class="slide level2">
+<h1>FAVE-extract Usage</h1>
+<p><img src="figures/alignment.png" alt="transcript" /></p>
+</section><section id="fave-extract-usage-1" class="slide level2">
+<h1>FAVE-extract Usage</h1>
+<h3 id="settle-on-your-options">Settle on your options</h3>
+<p>My config.txt</p>
+<pre><code>
+--outputFormat
+txt
+--speechSoftware
+Praat
+--formantPredictionMethod
+mahalanobis
+--measurementPointMethod
+faav
+--nSmoothing
+12
+--remeasure
+--vowelSystem
+phila
+--onlyMeasureStressed</code></pre>
+</section><section id="fave-extract-usage-2" class="slide level2">
+<h1>FAVE-extract Usage</h1>
+<h3 id="run-fave-extract">Run FAVE-extract</h3>
+<pre><code>
+python bin/extractFormants.py +config.txt test.wav test.TextGrid test_meas</code></pre>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>python</code></td>
+<td style="text-align: left;"><code>bin/extractFormants.py</code></td>
+<td style="text-align: left;"><code>+config.txt</code></td>
+<td style="text-align: left;"><code>test.wav</code></td>
+<td style="text-align: left;"><code>test.TextGrid</code></td>
+<td style="text-align: left;"><code>test_meas</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">using python</td>
+<td style="text-align: left;">the script</td>
+<td style="text-align: left;">add config options</td>
+<td style="text-align: left;">the audio</td>
+<td style="text-align: left;">the TextGrid</td>
+<td style="text-align: left;">the output file name</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+    </div>
+  </div>
+
+  <script src="FAVE_worshop1_files/revealjs_presentation/lib/js/head.min.js"></script>
+  <script src="FAVE_worshop1_files/revealjs_presentation/js/reveal.min.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'linear',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: []});
+    </script>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+  </body>
+</html>
