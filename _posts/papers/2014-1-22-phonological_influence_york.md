@@ -13,7 +13,7 @@ abstract: "There is a conventional wisdom regarding phonetic changes that their 
 
 In my talk, I describe these results and try to make the case for more phonological analyses of phonetic changes.
 "
-presented: []
+presented: [{conf: "University of York"}]
 published: []
 docs: [{format: "HTML5 Slides", url: "/papers/york_2014/", local: true }]
 categories: [italk]
