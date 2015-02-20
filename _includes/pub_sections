@@ -51,6 +51,14 @@
 						{% endfor %}
 						<br>
 				{% endif %}
+				{% if paper.accepted.size > 0 %}
+					 Accepted
+						{% for pub in paper.accepted %}
+								{{pub}}
+						{% endfor %}
+						<br>
+				{% endif %}
+
 				{% if paper.docs.size > 1 %}
 					{% for doc in paper.docs %}
 						{% if doc.local == true %}
