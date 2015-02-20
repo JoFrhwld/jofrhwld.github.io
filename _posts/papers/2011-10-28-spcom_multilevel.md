@@ -2,7 +2,7 @@
 layout: paper
 title: "New results from hierarchical models of the community grammar"
 year: 2012
-author: [ { name: "Josef Fruehwald", url: "http://www.ling.upenn.edu/~joseff/" },
+author: [ { name: "Josef Fruehwald", url: "https://jofrhwld.github.io" },
 		{name: "Laurel MacKenzie", url: "http://www.ling.upenn.edu/~laurel/"}]
 abstract: "We explore the novel results made possible by fitting hierarchical models to speech community data.
 			Specifically, these models produce estimates for the degree to which a speech community coheres to 

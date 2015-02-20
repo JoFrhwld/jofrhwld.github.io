@@ -2,7 +2,7 @@
 layout: paper
 title: "Phonological Involvement in Phonetic Change"
 year: 2012
-author: [ { name: "Josef Fruehwald", url: "http://www.ling.upenn.edu/~joseff/" }]
+author: [ { name: "Josef Fruehwald", url: "https://jofrhwld.github.io" }]
 abstract: "<p>A long standing issue in the study of sound change concerns the relationship between phonology and phonetics. Phonetic
 changes progress as continuous movement through the phonetic space, raising a number of questions about how a phonological
 representation is related to a phonetic realization if that phonetic realization can change. More importantly, however, is 

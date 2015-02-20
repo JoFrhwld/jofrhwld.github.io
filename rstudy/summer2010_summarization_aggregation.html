@@ -95,7 +95,7 @@
 				<p>
 					There are quite a few good summarization functions in base R. The simplest are <rcode>table()</rcode> and <rcode>tapply()</rcode>.
 					I'll be demonstrating their use with a dataset of recorded telephone numbers,
-					 <a href="http://www.ling.upenn.edu/~joseff/rstudy/data/Joe.Durr1.txt">here</a>.
+					 <a href="https://jofrhwld.github.iorstudy/data/Joe.Durr1.txt">here</a>.
 				</p>
 				<p>
 					Briefly, I read 93 strings of 7 numbers formatted as telephone numbers (e.g. 123-4567). <rcode>Begin</rcode> and <rcode>End</rcode>
@@ -108,7 +108,7 @@
 				</p>
 				<blockquote>
 					<rcode>
-						dur <- read.delim("http://www.ling.upenn.edu/~joseff/rstudy/data/Joe.Durr1.txt")<br>
+						dur <- read.delim("https://jofrhwld.github.iorstudy/data/Joe.Durr1.txt")<br>
 					</rcode>
 				</blockquote>
 				
@@ -457,7 +457,7 @@ fitBuckModels <- function(df){
 				</p>
 				<blockquote>
 					<rcode>
-						buck <- read.csv("http://www.ling.upenn.edu/~joseff/rstudy/data/sbuck.csv")<br>
+						buck <- read.csv("https://jofrhwld.github.iorstudy/data/sbuck.csv")<br>
 						<br>
 						## zscore the frequency<br>
 						buck$Freq.z <- (buck$Log_Freq - mean(buck$Log_Freq)) / sd(buck$Log_Freq)

@@ -57,6 +57,14 @@
 						{% endfor %}
 					</p>
 				{% endif %}
+				{% if page.accepted.size > 0 %}
+					<p> Accepted
+						{% for pub in page.accepted %}
+								{{pub}}
+						{% endfor %}
+					</p>
+				{% endif %}
+
 				{% if page.docs.size > 0 %}
 					<p>
 						{% for doc in page.docs %}

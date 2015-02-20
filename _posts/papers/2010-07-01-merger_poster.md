@@ -2,7 +2,7 @@
 layout: paper
 title: "Mergers, Distinctions, and Shifts "
 year: 2010
-author: [ { name: "Josef Fruehwald", url: "http://www.ling.upenn.edu/~joseff/" }]
+author: [ { name: "Josef Fruehwald", url: "https://jofrhwld.github.io" }]
 abstract: "Using data from the Atlas of North American English, I try to determine whether it is the 
 			phonetic gap created by the low-back merger or the phonological collapse which acts as a trigger
 			for TRAP retraction STRUT lowering."

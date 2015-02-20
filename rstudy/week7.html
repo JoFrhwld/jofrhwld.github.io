@@ -209,7 +209,7 @@
 		could also be included in a chi-square test.</p>
 		<blockquote>
 			<font face = "Courier">
-				ing <- read.csv("http://www.ling.upenn.edu/~joseff/rstudy/data/ing2.csv")<br>
+				ing <- read.csv("https://jofrhwld.github.iorstudy/data/ing2.csv")<br>
 				fol1<-table(ing$DepVar, ing$Following.Seg)<br>
 				fol1<br>
 				prop.table(fol1,2)<br>
@@ -350,7 +350,7 @@
 		since we don't know what the no-treatment condition is. We can use a script I wrote for this to make it easy.</p>
 		<blockquote>
 			<font face = "Courier">
-				source("http://www.ling.upenn.edu/~joseff/scripts/recontrast.R")<br>
+				source("https://jofrhwld.github.ioscripts/recontrast.R")<br>
 				ing.tbl$GramStatus <- recontrast(ing.tbl$GramStatus)<br>
 				##now for the regression<br>
 				ing.mod<-glm(ing.obs~ing.tbl$GramStatus+ing.tbl$Tongue,family = binomial)<br>
@@ -437,7 +437,7 @@
 		regressions as well, but I have some good data with this kind of relationship with categorical data.</p>
 		<blockquote>
 			<font face = "Courier">
-				donner<-read.csv("http://www.ling.upenn.edu/~joseff/rstudy/data/donner.csv")
+				donner<-read.csv("https://jofrhwld.github.iorstudy/data/donner.csv")
 			</font>
 		</blockquote>
 		<p>This is a data set for the <a href="http://en.wikipedia.org/wiki/Donner_Party">Donner Party</a>. We can fit a logistic regression of survival
@@ -538,7 +538,7 @@
 		corpus.</p>
 		<blockquote>
 			<font face = "Courier">
-				sbuck<-read.csv("http://www.ling.upenn.edu/~joseff/rstudy/data/sbuck.csv")<br>
+				sbuck<-read.csv("https://jofrhwld.github.iorstudy/data/sbuck.csv")<br>
 				sbuck$Gram<-relevel(sbuck$Gram,"Past")<br>
 				sbuck<-recontrast(sbuck)<br>
 				summary(sbuck)

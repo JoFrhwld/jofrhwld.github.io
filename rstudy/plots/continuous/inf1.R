@@ -1,4 +1,4 @@
-INF1 <- read.delim("http://www.ling.upenn.edu/~joseff/rstudy/data/INF1.txt")
+INF1 <- read.delim("https://jofrhwld.github.iorstudy/data/INF1.txt")
 cor.INF1 <- cor(INF1, use = "pairwise.complete.obs")
 image(	abs(cor.INF1),
 	axes = F,

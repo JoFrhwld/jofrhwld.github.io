@@ -2,7 +2,7 @@
 layout: paper
 title: "Title"
 year: 2008
-author: [ { name: "Josef Fruehwald", url: "http://www.ling.upenn.edu/~joseff/" }]
+author: [ { name: "Josef Fruehwald", url: "https://jofrhwld.github.io" }]
 abstract: ""
 presented: [{conf: "NWAV 37", url: ""} ]
 published: [""]

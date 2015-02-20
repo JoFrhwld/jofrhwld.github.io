@@ -460,7 +460,7 @@ Error: unexpected '}' in "    }"
 > for(i in 1:6){
 +     plot(1:10, 1:10, main=paste(expression(Phi[1]),"-",i,"*",expression(Phi[2])))
 +     }
-> donner<-read.csv("http://www.ling.upenn.edu/~joseff/data/donner.csv")
+> donner<-read.csv("https://jofrhwld.github.iodata/donner.csv")
 > 
 > donner <- arrange(donner, GENDER)
 > donner <- ddply(donner, .(AGE, NFATE), transform, stack = (0:(length(AGE)-1))*0.015)
@@ -615,7 +615,7 @@ Error in eval(expr, envir, enclos) : object 'Recovery.rate' not found
 > ggplot(bp, aes(End.Period, Recovery.Rate)) + geom_line() +facet_grid(.~Type, scales = "free_y")
 > ggplot(bp, aes(End.Period, Recovery.Rate)) + geom_line() +facet_grid(Type~., scales = "free_y")
 > ggplot(bp, aes(End.Period, Recovery.Rate)) + geom_line() +facet_grid(Type~., scales = "free_y") + expand_limits(y = 0)
-> jean <- read.csv("http://www.ling.upenn.edu/~joseff/data/jean2.csv")
+> jean <- read.csv("https://jofrhwld.github.iodata/jean2.csv")
 > ay <- subset(jean, VClass %in% c("ay","ay0"))
 > ay$VClass <- as.factor(as.character(ay$VClass))
 > 
@@ -1244,7 +1244,7 @@ Error: could not find function "colmeans"
 6518.6679151    0.1351347  738.8070208 
 > summary(dur)
 Error in summary(dur) : object 'dur' not found
-> dur <- read.delim("http://www.ling.upenn.edu/~joseff/rstudy/data/Joe.Durr1.txt")
+> dur <- read.delim("https://jofrhwld.github.iorstudy/data/Joe.Durr1.txt")
 > summary(duf)
 Error in summary(duf) : object 'duf' not found
 > summary(dur)

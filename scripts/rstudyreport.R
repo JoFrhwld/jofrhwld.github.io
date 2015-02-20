@@ -6,7 +6,7 @@
 ## install.packages(c("RColorBrewer","gdata"))
 library(RColorBrewer)
 library(gdata)
-source("http://www.ling.upenn.edu/~joseff/scripts/recontrast.R")
+source("https://jofrhwld.github.ioscripts/recontrast.R")
 
 ######
 ## Define a Color Palate
@@ -21,7 +21,7 @@ pal <- rev(brewer.pal(3,"Paired")[1:2])
 ######
 ## Read in the ING Data
 ######
-ing <- read.csv("http://www.ling.upenn.edu/~joseff/rstudy/data/ing2.csv")
+ing <- read.csv("https://jofrhwld.github.iorstudy/data/ing2.csv")
 
 ####
 ## GramStatus Proportion Table
@@ -401,7 +401,7 @@ anova(model7, test = "Chisq")
 ####
 ## Load the TD data
 ####
-td <- read.csv("http://www.ling.upenn.edu/~joseff/rstudy/data/sbuck.csv")
+td <- read.csv("https://jofrhwld.github.iorstudy/data/sbuck.csv")
 
 ####
 ## Reshape the data appropriately

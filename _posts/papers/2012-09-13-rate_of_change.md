@@ -2,7 +2,7 @@
 layout: paper
 title: "Analyzing the rate of language change"
 year: 2012
-author: [ { name: "Josef Fruehwald", url: "http://www.ling.upenn.edu/~joseff/" }]
+author: [ { name: "Josef Fruehwald", url: "https://jofrhwld.github.io" }]
 abstract: "In this talk, I will argue that it is possible to determine whether the influence of one segment on another is phonetic or phonological by examining how they interact during sound change. 
 
 I will begin with an introduction to the Philadelphia Neighborhood Corpus, which has been developed at Penn. It represents both the cumulative effort of fieldwork since the 1970's and the most recent developments in automated acoustic analysis (Labov & Rosenfender, 2011). I will then briefly present some of the initial results from the corpus, specifically the reversal of some sound changes which were originally identified as new and vigorous in the 1970's (Labov, Rosenfelder & Fruehwald, forthcoming).

@@ -2,7 +2,7 @@
 layout: paper
 title: "The Spread of Raising: Opacity, Lexicalization, and diffusion"
 year: 2007
-author: [ { name: "Josef Fruehwald", url: "http://www.ling.upenn.edu/~joseff/" }]
+author: [ { name: "Josef Fruehwald", url: "https://jofrhwld.github.io" }]
 abstract: "Canadian Raising is typically described as the centralization of the nucleus of /ay/ before voiceless segments. 
 			However some recent studies in areas affected by Raising have shown that the current conditioning factors are 
 			not as regular as reported previously (Vance, 1987; Dailey-OCain, 1997; Hall, 2005). This paper explores the status

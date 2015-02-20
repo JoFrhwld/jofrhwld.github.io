@@ -484,7 +484,7 @@ It looks like between Tucker's description, and Raymond's birth, there was a pho
 ---
 
 
-## [Phonological Innovation?](http://www.ling.upenn.edu/~joseff/assets/motion_chart.html)
+## [Phonological Innovation?](https://jofrhwld.github.ioassets/motion_chart.html)
 
 <object data="http://jofrhwld.github.io/assets/motion_chart.html" style="width:100%;height:90%;"></object>
 

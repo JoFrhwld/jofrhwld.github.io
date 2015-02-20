@@ -2,7 +2,7 @@
 layout: paper
 title: "'I'm done my homework' - Case assignment in a stative passive."
 year: 2013
-author: [ {name: "Josef Fruehwald", url: "http://www.ling.upenn.edu/~joseff/"}, { name: "Neil Myler", url: "https://files.nyu.edu/njm277/public/index.html"}]
+author: [ {name: "Josef Fruehwald", url: "https://jofrhwld.github.io"}, { name: "Neil Myler", url: "https://files.nyu.edu/njm277/public/index.html"}]
 abstract: "We present an analysis of an underdescribed construction common to Canadian and Philadelphian English dialects which appears to involve an instance of the copula/passive auxiliary be, a participial form of finish or do, and a DP complement receiving accusative Case (see Yerastov (2008) for a descriprition and discussion of its geographical distribution). This construction, which is fully productive and non-idiomatic, is illustrated in (1).
 <ol>
 	<li>I'm finished/done my homework.</li>

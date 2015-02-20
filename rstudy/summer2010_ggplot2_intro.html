@@ -306,7 +306,7 @@
 				</p>
 				<blockquote>
 					<rcode>
-						source("http://www.ling.upenn.edu/~joseff/rstudy/data/coins.R")<br>
+						source("https://jofrhwld.github.iorstudy/data/coins.R")<br>
 					</rcode>
 				</blockquote>
 				
@@ -314,7 +314,8 @@
 					<rcode>
 						ggplot(coins, aes(coin, value))+<br>
 						&nbsp;&nbsp;geom_point()<br>
-					</rcode>				</blockquote>
+					</rcode>
+				</blockquote>
 				<center>
 					<a href = "plots/ggplotintro/coin1.png"><img src = plots/ggplotintro/coin1.png width = 30%></a>
 				</center>
@@ -324,7 +325,8 @@
 					<rcode>
 						ggplot(coins, aes(coin, value))+<br>
 						&nbsp;&nbsp;geom_bar()<br>
-					</rcode>				</blockquote>
+					</rcode>
+				</blockquote>
 				<center>
 					<a href = "plots/ggplotintro/coin2.png"><img src = plots/ggplotintro/coin2.png width = 30%></a>
 				</center>
@@ -334,7 +336,8 @@
 					<rcode>
 						ggplot(coins, aes(coin, value * N))+<br>
 						&nbsp;&nbsp;geom_point()<br>
-					</rcode>				</blockquote>
+					</rcode>
+				</blockquote>
 				<center>
 					<a href = "plots/ggplotintro/coin3.png"><img src = plots/ggplotintro/coin3.png width = 30%></a>
 				</center>
@@ -344,7 +347,8 @@
 					<rcode>
 						ggplot(coins, aes(coin, value * N))+<br>
 						&nbsp;&nbsp;geom_bar()<br>
-					</rcode>				</blockquote>
+					</rcode>
+				</blockquote>
 				<center>
 					<a href = "plots/ggplotintro/coin4.png"><img src = plots/ggplotintro/coin4.png width = 30%></a>
 				</center>
@@ -354,7 +358,8 @@
 					<rcode>
 						ggplot(coins, aes(coin, value * N))+<br>
 						&nbsp;&nbsp;geom_bar(aes(color = coin))<br>
-					</rcode>				</blockquote>
+					</rcode>
+				</blockquote>
 				<center>
 					<a href = "plots/ggplotintro/coin5.png"><img src = plots/ggplotintro/coin5.png width = 30%></a>
 				</center>
@@ -712,7 +717,7 @@ median.quartile <- function(x){
 				</p>
 				<blockquote>
 					<rcode>
-						jean <- read.csv("http://www.ling.upenn.edu/~joseff/data/jean2.csv")<br>
+						jean <- read.csv("https://jofrhwld.github.iodata/jean2.csv")<br>
 						ay <- subset(jean, VClass %in% c("ay","ay0"))<br>
 						ay$VClass <- as.factor(as.character(ay$VClass))<br>
 						<br>
@@ -767,7 +772,7 @@ median.quartile <- function(x){
 				</p>
 				<blockquote>
 					<rcode>
-						source("http://www.ling.upenn.edu/~joseff/rstudy/plots/graphics/phila_bar.R")
+						source("https://jofrhwld.github.iorstudy/plots/graphics/phila_bar.R")
 					</rcode>
 				</blockquote>
 				<p>
@@ -948,7 +953,7 @@ median.quartile <- function(x){
 				
 				<blockquote>
 					<rcode>
-						donner<-read.csv("http://www.ling.upenn.edu/~joseff/data/donner.csv")<br>
+						donner<-read.csv("https://jofrhwld.github.iodata/donner.csv")<br>
 						<br>
 						ggplot(donner, aes(AGE, NFATE, color = GENDER))+<br>
 							&nbsp;&nbsp;geom_point(position = position_jitter(height = 0.02, width = 0)) + <br>

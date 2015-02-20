@@ -2,7 +2,7 @@
 layout: paper
 title: "The Spread of Raising: Opacity, Lexicalization, and diffusion"
 year: 2008
-author: [ { name: "Josef Fruehwald", url: "http://www.ling.upenn.edu/~joseff/" }]
+author: [ { name: "Josef Fruehwald", url: "https://jofrhwld.github.io" }]
 abstract: '<p>The centralization of the low upgliding diphthong (typically called Canadian Raising, here just Raising), is frequently cited as an example of phonological opacity. Conditioned by a following voiceless segment, Raising continues to apply when an underlying unstressed /t/ is flapped on the surface. Dialects which have both Raising and Flapping, then, maintain the distinction between "writer" and "rider" in the quality of the vowel, rather than the voicing of the stop.</p>
 
 <p>Exceptions to the simplest formulation of Raising have been reported on in the past. Underapplication of Raising in pre-voiceless environments can possibly be accounted for by prosodic structure (Chambers, 1973, 1989; Jensen, 2000; Vance, 1987). However, a few reports from the Inland North (Vance, 1987; Dailey-O&apos;Cain, 1997) and Canada (Hall, 2005) suggest that the regularity of Raising&apos;s conditioning has deteriorated, allowing raised nuclei before underlyingly voiced segments. The distribution of these raised variants is unpredictable within a speaker&apos;s phonology, but stable for given words, suggesting that Raising has lexicalized, and is undergoing diffusion to new environments.</p>
