@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Josef Fruehwald" />
+  <meta name="dcterms.date" content="2015-03-19" />
+  <title>Big Data and Sociolinguistics</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="index_files/revealjs_presentation/css/reveal.min.css"/>
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+
+
+<link rel="stylesheet" href="index_files/revealjs_presentation/css/theme/serif.css" id="theme">
+
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'index_files/revealjs_presentation/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--[if lt IE 9]>
+    <script src="index_files/revealjs_presentation/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="assets/mystyle.css" id="theme">
+    <script src="index_files/htmlwidgets-0.3.2/htmlwidgets.js"></script>
+    <script src="index_files/viz-0.3/viz.js"></script>
+    <link href="index_files/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+    <script src="index_files/grViz-binding-0.5/grViz.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Big Data and<br/> Sociolinguistics</h1>
+    <h2 class="author">Josef Fruehwald</h2>
+    <h3 class="date">March 19, 2015</h3>
+</section>
+
+<section><section id="big-data" class="titleslide slide level1"><h1>Big Data</h1></section><section id="are-sociolinguists-using-big-data" class="slide level2">
+<h1>Are Sociolinguists Using Big Data?</h1>
+<blockquote>
+<p>You cannot email this data to a colleague. You can’t even download it on your computer. This is data on an unprecedented impossibly mind boggling massive scale. - <a href="http://www.lse.ac.uk/newsAndMedia/videoAndAudio/channels/publicLecturesAndEvents/player.aspx?id=2888">Kenneth Benoit (2015)</a></p>
+</blockquote>
+<p>Not sociolinguistics yet.</p>
+</section><section id="the-philadelphia-neighborhood-corpus" class="slide level2">
+<h1>The Philadelphia Neighborhood Corpus</h1>
+<div style="width:75%;margin-left:auto;">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">speakers</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">wav files</th>
+<th style="text-align: right;">other</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">397</td>
+<td style="text-align: right;">302.46 hours</td>
+<td style="text-align: right;">51G</td>
+<td style="text-align: right;">32G</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section><section id="big-for-sociolinguistics-data" class="slide level2">
+<h1>Big for Sociolinguistics Data</h1>
+<blockquote>
+<p>Big data is a broad term for data sets so large or complex that traditional data processing applications are inadequate. - <a href="https://en.wikipedia.org/w/index.php?title=Big_data&amp;oldid=651266139">Wikipedia</a></p>
+</blockquote>
+</section><section id="traditional-data-processing-applications" class="slide level2">
+<h1>“Traditional data processing applications”</h1>
+<div style="width:50%;margin:auto;">
+<p><img src="figures/goldvarb.png" alt="goldvarb" /></p>
+</div>
+</section><section id="useful-data" class="slide level2">
+<h1>Useful Data</h1>
+<blockquote>
+<p>It is data made useful to us for analysis - <a href="https://www.youtube.com/watch?v=XzB_YcB6rPs&amp;t=235">Hilary Mason</a></p>
+</blockquote>
+</section><section id="big-enough-n" class="slide level2">
+<h1>Big Enough N</h1>
+<blockquote>
+<p>Sample sizes are never large. If N is too small to get a sufficiently-precise estimate, you need to get more data (or make more assumptions). But once N is “large enough,” you can start subdividing the data to learn more […]. N is never enough because if it were “enough” you’d already be on to the next problem for which you need more data. - <a href="http://andrewgelman.com/2005/07/31/n_is_never_larg/">Andrew Gelman</a></p>
+</blockquote>
+</section><section id="big-data-whatever-it-is-is-coming-to-sociolinguistics" class="slide level2">
+<h1>“Big Data”, whatever it is, is coming to sociolinguistics</h1>
+<h3 id="already-here">Already Here:</h3>
+<ul>
+<li><strong>FAVE-extract</strong> - automates formant analysis.</li>
+<li><a href="http://darla.dartmouth.edu/"><strong>DARLA</strong></a> - Automatic Speech Recognition implementation (Reddy &amp; Stanford)</li>
+</ul>
+<h3 id="likely-coming-soon">Likely coming soon</h3>
+<ul>
+<li>Document classification, generally</li>
+<li>Sentiment analysis, specifically</li>
+<li>Topic modeling, etc.</li>
+</ul>
+</section><section id="what-it-means-for-us" class="slide level2">
+<h1>What it means for us</h1>
+<ul>
+<li>We need to keep learning about and developing new computational tools.</li>
+<li>We need to push our students to do the same.</li>
+</ul>
+</section><section id="big-data-ism" class="slide level2">
+<h1>Big Data-ism</h1>
+<p><a href="http://www.nature.com/srep/2012/121210/srep00943/full/srep00943.html"><img src="figures/cooling.png" alt="cooling" /></a></p>
+</section><section id="big-data-ism-1" class="slide level2">
+<h1>Big Data-ism</h1>
+<p>My alternate title <img src="figures/frequency.png" alt="cooling" /></p>
+</section><section id="big-data-ism-2" class="slide level2">
+<h1>Big Data-ism</h1>
+<p>Another alternate title <img src="figures/ocr.png" alt="cooling" /></p>
+</section><section id="big-data-ism-3" class="slide level2">
+<h1>Big Data-ism</h1>
+<p><strong>A Fear:</strong></p>
+<ul>
+<li>More people doing superficial and theoretically unmotivated work.</li>
+</ul>
+<p><strong>A Problem</strong></p>
+<ul>
+<li>It’ll be trivial to find effect sizes != 0.</li>
+</ul>
+</section><section id="effect-size" class="slide level2">
+<h1>Effect Size</h1>
+<p><strong>The Facebook Contagion Experiment</strong></p>
+<div style="width:50%;margin:auto;">
+<p><img src="figures/facebook.png" alt="facebook" /></p>
+</div>
+<div style="align:center;">
+<p>Adam D. I. Kramer et al. PNAS 2014;111:8788-8790</p>
+</div>
+</section><section id="alternate-universes" class="slide level2">
+<h1>Alternate Universes</h1>
+<p>The headlines about the same effect size, but with different Ns might be:</p>
+<h3 id="n-1000">N = 1,000</h3>
+<p><strong>Facebook’s unethical experiment has no apparent effect on users’ emotions.</strong></p>
+<h3 id="n-689003">N = 689,003</h3>
+<p><strong>Facebook is using mind control!</strong></p>
+</section><section id="lets-get-serious-about-effect-size" class="slide level2">
+<h1>Let’s Get Serious About <br> Effect Size</h1>
+<ul>
+<li>Is the effect size of some predictor big enough to explain the phenomenon under discussion?</li>
+<li>Is it about the size we <em>expected</em> it to be.</li>
+</ul>
+<p>Expectations about how big an effect <em>ought</em> to be can only be provided by an articulated theory.</p>
+</section><section id="lets-get-serious-about-theory" class="slide level2">
+<h1>Let’s Get Serious about <br> Theory</h1>
+<div style="width:100%">
+<div style="float:left;width:50%;">
+<p><img src="figures/yang_1.png" alt="yang1" /></p>
+</div>
+<div style="float:left;width:50%;">
+<p><img src="figures/yang_2.png" alt="yang2" /></p>
+</div>
+<p>Yang (2013)</p>
+</div>
+</section><section id="remainder-of-the-talk" class="slide level2">
+<h1>Remainder of the talk</h1>
+<ul>
+<li class="fragment">There are two different models of undershoot that predict pre-voiceless /ay/ raising. I estimate the rate of change they predict, and compare that to the observed rates of change.</li>
+<li class="fragment">Using ideas from information theory, I estimate the predicted indexical association between gender and filled pause choice.</li>
+<li class="fragment">Both analysis are based on data from the Philadelphia Neighborhood Corpus</li>
+</ul>
+</section></section>
+<section><section id="ay-raising" class="titleslide slide level1"><h1>/ay/ Raising</h1></section><section id="ay-raising-1" class="slide level2">
+<h1>/ay/ Raising</h1>
+<div>
+<p><img src="index_files/figure-revealjs/plot_ays1.svg" title="plot of chunk plot_ays1" alt="plot of chunk plot_ays1" width="768" /></p>
+</div>
+<ul>
+<li>Philadelphia used to have no pre-voiceless /ay/ raising.</li>
+<li>It does now.</li>
+</ul>
+</section><section id="undershoot-explanation" class="slide level2">
+<h1>Undershoot Explanation</h1>
+<p>As a diphthong, /ay/ has a lot of ground to cover. Its nucleus raises before voicless consonants because</p>
+<ul>
+<li class="fragment">/ay/ is shorter before voiceless, giving you less time to all the way from /a/ to /i/. Therefore, the nucleus raises to [ʌ], so you don’t have to make such a big gesture in such a short amount of time. (Joos 1942)</li>
+<li class="fragment">The offglide of /ay/ is forced to be peripheral before voiceless, so the nucleus raises to [ʌ] via co-articulation with the glide. (Moreton &amp; Thomas, 2007)</li>
+</ul>
+</section><section id="ay-trajectories" class="slide level2">
+<h1>/ay/ Trajectories</h1>
+<p><img src="index_files/figure-revealjs/trajectory_plot.svg" title="plot of chunk trajectory_plot" alt="plot of chunk trajectory_plot" width="768" /></p>
+</section><section id="theory-prediction" class="slide level2">
+<h1>Theory Prediction</h1>
+<p><strong>The rate of change across phonetic contexts ought to be <em>proportional</em> to the phonetic pressure driving the change in that context.</strong></p>
+<ul>
+<li class="fragment">Contexts: /ay/ preceding:
+<ul>
+<li class="fragment">/t/, /d/ <span class="math">\(\rightarrow\)</span> [t], [d]</li>
+<li class="fragment">/t/, /d/ <span class="math">\(\rightarrow\)</span> [ɾ]</li>
+</ul></li>
+</ul>
+</section><section id="pressure-1-nucleus-to-glide-distance" class="slide level2">
+<h1>Pressure 1: Nucleus-to-glide distance</h1>
+<p><img src="index_files/figure-revealjs/glide_plot2.svg" title="plot of chunk glide_plot2" alt="plot of chunk glide_plot2" width="768" /></p>
+</section><section id="pressure-2-duration" class="slide level2">
+<h1>Pressure 2: Duration</h1>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-4.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="768" /></p>
+</section><section id="predicting" class="slide level2">
+<h1>Predicting</h1>
+<h3 id="we-know">We know</h3>
+<ul>
+<li>We know /ay/ rose before {/t/ <span class="math">\(\rightarrow\)</span> [t]}</li>
+<li>We know /ay/ did not raise before {/d/ <span class="math">\(\rightarrow\)</span> [d]}</li>
+</ul>
+<h3 id="procedure">Procedure</h3>
+<ul>
+<li class="fragment">Estimate the strength of the glide/duration precursor at the beginning of the change in the contexts:
+<ul>
+<li class="fragment">{/t/ <span class="math">\(\rightarrow\)</span> [t]}, {/d/ <span class="math">\(\rightarrow\)</span> [d]}</li>
+<li class="fragment">{/t/ <span class="math">\(\rightarrow\)</span> [ɾ]}, {/d/ <span class="math">\(\rightarrow\)</span> [ɾ]}</li>
+</ul></li>
+<li class="fragment">Rescale these effects so {/t/ <span class="math">\(\rightarrow\)</span> [t]} = 1, {/d/ <span class="math">\(\rightarrow\)</span> [d]} = 0</li>
+<li class="fragment">Resulting <em>relative</em> precursors in flapping contexts should be proportional to the rate of change in these contexts.</li>
+</ul>
+</section><section id="relative-precursors" class="slide level2">
+<h1>Relative Precursors:</h1>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-6.svg" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="960" /></p>
+<div style="font-size:smaller;">
+<p>Based on 10,000 samples from the posterior of the model</p>
+<p><code>precursor ~ TD * context * decade +</code> <br> <code>(TD * context | Speaker) + (1|Word)</code></p>
+</div>
+</section><section id="rate-of-change" class="slide level2">
+<h1>Rate of Change</h1>
+<p><img src="index_files/figure-revealjs/flap_graph.svg" title="plot of chunk flap_graph" alt="plot of chunk flap_graph" width="768" /></p>
+</section><section id="modelling" class="slide level2">
+<h1>Modelling</h1>
+<h3 id="estimating-relative-rates-of-change">Estimating relative rates of change</h3>
+<ul>
+<li class="fragment">Fit a linear model, estimating the rate of change for {/t/<span class="math">\(\rightarrow\)</span>[t]} contexts.(<span class="math">\(\beta\)</span>)</li>
+<li class="fragment">Estimate multipliers between 0 and 1 for each remaining context. (<span class="math">\(p_c\)</span>)</li>
+<li class="fragment">Treat the rate of change of the other contexts as the {/t/<span class="math">\(\rightarrow\)</span>[t]} slope times the multiplier (<span class="math">\(p_c\beta\)</span>)</li>
+</ul>
+</section><section id="results" class="slide level2">
+<h1>Results</h1>
+<p><img src="index_files/figure-revealjs/comp_plot.png" title="plot of chunk comp_plot" alt="plot of chunk comp_plot" width="960" /></p>
+</section><section id="results-1" class="slide level2">
+<h1>Results</h1>
+<p>Neither precursor model accounts for the behavior of <em>both</em> t-flaps and d-flaps.</p>
+</section></section>
+<section><section id="um" class="titleslide slide level1"><h1>Um…</h1></section><section id="filled-pauses" class="slide level2">
+<h1>Filled Pauses</h1>
+<p><img src="index_files/figure-revealjs/um_plot.svg" title="plot of chunk um_plot" alt="plot of chunk um_plot" width="768" /></p>
+</section><section id="is-this-a-signal" class="slide level2">
+<h1>Is this a signal?</h1>
+<div style="margin:auto;">
+<p><img src="index_files/figure-revealjs/boxplot.svg" title="plot of chunk boxplot" alt="plot of chunk boxplot" width="576" /></p>
+</div>
+</section><section id="information-theory" class="slide level2">
+<h1>Information Theory</h1>
+<p><div id="htmlwidget-7413" style="width:768px;height:200px;" class="grViz"></div>
+<script type="application/json" data-for="htmlwidget-7413">{ "x": {
+ "diagram": "\ndigraph rmarkdown {\n  rankdir=LR;\n  subgraph cluster0 {\n    node [shape = rectangle];\n    male [style=filled, color = \"#d95f02\"];\n    female [style = filled, color = \"#1b9e77\"];\n    label=\"message space\";\n    rank = same; male; female;\n  }\n  subgraph cluster1{\n    shape = rectangle;\n    label = \"signal space\";\n    um;\n    uh;\n  }\n  male -> um;\n  female -> um;\n  male -> uh;\n  female -> uh;\n}\n",
+"config": {
+ "engine": "dot",
+"options": null 
+} 
+},"evals": [  ] }</script></p>
+</section><section id="mutual-information" class="slide level2">
+<h1>Mutual Information</h1>
+<p>How much does the patterning of the message and signal together reduce uncertainty about either in isolation?</p>
+</section><section id="um-mutual-information-with-gender" class="slide level2">
+<h1>Um: Mutual Information with Gender</h1>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-10.svg" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="768" /></p>
+</section><section id="comparison-names" class="slide level2">
+<h1>Comparison: Names</h1>
+<p><div id="htmlwidget-312" style="width:768px;height:576px;" class="grViz"></div>
+<script type="application/json" data-for="htmlwidget-312">{ "x": {
+ "diagram": "digraph {rankdir = LR \n\n        F [shape=box]\n\n        M [shape=box]\n F -> Jessica [  colorscheme = dark23, color =  1 ];\nF -> Ashley [  colorscheme = dark23, color =  1 ];\nF -> Brittany [  colorscheme = dark23, color =  1 ];\nF -> Amanda [  colorscheme = dark23, color =  1 ];\nF -> Samantha [  colorscheme = dark23, color =  1 ];\nM -> Michael [  colorscheme = dark23, color =  2 ];\nM -> Christopher [  colorscheme = dark23, color =  2 ];\nM -> Matthew [  colorscheme = dark23, color =  2 ];\nM -> Joshua [  colorscheme = dark23, color =  2 ];\nM -> Daniel [  colorscheme = dark23, color =  2 ] }",
+"config": {
+ "engine": "dot",
+"options": null 
+} 
+},"evals": [  ] }</script></p>
+</section><section id="comparison-last-letter-of-names" class="slide level2">
+<h1>Comparison: Last Letter of Names</h1>
+<p><div id="htmlwidget-6497" style="width:768px;height:576px;" class="grViz"></div>
+<script type="application/json" data-for="htmlwidget-6497">{ "x": {
+ "diagram": "digraph {rankdir = LR \n\n        F [shape=box]\n\n        M [shape=box]\n F -> a [ penwidth = 3.78819354417118  weight =  37  colorscheme = dark23, color =  1 ];\nF -> e [ penwidth = 1.78443821894505  weight =  17  colorscheme = dark23, color =  1 ];\nF -> y [ penwidth = 1.67597329640193  weight =  16  colorscheme = dark23, color =  1 ];\nF -> n [ penwidth = 1.14858355835773  weight =  11  colorscheme = dark23, color =  1 ];\nF -> h [ penwidth = 0.450902521748845  weight =  4  colorscheme = dark23, color =  1 ];\nF -> r [ penwidth = 0.364892610135478  weight =  3  colorscheme = dark23, color =  1 ];\nF -> l [ penwidth = 0.344650953955897  weight =  3  colorscheme = dark23, color =  1 ];\nF -> i [ penwidth = 0.240523152744665  weight =  2  colorscheme = dark23, color =  1 ];\nM -> n [ penwidth = 2.54480290231014  weight =  25  colorscheme = dark23, color =  2 ];\nM -> y [ penwidth = 1.04812140122411  weight =  10  colorscheme = dark23, color =  2 ];\nM -> l [ penwidth = 0.944517582538586  weight =  9  colorscheme = dark23, color =  2 ];\nM -> s [ penwidth = 0.843856611223552  weight =  8  colorscheme = dark23, color =  2 ];\nM -> r [ penwidth = 0.770309788280646  weight =  7  colorscheme = dark23, color =  2 ];\nM -> e [ penwidth = 0.713879228272383  weight =  7  colorscheme = dark23, color =  2 ];\nM -> d [ penwidth = 0.496917318656775  weight =  4  colorscheme = dark23, color =  2 ];\nM -> w [ penwidth = 0.403813228586157  weight =  4  colorscheme = dark23, color =  2 ] }",
+"config": {
+ "engine": "dot",
+"options": null 
+} 
+},"evals": [  ] }</script></p>
+</section><section id="comparison" class="slide level2">
+<h1>Comparison</h1>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-14.svg" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="768" /></p>
+</section><section id="um-results" class="slide level2">
+<h1>Um: Results</h1>
+<ul>
+<li>A big difference in <span class="math">\(P(um|gender)\)</span> doesn’t translate to a big <span class="math">\(P(gender|um)\)</span>.</li>
+<li>The socio-indexical association between filled pause use and gender is very weak, despite the large difference in usage rates between men and women.</li>
+</ul>
+</section></section>
+<section><section id="summing-up" class="titleslide slide level1"><h1>Summing Up</h1></section><section id="preparing-for-the-future" class="slide level2">
+<h1>Preparing for the future</h1>
+<p>“Big Data” or “Big for Sociolinguistics Data” is going to allow us to investigate some phenomena we’ve always been interested in in detail that wasn’t possible before. If we’re creative, we might be able to investigate phenomena that we hadn’t thought were investigatable.</p>
+</section><section id="the-future-is-now" class="slide level2">
+<h1>The future is now</h1>
+<div class="incremental">
+<blockquote>
+<p>In the almost total absence of large-scale, questionnaire-supported observations which would have to be extended or repeated over generations of speakers in a community, such a picture can be only guesswork. - Hoenigswald (1960)</p>
+</blockquote>
+</div>
+<div class="incremental">
+<blockquote>
+<p>It could be observed only by means of an enormous mass of mechanical records, reaching through several generations of speakers. - Bloomfield (1933)</p>
+</blockquote>
+</div>
+</section><section id="preparing-for-the-future-1" class="slide level2">
+<h1>Preparing for the future</h1>
+<p>We need to stay on our theory building game. Our theories need to make quantitative predictions about what we’ll observe in our big data. Without that, we risk devolving into a field of superficial and insightless observation.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="index_files/revealjs_presentation/lib/js/head.min.js"></script>
+  <script src="index_files/revealjs_presentation/js/reveal.min.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'linear',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: []});
+    </script>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+  </body>
+</html>
