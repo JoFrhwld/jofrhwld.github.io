@@ -1,0 +1,12 @@
+.reveal blockquote p {
+  text-align: left;
+}
+
+.reveal p {
+  text-align: left;
+}
+
+.reveal p img {
+  text-align: center;
+  margin:auto;
+}

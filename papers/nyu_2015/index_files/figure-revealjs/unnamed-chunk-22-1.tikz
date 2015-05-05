@@ -1,0 +1,29 @@
+% Created by tikzDevice version 0.7.0 on 2015-04-30 15:24:34
+% !TEX encoding = UTF-8 Unicode
+\documentclass[10pt]{article}
+
+\nonstopmode
+
+\usepackage{tikz}
+
+\usepackage[active,tightpage,psfixbb]{preview}
+
+\PreviewEnvironment{pgfpicture}
+
+\setlength\PreviewBorder{0pt}
+
+\usepackage{tipa}
+\usepackage{qtree}\begin{document}
+
+\begin{tikzpicture}[x=1pt,y=1pt]
+\definecolor[named]{fillColor}{rgb}{1.00,1.00,1.00}
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (144.54,144.54);
+\begin{scope}
+\path[clip] ( 19.16, 19.16) rectangle (132.49,132.49);
+\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.98] at ( 75.83, 68.99) {\Tree [.DP D^{+def} -- ]};
+\end{scope}
+\end{tikzpicture}
+
+\end{document}
