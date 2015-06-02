@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Josef Fruehwald" />
+
+
+<title>Data Management</title>
+
+<script src="index_files/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="index_files/bootstrap-3.3.1/css/readable.min.css" rel="stylesheet" />
+<script src="index_files/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+<script src="index_files/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
+<script src="index_files/bootstrap-3.3.1/shim/respond.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="index_files/highlight/default.css"
+      type="text/css" />
+<script src="index_files/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+
+<div id="header">
+<h1 class="title">Data Management</h1>
+<h4 class="author"><em>Josef Fruehwald</em></h4>
+<h4 class="date"><em>June 3, 2015</em></h4>
+</div>
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This workshop will cover the following facets of working with quantitative data:</p>
+<ol style="list-style-type: decimal">
+<li>What tools to (not) use.</li>
+<li>Principles of tidy data.</li>
+<li>The Split-Apply-Combine approach to data analysis.</li>
+<li>Practical R code littered throughout.</li>
+</ol>
+<p>Hopefully this workshop will be able to act as a starting point for some. There is no 45 minute workshop, or semester long course for that matter, that will be able to comprehensively teach you all you need to know to be quantitative researcher. That requires some self direction and an entrepreneurial spirit.</p>
+</div>
+<div id="what-tools-to-not-use." class="section level1">
+<h1>What tools to (not) use.</h1>
+<p>Simply put:</p>
+<div style="text-align:center;font-size:300%;">
+Don’t use Excel.
+</div>
+<div style="text-align:center;font-size:300%;">
+Do use <a href="http://www.r-project.org/">R</a> and <a href="https://www.python.org/">Python</a>.
+</div>
+<div id="why-not-use-excel" class="section level2">
+<h2>Why not use Excel?</h2>
+<p>First, it is too easy to make mistakes and not realize it. To our Excel devotees out there, how many of you have spreadsheets and data that look like this?</p>
+<p><img src="figures/reinhart_rogoff_coding_error_0.png" alt="excel" /></p>
+<p>The results displayed in the spreadsheet above led the authors to conclude that when countries’ debt to GDP ratio approached 90%, their economies would shrink at a rate of -0.1%.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> This result was widely cited in the fallout of the 2008 financial crisis, especially by politicians supporting austerity measures. Without taking a stance here, it should suffice to say that the policy decisions connected to this spreadsheet are not uncontroversial.</p>
+<p>One problem, though, is that there are coding and formula errors in that spreadsheet! When you fix the coding errors in the spreadsheet, it turns out that countries with a debt to GDP ratio of 90% actually grow at a rate of about 2.2%.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> There is, in fact, a <a href="http://www.eusprig.org/index.htm">European Spreadsheet Risks Interest Group</a> that meets annually to discuss the risks about spreadsheet errors, and share horror stories.</p>
+<hr />
+<p>Second, spreadsheets tend to encourage data formatting that is pleasing to the eye, which is rarely formatting that is useful. For example, here is a screenshot of a spreadsheet containing vowel fromant data from 4 speakers. Each speaker has their own set of columns, with demographic information in one, merged cell at the top.</p>
+<p><img src="figures/bad_data.png" alt="bad format" /></p>
+<p>This data formatting is almost worse than useless when it comes to doing your statistical analyses. You might spend more time reformatting the data into a usable format than you will on an analysis.</p>
+<p>We’ll touch on tidy data further down, but the way this data ought to be formatted is with all speakers data concatenated together, length wise, with additional columns for the demographic data.</p>
+<pre><code>## Source: local data frame [2,000 x 7]
+## Groups: file
+## 
+##                         file age sex plt_vclass  word    F1     F2
+## 1  PH06-2-1-AB-Jean_meas.txt  61   f          e  WELL 611.8 1213.4
+## 2  PH06-2-1-AB-Jean_meas.txt  61   f        eyF  THEY 546.4 2013.7
+## 3  PH06-2-1-AB-Jean_meas.txt  61   f         iy TEACH 430.7 2549.6
+## 4  PH06-2-1-AB-Jean_meas.txt  61   f        iyF    ME 448.2 2006.0
+## 5  PH06-2-1-AB-Jean_meas.txt  61   f         ae    AT 603.9 1546.7
+## 6  PH06-2-1-AB-Jean_meas.txt  61   f         ay  TIME 768.8 1374.2
+## 7  PH06-2-1-AB-Jean_meas.txt  61   f         ay    MY 728.7 1344.1
+## 8  PH06-2-1-AB-Jean_meas.txt  61   f         oy  BOYS 513.1 1158.7
+## 9  PH06-2-1-AB-Jean_meas.txt  61   f         iy TEACH 383.9 2323.7
+## 10 PH06-2-1-AB-Jean_meas.txt  61   f        iyF    ME 461.2 1970.9
+## ..                       ... ... ...        ...   ...   ...    ...</code></pre>
+<hr />
+<p>Third, and maybe most importantly, Excel has had long standing errors in its statistical procedures.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. As Mélard (2014) said about Excel 2010:</p>
+<blockquote>
+<p>Microsoft has fixed the errors in the statistical procedures of Excel neither quickly nor correctly. The recent improvements reported in this paper should not hide the fact that Microsoft is still marketing a product that contains known errors. We didn’t analyze Excel in Office 2013 but, according to Microsoft (2013), where the changes with respect to Office 2010 are collected, there are few changes to Excel and nothing about the statistical aspects is mentioned.</p>
+</blockquote>
+</div>
+<div id="why-use-r-and-python" class="section level2">
+<h2>Why use R and Python?</h2>
+<div id="common-understanding" class="section level3">
+<h3>Common Understanding</h3>
+<p>In equal parts, R and Python are becoming the lingua francas of research and analysis in the social sciences and beyond. That means we all wind up benefiting from the collective wisdom of other researchers who are also using these tools. There are large communities of support surrounding them, and community investment in improving them and expanding them.</p>
+</div>
+<div id="free-and-open-source" class="section level3">
+<h3>Free and Open Source</h3>
+<p>R and Python are both free and open source. This means there is no need for student or institutional licenses to use them. After you leave Edinburgh, you’ll be able to re-run all of your analyses without worrying about your licence expiring.</p>
+</div>
+<div id="reproducibility" class="section level3">
+<h3>Reproducibility</h3>
+<p>R and Python are both programming languages, meaning you’ll need to write code to do your analyses. While this may seem intimidating for those of you who don’t feel computationally inclined, writing, running, and retaining the code is <em>crucial</em> for doing reproducible research. You’ll always be able to precisely reproduce your earlier results providing you save your scripts. The same can’t be said for using spreadsheet programs like Excel.</p>
+</div>
+<div id="career-utility" class="section level3">
+<h3>Career Utility</h3>
+<p>If you’re doing quantitative research, and you want to pursue an academic career, employers are going to want you to be able to teach their students how to do quantitative research. That means they’ll want you to teach R and/or Python.</p>
+<p>Outside of academia, knowing R and/or Python is a salable skill. “Data science” is still a growing sector of employment, and if you take the opportunity to learn these data skills to do your postgraduate research, you may be able to successfully leverage them into a career outside of academia.</p>
+</div>
+</div>
+</div>
+<div id="tidy-data" class="section level1">
+<h1>Tidy Data</h1>
+<p>Organizing your data so that it is “tidy” is crucial to efficiently carrying out your analysis. I’ll be adopting the definition of “tidy data” from Wickham (2014).<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> But first, let’s talk a little bit about data collection.</p>
+<div id="general-principles-of-data-collection" class="section level2">
+<h2>General Principles of Data Collection</h2>
+<div id="over-collect" class="section level3">
+<h3>Over-collect</h3>
+<p>When collecting data in the first place, over-collect if at all possible. The world is a very complex place, so there is no way you could cram it all into a bottle, but give it your best shot! If during the course of your data analysis, you find that it would have been really useful to have data on, say, duration, as well as formant frequencies, it becomes very costly to recollect that data, especially if you haven’t laid the proper trail for yourself.</p>
+<p>If your data collection involves you typing individual observations into a spreadsheet, this recommendation may seem especially onerous. That is why you should try to learn as many computation tricks and time saving techniques as possible. If you’re working with speech data, this means learning some <a href="http://www.fon.hum.uva.nl/praat/manual/Scripting.html">Praat</a> and Python scripting. If you’re working with textual data, this means learning some Python scripting.</p>
+</div>
+<div id="preserve-high-dimensional-info" class="section level3">
+<h3>Preserve High Dimensional Info</h3>
+<p>Let’s say you’re broadly interested in the effect following consonants have on the preceding vowels. The following consonants have some of the following properties:</p>
+<ul>
+<li>place of articulation</li>
+<li>degree of closure</li>
+<li>voicing</li>
+<li>nasality</li>
+</ul>
+<p>All of these properties are usually conveniently encodable in a single character.</p>
+<div style="width:75%">
+<table>
+<thead>
+<tr class="header">
+<th align="right">encoding</th>
+<th align="right">place</th>
+<th align="right">closure</th>
+<th align="right">voicing</th>
+<th align="right">nasality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><strong>k</strong></td>
+<td align="right">dorsal</td>
+<td align="right">stop</td>
+<td align="right">voiceless</td>
+<td align="right">non</td>
+</tr>
+<tr class="even">
+<td align="right"><strong>n</strong></td>
+<td align="right">apical</td>
+<td align="right">stop</td>
+<td align="right">voiced</td>
+<td align="right">nasal</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We’re calling the coding <strong>k</strong> “High Dimensional” because if you know the following consonant was a /k/, you automatically know a lot of other things about the following context. My recommendation here is two fold. First, in a context like this, you shouldn’t just record that the following segment was “dorsal”, and not keep a record that it was specifically /k/. <em>Preserve</em> the high dimensional coding.</p>
+<p>Second, take advantage of the high dimensionality of some encodings when you’re doing your data collection. For example, in the case of seeing what effect following segments have on vowels, in your initial data collection, you could <em>just</em> code for the identity of the following consonant:</p>
+<div style="width:25%">
+<table>
+<thead>
+<tr class="header">
+<th align="right">dur</th>
+<th align="right">fol_seg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.05</td>
+<td align="right">B</td>
+</tr>
+<tr class="even">
+<td align="right">0.05</td>
+<td align="right">B</td>
+</tr>
+<tr class="odd">
+<td align="right">0.06</td>
+<td align="right">D</td>
+</tr>
+<tr class="even">
+<td align="right">0.20</td>
+<td align="right">D</td>
+</tr>
+<tr class="odd">
+<td align="right">0.05</td>
+<td align="right">F</td>
+</tr>
+<tr class="even">
+<td align="right">0.08</td>
+<td align="right">F</td>
+</tr>
+<tr class="odd">
+<td align="right">0.14</td>
+<td align="right">P</td>
+</tr>
+<tr class="even">
+<td align="right">0.13</td>
+<td align="right">P</td>
+</tr>
+<tr class="odd">
+<td align="right">0.05</td>
+<td align="right">S</td>
+</tr>
+<tr class="even">
+<td align="right">0.09</td>
+<td align="right">S</td>
+</tr>
+<tr class="odd">
+<td align="right">0.18</td>
+<td align="right">T</td>
+</tr>
+<tr class="even">
+<td align="right">0.12</td>
+<td align="right">T</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Then, code all of the other information you need via a lookup table.</p>
+<pre class="r"><code>  features &lt;- data.frame(fol_seg = c(&quot;P&quot;,&quot;T&quot;, 
+                                     &quot;B&quot;,&quot;D&quot;, 
+                                     &quot;F&quot;,&quot;S&quot;),
+                         voicing = c(&quot;voiceless&quot;, &quot;voiceless&quot;,
+                                     &quot;voiced&quot;, &quot;voiced&quot;,
+                                     &quot;voiceless&quot;,&quot;voiceless&quot;),
+                         place = c(&quot;labial&quot;, &quot;apical&quot;,
+                                   &quot;labial&quot;, &quot;apical&quot;,
+                                   &quot;labial&quot;, &quot;apical&quot;))
+  features</code></pre>
+<pre><code>##   fol_seg   voicing  place
+## 1       P voiceless labial
+## 2       T voiceless apical
+## 3       B    voiced labial
+## 4       D    voiced apical
+## 5       F voiceless labial
+## 6       S voiceless apical</code></pre>
+<pre class="r"><code>  merge(dur_data, features)</code></pre>
+<pre><code>##    fol_seg  dur   voicing  place
+## 1        B 0.05    voiced labial
+## 2        B 0.05    voiced labial
+## 3        D 0.06    voiced apical
+## 4        D 0.20    voiced apical
+## 5        F 0.05 voiceless labial
+## 6        F 0.08 voiceless labial
+## 7        P 0.14 voiceless labial
+## 8        P 0.13 voiceless labial
+## 9        S 0.05 voiceless apical
+## 10       S 0.09 voiceless apical
+## 11       T 0.18 voiceless apical
+## 12       T 0.12 voiceless apical</code></pre>
+</div>
+<div id="leave-a-trail-of-crumbs" class="section level3">
+<h3>Leave A Trail of Crumbs</h3>
+<p>Be sure to answer this question: How can I preserve a record of this observation in such a way that I can quickly return to it and gather more data on it if necessary? If you fail to successfully answer this question, then you’ll be lost in the woods if you ever want to restudy, and the only way home is to replicate the study from scratch. For research involving speech data, keep a record of the coding you’re doing in a Praat TextGrid.</p>
+</div>
+<div id="give-meaningful-names" class="section level3">
+<h3>Give Meaningful Names</h3>
+<p>Give meaningful names to both the names of predictor columns, as well as to labels of nominal observations. Keeping a readme describing the data is still a good idea, but at least now the data is approachable at first glance.</p>
+</div>
+</div>
+<div id="storing-data" class="section level2">
+<h2>Storing Data</h2>
+<p>When we store data, it should be:</p>
+<ol style="list-style-type: example">
+<li><p><strong>Raw</strong> Raw data is the most useful data. It’s impossible to move down to smaller granularity from a coarser, summarized granularity. Summary tables etc. are nice for publishing in a paper document, but raw data is what we need for asking novel research questions with old data.</p></li>
+<li><p><strong>Open formatted</strong> Do not use proprietary database software for long term storage of your data. I have enough heard stories about interesting data sets that are no longer accessible for research either because the software they are stored in is defunct, or current versions are not backwards compatible. At that point, your data is property of Microsoft, or whoever. Store your data as raw text, delimited in some way (I prefer tabs).</p></li>
+<li><p><strong>Consistent</strong> I think this is most important when you may have data in many separate files. Each file and its headers should be consistently named and formatted. They should be consistently delimited and commented also. There is nothing worse than inconsistent headers and erratic comments, labels, headers or NA characters in a corpus.</p></li>
+<li><p><strong>Documented</strong> Produce a readme describing the data, how it was collected and processed, and describe every variable and its possible values.</p></li>
+</ol>
+</div>
+<div id="tidy-data-1" class="section level2">
+<h2>Tidy Data</h2>
+<p>Wickham (2014) identifies the following properties of tidy data.</p>
+<ol style="list-style-type: decimal">
+<li>Each variable forms a column.</li>
+<li>Each observation forms a row.</li>
+<li>Each type of observational unit forms a table.</li>
+</ol>
+<p>I’m going to focus on 1 and 2.</p>
+<p>Let’s return to our example where we’re trying to explore the relationship between vowel duration and following segments. Here’s a table, like you might see published in a paper, that contains the mean duration of four vowels in six different segmental contexts.</p>
+<div style="width:75%">
+<table>
+<caption>Table 1: Mean vowel duration in ms</caption>
+<thead>
+<tr class="header">
+<th align="left">plt_vclass</th>
+<th align="right">B</th>
+<th align="right">D</th>
+<th align="right">F</th>
+<th align="right">P</th>
+<th align="right">S</th>
+<th align="right">T</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ey</td>
+<td align="right">128</td>
+<td align="right">133</td>
+<td align="right">170</td>
+<td align="right">164</td>
+<td align="right">133</td>
+<td align="right">136</td>
+</tr>
+<tr class="even">
+<td align="left">iy</td>
+<td align="right">94</td>
+<td align="right">116</td>
+<td align="right">110</td>
+<td align="right">107</td>
+<td align="right">112</td>
+<td align="right">135</td>
+</tr>
+<tr class="odd">
+<td align="left">ow</td>
+<td align="right">79</td>
+<td align="right">132</td>
+<td align="right">149</td>
+<td align="right">98</td>
+<td align="right">95</td>
+<td align="right">113</td>
+</tr>
+<tr class="even">
+<td align="left">uw</td>
+<td align="right">NaN</td>
+<td align="right">178</td>
+<td align="right">80</td>
+<td align="right">128</td>
+<td align="right">70</td>
+<td align="right">110</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The <strong>variables</strong> in this table are</p>
+<ul>
+<li>The <em>vowel</em></li>
+<li>The following <em>consonant</em></li>
+<li>The <em>mean duration.</em></li>
+</ul>
+<p>Each <strong>observation</strong> is</p>
+<ul>
+<li>The <em>mean duration</em> of each <em>vowel</em> preceding each <em>consonant</em></li>
+</ul>
+<p>Table 1 violates the principles of tidy data in the following ways:</p>
+<ul>
+<li>The values of the <em>consonant</em> variable aren’t stored in any columns (they’re being used to defined columns).</li>
+<li>The values of <em>mean duration</em> variable are spread out across multiple columns.</li>
+<li>There are multiple <strong>observations</strong> per row.</li>
+</ul>
+<p>In order to conform to the tidy data format, we need:</p>
+<ul>
+<li>1 column for each <strong>variable</strong> (<em>vowel</em>, <em>consonant</em>, <em>mean_duration</em>)</li>
+<li>1 row for each <strong>observation</strong> (the <em>mean duration</em> for each <em>vowel</em> before each <em>consonant</em>)</li>
+</ul>
+<p>That’s going to look like Table 2.</p>
+<div style="width:30%">
+<table>
+<caption>Table 2: Mean vowel duration in ms</caption>
+<thead>
+<tr class="header">
+<th align="right">plt_vclass</th>
+<th align="right">consonant</th>
+<th align="right">mean_dur</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">ey</td>
+<td align="right">B</td>
+<td align="right">128</td>
+</tr>
+<tr class="even">
+<td align="right">iy</td>
+<td align="right">B</td>
+<td align="right">94</td>
+</tr>
+<tr class="odd">
+<td align="right">ow</td>
+<td align="right">B</td>
+<td align="right">79</td>
+</tr>
+<tr class="even">
+<td align="right">uw</td>
+<td align="right">B</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="right">ey</td>
+<td align="right">D</td>
+<td align="right">133</td>
+</tr>
+<tr class="even">
+<td align="right">iy</td>
+<td align="right">D</td>
+<td align="right">116</td>
+</tr>
+<tr class="odd">
+<td align="right">ow</td>
+<td align="right">D</td>
+<td align="right">132</td>
+</tr>
+<tr class="even">
+<td align="right">uw</td>
+<td align="right">D</td>
+<td align="right">178</td>
+</tr>
+<tr class="odd">
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>With the data in this format, it’s possible to begin doing visualization &amp; analysis.</p>
+<pre class="r"><code>  ggplot(melt_durs, aes(plt_vclass, mean_dur, fill = consonant))+
+    geom_bar(position = &quot;dodge&quot;, color = &quot;black&quot;, stat = &quot;identity&quot;)+
+    scale_fill_hue(limits = c(&quot;B&quot;,&quot;P&quot;,&quot;F&quot;,
+                              &quot;D&quot;,&quot;T&quot;,&quot;S&quot;))</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" title="" alt="" width="672" /></p>
+<div id="tools-for-tidying-data" class="section level3">
+<h3>Tools for tidying data:</h3>
+<p>In R, there are two key packages for tidying data:</p>
+<ul>
+<li><code>tidyr</code></li>
+<li><code>reshape2</code></li>
+</ul>
+<p>In Python, similar functionality can be found in the <a href="http://pandas.pydata.org/"><code>pandas</code></a> library.</p>
+</div>
+</div>
+</div>
+<div id="split-apply-combine" class="section level1">
+<h1><a href="http://www.jstatsoft.org/v40/i01/paper">Split-Apply-Combine</a></h1>
+<p>When doing data analysis, you’re going to find yourself doing these following steps a lot:</p>
+<ol style="list-style-type: decimal">
+<li>Splitting the data up into subsets.</li>
+<li>Applying some kind of function to those subsets.</li>
+<li>Combining the results back together</li>
+</ol>
+<p>Let’s take the tidy data from before:</p>
+<pre class="r"><code>dur_data &lt;- data.frame(plt_vclass = rep(c(&quot;ey&quot;, &quot;iy&quot;, &quot;ow&quot;), 6), 
+                       consonant = rep(c(&quot;B&quot;,&quot;D&quot;,&quot;F&quot;, &quot;P&quot;,&quot;S&quot;,&quot;T&quot;), each = 3),
+                       mean_dur = c(128, 94, 79, 
+                                    133,116, 132, 
+                                    170, 110, 149, 
+                                    164, 107, 98,  
+                                    133, 112, 95,  
+                                    136, 135, 113))</code></pre>
+<div style="width:30%">
+<table>
+<thead>
+<tr class="header">
+<th align="left">plt_vclass</th>
+<th align="left">consonant</th>
+<th align="right">mean_dur</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ey</td>
+<td align="left">B</td>
+<td align="right">128</td>
+</tr>
+<tr class="even">
+<td align="left">iy</td>
+<td align="left">B</td>
+<td align="right">94</td>
+</tr>
+<tr class="odd">
+<td align="left">ow</td>
+<td align="left">B</td>
+<td align="right">79</td>
+</tr>
+<tr class="even">
+<td align="left">ey</td>
+<td align="left">D</td>
+<td align="right">133</td>
+</tr>
+<tr class="odd">
+<td align="left">iy</td>
+<td align="left">D</td>
+<td align="right">116</td>
+</tr>
+<tr class="even">
+<td align="left">ow</td>
+<td align="left">D</td>
+<td align="right">132</td>
+</tr>
+<tr class="odd">
+<td align="left">ey</td>
+<td align="left">F</td>
+<td align="right">170</td>
+</tr>
+<tr class="even">
+<td align="left">iy</td>
+<td align="left">F</td>
+<td align="right">110</td>
+</tr>
+<tr class="odd">
+<td align="left">ow</td>
+<td align="left">F</td>
+<td align="right">149</td>
+</tr>
+<tr class="even">
+<td align="left">ey</td>
+<td align="left">P</td>
+<td align="right">164</td>
+</tr>
+<tr class="odd">
+<td align="left">iy</td>
+<td align="left">P</td>
+<td align="right">107</td>
+</tr>
+<tr class="even">
+<td align="left">ow</td>
+<td align="left">P</td>
+<td align="right">98</td>
+</tr>
+<tr class="odd">
+<td align="left">ey</td>
+<td align="left">S</td>
+<td align="right">133</td>
+</tr>
+<tr class="even">
+<td align="left">iy</td>
+<td align="left">S</td>
+<td align="right">112</td>
+</tr>
+<tr class="odd">
+<td align="left">ow</td>
+<td align="left">S</td>
+<td align="right">95</td>
+</tr>
+<tr class="even">
+<td align="left">ey</td>
+<td align="left">T</td>
+<td align="right">136</td>
+</tr>
+<tr class="odd">
+<td align="left">iy</td>
+<td align="left">T</td>
+<td align="right">135</td>
+</tr>
+<tr class="even">
+<td align="left">ow</td>
+<td align="left">T</td>
+<td align="right">113</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>One thing we might want to calculate is the average duration of each vowel. To do that we’ll</p>
+<ul>
+<li><strong>Split</strong> the data up into smaller tables, based on the <code>plt_vclass</code> column.</li>
+<li><strong>Apply</strong> the <code>mean()</code> function to the <code>mean_dur</code> column.</li>
+<li><strong>Combine</strong> the results back into one table.</li>
+</ul>
+<div id="split-the-data-up" class="section level2">
+<h2>Split the data up</h2>
+<p>First, split the data up into subsets based on the <code>plt_vclass</code> column:</p>
+<div style="width:100%;float:left;">
+<div style="width:30%;float:left;margin:15px;">
+<table>
+<thead>
+<tr class="header">
+<th align="left">plt_vclass</th>
+<th align="left">consonant</th>
+<th align="right">mean_dur</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ey</td>
+<td align="left">B</td>
+<td align="right">128</td>
+</tr>
+<tr class="even">
+<td align="left">ey</td>
+<td align="left">D</td>
+<td align="right">133</td>
+</tr>
+<tr class="odd">
+<td align="left">ey</td>
+<td align="left">F</td>
+<td align="right">170</td>
+</tr>
+<tr class="even">
+<td align="left">ey</td>
+<td align="left">P</td>
+<td align="right">164</td>
+</tr>
+<tr class="odd">
+<td align="left">ey</td>
+<td align="left">S</td>
+<td align="right">133</td>
+</tr>
+<tr class="even">
+<td align="left">ey</td>
+<td align="left">T</td>
+<td align="right">136</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="width:30%;float:left;margin:15px;">
+<table>
+<thead>
+<tr class="header">
+<th align="left">plt_vclass</th>
+<th align="left">consonant</th>
+<th align="right">mean_dur</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">iy</td>
+<td align="left">B</td>
+<td align="right">94</td>
+</tr>
+<tr class="even">
+<td align="left">iy</td>
+<td align="left">D</td>
+<td align="right">116</td>
+</tr>
+<tr class="odd">
+<td align="left">iy</td>
+<td align="left">F</td>
+<td align="right">110</td>
+</tr>
+<tr class="even">
+<td align="left">iy</td>
+<td align="left">P</td>
+<td align="right">107</td>
+</tr>
+<tr class="odd">
+<td align="left">iy</td>
+<td align="left">S</td>
+<td align="right">112</td>
+</tr>
+<tr class="even">
+<td align="left">iy</td>
+<td align="left">T</td>
+<td align="right">135</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="width:30%;float:left;margin:15px;">
+<table>
+<thead>
+<tr class="header">
+<th align="left">plt_vclass</th>
+<th align="left">consonant</th>
+<th align="right">mean_dur</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ow</td>
+<td align="left">B</td>
+<td align="right">79</td>
+</tr>
+<tr class="even">
+<td align="left">ow</td>
+<td align="left">D</td>
+<td align="right">132</td>
+</tr>
+<tr class="odd">
+<td align="left">ow</td>
+<td align="left">F</td>
+<td align="right">149</td>
+</tr>
+<tr class="even">
+<td align="left">ow</td>
+<td align="left">P</td>
+<td align="right">98</td>
+</tr>
+<tr class="odd">
+<td align="left">ow</td>
+<td align="left">S</td>
+<td align="right">95</td>
+</tr>
+<tr class="even">
+<td align="left">ow</td>
+<td align="left">T</td>
+<td align="right">113</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></br></p>
+</div>
+</div>
+<div id="apply-some-function-to-the-data" class="section level2">
+<h2>Apply some function to the data</h2>
+<p>In each subset, calculate the average duration.</p>
+<div style="width:100%;float:left;">
+<div style="width:20%;float:left;margin:15px;">
+<table>
+<thead>
+<tr class="header">
+<th align="left">plt_vclass</th>
+<th align="right">mean_dur</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ey</td>
+<td align="right">144</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="width:20%;float:left;margin:15px;">
+<table>
+<thead>
+<tr class="header">
+<th align="left">plt_vclass</th>
+<th align="right">mean_dur</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">iy</td>
+<td align="right">112.3333</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="width:20%;float:left;margin:15px;">
+<table>
+<thead>
+<tr class="header">
+<th align="left">plt_vclass</th>
+<th align="right">mean_dur</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ow</td>
+<td align="right">111</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></br></p>
+</div>
+</div>
+<div id="combine-the-result" class="section level2">
+<h2>Combine the result</h2>
+<p>Combine these results into a new table.</p>
+<div style="width:20%;">
+<table>
+<thead>
+<tr class="header">
+<th align="left">plt_vclass</th>
+<th align="right">mean_dur</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ey</td>
+<td align="right">144.0000</td>
+</tr>
+<tr class="even">
+<td align="left">iy</td>
+<td align="right">112.3333</td>
+</tr>
+<tr class="odd">
+<td align="left">ow</td>
+<td align="right">111.0000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="split-apply-combine-in-r" class="section level2">
+<h2>Split-Apply-Combine in R</h2>
+<p>The relatively new <code>dplyr</code> package in R is designed to implement this Split-Apply-Combine workflow in an easy to read fashion. It’s key functionality derives from</p>
+<ul>
+<li>The pipe operator: <code>%&gt;%</code></li>
+<li>Its data operation “verbs”</li>
+</ul>
+<pre class="r"><code>  library(dplyr)</code></pre>
+<div id="the-pipe" class="section level3">
+<h3>The <code>%&gt;%</code> (“pipe”)</h3>
+<div style="font-family:monospace;font-size:xx-large;text-align:center;">
+<p><span style="color:red">%&gt;%</span></p>
+</div>
+<p>We’ll pronounce <code>%&gt;%</code> as “pipe”.</p>
+<p>The way <code>%&gt;%</code> works is it takes a data frame on the left side, and inserts it as the first argument to the function on its right side. For example the <code>head()</code> function prints the first 6 rows of a data frame.</p>
+<pre class="r"><code>  head(dur_data)</code></pre>
+<pre><code>##   plt_vclass consonant mean_dur
+## 1         ey         B      128
+## 2         iy         B       94
+## 3         ow         B       79
+## 4         ey         D      133
+## 5         iy         D      116
+## 6         ow         D      132</code></pre>
+<p>With <code>%&gt;%</code>, you’d do it like this:</p>
+<pre class="r"><code>  dur_data %&gt;% head()</code></pre>
+<pre><code>##   plt_vclass consonant mean_dur
+## 1         ey         B      128
+## 2         iy         B       94
+## 3         ow         B       79
+## 4         ey         D      133
+## 5         iy         D      116
+## 6         ow         D      132</code></pre>
+<p>How useful is that really? Not very until you start chaining them together. If you wanted to get the number of rows in the data frame after you’ve applied <code>head()</code> to it, normally you’d write it out like this:</p>
+<pre class="r"><code>  nrow(head(dur_data))</code></pre>
+<pre><code>## [1] 6</code></pre>
+<p>Nested functions are kind of tough to read. You need to read them from the inside out. With <code>dplyr</code>, you can chain each function you want to use with <code>%&gt;%</code>.</p>
+<pre class="r"><code>  dur_data %&gt;% head() %&gt;% nrow()</code></pre>
+<pre><code>## [1] 6</code></pre>
+<p>The way to read that is “Take the <code>ing</code> data frame, and pipe it into <code>head()</code>. Then take the output of <code>head()</code> and pipe it into <code>nrow()</code>.”</p>
+</div>
+<div id="verbs" class="section level3">
+<h3>Verbs</h3>
+<p><code>dplyr</code> comes with a few “verbs” specially developed for chaining together.</p>
+<div style="width:75%;">
+<table>
+<thead>
+<tr class="header">
+<th align="left">verb</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>filter()</code></td>
+<td align="left">This works almost exactly like <code>subset()</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>summarise()</code></td>
+<td align="left">This takes a data frame, and outputs a new data frame based on the summary you asked for</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>mutate()</code></td>
+<td align="left">This takes a data frame, and adds additional columns based on the formula you give it formula</td>
+</tr>
+<tr class="even">
+<td align="left"><code>select()</code></td>
+<td align="left">This takes a data frame, and returns only the columns you ask for</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>arrange()</code></td>
+<td align="left">Reorders the rows of the data frame</td>
+</tr>
+<tr class="even">
+<td align="left"><strong><code>group_by()</code></strong></td>
+<td align="left">Defines sub-groupings in a data frame</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The <code>group_by()</code> function is the crucial one for doing Split-Apply-Combine in <code>dplyr</code>. First, let’s look at how we’ll use the <code>summarise()</code> function.</p>
+<pre class="r"><code>  dur_data %&gt;%
+    summarise(dur = mean(mean_dur))</code></pre>
+<pre><code>##        dur
+## 1 122.4444</code></pre>
+<p>By just passing <code>dur_data</code> to summarise, it creates a new data frame with one column, <code>dur</code>. The value of <code>dur</code> is calculated by applying <code>mean()</code> to <code>mean_dur</code>. It’s possible to create as many columns as you want like this:</p>
+<pre class="r"><code>  dur_data%&gt;%
+    summarise(dur = mean(mean_dur),
+              dur_sd = sd(mean_dur),
+              n = length(mean_dur),
+              arbitrary = &quot;foo&quot;)</code></pre>
+<pre><code>##        dur   dur_sd  n arbitrary
+## 1 122.4444 24.32675 18       foo</code></pre>
+<p>The <code>summarise()</code> verb gets more powerful in combination with <code>group_by()</code>.</p>
+<pre class="r"><code>  dur_data%&gt;%
+    group_by(plt_vclass)%&gt;%           ## Grouping the data by vowel
+    summarise(dur = mean(mean_dur),
+              dur_sd = sd(mean_dur),
+              n = length(mean_dur),
+              arbitrary = &quot;foo&quot;)</code></pre>
+<pre><code>## Source: local data frame [3 x 5]
+## 
+##   plt_vclass      dur   dur_sd n arbitrary
+## 1         ey 144.0000 18.09972 6       foo
+## 2         iy 112.3333 13.39652 6       foo
+## 3         ow 111.0000 25.83796 6       foo</code></pre>
+</div>
+</div>
+<div id="strategy-for-doing-split-apply-combine" class="section level2">
+<h2>Strategy for doing Split-Apply-Combine</h2>
+<p>A general strategy for cracking difficult Split-Apply-Combine nuts would be to first figure out how to solve the problem for a subset of the data, then try to figure out how to generalize it.</p>
+<p>Let’s ask the following question: How much do speakers vary with respect to vowel centralization. Shorter vowels tend to be more centralized, as do more frequent words. We’ll investigate this question using data from the <code>phoneticChange</code> package, which can be installed like so:</p>
+<pre class="r"><code>  library(devtools)
+  install_github(&quot;jofrhwld/phoneticChange&quot;)
+  library(phoneticChange)
+  library(magrittr)</code></pre>
+<p>First, let’s trim down the data a little bit, just to look at the data we’re interested in.</p>
+<pre class="r"><code>  ay &lt;- ays %&gt;%
+    filter(plt_vclass == &quot;ay&quot;,
+           !word %in% c(&quot;i&quot;,&quot;my&quot;))%&gt;%    ## I and MY are super frequent pronouns
+    select(idstring, sex, age, year, F1_n, F2_n, dur, SUBTLWF)%&gt;%
+    mutate(dur_ms = (dur * 1000),
+           logdur = log10(dur_ms),
+           center_dur = logdur - median(logdur),
+           zipf = log10(SUBTLWF) + 3)%&gt;% ## The &quot;Zipf scale&quot;, after http://crr.ugent.be/archives/1352
+  select(idstring, sex, age, year, F1_n, F2_n, center_dur, zipf)
+  
+  head(ay)</code></pre>
+<pre><code>##    idstring sex age year        F1_n        F2_n  center_dur     zipf
+## 1 PH00-1-1-   m  21 2000  1.75932668 -0.50321928 -0.19188553 5.252853
+## 2 PH00-1-1-   m  21 2000  0.06850389  0.04812934 -0.44715803 5.290035
+## 3 PH00-1-1-   m  21 2000 -0.08123688 -0.85704126 -0.36797679       NA
+## 4 PH00-1-1-   m  21 2000  1.46109299 -0.51536493  0.17609126 6.291952
+## 5 PH00-1-1-   m  21 2000  1.56341584  0.01488861  0.10914447 5.882302
+## 6 PH00-1-1-   m  21 2000  1.81423162 -0.40956992  0.08432089 5.290035</code></pre>
+<pre class="r"><code>  nrow(ay)</code></pre>
+<pre><code>## [1] 22672</code></pre>
+<div id="solving-the-problem-for-one-speaker" class="section level3">
+<h3>Solving the problem for one speaker</h3>
+<p>First, we’ll take out the data from one speaker:</p>
+<pre class="r"><code>  one_speaker &lt;- ay %&gt;% filter(idstring == &quot;PH00-1-1-&quot;)</code></pre>
+<p>We can estimate the effect of duration on F1 and F2 of /ay/.</p>
+<pre class="r"><code>  f1_model = lm(F1_n ~ center_dur, data = one_speaker)
+  f1_model</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = F1_n ~ center_dur, data = one_speaker)
+## 
+## Coefficients:
+## (Intercept)   center_dur  
+##        1.44         2.03</code></pre>
+<pre class="r"><code>  f2_model = lm(F2_n ~ center_dur, data = one_speaker)
+  f2_model</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = F2_n ~ center_dur, data = one_speaker)
+## 
+## Coefficients:
+## (Intercept)   center_dur  
+##    -0.45371     -0.08705</code></pre>
+</div>
+</div>
+<div id="expanding-it-for-all-speakers" class="section level2">
+<h2>Expanding it for all speakers</h2>
+<pre class="r"><code>  speaker_models &lt;- ay %&gt;%
+    group_by(idstring)%&gt;%
+    filter(n() &gt; 40)%&gt;%
+    do(f1_model = lm(F1_n ~ center_dur, data = .),
+       f2_model = lm(F2_n ~ center_dur, data = .))
+  
+  speaker_parameters &lt;- speaker_models %&gt;%
+                          rowwise()%&gt;%
+                          do(data.frame(idstring = .$idstring,
+                                        f1_intercept = coef(.$f1_model)[1],
+                                        f1_slope = coef(.$f1_model)[2],
+                                        f2_intercept = coef(.$f2_model)[1],
+                                        f2_slope = coef(.$f2_model)[2]))</code></pre>
+<pre><code>## Warning in rbind_all(out[[1]]): Unequal factor levels: coercing to
+## character</code></pre>
+<pre class="r"><code>  ggplot(speaker_parameters, aes(f2_slope, f1_slope))+
+      geom_vline(x = 0)+
+      geom_hline(y = 0)+
+      geom_point(color = &#39;red&#39;)+
+      scale_y_reverse()+
+      scale_x_reverse()+
+      coord_fixed()</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" title="" alt="" width="672" /></p>
+<pre class="r"><code>  library(tidyr)
+  
+  tidy_params &lt;- speaker_parameters %&gt;%
+    gather(formant_param, estimate, f1_intercept:f2_slope)%&gt;%
+    separate(formant_param, c(&quot;formant&quot;,&quot;parameter&quot;), sep = &quot;_&quot;)%&gt;%
+    spread(parameter, value = estimate)
+  
+  tidy_params  </code></pre>
+<pre><code>## Source: local data frame [442 x 4]
+## 
+##     idstring formant  intercept       slope
+## 1  PH00-1-1-      f1  1.4398331  2.02999192
+## 2  PH00-1-1-      f2 -0.4537147 -0.08704735
+## 3  PH00-1-2-      f1  1.3733503  2.03325076
+## 4  PH00-1-2-      f2 -0.5786406 -0.58856425
+## 5  PH00-1-3-      f1  1.5592401  2.09601622
+## 6  PH00-1-3-      f2 -0.3787459  0.18241027
+## 7  PH00-1-4-      f1  1.5342921  1.37077420
+## 8  PH00-1-4-      f2 -0.5535961 -0.17450608
+## 9  PH00-1-5-      f1  1.3693443  1.10219011
+## 10 PH00-1-5-      f2 -0.3890248  0.14457321
+## ..       ...     ...        ...         ...</code></pre>
+<pre class="r"><code>  ggplot(tidy_params, aes(intercept, slope))+
+      geom_hline(y= 0)+
+      geom_point()+
+      facet_wrap(~formant, scales = &quot;free&quot;)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-29-1.png" title="" alt="" width="672" /></p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Reinhart, Carmen M., and Kenneth S. Rogoff. “Growth in a Time of Debt (Digest Summary).” American Economic Review 100.2 (2010): 573-578.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Herndon, Thomas, Michael Ash, and Robert Pollin. “Does high public debt consistently stifle economic growth? A critique of Reinhart and Rogoff.” Cambridge Journal of Economics 38.2 (2014): 257-279.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>Mélard, Guy. “On the accuracy of statistical procedures in Microsoft Excel 2010.” Computational statistics 29.5 (2014): 1095-1128.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>Wickham Rstudio, H. (2014). Tidy Data. JSS Journal of Statistical Software, 59(10). Retrieved from <a href="http://www.jstatsoft.org/" class="uri">http://www.jstatsoft.org/</a><a href="#fnref4">↩</a></p></li>
+</ol>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
