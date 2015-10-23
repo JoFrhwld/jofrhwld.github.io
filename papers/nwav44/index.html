@@ -64,7 +64,7 @@
       var link = document.createElement( 'link' );
       link.rel = 'stylesheet';
       link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'index_files/revealjs_presentation/css/print/pdf.css' : 'index_files/revealjs_presentation/css/print/paper.css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? './index_files/revealjs_presentation/css/print/pdf.css' : './index_files/revealjs_presentation/css/print/paper.css';
       document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
     <!--[if lt IE 9]>
@@ -326,8 +326,8 @@
     </div>
   </div>
 
-  <script src="index_files/revealjs_presentation/lib/js/head.min.js"></script>
-  <script src="index_files/revealjs_presentation/js/reveal.min.js"></script>
+  <script src="./index_files/revealjs_presentation/lib/js/head.min.js"></script>
+  <script src="./index_files/revealjs_presentation/js/reveal.min.js"></script>
 
   <script>
 
