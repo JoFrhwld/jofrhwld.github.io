@@ -1,0 +1,24 @@
+---
+layout: paper
+title: "The Grammar of Variation"
+year: 2016
+author: [ { name: "Josef Fruehwald", url: "jofrhwld.github.io" }]
+abstract: "
+<p>Just like every other area of linguistics you study, speakers' knowledge of linguistic variation is complex, and structured. In this course, you'll learn about how quantitative probabilities can be combined with linguistic grammars in order to understand language variation, with a focus on language internal factors. Specifically you will learn
+</p>
+<ol>
+	<li> how researchers model linguistic variation using variable rules,</li>
+	<li>the basics of how probabilities are calculated and combined,</li>
+	<li>how to use the statistical package R to do these analyses.</li>
+</ol>
+<p>
+Each week will consist of 2 hours of lectures (Mondays), and 1 hour of R practical instruction (Tuesdays).
+</p>
+<p>
+<a href = 'courses/2016_gram_var/practicals'>Link to R Practicals</a>
+</p>
+"
+published: []
+categories: [course]
+display-category: "course"
+---
