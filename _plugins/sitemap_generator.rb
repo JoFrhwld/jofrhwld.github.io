@@ -144,7 +144,7 @@ module Jekyll
     # Returns last_modified_date of latest post
     def fill_posts(site, urlset)
       last_modified_date = nil
-      site.posts.each do |post|
+      toposts.docs.each do |post|
         if !excluded?(post.name)
           url = fill_url(site, post)
           urlset.add_element(url)
