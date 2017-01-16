@@ -15,7 +15,7 @@
 				<ul id="pagenav">
 					<li><a href = "{{site.baseurl}}" display=block>&larr;Home</a></li>
 					<li><a href = "{{page.categories.first | prepend: "/" | prepend: site.baseurl | append: ".html"}}">
-					{% if page.display-category != null} %}
+					{% if page.display-category != null %}
 						{{page.display-category | capitalize | prepend: "More " | append: "s"}}
 					{% else %}
 						{{page.categories.first | capitalize | prepend: "More " | append: "s"}}
