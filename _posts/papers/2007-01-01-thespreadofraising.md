@@ -12,7 +12,7 @@ abstract: "Canadian Raising is typically described as the centralization of the 
 presented: []
 published: ["as Undergraduate Thesis"]
 docs: [{format: "Paper", url: "http://repository.upenn.edu/curej/73/" }]
-categories: [paper]
+categories: [rpaper]
 display-category: Paper
 comments: true
 ---

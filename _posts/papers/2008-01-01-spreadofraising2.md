@@ -10,7 +10,7 @@ abstract: '<p>The centralization of the low upgliding diphthong (typically calle
 presented: [{conf: "NWAV 36, 2008", url: "http://www.ling.upenn.edu/nwav/"} ]
 published: ["Penn Working Papers in Linguistics 14.2"]
 docs: [{format: "Paper", url: "http://repository.upenn.edu/pwpl/vol14/iss2/11/" }]
-categories: [paper]
+categories: [rpaper]
 display-category: Paper
 comments: true
 ---

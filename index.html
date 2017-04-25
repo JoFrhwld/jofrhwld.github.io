@@ -125,17 +125,9 @@ title: Josef Fruehwald
 		<div class = "section group">
 			<div class = "col span_1_of_2">
 				<div class = "box">
-					<h3>The eVoweluate Survey!</h3>
+					<h3>Speech Across Dialects of English (SPADE)</h3>
 					<p>
-						The eVoweluate survey is a research project focusing on the reliability and reproducibility of manual vowel measurements. Its goals are twofold.
-					</p>
-
-					<ol>
-						<li>Quantitatively evaluate the quality of automated vowel analysis, specifically that produced by the FAVE suite.</li>
-						<li>Determine the rate of inter-annotator agreement amongst experts studying vowels.</li>
-					</ol>
-					<p>
-						<a href = "{{site.baseurl}}/eVoweluate"><h3>Sounds interesting? You can participate here!</h3></a>
+						I am part of the UK team, along with PI Jane Stuart-Smith, working on the SPADE project, funded by the Digging into Data challenge.
 					</p>
 
 				</div>
@@ -189,40 +181,21 @@ title: Josef Fruehwald
 	<section id = "research">
 		<h2>Research</h2>
 
-		{% assign pub_type = "dissertation"%}
-		<section id = "{{pub_type}}">
-			<h3>Dissertation<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}">&rarr;</a></h3>
-			{% include diss_sections %}
-
-		</section>
-		<hr class = "style-two">
 
 		{% assign pub_type = "rpaper"%}
 		<section id = "{{pub_type}}" class = "sub">
 
-			<h3>Journal Papers 
+			<h3>Papers 
 				<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}">&rarr;</a></h3>
 			{% include pub_sections %}
 
 		</section>
 
 		<hr class = "style-two">
-
-		{% assign pub_type = "paper"%}
-		<section id = "{{pub_type}}" class = "sub">
-
-			<h3>Working Papers and Proceedings
-				<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" >&rarr;</a></h3>
-			{% include pub_sections %}
-
-		</section>
-		<hr class = "style-two">
-
-		{% assign pub_type = "italk"%}
-		<section id = "{{pub_type}}" class = "sub">
-			<h3>Invited Talks
-				<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" >&rarr;</a></h3>
-			{% include pub_sections %}
+		{% assign pub_type = "dissertation"%}
+		<section id = "{{pub_type}}">
+			<h3>Dissertation<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}">&rarr;</a></h3>
+			{% include diss_sections %}
 
 		</section>
 
@@ -234,6 +207,16 @@ title: Josef Fruehwald
 				<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" >&rarr;</a></h3>
 			{% include pub_sections %}
 		</section>
+
+		<hr class = "style-two">
+		{% assign pub_type = "italk"%}
+		<section id = "{{pub_type}}" class = "sub">
+			<h3>Invited Talks
+				<a href = "{{ pub_type | prepend: "/" | prepend: site.baseurl | append: ".html"}}" >&rarr;</a></h3>
+			{% include pub_sections %}
+
+		</section>
+
 
 		<hr class = "style-two">
 
@@ -250,7 +233,7 @@ title: Josef Fruehwald
 
 	<section id = "teaching">
 		<h2>Teaching</h2>
-		<p>In the academic year 2014/2015, I'm organizing and teaching on the following courses.
+		<p>I am usually the course organizer for the following courses</p>
 		<div class = "section group">
 			<div class = "col span_1_of_3">
 				<div class = "box">
@@ -274,7 +257,7 @@ title: Josef Fruehwald
 			</div>
 			<div class = "col span_1_of_3">
 				<div class = "box">
-					<h3><a href = "teaching">The Grammar of Variation</a></h3>
+					<h3><a href = "teaching">Language Variation and Change</a></h3>
 					<p>
 						This honours course taught in the second semester will focus on how quantiative probabilities and grammatical theory can be brought together to be mutually informative.
 						There is also a practical component involving learning how to use R.
