@@ -1,0 +1,156 @@
+/* CSS - Cascading Style Sheet */
+/* Palette color codes */
+/* Palette URL: http://paletton.com/#uid=33f0u0kkElT90wieJroqEglx-aO */
+
+/* Feel free to copy&paste color codes to your application */
+
+
+/* As hex codes */
+
+:root{
+  --color-primary-0: #216D65 ;	/* Main Primary color */
+  --color-primary-1: #DEF7F5 ;
+  --color-primary-2: #589D95 ;
+  --color-primary-3: #084841 ;
+  --color-primary-4: #00231F ;
+  
+  --color-secondary-1-0: #B08534 ;	/* Main Secondary color (1) */
+  --color-secondary-1-1: #FFF6E5 ;
+  --color-secondary-1-2: #FCD58D ;
+  --color-secondary-1-3: #74500D ;
+  --color-secondary-1-4: #382400 ;
+  
+  --color-secondary-2-0: #AC333C ;	/* Main Secondary color (2) */
+  --color-secondary-2-1: #FEE4E6 ;
+  --color-secondary-2-2: #F68A92 ;
+  --color-secondary-2-3: #710D14 ;
+  --color-secondary-2-4: #370004 ;
+}
+
+
+
+
+h1{
+  text-decoration: underline;
+}
+
+h2{
+  margin-left: 2%;
+}
+
+h3{
+  margin-left: 2%;
+}
+
+h4{
+  margin-left: 2%;
+  font-weight: bold;
+}
+
+h5{
+  margin-left: 2%;
+  font-weight: bold;
+}
+
+.hygiene{
+  border-color: var(--color-secondary-1-0);
+  border-style: solid;
+  border-width: 3px;
+  background-color: var(--color-secondary-1-1);
+}
+
+.hygiene .label{
+  /* font-size:  small; */ 
+  color: var(--color-secondary-1-0);
+}
+
+.idiom{
+  border-color: var(--color-secondary-2-0);;
+  border-style: solid;
+  border-width: 3px;
+  background-color: var(--color-secondary-2-1);;
+}
+
+.idiom .label{
+  /* font-size:  small; */ 
+  color: var(--color-secondary-2-0);
+}
+
+.detail{
+  border-color: #17083E;
+  border-style: solid;
+  border-width: 3px;
+  background-color: #ECE9F5;
+}
+
+.detail .label{}
+
+.box { 
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding:10px;
+  overflow: auto;
+}
+
+
+.illustrate{
+  font-family:monospace;
+  font-size:xx-large;
+  text-align:center;
+  color:#747474;
+}
+
+.pop{
+  color:red;
+}
+
+
+
+.box .label{
+  
+}
+
+.label {
+  
+}
+.box p{
+
+}
+
+.half-img {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.break{
+  color: var(--color-primary-0);
+  border-color: var(--color-primary-0);
+  border-style: solid;
+  border-width: 3px;
+  background-color: var(--color-primary-1);
+}
+
+
+
+.break .big-label{
+  font-size: 300%;
+  text-shadow: 2px 2px 2px var(--color-primary-2);
+}
+
+.idiom .big-label{
+  font-size: 300%;
+  color: var(--color-secondary-2-0);
+  text-shadow: 2px 2px 2px var(--color-secondary-2-2);
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    position:relative;
+    background-image: -webkit-linear-gradient(left, rgba(88, 157, 149,0),  #216D65, rgba(88, 157, 149,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(88, 157, 149,0), #216D65, rgba88, 157, 149,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(88, 157, 1497,0),  #216D65, rgba(88, 157, 149,0)); 
+    background-image:      -o-linear-gradient(left, rgba(88, 157, 149,0),  #216D65, rgba(8, 48, 107,0)); 
+}
+
