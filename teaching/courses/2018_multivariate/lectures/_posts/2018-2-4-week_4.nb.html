@@ -1103,7 +1103,7 @@ head(sp1)</code></pre>
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG1fYm9vdCA8LSAoMToxMDAwKSU+JVxuICAgICAgICAgICAgICAgIG1hcCh+KHNwMSAlPiUgbXV0YXRlKHJlc2lkX3NhbXAgPSBzYW1wbGUocmVzaWQsIHJlcGxhY2UgPSBUKSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBkdXJfYyA9IHJlc2lkX3NhbXAgKyBmaXR0ZWQpKSklPiVcbiAgICAgICAgICAgICAgICBtYXAofihsbShGMV9uIH4gZHVyX2MsIGRhdGEgPSAueCkpKSU+JVxuICAgICAgICAgICAgICAgIG1hcCh0aWR5KSU+JVxuICAgICAgICAgICAgICAgIGJpbmRfcm93cyguaWQgPSBcImlkXCIpXG5gYGAifQ== -->
 <pre class="r"><code>lm_boot &lt;- (1:1000)%&gt;%
                 map(~(sp1 %&gt;% mutate(resid_samp = sample(resid, replace = T),
-                                     dur_c = resid_samp + fitted)))%&gt;%
+                                     F1_n = resid_samp + fitted)))%&gt;%
                 map(~(lm(F1_n ~ dur_c, data = .x)))%&gt;%
                 map(tidy)%&gt;%
                 bind_rows(.id = &quot;id&quot;)</code></pre>
