@@ -149,6 +149,8 @@ rcode{
 	border-color: black;
 	border-style: solid;
 	overflow: auto;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
 .imgbox{
@@ -160,12 +162,16 @@ rcode{
 	border-style: solid;
 	text-align: center;
 	overflow: auto;
+  -moz-border-radius: 10px;
+  border-radius: 10px;  
 }
 
 .imgbox img{
 	max-width: 100%;
 	max-height: 200px;
 	border: 2px solid #acacac;	
+  -moz-border-radius: 10px;
+  border-radius: 10px;  
 }
 
 
@@ -180,6 +186,9 @@ rcode{
   	font-family :  "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial Narrow", "Arial", "Lucida Grande", sans-serif; ;
   	text-align: left;
   	word-wrap: break-word;
+  -moz-border-radius: 10px;
+  border-radius: 10px;    
+
   }
 
 h2#contact:before{
