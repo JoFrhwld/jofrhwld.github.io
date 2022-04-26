@@ -1,3 +1,6 @@
 .DS_Store
-_site/*
-*.sublime-*
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
