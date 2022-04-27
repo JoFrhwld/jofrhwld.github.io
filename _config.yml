@@ -46,7 +46,7 @@ plugins:
 exclude:
   - oldsite
   - _site
-  - papers
+  #- papers
   #- teaching
   #- workshops
   #- scriots
