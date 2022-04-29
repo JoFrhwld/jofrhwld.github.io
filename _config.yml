@@ -29,9 +29,17 @@ twitter_username: jofrhwld
 github_username:  jofrhwld
 #paginate: true
 show_excerpts: true
+author:
+  name: Josef Fruehwald
+  email: josef.fruehwald@uky.edu
 
 # Build settings
 theme: minima
+minima:
+  social_links:
+    twitter: jofrhwld
+    github: jofrhwld
+  skin: dark
 #remote_theme: pages-themes/minimal@v0.2.0
 plugins:
   - jekyll-feed

@@ -35,6 +35,9 @@ layout: default
           {{ post.excerpt }}
         {%- endif -%}
       </li>
+        {%- if forloop.index == 3 -%}
+          {%- break -%}
+        {%- endif -%}
       {%- endfor -%}
     </ul>
 
