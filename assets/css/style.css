@@ -1,0 +1,11 @@
+.biobar{
+    width: 100%;
+    float: left;
+}
+
+.biobox{
+    width: 30%;
+    margin-left: 3%;
+    margin-right: auto;
+    float: left;
+}
