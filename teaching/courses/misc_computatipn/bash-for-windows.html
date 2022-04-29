@@ -1,0 +1,51 @@
+---
+layout: page
+title: "WSL"
+---
+
+<div class="container">
+			<h1>{{ page.title }}</h1>
+<section>
+<div class = "section group">
+
+				<div class = "col span_1_of_1">
+<h2>Installing Bash for Windows</h2>
+
+<h3></i>What is Bash?</h3>
+<p>Bash is a specific command line system. Its commands are standardized in macOS and Linux operating systems, but unfortunately, Windows' default command line has always used a different set of commands.&nbsp;<em>However</em>, it is possible to use bash in Windows 10 if you follow a few steps.</p>
+<p>If you are using a Windows computer in this course, I would&nbsp;<strong>highly recommend</strong> doing this, since it will make the content of the course notes and lectures line up with what we're doing in class.</p>
+
+<h3>Steps within Windows</h3>
+<h4>1. Launch Control panel</h4>
+<p>Launch Control Panel by searching for it in the start bar.&nbsp;</p>
+<h4>2 Go to Programs and Features</h4>
+<p>It might also be just called "Programs"</p>
+<p><img src="assets/control_panel.png" alt="control_panel.png"></p>
+<h4>3 Inside Programs and Features, go to "Turn Windows features on or off"</h4>
+<p><img src="assets/Programs_and_features.png" alt="Programs_and_features.png"></p>
+<h4>4. In the window that appears, scroll down to find "Windows Subsystem for Linux" and click the box, then press ok.</h4>
+<p><img src="assets/windows_features.png" alt="windows_features.png"></p>
+<h4>5. Allow your computer to restart.</h4>
+<p>Your computer needs to restart at this point for the rest of the process to work. A window should pop up asking if you want to restart now, just to make things go quicker.</p>
+<h4>6. Launch the Windows Store, and search for "Ubuntu".</h4>
+<p>You can launch the Windows Store by searching in the start bar. Once you've gotten the store page for Ubuntu pulled up, go ahead and "Get" it.&nbsp;</p>
+<p><img src="assets/windows_store.png" alt="windows_store.png"></p>
+
+<h3 class=""><i class="fab fa-ubuntu" aria-hidden="true"><span style="display: none;">&nbsp;</span></i>Inside Ubuntu</h3>
+<p>There are a few more steps to follow once Ubuntu is installed.</p>
+<h4>1. Launch Ubuntu</h4>
+<p>You find it by searching for it in the start bar. When you first open it, it may say it is installing things for a few moments.</p>
+<h4>2. Set a username</h4>
+<p>This will be your username for Ubuntu. It doesn't have to be the same as your Windows username, but you might as well make it the same just to keep things easy. Just type in the username you want, and hit enter.</p>
+<h4>3. Set a password</h4>
+<p>You'll be asked to set a password.&nbsp;<span style="font-size: 18pt;"><strong>You will not see the letters as you are typing, and the cursor won't move, but it&nbsp;<em>is&nbsp;</em>working.&nbsp;</strong></span></p>
+<p><span style="font-size: 12pt;">Type in the same password again to confirm it, and you're good to go!</span></p>
+
+<h3>Navigating to your files.</h3>
+<p>Unfortunately, your home directory in Ubuntu is in a kind of strange place. But, you can get to your normal files with the following:</p>
+<pre>cd /mnt/c/Users</pre>
+<p>Once you've gotten to the Users directory, run <code>ls</code>&nbsp;to find the directory with your username. Then <code>cd</code>&nbsp;into it, and you'll find all your files.</p>
+</div>
+</div>
+</section>
+</div>
