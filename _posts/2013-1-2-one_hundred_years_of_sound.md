@@ -21,9 +21,11 @@ author:
 - Ingrid Rosenfelder
 - Josef Fruehwald
 category: paper
+doi: 10.1353/lan.2013.0015
 journal: ''
 layout: publication
 number: '1'
+p_url: https://muse.jhu.edu/article/503024
 pages: 30--65
 published: Language
 title: 'One hundred years of sound change in Philadelphia: Linear Incrementaion, Reversal,

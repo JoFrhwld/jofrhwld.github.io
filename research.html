@@ -22,7 +22,13 @@ header: true
     {%- for post in posts -%}
         {%- if post.category == "paper" -%}
         <li>
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
+        <span class="post-meta">{{ post.date | date: date_format }} •  
+            {% for author in post.author %}
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+              <span class="p-author h-card" itemprop="name">{{ author }}</span></span>
+              {%- if forloop.last == false %}, {% endif -%}
+          {% endfor %}
+        </span>
         <h3>
             <a class="post-link" href="{{ post.url | relative_url }}">
             {{ post.title | escape }}
@@ -35,3 +41,4 @@ header: true
         {%- endif -%}
     {%- endfor -%}
 </ul>
+
