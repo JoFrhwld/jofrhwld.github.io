@@ -1,0 +1,40 @@
+---
+layout: default
+---
+<article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title | escape }}</h1>
+  </header>
+
+  
+  <div class="post-content">
+    {{ content }}
+    {%- if posts.size > 0 -%}
+    {%- if page.list_title -%}
+        <h2 class="post-list-heading">{{ page.list_title }}</h2>
+    {%- endif -%}
+    <ul class="post-list">
+        {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d" -%}
+        {%- for post in posts -%}
+            {%- if post.layout == page.post_match -%}
+            <li>
+            <span class="post-meta">{{ post.date | date: date_format }}</span>
+            <h3>
+                <a class="post-link" href="{{ post.url | relative_url }}">
+                {{ post.title | escape }}
+                </a>
+            </h3>
+                {%- if site.show_excerpts -%}
+                    {{ post.excerpt }}
+                {%- endif -%}
+            </li>
+            {%- endif -%}
+        {%- endfor -%}
+    </ul>
+    {%- endif -%}
+  </div>
+
+
+  
+</article>

@@ -2,19 +2,25 @@
 layout: page
 title: Research
 list_title: Papers
-post_match: paper
 permalink: /Research/
 header: true
 ---
 
-{%- if posts.size > 0 -%}
+
+{% if site.paginate %}
+    {% assign posts = paginator.posts %}
+{% else %}
+    {% assign posts = site.posts %}
+{% endif %}
+
+
 {%- if page.list_title -%}
     <h2 class="post-list-heading">{{ page.list_title }}</h2>
 {%- endif -%}
 <ul class="post-list">
     {%- assign date_format = site.minima.date_format | default: "%Y" -%}
     {%- for post in posts -%}
-        {%- if post.layout == page.post_match -%}
+        {%- if post.category == "paper" -%}
         <li>
         <span class="post-meta">{{ post.date | date: date_format }}</span>
         <h3>
@@ -29,4 +35,3 @@ header: true
         {%- endif -%}
     {%- endfor -%}
 </ul>
-{%- endif -%}
