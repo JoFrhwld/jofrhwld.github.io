@@ -13,12 +13,17 @@ author:
 - Josef Fruehwald
 category: paper
 doi: 10.1353/lan.2016.0041
-journal: ''
 layout: publication
 number: '2'
 p_url: https://muse.jhu.edu/article/621188
 pages: 376--410
 published: Language
+tags:
+- sociolinguistics
+- canadian raising
+- phonologization
+- hypocorrection
+- phonetic change
 title: The early influence of phonology on a phonetic change
 volume: '92'
 year: '2016'

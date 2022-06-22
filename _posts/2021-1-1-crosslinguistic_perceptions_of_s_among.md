@@ -18,7 +18,6 @@ author:
 - Lauren Hall-Lew
 category: paper
 doi: 10.1017/S0954394521000089
-journal: ''
 layout: publication
 number: '2'
 p_url: https://www.cambridge.org/core/product/identifier/S0954394521000089/type/journal_article

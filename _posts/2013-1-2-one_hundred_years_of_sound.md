@@ -22,7 +22,6 @@ author:
 - Josef Fruehwald
 category: paper
 doi: 10.1353/lan.2013.0015
-journal: ''
 layout: publication
 number: '1'
 p_url: https://muse.jhu.edu/article/503024

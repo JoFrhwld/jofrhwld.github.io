@@ -10,7 +10,6 @@ abstract: "Canadian Raising is typically described as the centralization of the 
 author:
 - Josef Fruehwald
 category: paper
-journal: ''
 layout: publication
 p_url: http://repository.upenn.edu/curej/73
 published: CUREJ College Undergraduate Research Electronic Journal

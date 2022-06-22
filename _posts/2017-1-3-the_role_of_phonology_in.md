@@ -12,12 +12,21 @@ author:
 - Josef Fruehwald
 category: paper
 doi: 10.1146/annurev-linguistics-011516-034101
-journal: ''
 layout: publication
 number: '1'
 p_url: https://www.annualreviews.org/doi/10.1146/annurev-linguistics-011516-034101
 pages: 25--42
 published: Annual Review of Linguistics
+tags:
+- phonetics
+- phonology
+- phonology
+- sound change
+- phonologization
+- contrast
+- phonetic change
+- phonetics interface
+- phonology-phonetics interface
 title: The Role of Phonology in Phonetic Change
 volume: '3'
 year: '2017'

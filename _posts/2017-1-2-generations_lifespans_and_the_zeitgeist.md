@@ -17,7 +17,6 @@ author:
 - Josef Fruehwald
 category: paper
 doi: 10.1017/S0954394517000060
-journal: ''
 layout: publication
 number: '1'
 p_url: https://www.cambridge.org/core/product/identifier/S0954394517000060/type/journal_article

@@ -9,11 +9,14 @@ author:
 - Josef Fruehwald
 - Kyle Gorman
 category: paper
-journal: ''
 layout: publication
 p_url: https://www.ideals.illinois.edu/handle/2142/25512
 pages: 36--50
 published: Studies in the Linguistic Sciences Illinois Working Papers
+tags:
+- language change
+- phonetics
+- phonology
 title: Cross-derivational feeding is epiphenomenal
 year: '2011'
 ---

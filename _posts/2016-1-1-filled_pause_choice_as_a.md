@@ -12,7 +12,6 @@ abstract: "In this paper, I argue that filled pause selection (um/uh) is a socio
 author:
 - Josef Fruehwald
 category: paper
-journal: ''
 layout: publication
 number: '2'
 p_url: https://repository.upenn.edu/pwpl/vol22/iss2/6/

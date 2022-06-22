@@ -33,6 +33,13 @@ layout: publication
 p_url: http://repository.upenn.edu/pwpl/vol14/iss2/11/
 pages: 83--92
 published: Penn Working Papers in Linguistics
+tags:
+- language change
+- phonetics
+- phonology
+- lexical diffusion
+- opcacity
+- sound change
 title: 'The Spread of Raising : Opacity , Lexicalization , and Diffusion'
 volume: '14'
 year: '2008'

@@ -11,10 +11,15 @@ author:
 - Josef Fruehwald
 category: paper
 doi: 10.1353/lan.2017.0051
-journal: ''
 layout: publication
 number: '3'
 published: Language
+tags:
+- flapping
+- canadian raising
+- incipient sound change
+- metrical foot
+- phonologization
 title: "Response to Berkson, Davis, \\& Strickler, \u2018What does incipient /ay/-raising\
   \ look like?\u2019"
 volume: '93'

@@ -22,7 +22,6 @@ author:
 - Charles Yang
 category: paper
 doi: 10.1017/S0954394519000061
-journal: ''
 layout: publication
 number: '1'
 p_url: https://www.cambridge.org/core/product/identifier/S0954394519000061/type/journal_article

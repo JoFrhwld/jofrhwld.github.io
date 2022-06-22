@@ -12,7 +12,6 @@ author:
 - Lauren Hall-Lew
 - Daniel Lawrence
 category: paper
-journal: ''
 layout: publication
 p_url: https://www.internationalphoneticassociation.org/icphs-proceedings/ICPhS2015/Papers/ICPHS0800.pdf
 published: Proceedings of the 18th International Congress of Phonetic Sciences

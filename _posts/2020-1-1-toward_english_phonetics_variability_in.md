@@ -22,7 +22,6 @@ author:
 - Josef Fruehwald
 category: paper
 doi: 10.3389/frai.2020.00038
-journal: ''
 layout: publication
 p_url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7861323/
 pages: '38'
