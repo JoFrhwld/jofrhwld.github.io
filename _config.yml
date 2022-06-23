@@ -25,7 +25,8 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jofrhwld
 github_username:  jofrhwld
-#paginate: true
+paginate: 10
+paginate_path: "/blog/page:num/"
 show_excerpts: true
 author:
   name: Josef Fruehwald
@@ -43,7 +44,13 @@ minima:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-paginate
 
+header_pages:
+ - blog/index.html
+ - teaching/courses/2017_lsa/index.html
+ - research/index.html
+ - blog.html
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -52,6 +59,22 @@ plugins:
 #
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
+
+jekyll_compose:
+  default_front_matter:
+    drafts:
+      description:
+      image:
+      category:
+      tags:
+    posts:
+      description:
+      image:
+      category: blog
+      tags:
+      author: 'Josef Fruehwald'
+      published: false
+      sitemap: false
 
 exclude:
   - oldsite
