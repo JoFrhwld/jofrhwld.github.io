@@ -27,6 +27,12 @@ number: '1'
 p_url: https://www.cambridge.org/core/product/identifier/S0954394519000061/type/journal_article
 pages: 1--20
 published: Language Variation and Change
+tags:
+- language change
+- modeling
+- phonological change
+- phonology
+- tolerance principle
 title: Using the Tolerance Principle to predict phonological change
 volume: '31'
 year: '2019'

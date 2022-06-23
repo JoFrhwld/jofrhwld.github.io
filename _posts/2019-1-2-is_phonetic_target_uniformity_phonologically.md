@@ -19,6 +19,11 @@ p_url: https://www.internationalphoneticassociation.org/icphs-proceedings/ICPhS2
 pages: '5'
 published: roceedings of the 19th International Congress of Phonetic Sciences Melbourne
   Australia 2019
+tags:
+- parallel shifts
+- phonetics
+- phonology
+- sound change
 title: Is phonetic target uniformity phonologically, or sociolinguistically grounded?
 year: '2019'
 ---

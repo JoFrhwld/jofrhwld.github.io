@@ -17,9 +17,9 @@ category: paper
 layout: publication
 published: The proceedings of the NorthEastern Linguistic Society NELS
 tags:
-- phonology
 - historical linguistics
-- langauge change
+- language change
+- phonology
 title: 'Phonological Rule Change: The Constant Rate Effect'
 volume: '40'
 year: '2013'

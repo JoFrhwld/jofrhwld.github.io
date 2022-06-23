@@ -17,8 +17,14 @@ number: '2'
 p_url: https://repository.upenn.edu/pwpl/vol22/iss2/6/
 pages: 41--49
 published: U Penn Working Papers in Linguistics
-title: Filled Pause Choice as a Sociolinguistic Variable Filled Pause Choice as a
-  Sociolinguistic Variable
+tags:
+- filled pauses
+- hesitation markers
+- language change
+- philadelphia english
+- sociolinguistic variable
+- variable rules
+title: Filled Pause Choice as a Sociolinguistic Variable
 volume: '22'
 year: '2016'
 ---

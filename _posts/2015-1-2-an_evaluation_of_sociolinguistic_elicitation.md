@@ -15,6 +15,12 @@ category: paper
 layout: publication
 p_url: https://www.internationalphoneticassociation.org/icphs-proceedings/ICPhS2015/Papers/ICPHS0800.pdf
 published: Proceedings of the 18th International Congress of Phonetic Sciences
+tags:
+- california english
+- intraspeaker variation
+- methods
+- naturalistic speech
+- vowel quality
 title: An Evaluation of Sociolinguistic Elicitation Methods
 year: '2015'
 ---

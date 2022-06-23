@@ -27,6 +27,12 @@ number: '1'
 p_url: https://muse.jhu.edu/article/503024
 pages: 30--65
 published: Language
+tags:
+- dialect geography
+- philadelphia english
+- sociolinguistics
+- sound change
+- variation
 title: 'One hundred years of sound change in Philadelphia: Linear Incrementaion, Reversal,
   and Reanalysis'
 volume: '89'

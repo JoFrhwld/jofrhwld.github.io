@@ -23,23 +23,12 @@ pages: 141--168
 published: Linguistic Variation
 tags:
 - adjective
-- and
-- and many other individuals
-- authors would like to
 - canadian english
 - case assignment
-- colloquium
-- data
-- english dialect syntax
-- for their helpful comments
-- in some cases
 - microvariation
 - philadelphia english
 - stative passive
-- thank the audience at
-- the 37th penn linguistics
 - vermont english
-- we are
 title: "I\u2019m done my homework\u2014Case assignment in a stative passive"
 volume: '15'
 year: '2015'

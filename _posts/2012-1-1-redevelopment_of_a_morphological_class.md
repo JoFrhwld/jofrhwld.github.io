@@ -25,10 +25,10 @@ p_url: http://repository.upenn.edu/pwpl/vol18/iss1/10/
 pages: 77--86
 published: Penn Working Papers in Linguistics
 tags:
-- phonology
 - distributed morphology
-- langauge variation
+- language variation
 - morphology
+- phonology
 title: Redevelopment of a Morphological Class
 volume: '18'
 year: '2012'

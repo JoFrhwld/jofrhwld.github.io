@@ -22,6 +22,12 @@ number: '1'
 p_url: https://www.cambridge.org/core/product/identifier/S0954394517000060/type/journal_article
 pages: 1--27
 published: Language Variation and Change
+tags:
+- apparent time
+- gams
+- language change
+- lifespan change
+- philadelphia english
 title: Generations, lifespans, and the zeitgeist
 volume: '29'
 year: '2017'

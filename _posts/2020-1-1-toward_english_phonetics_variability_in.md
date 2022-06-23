@@ -26,6 +26,13 @@ layout: publication
 p_url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7861323/
 pages: '38'
 published: Frontiers in Artificial Intelligence
+tags:
+- bayesian modeling
+- dialectal variation
+- english
+- phonetic variability
+- speaker variability
+- voicing effect
 title: "Toward \u201CEnglish\u201D Phonetics: Variability in the Pre-consonantal Voicing\
   \ Effect Across English Dialects and Speakers"
 volume: '3'
