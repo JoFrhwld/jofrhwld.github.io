@@ -3,10 +3,12 @@ layout: page
 title: Research 
 list_title: Papers 
 header: true 
-list_category: paper
+list_category: 
+- paper
+- conference paper
 --- 
 
-{% assign posts = site.categories.paper %} 
+{% assign posts = site.posts %} 
 
 {%- if page.list_title -%}
 <h2 class="post-list-heading">{{ page.list_title }}</h2>
@@ -14,7 +16,7 @@ list_category: paper
 <ul class="post-list">
     {%- assign date_format = site.minima.date_format | default: "%Y" -%} 
     {%- for post in posts -%} 
-        {%- if post.category == page.list_category -%}
+        {%- if page.list_category contains post.category -%}
         <li>
             <span class="post-meta">{{ post.date | date: date_format }} •  
                         {% for author in post.author %}
