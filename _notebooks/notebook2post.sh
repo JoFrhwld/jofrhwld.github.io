@@ -1,0 +1,1 @@
+jupyter nbconvert --execute --to html --output-dir ../blog/_posts --template headerless.tpl *ipynb 
