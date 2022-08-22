@@ -8,3 +8,4 @@ header : true
 ## Pages
 
 - [Notation](notation/)
+- [Reading a hard paper](reading/)

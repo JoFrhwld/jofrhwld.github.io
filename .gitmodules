@@ -1,3 +1,6 @@
 [submodule "teaching/courses/2022_lin517/notation"]
 	path = teaching/courses/2022_lin517/notation
 	url = https://github.com/JoFrhwld/notation.git
+[submodule "teaching/courses/2022_lin517/reading"]
+	path = teaching/courses/2022_lin517/reading
+	url = https://github.com/JoFrhwld/reading.git
