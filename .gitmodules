@@ -4,3 +4,6 @@
 [submodule "teaching/courses/2022_lin517/reading"]
 	path = teaching/courses/2022_lin517/reading
 	url = https://github.com/JoFrhwld/reading.git
+[submodule "teaching/courses/2022_lin517/what_is_nlp"]
+	path = teaching/courses/2022_lin517/what_is_nlp
+	url = https://github.com/JoFrhwld/what_is_nlp.git

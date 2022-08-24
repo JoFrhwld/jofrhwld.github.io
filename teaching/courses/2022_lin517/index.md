@@ -9,3 +9,4 @@ header : true
 
 - [Notation](notation/)
 - [Reading a hard paper](reading/)
+- [What is NLP](what_is_nlp/)
