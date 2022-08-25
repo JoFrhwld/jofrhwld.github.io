@@ -7,6 +7,10 @@ header : true
 
 ## Pages
 
+### Reference
 - [Notation](notation/)
 - [Reading a hard paper](reading/)
+- [Mac Command Line Setup](macsetup)
+
+### Lectures
 - [What is NLP](what_is_nlp/)
