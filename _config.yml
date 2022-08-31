@@ -50,8 +50,7 @@ header_pages:
  - blog/index.html
  - teaching/courses/2017_lsa/index.html
  - research/index.html
- - blog.html
-
+ - teaching/index.md
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
@@ -79,6 +78,7 @@ jekyll_compose:
 exclude:
   - oldsite
   - _site
+  - "*.qmd"
   #- papers
   #- teaching
   #- workshops

@@ -14,3 +14,4 @@ header : true
 
 ### Lectures
 - [What is NLP](what_is_nlp/)
+- [Data Sparsity](data_sparsity/)

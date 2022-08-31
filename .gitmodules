@@ -10,3 +10,9 @@
 [submodule "teaching/courses/2022_lin517/macsetup"]
 	path = teaching/courses/2022_lin517/macsetup
 	url = https://github.com/JoFrhwld/macsetup.git
+[submodule "teaching/courses/2022_lin517/data_sparsity"]
+	path = teaching/courses/2022_lin517/data_sparsity
+	url = https://github.com/JoFrhwld/data_sparsity.git
+[submodule "data_sparsity"]
+	path = data_sparsity
+	url = https://github.com/JoFrhwld/data_sparsity.git
