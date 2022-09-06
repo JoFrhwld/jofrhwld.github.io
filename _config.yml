@@ -79,6 +79,7 @@ exclude:
   - oldsite
   - _site
   - "*.qmd"
+  - teaching/courses/2022_lin517/src/*
   #- papers
   #- teaching
   #- workshops
