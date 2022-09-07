@@ -104,6 +104,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -211,6 +213,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#markup-is-everywhere" id="toc-markup-is-everywhere" class="nav-link" data-scroll-target="#markup-is-everywhere">Markup is everywhere</a></li>
   </ul></li>
+  <li><a href="#text-normalization" id="toc-text-normalization" class="nav-link" data-scroll-target="#text-normalization">Text Normalization</a>
+  <ul class="collapse">
+  <li><a href="#challenges-with-speech-and-text" id="toc-challenges-with-speech-and-text" class="nav-link" data-scroll-target="#challenges-with-speech-and-text">Challenges with speech and text</a></li>
+  <li><a href="#challenges-with-social-text" id="toc-challenges-with-social-text" class="nav-link" data-scroll-target="#challenges-with-social-text">Challenges with social text</a></li>
+  </ul></li>
+  <li><a href="#tokenizers" id="toc-tokenizers" class="nav-link" data-scroll-target="#tokenizers">Tokenizers</a></li>
   </ul>
 </nav>
     </div>
@@ -297,24 +305,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>The list <code>all_grams4</code> contains a list of every token of 4grams in these books. Let’s count them up and look at the top 10 most frequent 4 word phrases Mary Shelley used in her writing!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>gram_count <span class="op">=</span> Counter(all_grams4)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>top10 <span class="op">=</span> gram_count.most_common(<span class="dv">10</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> gram <span class="kw">in</span> top10:</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(gram)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>('Project_Gutenberg_Literary_Archive', 52)
-('the_Project_Gutenberg_Literary', 44)
-('Gutenberg_Literary_Archive_Foundation', 34)
-('the_terms_of_this', 32)
-('Project_Gutenberg-tm_electronic_works', 30)
-('at_the_same_time', 25)
-('to_the_Project_Gutenberg', 24)
-('*_*_*_*', 22)
-('in_the_United_States', 21)
-('for_the_sake_of', 21)</code></pre>
+<div id="tbl-4gram" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;1: Top 10 4grams from Mary Shelley’s Work</caption>
+<thead>
+<tr class="header">
+<th>4gram</th>
+<th style="text-align: right;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Project_Gutenberg_Literary_Archive</code></td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr class="even">
+<td><code>the_Project_Gutenberg_Literary</code></td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="odd">
+<td><code>Gutenberg_Literary_Archive_Foundation</code></td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="even">
+<td><code>the_terms_of_this</code></td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr class="odd">
+<td><code>Project_Gutenberg-tm_electronic_works</code></td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="even">
+<td><code>at_the_same_time</code></td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="odd">
+<td><code>to_the_Project_Gutenberg</code></td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr class="even">
+<td><code>*_*_*_*</code></td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr class="odd">
+<td><code>in_the_United_States</code></td>
+<td style="text-align: right;">21</td>
+</tr>
+<tr class="even">
+<td><code>for_the_sake_of</code></td>
+<td style="text-align: right;">21</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <p>So, either Mary Shelly was obsessed with the <code>Project Gutenberg Literary Archive</code>, and <code>the terms of this</code> and <code>for the sake of</code>, or something else is going on.</p>
@@ -324,16 +366,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>python: <a href="https://github.com/raduangelescu/gutenbergpy"><code>gutenbergpy</code></a></li>
 <li>R: <a href="https://docs.ropensci.org/gutenbergr/"><code>gutenbergr</code></a></li>
 </ul>
-<p>Or, you might decide to leave it all in. It seems pretty clear this is the approach to the dataset they trained GPT-3 on, because if you prompt it wit the first few lines of the Project Gutenberg license, it will continue it.</p>
+<p>Or, you might decide to leave it all in. It seems pretty clear this is the approach to the dataset they trained GPT-3 on, because if you prompt it with the first few lines of the Project Gutenberg license, it will continue it.</p>
 <div id="fig-licenses" class="quarto-layout-panel">
 <p></p><figcaption>Figure&nbsp;1: The original Project Gutenberg License vs what GPT3 reproduces</figcaption><p></p>
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="assets/gut_license.png" id="orig-gut" class="img-fluid figure-img"></p>
+<p><img src="assets/gut_license.png" id="orig-gut" class="img-fluid figure-img" alt="The original plain text Project Gutenberg license"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="assets/gpt3_gut.png" id="gpt_gut" class="img-fluid figure-img"></p>
+<p><img src="assets/gpt3_gut.png" id="gpt_gut" class="img-fluid figure-img" alt="The GPT3 api, which has been given the first few lines of the Project Gutenberg license, and has completed the rest."></p>
 </div>
 </div>
 </figure>
@@ -342,13 +384,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="markup-is-everywhere">Markup is everywhere</h3>
 <p>Setting aside the issue of headers and footers, we also need to deal with the fact that “markup” is everywhere. Even in the relatively plain text of Project Gutenberg books, they use underscores <code>_</code> to indicate italics or emphasized text.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># python</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>underscore_lines <span class="op">=</span> [line </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                      <span class="cf">for</span> line <span class="kw">in</span> book_lines </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">if</span> <span class="bu">any</span>([<span class="st">"_"</span> <span class="kw">in</span> word </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="cf">for</span> word <span class="kw">in</span> line])]</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" "</span>.join(underscore_lines[i]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># python</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>underscore_lines <span class="op">=</span> [line </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                      <span class="cf">for</span> line <span class="kw">in</span> book_lines </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">if</span> <span class="bu">any</span>([<span class="st">"_"</span> <span class="kw">in</span> word </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="cf">for</span> word <span class="kw">in</span> line])]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" "</span>.join(underscore_lines[i]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Mathilda _is being published
 of_ Studies in Philology.
@@ -356,12 +398,133 @@ novelette _Mathilda_ together with the opening pages of its rough
 draft, _The Fields of Fancy_. They are transcribed from the microfilm</code></pre>
 </div>
 </div>
+<p>This, again, is something we need to decide whether or not we want to include in our corpora. For these massive language models that focus on text generation, they may <em>want</em> the model to generate markup along with the text, so they might leave it in. Some text markup that’s intended to indicate prosodic patterns could be useful to leave in from a linguistic theory perspective.</p>
+<p>Either way, though, it is still a <em>decision</em> that needs to be made about the data.</p>
+</section>
+</section>
+<section id="text-normalization" class="level2">
+<h2 class="anchored" data-anchor-id="text-normalization">Text Normalization</h2>
+<p>I called the issues above “data wrangling”, since it’s mostly about identifying the <em>content</em> we want to be including in our modelling. But once you’ve done that, there are still questions about how we process data for analysis which fall under “text normalization”.</p>
+<p>Consider the following sentences</p>
+<blockquote class="blockquote">
+<p>The 2019 film Cats is a movie about cats. Cats appear in every scene. A cat appears in every scene &gt;.&lt;.</p>
+</blockquote>
+<p>Let’s split this sentence up along whitespace, and count how many times “cats” appears.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>phrase <span class="op">=</span> <span class="st">"""The 2019 film Cats is a movie about cats. </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">Cats appear in every scene. </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">A cat appears in every scene. &gt;.&lt; :-)"""</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> re.split(<span class="st">"\s"</span>, phrase)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>cat_c <span class="op">=</span> Counter(words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div id="tbl-cats" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;2: frequency of “cats”</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>word</th>
+<th style="text-align: right;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cats</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td>cats.</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td>cat</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>A very important thing to keep in mind is that our language models will treat the words in these rows as three completely separate word types.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> That even includes the period <code>.</code> in the second row. Some typical steps involve</p>
+<ul>
+<li><p>separating punctuation from words</p></li>
+<li><p>“case folding” or converting everything to lowercase.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>words2 <span class="op">=</span> re.split(<span class="vs">r"\s"</span>, phrase)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>words2 <span class="op">=</span> [re.sub(<span class="vs">r"\W"</span>, <span class="st">''</span>, word) <span class="cf">for</span> word <span class="kw">in</span> words2]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>words2 <span class="op">=</span> [word.lower() <span class="cf">for</span> word <span class="kw">in</span> words2]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>words2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['the', '2019', 'film', 'cats', 'is', 'a', 'movie', 'about', 'cats', '', 'cats', 'appear', 'in', 'every', 'scene', '', 'a', 'cat', 'appears', 'in', 'every', 'scene', '', '']</code></pre>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-cats_token" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;3: frequency of tokenized “cats”</caption>
+<thead>
+<tr class="header">
+<th>word</th>
+<th style="text-align: right;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cats</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td>cat</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="challenges-with-speech-and-text" class="level3">
+<h3 class="anchored" data-anchor-id="challenges-with-speech-and-text">Challenges with speech and text</h3>
+<ul>
+<li><p><i class="fa-solid fa-keyboard" aria-hidden="true"></i>: <code>$1500</code></p>
+<ul>
+<li><p><i class="fa-solid fa-bullhorn" aria-hidden="true"></i>: “one thousand five hundred dollars”</p></li>
+<li><p><i class="fa-solid fa-bullhorn" aria-hidden="true"></i>: “fifteen hundred dollars”</p></li>
+<li><p><i class="fa-solid fa-bullhorn" aria-hidden="true"></i>: “one and a half thousand dollars”</p></li>
+<li><p><i class="fa-solid fa-bullhorn" aria-hidden="true"></i>: “one point five thousand dollars”</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="challenges-with-social-text" class="level3">
+<h3 class="anchored" data-anchor-id="challenges-with-social-text">Challenges with social text</h3>
+<p>A tokenizer would ideally work equally well for any of these inputs, keeping them together as tokens rather than each split up as punctuation.</p>
+<ul>
+<li><p><code>XD</code></p></li>
+<li><p><code>&gt;.&lt;</code></p></li>
+<li><p><code>T.T</code></p></li>
+<li><p><code>:-)</code></p></li>
+<li><p><code>:3</code></p></li>
+<li><p>😺</p></li>
+</ul>
+</section>
+</section>
+<section id="tokenizers" class="level2">
+<h2 class="anchored" data-anchor-id="tokenizers">Tokenizers</h2>
 
 
 </section>
-</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>At least, before we start doing fancier models that start taking into account distributional semantics.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
