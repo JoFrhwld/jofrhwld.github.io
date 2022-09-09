@@ -2,11 +2,13 @@
   {
     "listing": "/index.html",
     "items": [
-      "/notation/index.html",
-      "/reading/index.html",
-      "/what_is_nlp/index.html",
-      "/data_sparsity/data_sparsity.html",
-      "/data_processing/index.html"
+      "/resources/notation/index.html",
+      "/resources/reading/index.html",
+      "/lectures/what_is_nlp/index.html",
+      "/lectures/data_sparsity/data_sparsity.html",
+      "/python_sessions/00_session1.html",
+      "/lectures/data_processing/index.html",
+      "/python_sessions/01_session2.html"
     ]
   }
 ]
