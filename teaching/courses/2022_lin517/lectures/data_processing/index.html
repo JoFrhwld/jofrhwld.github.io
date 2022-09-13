@@ -875,111 +875,145 @@ draft, _The Fields of Fancy_. They are transcribed from the microfilm</code></pr
 <p>The downside of tokenizers like the three above is that you can’t pre-specify how many types you will get out. That is, you can’t pre-specify your vocabulary size. That isn’t ideal for neural-network based models, which need to use matrices of finite and pre-specified size. So there are also tokenizers that keep a fixed cap on the vocabulary size, even if they result in tokens that aren’t really linguistically meaningful.</p>
 <section id="byte-pair-encoding" class="level4">
 <h4 class="anchored" data-anchor-id="byte-pair-encoding">Byte Pair Encoding</h4>
+<p>Byte Pair Encoding is one approach to tokenizing where we can pre-specify the maximum vocabulary size either by setting a maximum vocabulary hyperparameter, or by setting a maximum iteration hyperparameter.</p>
+<p>Let’s start out with a fake training of a byte pair encoder with the simple vocabulary “cats can’t canter”. We kick things off treating every character as a token, plus a specialized start-of-word symbol, which I’m representing with <code>_</code>.</p>
 <div class="quarto-layout-panel" style="border-style: solid;">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p>Words</p>
+<p>Tokens</p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<pre><code>c a t s _
-c a n ' t _
-c a n t e r _</code></pre>
+<pre><code>_ c a t s
+_ c a n ' t
+_ c a n t e r</code></pre>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p>Vocabulary</p>
+<p>Types</p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>{'a', 'e', 't', 'r', 
-'s', 'n', 'c', "'", ' '}</code></pre>
+'s', 'n', 'c', "'", '_'}</code></pre>
 </div>
 </div>
 </div>
 <div class="cell">
 
 </div>
+<p>This is, in principle, the smallest and <em>simplest</em> tokenization we could do for any input text. While the total number of <em>words</em> is infinite, the total number of characters or symbols we use to create those words is finite.</p>
+<p>The next step is to count up all of the pairs (or bigrams) of tokens in the training data. In this case, both (<code>_</code>, <code>c</code>) and (<code>c</code>, <code>a</code>) appear equally commonly, so I make a decision and say (<code>_</code>, <code>c</code>) is the one we’ll process first. We’ll paste them together, call them a new type, and replace all (<code>_</code>, <code>c</code>) sequences with <code>_c</code>.</p>
 <div class="quarto-layout-panel" style="border-style: solid;">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p>Words</p>
+<p>tokens</p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<pre><code>ca t s _
-ca n ' t _
-ca n t e r _</code></pre>
+<pre><code>_c a t s
+_c a n ' t
+_c a n t e r</code></pre>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p>Vocabulary</p>
+<p>types</p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>{'a', 'e', 't', 'r', 
-'s', 'n', 'c', "'", ' ', 'ca'}</code></pre>
+'s', 'n', 'c', "'", ' ',
+`_c`}</code></pre>
 </div>
 </div>
 </div>
+<p>Repeating the process, the most frequently occurring bigram is now (<code>_c</code>, <code>a</code>), so we’ll add <code>_ca</code> as a new type, and replace all (<code>_c</code>, <code>a</code>) sequences with <code>_ca</code>.</p>
 <div class="quarto-layout-panel" style="border-style: solid;">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p>Words</p>
+<p>tokens</p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<pre><code>ca t s _
-can ' t _
-can t e r _</code></pre>
+<pre><code>_ca t s 
+_ca n ' t _
+_ca n t e r _</code></pre>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p>Vocabulary</p>
+<p>types</p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>{'a', 'e', 't', 'r', 
-'s', 'n', 'c', "'", ' ', 'ca', 'can'}</code></pre>
+'s', 'n', 'c', "'", ' ', 
+'_c', '_ca'}</code></pre>
 </div>
 </div>
 </div>
+<p>Finally, the last most frequent sequence is (<code>_ca</code>, <code>n</code>), so we’ll add <code>_can</code> to the vocabulary, and collapse (<code>_ca</code>, <code>n</code>) sequences.</p>
+<div class="quarto-layout-panel" style="border-style: solid;">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>tokens</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>_ca t s
+_can ' t
+_can t e r</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>types</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>{'a', 'e', 't', 'r', 
+'s', 'n', 'c', "'", ' ', 
+'_c', '_ca', '_can'}</code></pre>
+</div>
+</div>
+</div>
+<p>We’ll stop at that point, but we could either continue for a fixed number of iterations, or until our type, or vocabulary size reaches a fixed number.</p>
 </section>
 <section id="training" class="level4">
 <h4 class="anchored" data-anchor-id="training">Training</h4>
+<p>The python library <code>sentencepiece</code> has a method for training a BPE tokenizer. We’ll run it on <em>Frankenstein</em> with a vocabulary limited to about ~1,000 items to see what we’ll get.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gutenbergpy.textget</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sentencepiece <span class="im">as</span> spm</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>raw_book <span class="op">=</span> gutenbergpy.textget.get_text_by_id(<span class="dv">84</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>clean_book  <span class="op">=</span> gutenbergpy.textget.strip_headers(raw_book)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"texts/frank.txt"</span>, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="bu">file</span>.write(clean_book)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">file</span>.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gutenbergpy.textget</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sentencepiece <span class="im">as</span> spm</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>raw_book <span class="op">=</span> gutenbergpy.textget.get_text_by_id(<span class="dv">84</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>clean_book  <span class="op">=</span> gutenbergpy.textget.strip_headers(raw_book)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"texts/frank.txt"</span>, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="bu">file</span>.write(clean_book)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">file</span>.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>spm.SentencePieceTrainer.train(<span class="bu">input</span> <span class="op">=</span> <span class="st">"texts/frank.txt"</span>, </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                               model_prefix <span class="op">=</span> <span class="st">"m"</span>,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                               vocab_size <span class="op">=</span> <span class="dv">5000</span>, </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                               model_type <span class="op">=</span> <span class="st">"bpe"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>spm.SentencePieceTrainer.train(<span class="bu">input</span> <span class="op">=</span> <span class="st">"texts/frank.txt"</span>, </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                               model_prefix <span class="op">=</span> <span class="st">"m"</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                               vocab_size <span class="op">=</span> <span class="dv">1000</span>, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                               model_type <span class="op">=</span> <span class="st">"bpe"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The code above trained the tokenizer and saved it as a model. Here we’ll load it and run it on a sample paragraph to look at the output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sp <span class="op">=</span> spm.SentencePieceProcessor(model_file<span class="op">=</span><span class="st">'m.model'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sp <span class="op">=</span> spm.SentencePieceProcessor(model_file<span class="op">=</span><span class="st">'m.model'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>para <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="st">You will rejoice to hear that no disaster has accompanied the</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="st">commencement of an enterprise which you have regarded with such evil</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="st">forebodings. I arrived here yesterday, and my first task is to assure</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="st">my dear sister of my welfare and increasing confidence in the success</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="st">of my undertaking</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>sp.encode_as_pieces(para)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>para <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="st">You will rejoice to hear that no disaster has accompanied the</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="st">commencement of an enterprise which you have regarded with such evil</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="st">forebodings. I arrived here yesterday, and my first task is to assure</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="st">my dear sister of my welfare and increasing confidence in the success</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="st">of my undertaking</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.encode_as_pieces(para))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>['▁You', '▁will', '▁rejo', 'ice', '▁to', '▁hear', '▁that', '▁no', '▁disaster', '▁has', '▁accompanied', '▁the', '▁commencement', '▁of', '▁an', '▁enterprise', '▁which', '▁you', '▁have', '▁regarded', '▁with', '▁such', '▁evil', '▁fore', 'bod', 'ings', '.', '▁I', '▁arrived', '▁here', '▁y', 'esterday', ',', '▁and', '▁my', '▁first', '▁task', '▁is', '▁to', '▁assure', '▁my', '▁dear', '▁sister', '▁of', '▁my', '▁we', 'lf', 'are', '▁and', '▁incre', 'asing', '▁confidence', '▁in', '▁the', '▁success', '▁of', '▁my', '▁undertaking']</code></pre>
+<pre><code>['▁You', '▁will', '▁re', 'j', 'o', 'ice', '▁to', '▁he', 'ar', '▁that', '▁no', '▁dis', 'as', 'ter', '▁has', '▁acc', 'om', 'p', 'an', 'ied', '▁the', '▁comm', 'ence', 'ment', '▁of', '▁an', '▁enter', 'pr', 'ise', '▁which', '▁you', '▁have', '▁reg', 'ard', 'ed', '▁with', '▁such', '▁ev', 'il', '▁f', 'ore', 'b', 'od', 'ings', '.', '▁I', '▁arri', 'ved', '▁he', 're', '▁y', 'es', 'ter', 'd', 'ay', ',', '▁and', '▁my', '▁first', '▁t', 'as', 'k', '▁is', '▁to', '▁ass', 'ure', '▁my', '▁dear', '▁s', 'is', 'ter', '▁of', '▁my', '▁we', 'lf', 'are', '▁and', '▁inc', 're', 'as', 'ing', '▁conf', 'id', 'ence', '▁in', '▁the', '▁su', 'cc', 'ess', '▁of', '▁my', '▁under', 't', 'aking']</code></pre>
 </div>
 </div>
 </section>
 <section id="the-benefit" class="level4">
 <h4 class="anchored" data-anchor-id="the-benefit">The Benefit?</h4>
+<p>Why tokenize things this way? On the one hand, we wind up with tokens that don’t align with any particular linguistic structure. On the other, we’ve got a predictable vocabulary size, and a dramatically less serious data sparsity problem.</p>
 <div class="cell">
 
 </div>
@@ -1005,9 +1039,9 @@ can t e r _</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">bpe</td>
-<td style="text-align: right;">262</td>
-<td style="text-align: right;">4652</td>
-<td style="text-align: right;">0.056</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1015</td>
+<td style="text-align: right;">0.009</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ptb</td>
