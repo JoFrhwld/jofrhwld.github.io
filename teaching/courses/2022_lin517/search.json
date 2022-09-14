@@ -116,7 +116,7 @@
     "href": "index.html",
     "title": "Lin517: Natural Language Processing",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nCategories\n\n\n\n\n\n\n\n\n\nAug 20, 2022\n\n\nMathematical Notation\n\n\n\n\n\n\n\n \n\n\n\nAug 22, 2022\n\n\nReading a Technical Paper\n\n\n\n\n\n\n\n\n\nAug 24, 2022\n\n\nWhat is NLP?(for this course)\n\n\n\n\n\n\n\n\n\nAug 31, 2022\n\n\nData Sparsity\n\n\n\n\n\n\n\n \n\n\n\nSep 2, 2022\n\n\nStarting Python\n\n\npython\n\n\n\n\n\n\n\nSep 6, 2022\n\n\nData Processing\n\n\n\n\n\n\n\n\n\nSep 9, 2022\n\n\nLists and Dictionaries\n\n\npython\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nCategories\n\n\n\n\n\n\n\n\n\nAug 20, 2022\n\n\nMathematical Notation\n\n\n\n\n\n\n\n \n\n\n\nAug 22, 2022\n\n\nReading a Technical Paper\n\n\n\n\n\n\n\n\n\nAug 24, 2022\n\n\nWhat is NLP?(for this course)\n\n\n\n\n\n\n\n\n\nAug 31, 2022\n\n\nData Sparsity\n\n\n\n\n\n\n\n \n\n\n\nSep 2, 2022\n\n\nStarting Python\n\n\npython\n\n\n\n\n\n\n\nSep 6, 2022\n\n\nData Processing\n\n\n\n\n\n\n\n\n\nSep 9, 2022\n\n\nLists and Dictionaries\n\n\npython\n\n\n\n\n\n \n\n\n\nSep 13, 2022\n\n\nAddendum\n\n\n\n\n\n\n\n \n\n\n\nSep 13, 2022\n\n\nLemmatizing and Stemming\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "python_sessions/01_session2.html",
@@ -222,6 +222,48 @@
     "title": "Data Sparsity",
     "section": "Extra",
     "text": "Extra\nTo work out just how accurate the Good-Turing estimate is, I did the following experiment.\nStarting from the beginning of the book, I coded each word \\(w_i\\) for whether or not it had already appeared in the book, 1 if yes, 0 if no. This is my best shot at writing that out in mathematical notation.\n\\[\na_i = \\left\\{\\begin{array}{ll}1,& x_i\\in x_{1:i-1}\\\\\n                             0,& x_1 \\notin x_{1:i-1}\\end{array}\\right\\}\n\\]\nThen for every position in the book, I made a table of counts of all the words up to that point in the book so far, and got the proportion of word tokens that had appeared only once. Again, here’s my best stab at writing that out mathematically.\n\\[\nc_{ji} = C(w_j), w_j \\in x_{i:i-1}\n\\]\n\\[\nr_i = \\sum_{j=1}\\left\\{\\begin{array}{ll}1,&c_{ji}=1\\\\0,& c_{ji} >1 \\end{array}\\right\\}\n\\]\n\\[\ng_i = \\frac{r_i}{i-1}\n\\]\n\nfrank_words$first_appearance <- NA\nfrank_words$first_appearance[1] <- 1\n\nfrank_words$gt_est <- NA\nfrank_words$gt_est[1] <- 1\nfor(i in 2:nrow(frank_words)){\n  i_minus <- i-1\n  prev_corp <- frank_words$word[1:i_minus]\n  this_word <- frank_words$word[i]\n  \n  frank_words$first_appearance[i] <- ifelse(this_word %in% prev_corp, 0, 1)\n  frank_words$gt_est[i] <- sum(table(prev_corp) == 1)/i_minus\n}\n\n\n\n\nThen, I plotted the Good-Turing estimate for every position as well as a non-linear logistic regression smooth."
+  },
+  {
+    "objectID": "lectures/lem_stem/index.html#what-tokenizing-does-not-get-for-you",
+    "href": "lectures/lem_stem/index.html#what-tokenizing-does-not-get-for-you",
+    "title": "Lemmatizing and Stemming",
+    "section": "What tokenizing does not get for you",
+    "text": "What tokenizing does not get for you\nComing back to the example sentences from the first data processing lecture, properly tokenizing these sentences will only partly help us with our linguistic analysis.\nimport nltk\nfrom nltk.tokenize import word_tokenize\nfrom collections import Counter\nfrom tabulate import tabulate\n\nphrase = \"\"\"The 2019 film CATS is a movie about cats. \nCats appear in every scene. \nA cat can always be seen\"\"\"\n\n# case folding\nphrase_lower = phrase.lower()\n\n# tokenization\ntokens = word_tokenize(phrase_lower)\n\n# counting\ntoken_count = Counter(tokens)\n\n# cat focus\ncat_list = [[k,token_count[k]] for k in token_count if \"cat\" in k]\n\nprint(tabulate(cat_list,\n               headers = [\"type\", \"count\"]))\n\n\n\ntype\ncount\n\n\n\n\ncats\n3\n\n\ncat\n1\n\n\n\nWe’ve still got the plural cats being counted as a separate word from cat, which for our weird use case, we don’t want. Our options here are to either “stem” or “lemmatize” our tokens."
+  },
+  {
+    "objectID": "lectures/lem_stem/index.html#stemming",
+    "href": "lectures/lem_stem/index.html#stemming",
+    "title": "Lemmatizing and Stemming",
+    "section": "Stemming",
+    "text": "Stemming\nStemming is focused on cutting off morphemes and, to some degree, providing a consistent stem across all types that share a stem. So the outcomes aren’t always a recognizable word,\n\nfrom nltk.stem import PorterStemmer\nfrom nltk.stem import SnowballStemmer\n\np_stemmer = PorterStemmer()\np_stemmed = [p_stemmer.stem(t) for t in tokens]\nfor t in p_stemmed:\n  print(f\"`{t}` |\", end = \" \")\nthe | 2019 | film | cat | is | a | movi | about | cat | . | cat | appear | in | everi | scene | . | a | cat | can | alway | be | seen |\ns_stemmer = SnowballStemmer(\"english\")\ns_stemmed = [s_stemmer.stem(t) for t in tokens]\nfor t in s_stemmed:\n  print(f\"`{t}` |\", end = \" \")\nthe | 2019 | film | cat | is | a | movi | about | cat | . | cat | appear | in | everi | scene | . | a | cat | can | alway | be | seen |\ncry = [\"cry\", \"cries\", \"crying\", \"cried\", \"crier\"]\n\nprint(\n  tabulate(\n    [[c, s_stemmer.stem(c)] for c in cry],\n    headers=[\"token\", \"stem\"]\n  )\n)\n\n\n\ntoken\nstem\n\n\n\n\ncry\ncri\n\n\ncries\ncri\n\n\ncrying\ncri\n\n\ncried\ncri\n\n\ncrier\ncrier\n\n\n\nAlso, when something like inflectional morphology makes a change to the stem, it won’t get undone by the stemmer.\n\nrun = [\"run\", \"runs\", \"running\", \"ran\", \"runner\"]\n\nprint(\n  tabulate(\n    [[r, s_stemmer.stem(r)] for r in run],\n    headers=[\"token\", \"stem\"]\n  )\n)\n\ntoken    stem\n-------  ------\nrun      run\nruns     run\nrunning  run\nran      ran\nrunner   runner"
+  },
+  {
+    "objectID": "lectures/lem_stem/index.html#lemmatizing",
+    "href": "lectures/lem_stem/index.html#lemmatizing",
+    "title": "Lemmatizing and Stemming",
+    "section": "Lemmatizing",
+    "text": "Lemmatizing\nLemmatizing involves a more complex morphological analysis of words, and as such requires language specific models to work.\n\nnltk lemmatizing\nnltk uses WordNet for its English lemmatizing.\n\nwnl = nltk.WordNetLemmatizer()\n\nprint(\n  tabulate(\n    [[c, wnl.lemmatize(c)] for c in cry],\n    headers=[\"token\", \"lemma\"]\n  )\n)\n\n\n\ntoken\nlemma\n\n\n\n\ncry\ncry\n\n\ncries\ncry\n\n\ncrying\ncry\n\n\ncried\ncried\n\n\ncrier\ncrier\n\n\n\nprint(\n  tabulate(\n    [[r, wnl.lemmatize(r)] for r in run],\n    headers=[\"token\", \"lemma\"]\n  )\n)\n\n\n\ntoken\nlemma\n\n\n\n\nrun\nrun\n\n\nruns\nrun\n\n\nrunning\nrunning\n\n\nran\nran\n\n\nrunner\nrunner\n\n\n\n\n\nspaCy lemmatizing\nspaCy has a number of models that do lemmatizing. They list WordNet along with a few other data sources for the model.\n\nimport spacy\nnlp = spacy.load(\"en_core_web_sm\")\nlemmatizer = nlp.get_pipe(\"lemmatizer\")\n\n\n\n\n\ndoc = nlp(\" \".join(cry))\nprint(\n  tabulate(\n    [[c.text, c.lemma_] for c in doc],\n    headers=[\"token\", \"lemma\"]\n  )\n)\n\ntoken    lemma\n-------  -------\ncry      cry\ncries    cry\ncrying   cry\ncried    cry\ncrier    crier\n\n\n\ndoc = nlp(\" \".join(run))\nprint(\n  tabulate(\n    [[r.text, r.lemma_] for r in doc],\n    headers=[\"token\", \"lemma\"]\n  )\n)\n\ntoken    lemma\n-------  -------\nrun      run\nruns     run\nrunning  run\nran      run\nrunner   runner"
+  },
+  {
+    "objectID": "lectures/lem_stem/index.html#the-use-of-lemmatizing-and-stemming",
+    "href": "lectures/lem_stem/index.html#the-use-of-lemmatizing-and-stemming",
+    "title": "Lemmatizing and Stemming",
+    "section": "The use of lemmatizing and stemming",
+    "text": "The use of lemmatizing and stemming\nFor a lot of the NLP tasks we’re going to be learning about, lemmatizing and stemming don’t factor in as much. However, they’re useful tools to have handy when doing linguistic analyses. For example, for all of the importance of “word frequency” in linguistics literature, there’s often not much clarity about how the text was pre-processed to get these word frequencies."
+  },
+  {
+    "objectID": "lectures/data_processing/addendum.html",
+    "href": "lectures/data_processing/addendum.html",
+    "title": "Addendum",
+    "section": "",
+    "text": "In the lecture notes before, I showed you how to do tokenizing in the python package nltk. But there’s another big NLP package out there called spaCy. Why did I focus on nltk? I think I can best explain that with this graph:"
+  },
+  {
+    "objectID": "lectures/data_processing/addendum.html#tokenizing-with-spacy",
+    "href": "lectures/data_processing/addendum.html#tokenizing-with-spacy",
+    "title": "Addendum",
+    "section": "Tokenizing with spaCy",
+    "text": "Tokenizing with spaCy\n\n\n\n\n# bash\npython -m spacy download en_core_web_sm\n\n\nimport spacy\n\nnlp = spacy.load(\"en_core_web_sm\")\nphrase2 = \"\"\"\nCATS had a budget of $100,000,000, most of which \nwent into the so-called 'digital fur technology'. \nIt's a little hard to believe, but it only made \n$75.5 million at the box office. #badmovie :-P\n\"\"\"\n\ndoc = nlp(phrase2.strip().replace(\"\\n\", \" \"))\n\nfor token in doc:\n  print(f\"| `{token.text}`\", end = \" \")\nCATS | had | a | budget | of | $ | 100,000,000 | , | most | of | which |  | went | into | the | so | - | called | ' | digital | fur | technology | ' | . |  | It | 's | a | little | hard | to | believe | , | but | it | only | made |  | $ | 75.5 | million | at | the | box | office | . | # | badmovie | :-P"
   },
   {
     "objectID": "lectures/data_processing/index.html",
