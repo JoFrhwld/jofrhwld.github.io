@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-date','listing-file-modified','listing-title','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
       searchColumns: ["listing-date","listing-title","listing-author"],
     };
@@ -206,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(9)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(10)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(3)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -259,9 +259,10 @@ ul.task-list li input[type="checkbox"] {
 <thead>
 <tr>
 <th>
+<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
 </th>
 <th>
-<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
+Modified
 </th>
 <th>
 <a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
@@ -273,11 +274,11 @@ Categories
 </thead>
 <tbody class="list">
 <tr data-index="0" data-listing-date-sort="1660968000000" data-listing-file-modified-sort="1662488022935" data-listing-reading-time-sort="9.115" data-listing-title-sort="Mathematical Notation" data-listing-filename-sort="index.qmd">
-<td class="listing-image">
-<img src="./resources/notation/assets/license.png" style="height: 40px;">
-</td>
 <td class="listing-date">
-Aug 20, 2022
+2022-08-20
+</td>
+<td class="listing-file-modified">
+2022-09-06
 </td>
 <td class="listing-title">
 <a href="./resources/notation/index.html" class="title">Mathematical Notation</a>
@@ -286,13 +287,11 @@ Aug 20, 2022
 </td>
 </tr>
 <tr data-index="1" data-listing-date-sort="1661140800000" data-listing-file-modified-sort="1662485286722" data-listing-reading-time-sort="8.165" data-listing-title-sort="Reading a Technical Paper" data-listing-filename-sort="index.qmd">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
 <td class="listing-date">
-Aug 22, 2022
+2022-08-22
+</td>
+<td class="listing-file-modified">
+2022-09-06
 </td>
 <td class="listing-title">
 <a href="./resources/reading/index.html" class="title">Reading a Technical Paper</a>
@@ -301,11 +300,11 @@ Aug 22, 2022
 </td>
 </tr>
 <tr data-index="2" data-listing-date-sort="1661313600000" data-listing-file-modified-sort="1662695893074" data-listing-reading-time-sort="8.885" data-listing-title-sort="What is NLP?<br>(for this course)" data-listing-filename-sort="index.qmd">
-<td class="listing-image">
-<img src="./lectures/what_is_nlp/index_files/figure-html/shift-prob-1.png" style="height: 40px;">
-</td>
 <td class="listing-date">
-Aug 24, 2022
+2022-08-24
+</td>
+<td class="listing-file-modified">
+2022-09-08
 </td>
 <td class="listing-title">
 <a href="./lectures/what_is_nlp/index.html" class="title">What is NLP?<br>(for this course)</a>
@@ -314,11 +313,11 @@ Aug 24, 2022
 </td>
 </tr>
 <tr data-index="3" data-listing-date-sort="1661918400000" data-listing-file-modified-sort="1662926808111" data-listing-reading-time-sort="27.53" data-listing-title-sort="Data Sparsity" data-listing-filename-sort="data_sparsity.qmd">
-<td class="listing-image">
-<img src="./lectures/data_sparsity/data_sparsity_files/figure-html/unnamed-chunk-2-1.png" style="height: 40px;">
-</td>
 <td class="listing-date">
-Aug 31, 2022
+2022-08-31
+</td>
+<td class="listing-file-modified">
+2022-09-11
 </td>
 <td class="listing-title">
 <a href="./lectures/data_sparsity/data_sparsity.html" class="title">Data Sparsity</a>
@@ -327,13 +326,11 @@ Aug 31, 2022
 </td>
 </tr>
 <tr data-index="4" data-categories="python" data-listing-date-sort="1662091200000" data-listing-file-modified-sort="1662695175178" data-listing-reading-time-sort="7.145" data-listing-title-sort="Starting Python" data-listing-filename-sort="00_session1.qmd">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
 <td class="listing-date">
-Sep 2, 2022
+2022-09-02
+</td>
+<td class="listing-file-modified">
+2022-09-08
 </td>
 <td class="listing-title">
 <a href="./python_sessions/00_session1.html" class="title">Starting Python</a>
@@ -343,11 +340,11 @@ python
 </td>
 </tr>
 <tr data-index="5" data-listing-date-sort="1662436800000" data-listing-file-modified-sort="1663107078019" data-listing-reading-time-sort="16.025" data-listing-title-sort="Data Processing" data-listing-filename-sort="index.qmd">
-<td class="listing-image">
-<img src="./lectures/data_processing/assets/gut_license.png" style="height: 40px;">
-</td>
 <td class="listing-date">
-Sep 6, 2022
+2022-09-06
+</td>
+<td class="listing-file-modified">
+2022-09-13
 </td>
 <td class="listing-title">
 <a href="./lectures/data_processing/index.html" class="title">Data Processing</a>
@@ -356,11 +353,11 @@ Sep 6, 2022
 </td>
 </tr>
 <tr data-index="6" data-categories="python" data-listing-date-sort="1662696000000" data-listing-file-modified-sort="1662695433456" data-listing-reading-time-sort="6.425" data-listing-title-sort="Lists and Dictionaries" data-listing-filename-sort="01_session2.qmd">
-<td class="listing-image">
-<img src="./python_sessions/assets/index.svg" style="height: 40px;">
-</td>
 <td class="listing-date">
-Sep 9, 2022
+2022-09-09
+</td>
+<td class="listing-file-modified">
+2022-09-08
 </td>
 <td class="listing-title">
 <a href="./python_sessions/01_session2.html" class="title">Lists and Dictionaries</a>
@@ -370,13 +367,11 @@ python
 </td>
 </tr>
 <tr data-index="7" data-listing-date-sort="1663041600000" data-listing-file-modified-sort="1663122245878" data-listing-reading-time-sort="3.35" data-listing-title-sort="Addendum" data-listing-filename-sort="addendum.qmd">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
 <td class="listing-date">
-Sep 13, 2022
+2022-09-13
+</td>
+<td class="listing-file-modified">
+2022-09-13
 </td>
 <td class="listing-title">
 <a href="./lectures/data_processing/addendum.html" class="title">Addendum</a>
@@ -385,18 +380,30 @@ Sep 13, 2022
 </td>
 </tr>
 <tr data-index="8" data-listing-date-sort="1663041600000" data-listing-file-modified-sort="1663128834708" data-listing-reading-time-sort="2.46" data-listing-title-sort="Lemmatizing and Stemming" data-listing-filename-sort="index.qmd">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
 <td class="listing-date">
-Sep 13, 2022
+2022-09-13
+</td>
+<td class="listing-file-modified">
+2022-09-14
 </td>
 <td class="listing-title">
 <a href="./lectures/lem_stem/index.html" class="title">Lemmatizing and Stemming</a>
 </td>
 <td class="listing-categories">
+</td>
+</tr>
+<tr data-index="9" data-categories="python" data-listing-date-sort="1663300800000" data-listing-file-modified-sort="1663268964996" data-listing-reading-time-sort="5.855" data-listing-title-sort="Loops Etc." data-listing-filename-sort="02_session3.qmd">
+<td class="listing-date">
+2022-09-16
+</td>
+<td class="listing-file-modified">
+2022-09-15
+</td>
+<td class="listing-title">
+<a href="./python_sessions/02_session3.html" class="title">Loops Etc.</a>
+</td>
+<td class="listing-categories">
+python
 </td>
 </tr>
 </tbody>
