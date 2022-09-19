@@ -337,29 +337,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="stemming" class="level2">
 <h2 class="anchored" data-anchor-id="stemming">Stemming</h2>
-<p>Stemming is focused on cutting off morphemes and, to some degree, providing a consistent stem across all types that share a stem. So the outcomes aren’t always a recognizable word,</p>
+<p>Stemming is focused on cutting off morphemes and, to some degree, providing a consistent stem across all types that share a stem. So the outcomes aren’t always a recognizable word. The way it does this is all rule-based. For example, <a href="https://snowballstem.org/algorithms/porter/stemmer.html">the first step of the Porter stemmer contains the following rewrite rules</a>.</p>
+<pre><code>i.   sses -&gt; ss
+ii.  ies -&gt; i
+iii. ss -&gt; ss
+iv.  s -&gt; </code></pre>
+<p>When a word comes into the first step, if its end matches any of the left hand sides, it will get re-written as the right hand side. If it could match multiple, the one it has the longest match with wins, so</p>
+<ul>
+<li><p>“passes” matches <code>i.</code> , so it gets rewritten as “pass”</p></li>
+<li><p>“pass” matches <code>iii.</code> and <code>iv.</code>, but has the largest overlap with <code>iii.</code> so it gets rewritten as “pass”</p></li>
+<li><p>“parties” matches <code>ii.</code>, so it gets rewritten as “parti”</p></li>
+<li><p>“pas” (as in “faux pas”) matches <code>iv.</code> so it gets rewritten as “pa”</p></li>
+<li><p>“cats” matches <code>iv.</code> so it gets rewritten as “cats”</p></li>
+</ul>
+<p>This works basically correctly to the various /+z/ morphemes in English, but it over does it (“pas” should be left alone) and it produces some stems that don’t <em>look</em> like the actual root word (“parti” vs “party”).</p>
+<p>After this step, it contains a lot more hand crafted rules (e.g.&nbsp;<code>ational - &gt; ate</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> PorterStemmer</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> SnowballStemmer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> PorterStemmer</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> SnowballStemmer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p_stemmer <span class="op">=</span> PorterStemmer()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>p_stemmed <span class="op">=</span> [p_stemmer.stem(t) <span class="cf">for</span> t <span class="kw">in</span> tokens]</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> p_stemmed:</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="ss">f"`</span><span class="sc">{</span>t<span class="sc">}</span><span class="ss">` |"</span>, end <span class="op">=</span> <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>the</code> | <code>2019</code> | <code>film</code> | <code>cat</code> | <code>is</code> | <code>a</code> | <code>movi</code> | <code>about</code> | <code>cat</code> | <code>.</code> | <code>cat</code> | <code>appear</code> | <code>in</code> | <code>everi</code> | <code>scene</code> | <code>.</code> | <code>a</code> | <code>cat</code> | <code>can</code> | <code>alway</code> | <code>be</code> | <code>seen</code> |</p>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>s_stemmer <span class="op">=</span> SnowballStemmer(<span class="st">"english"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>s_stemmed <span class="op">=</span> [s_stemmer.stem(t) <span class="cf">for</span> t <span class="kw">in</span> tokens]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> s_stemmed:</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p_stemmer <span class="op">=</span> PorterStemmer()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>p_stemmed <span class="op">=</span> [p_stemmer.stem(t) <span class="cf">for</span> t <span class="kw">in</span> tokens]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> p_stemmed:</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="ss">f"`</span><span class="sc">{</span>t<span class="sc">}</span><span class="ss">` |"</span>, end <span class="op">=</span> <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>the</code> | <code>2019</code> | <code>film</code> | <code>cat</code> | <code>is</code> | <code>a</code> | <code>movi</code> | <code>about</code> | <code>cat</code> | <code>.</code> | <code>cat</code> | <code>appear</code> | <code>in</code> | <code>everi</code> | <code>scene</code> | <code>.</code> | <code>a</code> | <code>cat</code> | <code>can</code> | <code>alway</code> | <code>be</code> | <code>seen</code> |</p>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cry <span class="op">=</span> [<span class="st">"cry"</span>, <span class="st">"cries"</span>, <span class="st">"crying"</span>, <span class="st">"cried"</span>, <span class="st">"crier"</span>]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  tabulate(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    [[c, s_stemmer.stem(c)] <span class="cf">for</span> c <span class="kw">in</span> cry],</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>[<span class="st">"token"</span>, <span class="st">"stem"</span>]</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>s_stemmer <span class="op">=</span> SnowballStemmer(<span class="st">"english"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>s_stemmed <span class="op">=</span> [s_stemmer.stem(t) <span class="cf">for</span> t <span class="kw">in</span> tokens]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> s_stemmed:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="ss">f"`</span><span class="sc">{</span>t<span class="sc">}</span><span class="ss">` |"</span>, end <span class="op">=</span> <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>the</code> | <code>2019</code> | <code>film</code> | <code>cat</code> | <code>is</code> | <code>a</code> | <code>movi</code> | <code>about</code> | <code>cat</code> | <code>.</code> | <code>cat</code> | <code>appear</code> | <code>in</code> | <code>everi</code> | <code>scene</code> | <code>.</code> | <code>a</code> | <code>cat</code> | <code>can</code> | <code>alway</code> | <code>be</code> | <code>seen</code> |</p>
+<p>Just to focus on how the stemmers operate over a specific paradigm:</p>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cry <span class="op">=</span> [<span class="st">"cry"</span>, <span class="st">"cries"</span>, <span class="st">"crying"</span>, <span class="st">"cried"</span>, <span class="st">"crier"</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  tabulate(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    [[c, s_stemmer.stem(c)] <span class="cf">for</span> c <span class="kw">in</span> cry],</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>[<span class="st">"token"</span>, <span class="st">"stem"</span>]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="table">
 <thead>
 <tr class="header">
@@ -391,14 +406,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Also, when something like inflectional morphology makes a change to the stem, it won’t get undone by the stemmer.</p>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>run <span class="op">=</span> [<span class="st">"run"</span>, <span class="st">"runs"</span>, <span class="st">"running"</span>, <span class="st">"ran"</span>, <span class="st">"runner"</span>]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  tabulate(</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    [[r, s_stemmer.stem(r)] <span class="cf">for</span> r <span class="kw">in</span> run],</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>[<span class="st">"token"</span>, <span class="st">"stem"</span>]</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>run <span class="op">=</span> [<span class="st">"run"</span>, <span class="st">"runs"</span>, <span class="st">"running"</span>, <span class="st">"ran"</span>, <span class="st">"runner"</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  tabulate(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    [[r, s_stemmer.stem(r)] <span class="cf">for</span> r <span class="kw">in</span> run],</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>[<span class="st">"token"</span>, <span class="st">"stem"</span>]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="table">
 <thead>
 <tr class="header">
@@ -435,16 +450,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Lemmatizing involves a more complex morphological analysis of words, and as such requires language specific models to work.</p>
 <section id="nltk-lemmatizing" class="level3">
 <h3 class="anchored" data-anchor-id="nltk-lemmatizing">nltk lemmatizing</h3>
-<p>nltk uses <a href="https://wordnet.princeton.edu">WordNet</a> for its English lemmatizing.</p>
+<p>nltk uses <a href="https://wordnet.princeton.edu">WordNet</a> for its English lemmatizing. WordNet is a large database of lexical relations that have been hand annotated starting in the 1980s. Its outputs are always recognizable words.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>wnl <span class="op">=</span> nltk.WordNetLemmatizer()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>wnl <span class="op">=</span> nltk.WordNetLemmatizer()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  tabulate(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    [[c, wnl.lemmatize(c)] <span class="cf">for</span> c <span class="kw">in</span> cry],</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>[<span class="st">"token"</span>, <span class="st">"lemma"</span>]</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  tabulate(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    [[c, wnl.lemmatize(c)] <span class="cf">for</span> c <span class="kw">in</span> cry],</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>[<span class="st">"token"</span>, <span class="st">"lemma"</span>]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="table">
 <thead>
 <tr class="header">
@@ -475,12 +490,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  tabulate(</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    [[r, wnl.lemmatize(r)] <span class="cf">for</span> r <span class="kw">in</span> run],</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>[<span class="st">"token"</span>, <span class="st">"lemma"</span>]</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  tabulate(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    [[r, wnl.lemmatize(r)] <span class="cf">for</span> r <span class="kw">in</span> run],</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>[<span class="st">"token"</span>, <span class="st">"lemma"</span>]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="table">
 <thead>
 <tr class="header">
@@ -516,20 +531,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="spacy-lemmatizing">spaCy lemmatizing</h3>
 <p>spaCy has a number of models that do lemmatizing. They list WordNet along with a few other data sources for the model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>nlp <span class="op">=</span> spacy.load(<span class="st">"en_core_web_sm"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>lemmatizer <span class="op">=</span> nlp.get_pipe(<span class="st">"lemmatizer"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>nlp <span class="op">=</span> spacy.load(<span class="st">"en_core_web_sm"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>lemmatizer <span class="op">=</span> nlp.get_pipe(<span class="st">"lemmatizer"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(<span class="st">" "</span>.join(cry))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  tabulate(</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    [[c.text, c.lemma_] <span class="cf">for</span> c <span class="kw">in</span> doc],</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>[<span class="st">"token"</span>, <span class="st">"lemma"</span>]</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(<span class="st">" "</span>.join(cry))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  tabulate(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    [[c.text, c.lemma_] <span class="cf">for</span> c <span class="kw">in</span> doc],</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>[<span class="st">"token"</span>, <span class="st">"lemma"</span>]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="table">
 <thead>
 <tr class="header">
@@ -560,13 +572,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(<span class="st">" "</span>.join(run))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  tabulate(</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    [[r.text, r.lemma_] <span class="cf">for</span> r <span class="kw">in</span> doc],</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>[<span class="st">"token"</span>, <span class="st">"lemma"</span>]</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(<span class="st">" "</span>.join(run))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  tabulate(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    [[r.text, r.lemma_] <span class="cf">for</span> r <span class="kw">in</span> doc],</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>[<span class="st">"token"</span>, <span class="st">"lemma"</span>]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="table">
 <thead>
 <tr class="header">
@@ -601,7 +613,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="the-use-of-lemmatizing-and-stemming" class="level2">
 <h2 class="anchored" data-anchor-id="the-use-of-lemmatizing-and-stemming">The use of lemmatizing and stemming</h2>
-<p>For a lot of the NLP tasks we’re going to be learning about, lemmatizing and stemming don’t factor in as much. However, they’re useful tools to have handy when doing linguistic analyses. For example, for all of the importance of “word frequency” in linguistics literature, there’s often not much clarity about how the text was pre-processed to get these word frequencies.</p>
+<p>For a lot of the NLP tasks we’re going to be learning about, lemmatizing and stemming don’t factor in as part of the pre-processing pipeline. However, they’re useful tools to have handy when doing linguistic analyses. For example, for all of the importance of “word frequency” in linguistics literature, there’s often not much clarity about how the text was pre-processed to get these word frequencies.</p>
 
 
 </section>
