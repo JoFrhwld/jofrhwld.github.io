@@ -7,6 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Josef Fruehwald">
+<meta name="dcterms.date" content="2022-09-28">
+<meta name="description" content="ngram langauge model notes. The structure of these notes broadly follows SLP V3.">
 
 <title>Lin517: Natural Language Processing - ngram Language Models</title>
 <style>
@@ -21,6 +23,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
@@ -59,6 +124,8 @@ div.csl-indent {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -78,6 +145,7 @@ div.csl-indent {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible">
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -204,6 +272,12 @@ div.csl-indent {
   <li><a href="#data-sparsity-rears-its-head" id="toc-data-sparsity-rears-its-head" class="nav-link" data-scroll-target="#data-sparsity-rears-its-head">Data Sparsity rears its head</a></li>
   <li><a href="#building-up-a-bigram-model" id="toc-building-up-a-bigram-model" class="nav-link" data-scroll-target="#building-up-a-bigram-model">Building up a bigram model</a></li>
   </ul></li>
+  <li><a href="#the-probability-of-a-sentence" id="toc-the-probability-of-a-sentence" class="nav-link" data-scroll-target="#the-probability-of-a-sentence">The probability of a sentence</a>
+  <ul class="collapse">
+  <li><a href="#larger-ngrams" id="toc-larger-ngrams" class="nav-link" data-scroll-target="#larger-ngrams">Larger ngrams</a></li>
+  </ul></li>
+  <li><a href="#generating-text" id="toc-generating-text" class="nav-link" data-scroll-target="#generating-text">Generating text</a></li>
+  <li><a href="#sparsity-again" id="toc-sparsity-again" class="nav-link" data-scroll-target="#sparsity-again">Sparsity, again</a></li>
   </ul>
 </nav>
     </div>
@@ -215,6 +289,11 @@ div.csl-indent {
 <h1 class="title d-none d-lg-block">ngram Language Models</h1>
 </div>
 
+<div>
+  <div class="description">
+    ngram langauge model notes. The structure of these notes broadly follows SLP V3.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -226,6 +305,12 @@ div.csl-indent {
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 28, 2022</p>
+    </div>
+  </div>
     
   </div>
   
@@ -849,6 +934,1174 @@ We-&gt;saw
 </div>
 </figure>
 </div>
+</section>
+</section>
+<section id="the-probability-of-a-sentence" class="level2">
+<h2 class="anchored" data-anchor-id="the-probability-of-a-sentence">The probability of a sentence</h2>
+<p>Another way to visualize the final state diagram from above is with a matrix, with the “from” words along the rows and the “to” words along the columns.</p>
+<div class="cell-output-display">
+<table class="table">
+<colgroup>
+<col style="width: 1%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">words</th>
+<th style="text-align: left;">a</th>
+<th style="text-align: left;">book</th>
+<th style="text-align: left;">dog</th>
+<th style="text-align: left;">END</th>
+<th style="text-align: left;">I</th>
+<th style="text-align: left;">read</th>
+<th style="text-align: left;">saw</th>
+<th style="text-align: left;">the</th>
+<th style="text-align: left;">We</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">a</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.5</td>
+<td style="text-align: left;">0.5</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">book</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dog</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">I</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.25</td>
+<td style="text-align: left;">0.75</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">read</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">saw</td>
+<td style="text-align: left;">0.75</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.25</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">START</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.8</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">the</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">We</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>There is a non-zero number for every arrow in the state diagram. Every <em>0</em> value in the table represents a possible bigram that wasn’t observed (so, no arrow in the diagram).</p>
+<p>Given these bigram probabilities we estimated from the corpus <em>and</em> our assumption that we can approximate the probability of whole sentences with smaller ngram probabilities, we can estimate the probability of a new sentence like so:</p>
+<ul>
+<li>We saw the dog.</li>
+</ul>
+<style>
+    .bigrampath{
+    }
+    .bg1{
+      color: #440154; 
+    }
+    .bg2{
+      color: #3b528b; 
+    }
+    .bg3{
+      color: #21918c;
+    }
+    .bg4{
+      color: #5ec962;
+    }
+    .bg5{
+      color: #fde725;
+    }
+    .bigrampath tr:nth-child(7) td:nth-child(10){background : #440154; color: white;}
+    .bigrampath tr:nth-child(9) td:nth-child(8) {background : #3b528b;  color: white;}
+    .bigrampath tr:nth-child(6) td:nth-child(9) {background :  #21918c; color: white;}
+    .bigrampath tr:nth-child(8) td:nth-child(4) {background :  #5ec962; }
+    .bigrampath tr:nth-child(3) td:nth-child(5) {background :  #fde725; }
+</style>
+<p><span class="bg1">P(We | &lt;START&gt;)</span> <span class="math inline">\(\times\)</span> <span class="bg2">P(saw | We)</span> <span class="math inline">\(\times\)</span> <span class="bg3">P(the | saw)</span> <span class="math inline">\(\times\)</span> <span class="bg4">P(the | saw)</span> <span class="math inline">\(\times\)</span> <span class="bg5">P(dog | the)</span></p>
+<div class="bigrampath">
+<div class="cell-output-display">
+<table class="table">
+<colgroup>
+<col style="width: 1%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">words</th>
+<th style="text-align: left;">a</th>
+<th style="text-align: left;">book</th>
+<th style="text-align: left;">dog</th>
+<th style="text-align: left;">END</th>
+<th style="text-align: left;">I</th>
+<th style="text-align: left;">read</th>
+<th style="text-align: left;">saw</th>
+<th style="text-align: left;">the</th>
+<th style="text-align: left;">We</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">a</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.5</td>
+<td style="text-align: left;">0.5</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">book</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dog</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">I</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.25</td>
+<td style="text-align: left;">0.75</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">read</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">saw</td>
+<td style="text-align: left;">0.75</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.25</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">START</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.8</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">the</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">We</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We can re-write the probability formula above like so:</p>
+<p><span class="math display">\[
+P(s) = \prod_{i=1}^n P(w_i|w_{i-1})
+\]</span></p>
+<p>We can also plug in the probabilities of these bigrams into the formula to get our estimated probility of the sentence.</p>
+<p><span class="math display">\[
+P(s) = 0.2 \times 1 \times 1\times 0.25 \times 1 = 0.05
+\]</span></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Log probabilities
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Once you start multiplying probabilities, you’re going to get smaller and smaller numbers.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">this</th>
+<th style="text-align: left;"></th>
+<th style="text-align: right;">equals</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0.5</td>
+<td style="text-align: left;">=</td>
+<td style="text-align: right;">0.500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0.5 × 0.5</td>
+<td style="text-align: left;">=</td>
+<td style="text-align: right;">0.250</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0.5 × 0.5 × 0.5</td>
+<td style="text-align: left;">=</td>
+<td style="text-align: right;">0.125</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0.5 × 0.5 × 0.5 × 0.5</td>
+<td style="text-align: left;">=</td>
+<td style="text-align: right;">0.062</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0.5 × 0.5 × 0.5 × 0.5 × 0.5</td>
+<td style="text-align: left;">=</td>
+<td style="text-align: right;">0.031</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Even one very small probability (which you’ll get sometimes) can start sending the overall estimate into infintesimally small numbers close to 0, which <a href="https://en.wikipedia.org/wiki/Arithmetic_underflow">computers may not be able to represent</a>.</p>
+<p>So, it’s also common to see the log-probability (a.k.a. the log-likelihood, in this case) being calculated instead. The way logarithms work, you add together values that you would have multiplied in the probability space.</p>
+<p><span class="math display">\[
+\log(P(\text{We saw the dog}))=\log(P(\text{We | &lt;START&gt;})) +  \log(P(\text{saw | We}))+\dots
+\]</span></p>
+<p><span class="math display">\[
+\log(P(s)) = \sum_{i=1}^n \log(P(w_i|w_{i-1}))
+\]</span></p>
+<p><span class="math display">\[
+\log(P(s)) = -1.609438 + 0 + 0 + -1.386294 + 0 = -2.995732
+\]</span></p>
+</div>
+</div>
+<section id="larger-ngrams" class="level3">
+<h3 class="anchored" data-anchor-id="larger-ngrams">Larger ngrams</h3>
+<p>Language models that take a larger window of adjacent words (3, or 4 grams) work in the same way, and are more “accurate” but are harder to visualize.</p>
+<div class="cell-output-display">
+<table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">prev</th>
+<th style="text-align: left;">a</th>
+<th style="text-align: left;">book</th>
+<th style="text-align: left;">dog</th>
+<th style="text-align: left;">END</th>
+<th style="text-align: left;">read</th>
+<th style="text-align: left;">saw</th>
+<th style="text-align: left;">the</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">a_a</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">a_book</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">a_dog</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">a_I</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">a_read</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">a_saw</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">a_the</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">a_We</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">I_a</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">I_book</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">I_dog</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">I_I</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">I_read</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">I_saw</td>
+<td style="text-align: left;">0.666666666666667</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.333333333333333</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">I_the</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">I_We</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">read_a</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">read_book</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">read_dog</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">read_I</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">read_read</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">read_saw</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">read_the</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">read_We</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">saw_a</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.333333333333333</td>
+<td style="text-align: left;">0.666666666666667</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">saw_book</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">saw_dog</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">saw_I</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">saw_read</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">saw_saw</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">saw_the</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">saw_We</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">START_a</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">START_book</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">START_dog</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">START_I</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">0.25</td>
+<td style="text-align: left;">0.75</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">START_read</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">START_saw</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">START_the</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">START_We</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">the_a</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">the_book</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">the_dog</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">the_I</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">the_read</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">the_saw</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">the_the</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">the_We</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">We_a</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">We_book</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">We_dog</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">We_I</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">We_read</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">We_saw</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">We_the</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">We_We</td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+<td style="text-align: left;"><span style="color:grey">0</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="generating-text" class="level2">
+<h2 class="anchored" data-anchor-id="generating-text">Generating text</h2>
+<p>Once we’ve estimated all of these transition probabilities, we can turn them around to <em>generate</em> text, if we want. Let’s take the final bigram “model” we had from before:</p>
+<div class="cell" data-fig-responsive="true" data-file="figure/5sent.dot">
+<div class="cell-output-display">
+<div>
+<p>
+<svg width="672" height="480" viewbox="0.00 0.00 648.01 124.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 120)"> <polygon fill="white" stroke="transparent" points="-4,4 -4,-120 644.01,-120 644.01,4 -4,4"></polygon> <!-- a --> <g id="node1" class="node">
+<title>
+a
+</title>
+<ellipse fill="none" stroke="black" cx="394.05" cy="-85" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="394.05" y="-80.8" font-family="Times,serif" font-size="14.00">a</text> </g> <!-- book --> <g id="node2" class="node">
+<title>
+book
+</title>
+<ellipse fill="none" stroke="black" cx="504.9" cy="-98" rx="30.2" ry="18"></ellipse> <text text-anchor="middle" x="504.9" y="-93.8" font-family="Times,serif" font-size="14.00">book</text> </g> <!-- a&#45;&gt;book --> <g id="edge1" class="edge">
+<title>
+a-&gt;book
+</title>
+<path fill="none" stroke="black" stroke-width="3" d="M420.84,-88.08C433.89,-89.64 450.02,-91.57 464.57,-93.3"></path> <polygon fill="black" stroke="black" stroke-width="3" points="464.49,-96.82 474.83,-94.53 465.32,-89.87 464.49,-96.82"></polygon> <text text-anchor="middle" x="447.8" y="-96.2" font-family="Times,serif" font-size="14.00">0.5</text> </g> <!-- dog --> <g id="node3" class="node">
+<title>
+dog
+</title>
+<ellipse fill="none" stroke="black" cx="504.9" cy="-44" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="504.9" y="-39.8" font-family="Times,serif" font-size="14.00">dog</text> </g> <!-- a&#45;&gt;dog --> <g id="edge2" class="edge">
+<title>
+a-&gt;dog
+</title>
+<path fill="none" stroke="black" stroke-width="3" d="M417.87,-76.41C433.39,-70.56 454.18,-62.73 471.43,-56.23"></path> <polygon fill="black" stroke="black" stroke-width="3" points="472.98,-59.38 481.11,-52.58 470.52,-52.83 472.98,-59.38"></polygon> <text text-anchor="middle" x="447.8" y="-72.2" font-family="Times,serif" font-size="14.00">0.5</text> </g> <!-- END --> <g id="node4" class="node">
+<title>
+END
+</title>
+<ellipse fill="none" stroke="black" cx="609.13" cy="-71" rx="30.77" ry="18"></ellipse> <text text-anchor="middle" x="609.13" y="-66.8" font-family="Times,serif" font-size="14.00">END</text> </g> <!-- book&#45;&gt;END --> <g id="edge3" class="edge">
+<title>
+book-&gt;END
+</title>
+<path fill="none" stroke="black" stroke-width="6" d="M533.03,-90.84C544.6,-87.78 558.3,-84.16 570.81,-80.86"></path> <polygon fill="black" stroke="black" stroke-width="6" points="572.19,-85.92 580.52,-78.29 569.51,-75.77 572.19,-85.92"></polygon> <text text-anchor="middle" x="556.75" y="-89.2" font-family="Times,serif" font-size="14.00">1</text> </g> <!-- dog&#45;&gt;END --> <g id="edge4" class="edge">
+<title>
+dog-&gt;END
+</title>
+<path fill="none" stroke="black" stroke-width="6" d="M530.38,-50.47C542.44,-53.65 557.23,-57.56 570.66,-61.1"></path> <polygon fill="black" stroke="black" stroke-width="6" points="569.59,-66.25 580.6,-63.73 572.27,-56.1 569.59,-66.25"></polygon> <text text-anchor="middle" x="556.75" y="-62.2" font-family="Times,serif" font-size="14.00">1</text> </g> <!-- I --> <g id="node5" class="node">
+<title>
+I
+</title>
+<ellipse fill="none" stroke="black" cx="163.74" cy="-72" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="163.74" y="-67.8" font-family="Times,serif" font-size="14.00">I</text> </g> <!-- read --> <g id="node6" class="node">
+<title>
+read
+</title>
+<ellipse fill="none" stroke="black" cx="278.89" cy="-98" rx="27.81" ry="18"></ellipse> <text text-anchor="middle" x="278.89" y="-93.8" font-family="Times,serif" font-size="14.00">read</text> </g> <!-- I&#45;&gt;read --> <g id="edge5" class="edge">
+<title>
+I-&gt;read
+</title>
+<path fill="none" stroke="black" stroke-width="1.5" d="M189.57,-77.71C204.98,-81.25 225.03,-85.85 242.14,-89.78"></path> <polygon fill="black" stroke="black" stroke-width="1.5" points="241.81,-93.3 252.34,-92.13 243.37,-86.48 241.81,-93.3"></polygon> <text text-anchor="middle" x="220.99" y="-91.2" font-family="Times,serif" font-size="14.00">0.25</text> </g> <!-- saw --> <g id="node7" class="node">
+<title>
+saw
+</title>
+<ellipse fill="none" stroke="black" cx="278.89" cy="-31" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="278.89" y="-26.8" font-family="Times,serif" font-size="14.00">saw</text> </g> <!-- I&#45;&gt;saw --> <g id="edge6" class="edge">
+<title>
+I-&gt;saw
+</title>
+<path fill="none" stroke="black" stroke-width="4.5" d="M187.91,-63.6C204.46,-57.61 226.96,-49.46 245.31,-42.8"></path> <polygon fill="black" stroke="black" stroke-width="4.5" points="246.69,-46.49 254.75,-39.38 244.01,-39.09 246.69,-46.49"></polygon> <text text-anchor="middle" x="220.99" y="-60.2" font-family="Times,serif" font-size="14.00">0.75</text> </g> <!-- read&#45;&gt;a --> <g id="edge7" class="edge">
+<title>
+read-&gt;a
+</title>
+<path fill="none" stroke="black" stroke-width="6" d="M306.42,-94.95C321.43,-93.23 340.4,-91.05 356.77,-89.17"></path> <polygon fill="black" stroke="black" stroke-width="6" points="357.74,-94.34 367.07,-87.98 356.54,-83.91 357.74,-94.34"></polygon> <text text-anchor="middle" x="336.8" y="-96.2" font-family="Times,serif" font-size="14.00">1</text> </g> <!-- saw&#45;&gt;a --> <g id="edge8" class="edge">
+<title>
+saw-&gt;a
+</title>
+<path fill="none" stroke="black" stroke-width="4.5" d="M301.44,-41.28C318.67,-49.5 343.03,-61.13 362.3,-70.33"></path> <polygon fill="black" stroke="black" stroke-width="4.5" points="360.86,-74 371.58,-74.75 364.25,-66.89 360.86,-74"></polygon> <text text-anchor="middle" x="336.8" y="-66.2" font-family="Times,serif" font-size="14.00">0.75</text> </g> <!-- the --> <g id="node8" class="node">
+<title>
+the
+</title>
+<ellipse fill="none" stroke="black" cx="394.05" cy="-18" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="394.05" y="-13.8" font-family="Times,serif" font-size="14.00">the</text> </g> <!-- saw&#45;&gt;the --> <g id="edge9" class="edge">
+<title>
+saw-&gt;the
+</title>
+<path fill="none" stroke="black" stroke-width="1.5" d="M303.78,-23.55C310.44,-21.79 317.72,-20.15 324.55,-19.2 334.97,-17.75 346.38,-17.16 356.84,-17.01"></path> <polygon fill="black" stroke="black" stroke-width="1.5" points="356.92,-20.51 366.91,-16.99 356.9,-13.51 356.92,-20.51"></polygon> <text text-anchor="middle" x="336.8" y="-24.2" font-family="Times,serif" font-size="14.00">0.25</text> </g> <!-- the&#45;&gt;dog --> <g id="edge12" class="edge">
+<title>
+the-&gt;dog
+</title>
+<path fill="none" stroke="black" stroke-width="6" d="M421.14,-15.88C432.21,-15.65 445.17,-16.28 456.55,-19.2 463.04,-20.86 469.63,-23.56 475.75,-26.58"></path> <polygon fill="black" stroke="black" stroke-width="6" points="473.61,-31.39 484.91,-31.48 478.57,-22.13 473.61,-31.39"></polygon> <text text-anchor="middle" x="447.8" y="-24.2" font-family="Times,serif" font-size="14.00">1</text> </g> <!-- START --> <g id="node9" class="node">
+<title>
+START
+</title>
+<ellipse fill="none" stroke="black" cx="41.62" cy="-45" rx="41.74" ry="18"></ellipse> <text text-anchor="middle" x="41.62" y="-40.8" font-family="Times,serif" font-size="14.00">START</text> </g> <!-- START&#45;&gt;I --> <g id="edge10" class="edge">
+<title>
+START-&gt;I
+</title>
+<path fill="none" stroke="black" stroke-width="4.8" d="M78.99,-53.17C94.47,-56.65 112.46,-60.7 127.79,-64.14"></path> <polygon fill="black" stroke="black" stroke-width="4.8" points="127.23,-68.32 137.91,-66.42 129.07,-60.13 127.23,-68.32"></polygon> <text text-anchor="middle" x="109.99" y="-65.2" font-family="Times,serif" font-size="14.00">0.8</text> </g> <!-- We --> <g id="node10" class="node">
+<title>
+We
+</title>
+<ellipse fill="none" stroke="black" cx="163.74" cy="-18" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="163.74" y="-13.8" font-family="Times,serif" font-size="14.00">We</text> </g> <!-- START&#45;&gt;We --> <g id="edge11" class="edge">
+<title>
+START-&gt;We
+</title>
+<path fill="none" stroke="black" stroke-width="1.2" d="M78.99,-36.83C94.47,-33.35 112.46,-29.3 127.79,-25.86"></path> <polygon fill="black" stroke="black" stroke-width="1.2" points="128.92,-29.19 137.91,-23.58 127.38,-22.36 128.92,-29.19"></polygon> <text text-anchor="middle" x="109.99" y="-36.2" font-family="Times,serif" font-size="14.00">0.2</text> </g> <!-- We&#45;&gt;saw --> <g id="edge13" class="edge">
+<title>
+We-&gt;saw
+</title>
+<path fill="none" stroke="black" stroke-width="6" d="M190.88,-16.99C203.7,-16.86 219.34,-17.27 233.24,-19.2 236.76,-19.69 240.4,-20.36 244.02,-21.14"></path> <polygon fill="black" stroke="black" stroke-width="6" points="243.06,-26.31 254.01,-23.55 245.52,-16.1 243.06,-26.31"></polygon> <text text-anchor="middle" x="220.99" y="-24.2" font-family="Times,serif" font-size="14.00">1</text> </g> </g>
+</svg>
+</p>
+</div>
+</div>
+</div>
+<p>If we start at <code>&lt;START&gt;</code> and roll some dice, there’s a 80% chance we’ll move to <code>I</code> and a 20% chance we’ll move to <code>We</code>.</p>
+<ul>
+<li><p><code>&lt;START&gt;</code></p>
+<ul>
+<li><p><i class="fa-solid fa-dice-d20" aria-hidden="true"></i> = 26</p></li>
+<li><p><code>We</code></p>
+<ul>
+<li><p><i class="fa-solid fa-dice-d20" aria-hidden="true"></i> = 67</p></li>
+<li><p><code>saw</code></p>
+<ul>
+<li><p><i class="fa-solid fa-dice-d20" aria-hidden="true"></i> = 67</p></li>
+<li><p><code>a</code></p>
+<ul>
+<li><p><i class="fa-solid fa-dice-d20" aria-hidden="true"></i> = 67</p></li>
+<li><p><code>dog</code></p>
+<ul>
+<li><p><i class="fa-solid fa-dice-d20" aria-hidden="true"></i> = 23</p></li>
+<li><p><code>&lt;END&gt;</code></p></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Our bigram model on our boring corpus generates boring results. But here’s the output of a tigram model estimated over <em>Frankenstein</em>.</p>
+<div class="cell">
+
+</div>
+<details>
+<summary>
+Details
+</summary>
+<p>The version of the data I’m working with here hasn’t been sentence-ized (so no <code>&lt;START&gt;</code> or <code>&lt;BEGIN&gt;</code> tags), and has also had punctuation stripped out (<a href="https://juliasilge.github.io/tidytext/reference/unnest_tokens.html">see function here</a>). So after estimating the trigram probabilities, seed the generator by sampling over all trigrams, then progress by sampling over the distribution of <span class="math inline">\(P(w_i|w_{i-2}w_{i-1})\)</span>.</p>
+</details>
+<div class="cell">
+<details>
+<summary>Trigram R Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>frank <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">nextw1 =</span> <span class="fu">lead</span>(word),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">nextw2 =</span> <span class="fu">lead</span>(word, <span class="at">n =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word, nextw1) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_tot =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word, nextw1, nextw2) <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">p =</span> n<span class="sc">/</span>n_tot) <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">p =</span> <span class="fu">mean</span>(p),</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())<span class="sc">%&gt;%</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()<span class="ot">-&gt;</span>trigram</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<details>
+<summary>generator R Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">517</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>generate_frankenstein <span class="ot">&lt;-</span> <span class="cf">function</span>(trigram, <span class="at">n =</span> <span class="dv">100</span>){</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  trigram <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">all_p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">weight =</span> all_p)<span class="ot">-&gt;</span>init_df</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  init_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(init_df<span class="sc">$</span>word, init_df<span class="sc">$</span>nextw1, init_df<span class="sc">$</span>nextw2)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq</span>(n)){</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    hist <span class="ot">=</span> <span class="fu">rev</span>(<span class="fu">rev</span>(init_vec)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    trigram <span class="sc">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(word <span class="sc">==</span> hist[<span class="dv">1</span>],</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>             nextw1 <span class="sc">==</span> hist[<span class="dv">2</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">weight =</span> p) <span class="sc">%&gt;%</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pull</span>(nextw2) <span class="ot">-&gt;</span> new_w</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      init_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(init_vec, new_w)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">str_c</span>(init_vec, <span class="at">collapse =</span> <span class="st">" "</span>))</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">"&gt; "</span>, <span class="fu">generate_frankenstein</span>(trigram, <span class="at">n =</span> <span class="dv">100</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<blockquote class="blockquote">
+<p>grief had given me greater pleasure than i possess to bear me on the valley as i approached this tremendous being i dared to be endured in the world never before saw equalled look at that instant my father made no reproach in his ugliness i attempted to carry him into the world was now a blot upon the mountain it is nevertheless true a youngster who but a conversation that i held but of little avail my revenge is of no avail when i returned it was already eaten and the sound of footsteps along the sands he struck his foot against</p>
+</blockquote>
+</section>
+<section id="sparsity-again" class="level2">
+<h2 class="anchored" data-anchor-id="sparsity-again">Sparsity, again</h2>
 <div class="cell">
 
 </div>
@@ -861,7 +2114,7 @@ We-&gt;saw
 <p>The rectangle represents a matrix, with the y-axis representing “from” words and the x-axis representing “to” words in Frankenstein. There <em>could</em> be a point in any location in the rectangle, representing a time that word <span class="math inline">\(w_n\)</span> followed word <span class="math inline">\(w_{n-1}\)</span>. Each point represents a cell in that matrix where <em>any</em> data was observed.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
@@ -876,7 +2129,6 @@ We-&gt;saw
 
 
 
-</section>
 </section>
 
 
@@ -992,4 +2244,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
