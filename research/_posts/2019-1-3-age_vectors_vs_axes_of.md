@@ -26,11 +26,11 @@ p_url: https://assta.org/proceedings/ICPhS2019/papers/ICPhS_1307.pdf
 published: Proceedings of the 19th International Congress of Phonetic Sciences Melbourne
   Australia 2019
 tags:
-- automatics
-- change
-- formants
 - variation
 - vowels
+- change
+- automatics
+- formants
 title: Age vectors vs. axes of intraspeaker variation in vowel formants measured automatically
   from several English speech corpora.
 year: '2019'

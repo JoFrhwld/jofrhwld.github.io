@@ -21,12 +21,12 @@ p_url: https://oxford.universitypressscholarship.com/view/10.1093/oso/9780198796
 pages: 569--590
 published: The Oxford History of Phonology
 tags:
-- language change
-- language variation
-- phonetics
-- phonology
-- sociolinguistic variable
 - sociolinguistics
+- language change
+- phonology
+- phonetics
+- language variation
+- sociolinguistic variable
 - variable rules
 title: The study of variation
 year: '2022'

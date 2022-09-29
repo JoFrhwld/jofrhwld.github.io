@@ -24,11 +24,11 @@ p_url: https://www.cambridge.org/core/product/identifier/S0954394521000089/type/
 pages: 165--191
 published: Language Variation and Change
 tags:
-- /s/
-- experimental sociolinguistics
+- sociolinguistics
 - identity
 - indexicality
-- sociolinguistics
+- /s/
+- experimental sociolinguistics
 title: Crosslinguistic perceptions of /s/ among English, French, and German listeners
 volume: '33'
 year: '2021'

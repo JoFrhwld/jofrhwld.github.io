@@ -20,10 +20,10 @@ pages: '5'
 published: roceedings of the 19th International Congress of Phonetic Sciences Melbourne
   Australia 2019
 tags:
-- parallel shifts
-- phonetics
 - phonology
 - sound change
+- phonetics
+- parallel shifts
 title: Is phonetic target uniformity phonologically, or sociolinguistically grounded?
 year: '2019'
 ---

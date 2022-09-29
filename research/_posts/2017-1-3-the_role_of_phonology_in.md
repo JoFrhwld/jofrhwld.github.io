@@ -18,10 +18,10 @@ p_url: https://www.annualreviews.org/doi/10.1146/annurev-linguistics-011516-0341
 pages: 25--42
 published: Annual Review of Linguistics
 tags:
-- phonetics
-- phonology
 - phonology
 - sound change
+- phonetics
+- phonology
 - phonologization
 - contrast
 - phonetic change

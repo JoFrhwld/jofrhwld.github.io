@@ -29,9 +29,9 @@ pages: 1--20
 published: Language Variation and Change
 tags:
 - language change
-- modeling
-- phonological change
 - phonology
+- phonological change
+- modeling
 - tolerance principle
 title: Using the Tolerance Principle to predict phonological change
 volume: '31'

@@ -15,8 +15,8 @@ pages: 36--50
 published: Studies in the Linguistic Sciences Illinois Working Papers
 tags:
 - language change
-- phonetics
 - phonology
+- phonetics
 title: Cross-derivational feeding is epiphenomenal
 year: '2011'
 ---

@@ -24,11 +24,11 @@ number: '2'
 pages: 199--234
 published: Language Dynamics and Change
 tags:
-- corpus linguistics
-- crosslinguistic change
+- language change
 - filled pauses
 - hesitation markers
-- language change
+- corpus linguistics
+- crosslinguistic change
 title: Variation and Change in the Use of Hesitation Markers in Germanic Languages
 volume: '6'
 year: '2016'
