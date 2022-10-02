@@ -1103,12 +1103,12 @@ We-&gt;saw
       color: #fde725;
     }
     .bigrampath tr:nth-child(7) td:nth-child(10){background : #440154; color: white;}
-    .bigrampath tr:nth-child(9) td:nth-child(8) {background : #3b528b;  color: white;}
-    .bigrampath tr:nth-child(6) td:nth-child(9) {background :  #21918c; color: white;}
-    .bigrampath tr:nth-child(8) td:nth-child(4) {background :  #5ec962; }
-    .bigrampath tr:nth-child(3) td:nth-child(5) {background :  #fde725; }
+    .bigrampath tr:nth-child(9) td:nth-child(8) {background : #3b528b; color: white;}
+    .bigrampath tr:nth-child(6) td:nth-child(9) {background : #21918c; color: white;}
+    .bigrampath tr:nth-child(8) td:nth-child(4) {background : #5ec962; }
+    .bigrampath tr:nth-child(3) td:nth-child(5) {background : #fde725; }
 </style>
-<p><span class="bg1">P(We | &lt;START&gt;)</span> <span class="math inline">\(\times\)</span> <span class="bg2">P(saw | We)</span> <span class="math inline">\(\times\)</span> <span class="bg3">P(the | saw)</span> <span class="math inline">\(\times\)</span> <span class="bg4">P(the | saw)</span> <span class="math inline">\(\times\)</span> <span class="bg5">P(dog | the)</span></p>
+<p><span class="bg1">P(We | &lt;START&gt;)</span> <span class="math inline">\(\times\)</span> <span class="bg2">P(saw | We)</span> <span class="math inline">\(\times\)</span> <span class="bg3">P(the | saw)</span> <span class="math inline">\(\times\)</span> <span class="bg4">P(dog | saw)</span> <span class="math inline">\(\times\)</span> <span class="bg5">P(&lt;END&gt; | dog)</span></p>
 <div class="bigrampath">
 <div class="cell-output-display">
 <table class="table">
@@ -2075,7 +2075,7 @@ Details
 </div>
 <details>
 <summary>generator R Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">517</span>)</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#set.seed(517)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>generate_frankenstein <span class="ot">&lt;-</span> <span class="cf">function</span>(trigram, <span class="at">n =</span> <span class="dv">100</span>){</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  trigram <span class="sc">%&gt;%</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">all_p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
@@ -2097,7 +2097,7 @@ Details
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">"&gt; "</span>, <span class="fu">generate_frankenstein</span>(trigram, <span class="at">n =</span> <span class="dv">100</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <blockquote class="blockquote">
-<p>grief had given me greater pleasure than i possess to bear me on the valley as i approached this tremendous being i dared to be endured in the world never before saw equalled look at that instant my father made no reproach in his ugliness i attempted to carry him into the world was now a blot upon the mountain it is nevertheless true a youngster who but a conversation that i held but of little avail my revenge is of no avail when i returned it was already eaten and the sound of footsteps along the sands he struck his foot against</p>
+<p>this misery until he was but a high wind quickly dried the earth a dæmon whose delight was in a cloud of wonder and admiration sometimes i found it was a narrow minded trader and saw idleness and ruin in the neighbourhood of man a servant a condition which in his better days being even now you tremble you are too considerate to make so great that not only useless but draw down treble misery on his persecutor his tale i perhaps may be wafted to a want of sleep i often took his tools the use of which the servant presently brought</p>
 </blockquote>
 </section>
 <section id="sparsity-again" class="level2">

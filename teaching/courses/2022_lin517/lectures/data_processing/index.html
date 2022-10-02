@@ -383,7 +383,7 @@ div.csl-indent {
 </tr>
 <tr class="odd">
 <td><code>Gutenberg_Literary_Archive_Foundation</code></td>
-<td style="text-align: right;">34</td>
+<td style="text-align: right;">33</td>
 </tr>
 <tr class="even">
 <td><code>the_terms_of_this</code></td>
@@ -391,23 +391,23 @@ div.csl-indent {
 </tr>
 <tr class="odd">
 <td><code>Project_Gutenberg-tm_electronic_works</code></td>
-<td style="text-align: right;">30</td>
+<td style="text-align: right;">31</td>
 </tr>
 <tr class="even">
 <td><code>at_the_same_time</code></td>
 <td style="text-align: right;">25</td>
 </tr>
 <tr class="odd">
-<td><code>to_the_Project_Gutenberg</code></td>
+<td><code>in_the_United_States</code></td>
 <td style="text-align: right;">24</td>
 </tr>
 <tr class="even">
-<td><code>*_*_*_*</code></td>
-<td style="text-align: right;">22</td>
+<td><code>to_the_Project_Gutenberg</code></td>
+<td style="text-align: right;">24</td>
 </tr>
 <tr class="odd">
-<td><code>in_the_United_States</code></td>
-<td style="text-align: right;">21</td>
+<td><code>*_*_*_*</code></td>
+<td style="text-align: right;">22</td>
 </tr>
 <tr class="even">
 <td><code>for_the_sake_of</code></td>
@@ -989,23 +989,27 @@ _can t e r</code></pre>
 <p>The python library <code>sentencepiece</code> has a method for training a BPE tokenizer. We’ll run it on <em>Frankenstein</em> with a vocabulary limited to about ~1,000 items to see what we’ll get.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gutenbergpy.textget</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sentencepiece <span class="im">as</span> spm</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>raw_book <span class="op">=</span> gutenbergpy.textget.get_text_by_id(<span class="dv">84</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>clean_book  <span class="op">=</span> gutenbergpy.textget.strip_headers(raw_book)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"texts/frank.txt"</span>, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="bu">file</span>.write(clean_book)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">file</span>.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gutenbergpy.gutenbergcache <span class="im">import</span> GutenbergCacheSettings</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sentencepiece <span class="im">as</span> spm</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>GutenbergCacheSettings.<span class="bu">set</span>(TextFilesCacheFolder <span class="op">=</span> <span class="st">"gen/texts/"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>raw_book <span class="op">=</span> gutenbergpy.textget.get_text_by_id(<span class="dv">84</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>clean_book  <span class="op">=</span> gutenbergpy.textget.strip_headers(raw_book)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"gen/texts/frank.txt"</span>, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="bu">file</span>.write(clean_book)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">file</span>.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>spm.SentencePieceTrainer.train(<span class="bu">input</span> <span class="op">=</span> <span class="st">"texts/frank.txt"</span>, </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                               model_prefix <span class="op">=</span> <span class="st">"m"</span>,</span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>spm.SentencePieceTrainer.train(<span class="bu">input</span> <span class="op">=</span> <span class="st">"gen/texts/frank.txt"</span>, </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                               model_prefix <span class="op">=</span> <span class="st">"gen/m"</span>,</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                               vocab_size <span class="op">=</span> <span class="dv">1000</span>, </span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                               model_type <span class="op">=</span> <span class="st">"bpe"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The code above trained the tokenizer and saved it as a model. Here we’ll load it and run it on a sample paragraph to look at the output.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sp <span class="op">=</span> spm.SentencePieceProcessor(model_file<span class="op">=</span><span class="st">'m.model'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sp <span class="op">=</span> spm.SentencePieceProcessor(model_file<span class="op">=</span><span class="st">'gen/m.model'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>para <span class="op">=</span> <span class="st">"""</span></span>

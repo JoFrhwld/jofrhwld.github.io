@@ -24,3 +24,12 @@
 .bug6 {
   color: #35F448;
 }
+
+.ripe{
+  color: #E30B5C;
+  font-weight: bold;
+}
+.unripe{
+  color: #93817D;
+  font-weight:bold;
+}
