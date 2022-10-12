@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.113">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Josef Fruehwald">
+<meta name="dcterms.date" content="2022-10-11">
+<meta name="description" content="How we work around the problems of data sparsity">
+
+<title>Lin517: Natural Language Processing - ngram - Smoothing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: 1;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">ngram - Smoothing</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Lin517: Natural Language Processing</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Resources</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/reading/index.html" class="sidebar-item-text sidebar-link">Reading a technical paper</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/notation/index.html" class="sidebar-item-text sidebar-link">Mathematical notation</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Lecture Notes</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/what_is_nlp/index.html" class="sidebar-item-text sidebar-link">What is NLP?</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/data_sparsity/data_sparsity.html" class="sidebar-item-text sidebar-link">Data Sparsity</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/data_processing/index.html" class="sidebar-item-text sidebar-link">Data processing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/data_processing/addendum.html" class="sidebar-item-text sidebar-link">Data processing – addendum</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lem_stem/index.html" class="sidebar-item-text sidebar-link">Lemmatizing and stemming</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/ngram/index.html" class="sidebar-item-text sidebar-link">ngram Language Models</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/evaluation/index.html" class="sidebar-item-text sidebar-link">Evaluating models</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">python sessions</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/00_session1.html" class="sidebar-item-text sidebar-link">Starting Python</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/01_session2.html" class="sidebar-item-text sidebar-link">Lists and Dictionaries</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/02_session3.html" class="sidebar-item-text sidebar-link">Loops Etc.</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/03_session4.html" class="sidebar-item-text sidebar-link">Comprehensions and Useful Things</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/04_session5.html" class="sidebar-item-text sidebar-link">Making and Counting Bigrams</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#perplexity-review" id="toc-perplexity-review" class="nav-link active" data-scroll-target="#perplexity-review">Perplexity Review</a>
+  <ul class="collapse">
+  <li><a href="#a-familiar-problem-approaches" id="toc-a-familiar-problem-approaches" class="nav-link" data-scroll-target="#a-familiar-problem-approaches">A familiar problem approaches</a></li>
+  </ul></li>
+  <li><a href="#oov---out-of-vocabulary" id="toc-oov---out-of-vocabulary" class="nav-link" data-scroll-target="#oov---out-of-vocabulary">OOV - Out of Vocabulary</a>
+  <ul class="collapse">
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions?</a></li>
+  </ul></li>
+  <li><a href="#real-zeros" id="toc-real-zeros" class="nav-link" data-scroll-target="#real-zeros">Real Zeros</a>
+  <ul class="collapse">
+  <li><a href="#add-1-smoothing-laplace-smoothing" id="toc-add-1-smoothing-laplace-smoothing" class="nav-link" data-scroll-target="#add-1-smoothing-laplace-smoothing">Add 1 smoothing (Laplace Smoothing)</a></li>
+  <li><a href="#absolute-discounting" id="toc-absolute-discounting" class="nav-link" data-scroll-target="#absolute-discounting">Absolute Discounting</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">ngram - Smoothing</h1>
+</div>
+
+<div>
+  <div class="description">
+    How we work around the problems of data sparsity
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Josef Fruehwald </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 11, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="perplexity-review" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="perplexity-review">Perplexity Review</h2>
+<p>The notes on <a href="../../lectures/ngram/index.html">Perplexity</a>, describe how we can get a measure of how well a given n-gram model predicts strings in a test set of data. Roughly speaking:</p>
+<ul>
+<li><p>The better the model gets, the higher a probability it will assign to each <span class="math inline">\(P(w_i|w_{i-1})\)</span> .</p></li>
+<li><p>The higher the probabilities, the lower the perplexities.</p></li>
+<li><p>The lower the perplexities, the better the model</p></li>
+</ul>
+<p>As a quick demonstration, I’ve written some code here in collapsible sections to build a bigram model of Frankenstein, and to get the conditional probabilities for every bigram in an input sentence.</p>
+<div class="cell" data-execution_count="1">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gutenbergpy.textget</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tabulate <span class="im">import</span> tabulate</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<details>
+<summary><code>getbook()</code> function</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> getbook(book, outfile):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">  Download a book from project Gutenberg and save it </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">  to the specified outfile</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="ss">f"Downloading Project Gutenberg ID </span><span class="sc">{</span>book<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  raw_book <span class="op">=</span> gutenbergpy.textget.get_text_by_id(book)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  clean_book <span class="op">=</span> gutenbergpy.textget.strip_headers(raw_book)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="kw">not</span> outfile:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    outfile <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>book<span class="sc">}</span><span class="ss">.txt'</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Saving book as </span><span class="sc">{</span>outfile<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">with</span> <span class="bu">open</span>(outfile, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">file</span>.write(clean_book)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">file</span>.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>getbook(book <span class="op">=</span> <span class="dv">84</span>, outfile <span class="op">=</span> <span class="st">"gen/frankenstein.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Downloading Project Gutenberg ID 84</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<details>
+<summary>From a file string to ngrams</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ngramize(filename, n <span class="op">=</span> <span class="dv">2</span>):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">    given a file name, generate the ngrams and n-1 grams</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> f.read()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  sentences <span class="op">=</span> nltk.sent_tokenize(lines)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  sentences <span class="op">=</span> [sent.strip().replace(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">" "</span>) </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                      <span class="cf">for</span> sent <span class="kw">in</span> sentences]</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                      </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  sentences_tok <span class="op">=</span> [nltk.word_tokenize(sent) </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                      <span class="cf">for</span> sent <span class="kw">in</span> sentences]</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                      </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  sentences_padn <span class="op">=</span> [<span class="bu">list</span>(nltk.lm.preprocessing.pad_both_ends(sent, n <span class="op">=</span> n)) </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                      <span class="cf">for</span> sent <span class="kw">in</span> sentences_tok]</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                      </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  sentences_ngram <span class="op">=</span> [<span class="bu">list</span>(nltk.ngrams(sent, n <span class="op">=</span> n)) </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                      <span class="cf">for</span> sent <span class="kw">in</span> sentences_padn]</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  sentences_ngram_minus <span class="op">=</span> [<span class="bu">list</span>(nltk.ngrams(sent, n <span class="op">=</span> n<span class="op">-</span><span class="dv">1</span>)) </span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                      <span class="cf">for</span> sent <span class="kw">in</span> sentences_padn]                      </span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  flat_ngram <span class="op">=</span> <span class="bu">sum</span>(sentences_ngram, [])</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  flat_ngram_minus <span class="op">=</span> <span class="bu">sum</span>(sentences_ngram_minus, [])  </span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>                      </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(flat_ngram, flat_ngram_minus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<details>
+<summary>Getting bigrams and unigrams from frankenstein</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bigram, unigram <span class="op">=</span> ngramize(<span class="st">"gen/frankenstein.txt"</span>, n <span class="op">=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<details>
+<summary>Getting counts of bigrams and unigrams</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bigram_count <span class="op">=</span> Counter(bigram)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>unigram_count <span class="op">=</span> Counter(unigram)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<details>
+<summary>A function to get the conditional probability of a bigram</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_conditional_prob(x, bigram_count, unigram_count):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">    for a tuple x, get the conditional probability of x[1] | x[0]</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> x <span class="kw">in</span> bigram_count:</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    cond <span class="op">=</span> bigram_count[x] <span class="op">/</span> unigram_count[x[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    cond <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(cond)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<details>
+<summary>A function to get the conditional probability of every ngram in a sentence</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_sentence_probs(sentence, bigram_count, unigram_count, n <span class="op">=</span> <span class="dv">2</span>):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    given a sentence, get its list of conditional probabilities</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  sent_tokens <span class="op">=</span> nltk.word_tokenize(sentence)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  sent_pad <span class="op">=</span> nltk.lm.preprocessing.pad_both_ends(sent_tokens, n <span class="op">=</span> n)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  sent_ngram <span class="op">=</span> nltk.ngrams(sent_pad, n <span class="op">=</span> n)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  sent_conditionals <span class="op">=</span> [get_conditional_prob(gram, bigram_count, unigram_count) </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">for</span> gram <span class="kw">in</span> sent_ngram]</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(sent_conditionals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="cell" data-execution_count="9">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<details>
+<summary>Given a sentence, get the conditional probability expression, for printing.</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_conditional_strings(sentence, n <span class="op">=</span> <span class="dv">2</span>):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">    given a sentence, return the string of conditionals</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  sent_tokens <span class="op">=</span> nltk.word_tokenize(sentence)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  sent_pad <span class="op">=</span> nltk.lm.preprocessing.pad_both_ends(sent_tokens, n <span class="op">=</span> n)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  sent_pad <span class="op">=</span> [x.replace(<span class="st">"&lt;"</span>, <span class="st">"&amp;lt;"</span>).replace(<span class="st">"&gt;"</span>, <span class="st">"&amp;gt;"</span>) <span class="cf">for</span> x <span class="kw">in</span> sent_pad]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  sent_ngram <span class="op">=</span> nltk.ngrams(sent_pad, n <span class="op">=</span> n)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  out_cond <span class="op">=</span> [<span class="ss">f"P(</span><span class="sc">{</span>x[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span><span class="st">' '</span><span class="sc">.</span>join(x[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>])<span class="sc">}</span><span class="ss">)"</span> <span class="cf">for</span> x <span class="kw">in</span> sent_ngram]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(out_cond)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<p>Having built the bigram model with the code above, we can take this sample sentence:</p>
+<blockquote class="blockquote">
+<p>I saw the old man.</p>
+</blockquote>
+<p>We can calculate the conditional probability of every word in the sentence given the word before, as well as <a href="../../lectures/ngram/01-ngram-eval.html#from-probability-to-bits-a.k.a.-surprisal">the surprisal for each word</a>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="cell" data-execution_count="10">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">=</span> <span class="st">"I saw the old man."</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>cond_probs <span class="op">=</span> get_sentence_probs(sentence, bigram_count, unigram_count, n <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cond_surp <span class="op">=</span> [<span class="op">-</span>np.log2(x) <span class="cf">for</span> x <span class="kw">in</span> cond_probs]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>cond_strings <span class="op">=</span> get_conditional_strings(sentence, n <span class="op">=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">conditional</th>
+<th style="text-align: right;">probability</th>
+<th style="text-align: right;">surprisal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">P(I | &lt;s&gt;)</td>
+<td style="text-align: right;">0.1876</td>
+<td style="text-align: right;">2.4139</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(saw | I)</td>
+<td style="text-align: right;">0.0162</td>
+<td style="text-align: right;">5.9476</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(the | saw)</td>
+<td style="text-align: right;">0.2340</td>
+<td style="text-align: right;">2.0952</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(old | the)</td>
+<td style="text-align: right;">0.0064</td>
+<td style="text-align: right;">7.2865</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(man | old)</td>
+<td style="text-align: right;">0.6800</td>
+<td style="text-align: right;">0.5564</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(. | man)</td>
+<td style="text-align: right;">0.1364</td>
+<td style="text-align: right;">2.8745</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(&lt;/s&gt; | .)</td>
+<td style="text-align: right;">0.9993</td>
+<td style="text-align: right;">0.0011</td>
+</tr>
+</tbody>
+</table>
+<p>Summing up the surprisal column, we get the total surprisal of the sentence (about 21 bits). We can then get the number of bits per word (about 3) which gives us our ngram perplexity for the sentence (about 8).</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">total surprisal</th>
+<th style="text-align: right;">surprisal/word</th>
+<th style="text-align: right;">perplexity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">21.1752</td>
+<td style="text-align: right;">3.0250</td>
+<td style="text-align: right;">8.1400</td>
+</tr>
+</tbody>
+</table>
+<section id="a-familiar-problem-approaches" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="a-familiar-problem-approaches">A familiar problem approaches</h3>
+<p>But, not everything is so neat and tidy. Let’s try this again for the sentence</p>
+<blockquote class="blockquote">
+<p>I saw the same man.</p>
+</blockquote>
+<div class="cell" data-execution_count="13">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">=</span> <span class="st">"I saw the same man."</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cond_probs <span class="op">=</span> get_sentence_probs(sentence, bigram_count, unigram_count, n <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>cond_surp <span class="op">=</span> [<span class="op">-</span>np.log2(x) <span class="cf">for</span> x <span class="kw">in</span> cond_probs]</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>cond_strings <span class="op">=</span> get_conditional_strings(sentence, n <span class="op">=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">conditional</th>
+<th style="text-align: right;">probability</th>
+<th style="text-align: right;">surprisal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">P(I | &lt;s&gt;)</td>
+<td style="text-align: right;">0.1876</td>
+<td style="text-align: right;">2.4139</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(saw | I)</td>
+<td style="text-align: right;">0.0162</td>
+<td style="text-align: right;">5.9476</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(the | saw)</td>
+<td style="text-align: right;">0.2340</td>
+<td style="text-align: right;">2.0952</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(same | the)</td>
+<td style="text-align: right;">0.0154</td>
+<td style="text-align: right;">6.0235</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(man | same)</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;"><p><i class="fa-solid fa-infinity" aria-hidden="true"></i></p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(. | man)</td>
+<td style="text-align: right;">0.1364</td>
+<td style="text-align: right;">2.8745</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(&lt;/s&gt; | .)</td>
+<td style="text-align: right;">0.9993</td>
+<td style="text-align: right;">0.0011</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">total surprisal</th>
+<th style="text-align: left;">surprisal/word</th>
+<th style="text-align: left;">perplexity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><p><i class="fa-solid fa-infinity" aria-hidden="true"></i></p></td>
+<td style="text-align: left;"><p><i class="fa-solid fa-infinity" aria-hidden="true"></i></p></td>
+<td style="text-align: left;"><i class="fa-solid fa-infinity" aria-hidden="true"></i>!</td>
+</tr>
+</tbody>
+</table>
+<p>It looks like the bigram <code>("same", "man")</code> just didn’t appear in the novel. This is zero percolates up through all of our calculations.</p>
+<p><span class="math display">\[
+C(\text{same man}) = 0
+\]</span></p>
+<p><span class="math display">\[
+P(\text{same man}) = \frac{C(\text{same man)}}{N} = \frac{0}{N} = 0
+\]</span></p>
+<p><span class="math display">\[
+P(\text{man}~|~\text{same}) = \frac{P(\text{same man)}}{P(\text{same)}} = \frac{0}{P(\text{same})} = 0
+\]</span></p>
+<p><span class="math display">\[
+s(\text{man}~|~\text{same}) = -\log_2(P(\text{man}~|~\text{same})) = -\log_2(0) = \infty
+\]</span></p>
+<p><span class="math display">\[
+pp(\text{I saw the same man.)} = \frac{\sum_{i=1}^Ns(w_i|w_{i-1})}{N} = \frac{\dots+\infty+\dots}{N} = \infty
+\]</span></p>
+<p>In other words, our bigram model’s “mind” is <strong>completely</strong> blown by a sentence with the sequence <code>same man</code> in it.</p>
+<div id="fig-mindblow" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><span data-fig-align="center"><iframe src="https://giphy.com/embed/lXu72d4iKwqek" width="100%" height="100%" frameborder="0" class="giphy-embed" allowfullscreen=""></iframe></span></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1: Our our ngram model, upon seeing <code>same man</code></figcaption><p></p>
+</figure>
+</div>
+<p>This is, of course <a href="../../lectures/data_sparsity/data_sparsity.html">data sparsity</a> rearing its head again. On the one hand, we <em>are</em> building an n-gram model out of a fairly small corpus. But on the other, the data sparsity problem will never go away, and we are always going to be left with the following two issues:</p>
+<ul>
+<li><p>Out Of Vocabulary items</p></li>
+<li><p>Missing ngrams of words that <em>were</em> in the vocabulary.</p></li>
+</ul>
+</section>
+</section>
+<section id="oov---out-of-vocabulary" class="level2">
+<h2 class="anchored" data-anchor-id="oov---out-of-vocabulary">OOV - Out of Vocabulary</h2>
+<p>“Out Of Vocabulary”, commonly referred to OOV, problems, are going to come up if you ever do any computational work with language of any variety.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+OOV Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A lot of phoneticians today use “forced alignment”, which tries to time align words and phones to audio. Step one of the process is taking a transcription, tokenizing it, then looking up each token in a pre-specified pronunciation dictionary. A commonly used pronunciation dictionary is the CMU pronunciation dictionary. Here’s what a few entries of it around <code>Frankenstein</code> look like</p>
+<pre><code>...
+FRANKENFOOD  F R AE1 NG K AH0 N F UW2 D
+FRANKENHEIMER  F R AE1 NG K AH0 N HH AY2 M ER0
+FRANKENSTEIN  F R AE1 NG K AH0 N S T AY2 N
+FRANKENSTEIN(1)  F R AE1 NG K AH0 N S T IY2 N
+FRANKENSTEIN'S  F R AE1 NG K AH0 N S T AY2 N Z
+FRANKENSTEIN'S(1)  F R AE1 NG K AH0 N S T IY2 N Z
+FRANKFORT  F R AE1 NG K F ER0 T
+FRANKFORT'S  F R AE1 NG K F ER0 T S
+FRANKFURT  F R AE1 NG K F ER0 T
+...</code></pre>
+<p>Let’s say I tokenized this sentence and looked up each word</p>
+<blockquote class="blockquote">
+<p>I ate the po’boy.</p>
+</blockquote>
+<p>We’d wind up with this:</p>
+<pre><code>I  AY1
+ATE  EY1 T
+THE  DH AH0
+&lt;UNK&gt;  &lt;UNK&gt;</code></pre>
+<p>We’re getting <code>&lt;UNK&gt;</code> for “po’boy” because it’s not in the CMU dictionary. It’s an Out Of Vocabulary, or OOV word.</p>
+</div>
+</div>
+<p>Our example of perplexity blowing up was due to a specific bigram, <code>('same', 'man')</code> not appearing in the corpus, even though each individual word does appear. The same thing will happen if any individual word in a sentence is oov.</p>
+<div class="cell" data-execution_count="16">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># literally blowing the mind of a victorian child eating a cool ranch dorito</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">=</span> <span class="st">"I ate a cool ranch Dorito."</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>cond_probs <span class="op">=</span> get_sentence_probs(sentence, bigram_count, unigram_count, n <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>cond_surp <span class="op">=</span> [<span class="op">-</span>np.log2(x) <span class="cf">for</span> x <span class="kw">in</span> cond_probs]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>cond_strings <span class="op">=</span> get_conditional_strings(sentence, n <span class="op">=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">conditional</th>
+<th style="text-align: right;">probability</th>
+<th style="text-align: right;">surprisal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">P(I | &lt;s&gt;)</td>
+<td style="text-align: right;">0.1876</td>
+<td style="text-align: right;">2.4139</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(ate | I)</td>
+<td style="text-align: right;">0.0007</td>
+<td style="text-align: right;">10.4712</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(a | ate)</td>
+<td style="text-align: right;">0.2500</td>
+<td style="text-align: right;">2.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(cool | a)</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;"><p><i class="fa-solid fa-infinity" aria-hidden="true"></i></p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(ranch | cool)</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;"><p><i class="fa-solid fa-infinity" aria-hidden="true"></i></p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(Dorito | ranch)</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;"><p><i class="fa-solid fa-infinity" aria-hidden="true"></i></p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(. | Dorito)</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;"><p><i class="fa-solid fa-infinity" aria-hidden="true"></i></p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(&lt;/s&gt; | .)</td>
+<td style="text-align: right;">0.9993</td>
+<td style="text-align: right;">0.0011</td>
+</tr>
+</tbody>
+</table>
+<section id="solutions" class="level3">
+<h3 class="anchored" data-anchor-id="solutions">Solutions?</h3>
+<p>One approach SLP suggests is to convert every vocabulary item that occurs below a certain frequency to <code>&lt;UNK&gt;</code>, then re-estimate all of the ngram values. Here, I’m</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting a list of unigrams that occurred once</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>to_unk <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> unigram_count <span class="cf">if</span> unigram_count[x] <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;UNK&gt; conversion</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>unigram_unk <span class="op">=</span> [(<span class="st">"&lt;UNK&gt;"</span>,) <span class="cf">if</span> x <span class="kw">in</span> to_unk <span class="cf">else</span> x <span class="cf">for</span> x <span class="kw">in</span> unigram]</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>bigram_unk <span class="op">=</span> [(<span class="st">"&lt;UNK&gt;"</span>, <span class="st">"&lt;UNK&gt;"</span>) <span class="cf">if</span> ((x[<span class="dv">0</span>],) <span class="kw">in</span> to_unk <span class="kw">and</span> (x[<span class="dv">1</span>],) <span class="kw">in</span> to_unk) <span class="cf">else</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>              (<span class="st">"&lt;UNK&gt;"</span>, x[<span class="dv">1</span>]) <span class="cf">if</span> (x[<span class="dv">0</span>],) <span class="kw">in</span> to_unk <span class="cf">else</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>              (x[<span class="dv">0</span>], <span class="st">"&lt;UNK&gt;"</span>) <span class="cf">if</span> (x[<span class="dv">1</span>],) <span class="kw">in</span> to_unk <span class="cf">else</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>              x <span class="cf">for</span> x <span class="kw">in</span> bigram ]</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;UNK&gt; count              </span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>unigram_unk_count <span class="op">=</span> Counter(unigram_unk)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>bigram_unk_count <span class="op">=</span> Counter(bigram_unk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="19">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<details>
+<summary>A function to get the conditional probability of every ngram in a sentence</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_sentence_unk_probs(sentence, bigram_count, unigram_count, n <span class="op">=</span> <span class="dv">2</span>):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">    given a sentence, get its list of conditional probabilities</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  sent_tokens <span class="op">=</span> nltk.word_tokenize(sentence)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  sent_tokens_unk <span class="op">=</span> [x <span class="cf">if</span> (x,) <span class="kw">in</span> unigram_count <span class="cf">else</span> <span class="st">"&lt;UNK&gt;"</span> <span class="cf">for</span> x <span class="kw">in</span> sent_tokens]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  sent_pad <span class="op">=</span> nltk.lm.preprocessing.pad_both_ends(sent_tokens_unk, n <span class="op">=</span> n)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  sent_ngram <span class="op">=</span> nltk.ngrams(sent_pad, n <span class="op">=</span> n)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  sent_conditionals <span class="op">=</span> [get_conditional_prob(gram, bigram_count, unigram_count) </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">for</span> gram <span class="kw">in</span> sent_ngram]</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(sent_conditionals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">=</span> <span class="st">"I ate a Dorito."</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>cond_probs <span class="op">=</span> get_sentence_unk_probs(sentence, bigram_unk_count, unigram_unk_count, n <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>cond_surp <span class="op">=</span> [<span class="op">-</span>np.log2(x) <span class="cf">for</span> x <span class="kw">in</span> cond_probs]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>cond_strings <span class="op">=</span> get_conditional_unk_strings(sentence, unigram_count, n <span class="op">=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">conditional</th>
+<th style="text-align: right;">probability</th>
+<th style="text-align: right;">surprisal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">P(I | &lt;s&gt;)</td>
+<td style="text-align: right;">0.1876</td>
+<td style="text-align: right;">2.4139</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(ate | I)</td>
+<td style="text-align: right;">0.0007</td>
+<td style="text-align: right;">10.4712</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(a | ate)</td>
+<td style="text-align: right;">0.2500</td>
+<td style="text-align: right;">2.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(&lt;UNK&gt; | a)</td>
+<td style="text-align: right;">0.1173</td>
+<td style="text-align: right;">3.0912</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(. | &lt;UNK&gt;)</td>
+<td style="text-align: right;">0.0600</td>
+<td style="text-align: right;">4.0588</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(&lt;/s&gt; | .)</td>
+<td style="text-align: right;">0.9993</td>
+<td style="text-align: right;">0.0011</td>
+</tr>
+</tbody>
+</table>
+<p>Converting low frequency words to <code>&lt;UNK&gt;</code> means that now when the ngram model meets a word it doesn’t know, like <code>Dorito</code>, there is still some probability it can assign.</p>
+</section>
+</section>
+<section id="real-zeros" class="level2">
+<h2 class="anchored" data-anchor-id="real-zeros">Real Zeros</h2>
+<p>This <code>&lt;UNK&gt;</code>ification of the data doesn’t solve everything, though. Here’s the longer sentence:</p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">=</span> <span class="st">"I ate a cool ranch Dorito."</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>cond_probs <span class="op">=</span> get_sentence_unk_probs(sentence, bigram_unk_count, unigram_unk_count, n <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>cond_surp <span class="op">=</span> [<span class="op">-</span>np.log2(x) <span class="cf">for</span> x <span class="kw">in</span> cond_probs]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>cond_strings <span class="op">=</span> get_conditional_unk_strings(sentence, unigram_unk_count, n <span class="op">=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">conditional</th>
+<th style="text-align: right;">probability</th>
+<th style="text-align: right;">surprisal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">P(I | &lt;s&gt;)</td>
+<td style="text-align: right;">0.1876</td>
+<td style="text-align: right;">2.4139</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(ate | I)</td>
+<td style="text-align: right;">0.0007</td>
+<td style="text-align: right;">10.4712</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(a | ate)</td>
+<td style="text-align: right;">0.2500</td>
+<td style="text-align: right;">2.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(cool | a)</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;"><p><i class="fa-solid fa-infinity" aria-hidden="true"></i></p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(&lt;UNK&gt; | cool)</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;"><p><i class="fa-solid fa-infinity" aria-hidden="true"></i></p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(&lt;UNK&gt; | &lt;UNK&gt;)</td>
+<td style="text-align: right;">0.0391</td>
+<td style="text-align: right;">4.6782</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(. | &lt;UNK&gt;)</td>
+<td style="text-align: right;">0.0600</td>
+<td style="text-align: right;">4.0588</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(&lt;/s&gt; | .)</td>
+<td style="text-align: right;">0.9993</td>
+<td style="text-align: right;">0.0011</td>
+</tr>
+</tbody>
+</table>
+<p>The problem here is that there <em>is</em> a known word, <code>cool</code>, that just happens never to occur in the bigrams <code>(a, cool)</code> or <code>(cool, &lt;UNK&gt;)</code>. Maybe what we want is some way of assigning a small probability, of bigrams that could have happened, but didn’t.</p>
+<section id="add-1-smoothing-laplace-smoothing" class="level3">
+<h3 class="anchored" data-anchor-id="add-1-smoothing-laplace-smoothing">Add 1 smoothing (Laplace Smoothing)</h3>
+<p>The first, simple idea, is to make a grid of all possible bigrams, and add 1 to all of their counts.</p>
+<div class="cell" data-execution_count="25">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<details>
+<summary>A function to get the add 1 smoothed conditional probability of a bigram</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_conditional_prob_add1(x, bigram_count, unigram_count):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">    for a tuple x, get the conditional probability of x[1] | x[0]</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> x <span class="kw">in</span> bigram_count:</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    cond <span class="op">=</span> (bigram_count[x]<span class="op">+</span><span class="dv">1</span>) <span class="op">/</span> (unigram_count[x[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]] <span class="op">+</span> <span class="bu">len</span>(unigram_count))</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    cond <span class="op">=</span> <span class="dv">1</span><span class="op">/</span> (unigram_count[x[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]] <span class="op">+</span> <span class="bu">len</span>(unigram_count))</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(cond)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="cell" data-execution_count="26">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>python</strong></pre>
+</div>
+<details>
+<summary>A function to get the conditional probability of every ngram in a sentence</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_sentence_unk_probs_add1(sentence, bigram_count, unigram_count, n <span class="op">=</span> <span class="dv">2</span>):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">    given a sentence, get its list of conditional probabilities</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  sent_tokens <span class="op">=</span> nltk.word_tokenize(sentence)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  sent_tokens_unk <span class="op">=</span> [x <span class="cf">if</span> (x,) <span class="kw">in</span> unigram_count <span class="cf">else</span> <span class="st">"&lt;UNK&gt;"</span> <span class="cf">for</span> x <span class="kw">in</span> sent_tokens]</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  sent_pad <span class="op">=</span> nltk.lm.preprocessing.pad_both_ends(sent_tokens_unk, n <span class="op">=</span> n)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  sent_ngram <span class="op">=</span> nltk.ngrams(sent_pad, n <span class="op">=</span> n)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  sent_conditionals <span class="op">=</span> [get_conditional_prob_add1(gram, bigram_count, unigram_count) </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">for</span> gram <span class="kw">in</span> sent_ngram]</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(sent_conditionals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">=</span> <span class="st">"I ate a cool ranch Dorito."</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>cond_probs <span class="op">=</span> get_sentence_unk_probs_add1(sentence, bigram_unk_count, unigram_unk_count, n <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>cond_surp <span class="op">=</span> [<span class="op">-</span>np.log2(x) <span class="cf">for</span> x <span class="kw">in</span> cond_probs]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>cond_strings <span class="op">=</span> get_conditional_unk_strings(sentence, unigram_unk_count, n <span class="op">=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">conditional</th>
+<th style="text-align: right;">probability</th>
+<th style="text-align: right;">surprisal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">P(I | &lt;s&gt;)</td>
+<td style="text-align: right;">0.0797</td>
+<td style="text-align: right;">3.6498</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(ate | I)</td>
+<td style="text-align: right;">0.0004</td>
+<td style="text-align: right;">11.1921</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(a | ate)</td>
+<td style="text-align: right;">0.0005</td>
+<td style="text-align: right;">11.0307</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(cool | a)</td>
+<td style="text-align: right;">0.0002</td>
+<td style="text-align: right;">12.4299</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(&lt;UNK&gt; | cool)</td>
+<td style="text-align: right;">0.0002</td>
+<td style="text-align: right;">12.0300</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(&lt;UNK&gt; | &lt;UNK&gt;)</td>
+<td style="text-align: right;">0.0180</td>
+<td style="text-align: right;">5.7941</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(. | &lt;UNK&gt;)</td>
+<td style="text-align: right;">0.0276</td>
+<td style="text-align: right;">5.1784</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(&lt;/s&gt; | .)</td>
+<td style="text-align: right;">0.3912</td>
+<td style="text-align: right;">1.3539</td>
+</tr>
+</tbody>
+</table>
+<p>2 things to notice here:</p>
+<ol type="1">
+<li>There are no more zeros!</li>
+<li>The probabilities are all different!</li>
+</ol>
+<p>The probabilities jumped around because by adding 1 to every bigram count, we’ve given many bigrams a larger portion of the probability pie than they had before, and in a probability space, everything has to sum to 1. So that means we’ve also <em>taken away</em> a portion of the probability space from many bigrams.<br>
+</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">conditional</th>
+<th style="text-align: right;">bigram count</th>
+<th style="text-align: right;">w1 count</th>
+<th style="text-align: right;">add 1 prob</th>
+<th style="text-align: right;">implied counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">P(I | &lt;s&gt;)</td>
+<td style="text-align: right;">577</td>
+<td style="text-align: right;">3,075</td>
+<td style="text-align: right;">0.0797</td>
+<td style="text-align: right;">244.9828</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(ate | I)</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2,839</td>
+<td style="text-align: right;">0.0004</td>
+<td style="text-align: right;">1.2134</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(a | ate)</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.0005</td>
+<td style="text-align: right;">0.0019</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(cool | a)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,338</td>
+<td style="text-align: right;">0.0002</td>
+<td style="text-align: right;">0.2425</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(&lt;UNK&gt; | cool)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0002</td>
+<td style="text-align: right;">0.0005</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(&lt;UNK&gt; | &lt;UNK&gt;)</td>
+<td style="text-align: right;">138</td>
+<td style="text-align: right;">3,533</td>
+<td style="text-align: right;">0.0180</td>
+<td style="text-align: right;">63.6700</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P(. | &lt;UNK&gt;)</td>
+<td style="text-align: right;">212</td>
+<td style="text-align: right;">3,533</td>
+<td style="text-align: right;">0.0276</td>
+<td style="text-align: right;">97.5663</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P(&lt;/s&gt; | .)</td>
+<td style="text-align: right;">2,686</td>
+<td style="text-align: right;">2,688</td>
+<td style="text-align: right;">0.3912</td>
+<td style="text-align: right;">1,051.6389</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="absolute-discounting" class="level3">
+<h3 class="anchored" data-anchor-id="absolute-discounting">Absolute Discounting</h3>
+<p>The add 1 method effectively shaved off a little bit of probability from bigrams we <em>did</em> see to give it to bigrams we <em>didn’t</em> see. For example, we had 2 observations of <code>(I, ate)</code>, but after redistributing probabilities, we’d effectively shaved off 0.79 observations. Things are even more extreme for other bigrams. Like <code>(&lt;s&gt;, I)</code> which got 323 observations shaved off, to redistribute to unseen bigrams.</p>
+<p>The idea behind Absolute Discounting is instead of shaving variable amounts of probability off of every ngram, we instead shave off a <em>fixed</em> amount. The Greek letter <span class="math inline">\(\delta\)</span> is used to indicate this “shave off” amount.</p>
+<p>Our total number of observed bigrams, after <code>&lt;UNK&gt;</code>ifying, 36,744. If we shaved off 0.25 observations off of each bigram, that would give us <span class="math inline">\(36,744\times0.75=27,558\)</span> observations to spread around to the bigrams we <em>didn’t</em> observe. If we just did that uniformly, the unobserved bigrams would just get a sliver of that probability mass. There are 4,179 unigrams in our data, meaning we would <em>expect</em> there to be <span class="math inline">\(4179^2=17,464,041\)</span> possible bigrams, that means there are <span class="math inline">\(17,464,041-36,744 = 17,427,297\)</span> bigrams trying to get a piece of those 8,936 observations we just shaved off, coming out to just 0.0016 observations each.</p>
+<p>Some more clever approaches try not to distribute the probability surplus evenly, though. For example Kneser-Ney smoothing tries to distribute it proportionally to how often the <span class="math inline">\(w_i\)</span> word in a <span class="math inline">\((w_{i-1}w_i)\)</span> bigram appears as the second word in a bigram.</p>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><span class="math inline">\(-\log_2(p)\)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
