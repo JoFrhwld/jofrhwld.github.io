@@ -17,7 +17,16 @@
       "/python_sessions/04_session5.html",
       "/lectures/evaluation/index.html",
       "/lectures/ngram/01-ngram-eval.html",
-      "/lectures/ngram/02_smoothing.html"
+      "/lectures/ngram/02_smoothing.html",
+      "/python_sessions/05_session6.md",
+      "/lectures/word_vectors/01_concept.html",
+      "/lectures/word_vectors/index.html"
+    ]
+  },
+  {
+    "listing": "/lectures/word_vectors/index.html",
+    "items": [
+      "/lectures/word_vectors/01_concept.html"
     ]
   }
 ]

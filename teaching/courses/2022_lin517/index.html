@@ -2,17 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.113">
+<meta name="generator" content="quarto-1.2.233">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Josef Fruehwald">
 
 <title>Lin517: Natural Language Processing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: 1;}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -128,12 +129,12 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Resources</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Resources</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./resources/reading/index.html" class="sidebar-item-text sidebar-link">Reading a technical paper</a>
@@ -148,17 +149,35 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Lecture Notes</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Lecture Notes</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Intro</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lectures/what_is_nlp/index.html" class="sidebar-item-text sidebar-link">What is NLP?</a>
   </div>
 </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Data Sparsity and Processing</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lectures/data_sparsity/data_sparsity.html" class="sidebar-item-text sidebar-link">Data Sparsity</a>
@@ -179,6 +198,16 @@ ul.task-list li input[type="checkbox"] {
   <a href="./lectures/lem_stem/index.html" class="sidebar-item-text sidebar-link">Lemmatizing and stemming</a>
   </div>
 </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">ngrams</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lectures/ngram/index.html" class="sidebar-item-text sidebar-link">ngram Language Models</a>
@@ -186,19 +215,56 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./lectures/ngram/01-ngram-eval.html" class="sidebar-item-text sidebar-link">ngrams - Perplexity</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectures/ngram/02_smoothing.html" class="sidebar-item-text sidebar-link">ngram - Smoothing</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./lectures/word_vectors/index.html" class="sidebar-item-text sidebar-link">Word Vectors</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectures/word_vectors/01_concept.html" class="sidebar-item-text sidebar-link">Word Vectors - Concepts</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Models</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./lectures/evaluation/index.html" class="sidebar-item-text sidebar-link">Evaluating models</a>
   </div>
 </li>
       </ul>
   </li>
+      </ul>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">python sessions</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">python sessions</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_sessions/00_session1.html" class="sidebar-item-text sidebar-link">Starting Python</a>
@@ -232,7 +298,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(16)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(5)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(19)</span></div><div class="category" data-category="data">data <span class="quarto-category-count">(4)</span></div><div class="category" data-category="intro">intro <span class="quarto-category-count">(1)</span></div><div class="category" data-category="models">models <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ngram">ngram <span class="quarto-category-count">(3)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(5)</span></div><div class="category" data-category="word vectors">word vectors <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -245,7 +311,14 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Josef Fruehwald </p>
+          </div>
+  </div>
     
+  
     
   </div>
   
@@ -325,30 +398,32 @@ Categories
 <td class="listing-categories">
 </td>
 </tr>
-<tr data-index="2" data-listing-date-sort="1661313600000" data-listing-file-modified-sort="1662695893074" data-listing-reading-time-sort="8.885" data-listing-title-sort="What is NLP?<br>(for this course)" data-listing-filename-sort="index.qmd">
+<tr data-index="2" data-categories="intro" data-listing-date-sort="1661313600000" data-listing-file-modified-sort="1666123926455" data-listing-reading-time-sort="8.885" data-listing-title-sort="What is NLP?<br>(for this course)" data-listing-filename-sort="index.qmd">
 <td class="listing-date">
 2022-08-24
 </td>
 <td class="listing-file-modified">
-2022-09-08
+2022-10-18
 </td>
 <td class="listing-title">
 <a href="./lectures/what_is_nlp/index.html" class="title">What is NLP?<br>(for this course)</a>
 </td>
 <td class="listing-categories">
+intro
 </td>
 </tr>
-<tr data-index="3" data-listing-date-sort="1661918400000" data-listing-file-modified-sort="1662926808111" data-listing-reading-time-sort="27.53" data-listing-title-sort="Data Sparsity" data-listing-filename-sort="data_sparsity.qmd">
+<tr data-index="3" data-categories="data" data-listing-date-sort="1661918400000" data-listing-file-modified-sort="1666125640206" data-listing-reading-time-sort="27.53" data-listing-title-sort="Data Sparsity" data-listing-filename-sort="data_sparsity.qmd">
 <td class="listing-date">
 2022-08-31
 </td>
 <td class="listing-file-modified">
-2022-09-11
+2022-10-18
 </td>
 <td class="listing-title">
 <a href="./lectures/data_sparsity/data_sparsity.html" class="title">Data Sparsity</a>
 </td>
 <td class="listing-categories">
+data
 </td>
 </tr>
 <tr data-index="4" data-categories="python" data-listing-date-sort="1662091200000" data-listing-file-modified-sort="1662695175178" data-listing-reading-time-sort="7.145" data-listing-title-sort="Starting Python" data-listing-filename-sort="00_session1.qmd">
@@ -365,17 +440,18 @@ Categories
 python
 </td>
 </tr>
-<tr data-index="5" data-listing-date-sort="1662436800000" data-listing-file-modified-sort="1664735276091" data-listing-reading-time-sort="16.05" data-listing-title-sort="Data Processing" data-listing-filename-sort="index.qmd">
+<tr data-index="5" data-categories="data" data-listing-date-sort="1662436800000" data-listing-file-modified-sort="1666123654333" data-listing-reading-time-sort="16.05" data-listing-title-sort="Data Processing" data-listing-filename-sort="index.qmd">
 <td class="listing-date">
 2022-09-06
 </td>
 <td class="listing-file-modified">
-2022-10-02
+2022-10-18
 </td>
 <td class="listing-title">
 <a href="./lectures/data_processing/index.html" class="title">Data Processing</a>
 </td>
 <td class="listing-categories">
+data
 </td>
 </tr>
 <tr data-index="6" data-categories="python" data-listing-date-sort="1662696000000" data-listing-file-modified-sort="1664818134703" data-listing-reading-time-sort="6.57" data-listing-title-sort="Lists and Dictionaries" data-listing-filename-sort="01_session2.qmd">
@@ -392,30 +468,32 @@ python
 python
 </td>
 </tr>
-<tr data-index="7" data-listing-date-sort="1663041600000" data-listing-file-modified-sort="1663122245878" data-listing-reading-time-sort="3.35" data-listing-title-sort="Addendum" data-listing-filename-sort="addendum.qmd">
+<tr data-index="7" data-categories="data" data-listing-date-sort="1663041600000" data-listing-file-modified-sort="1666125636579" data-listing-reading-time-sort="3.35" data-listing-title-sort="Addendum" data-listing-filename-sort="addendum.qmd">
 <td class="listing-date">
 2022-09-13
 </td>
 <td class="listing-file-modified">
-2022-09-13
+2022-10-18
 </td>
 <td class="listing-title">
 <a href="./lectures/data_processing/addendum.html" class="title">Addendum</a>
 </td>
 <td class="listing-categories">
+data
 </td>
 </tr>
-<tr data-index="8" data-listing-date-sort="1663041600000" data-listing-file-modified-sort="1664734833680" data-listing-reading-time-sort="3.725" data-listing-title-sort="Lemmatizing and Stemming" data-listing-filename-sort="index.qmd">
+<tr data-index="8" data-categories="data" data-listing-date-sort="1663041600000" data-listing-file-modified-sort="1666123824491" data-listing-reading-time-sort="3.725" data-listing-title-sort="Lemmatizing and Stemming" data-listing-filename-sort="index.qmd">
 <td class="listing-date">
 2022-09-13
 </td>
 <td class="listing-file-modified">
-2022-10-02
+2022-10-18
 </td>
 <td class="listing-title">
 <a href="./lectures/lem_stem/index.html" class="title">Lemmatizing and Stemming</a>
 </td>
 <td class="listing-categories">
+data
 </td>
 </tr>
 <tr data-index="9" data-categories="python" data-listing-date-sort="1663300800000" data-listing-file-modified-sort="1663268964996" data-listing-reading-time-sort="5.855" data-listing-title-sort="Loops Etc." data-listing-filename-sort="02_session3.qmd">
@@ -446,17 +524,18 @@ python
 python
 </td>
 </tr>
-<tr data-index="11" data-listing-date-sort="1664337600000" data-listing-file-modified-sort="1664736433442" data-listing-reading-time-sort="16.76" data-listing-title-sort="ngram Language Models" data-listing-filename-sort="index.qmd">
+<tr data-index="11" data-categories="ngram" data-listing-date-sort="1664337600000" data-listing-file-modified-sort="1666123853808" data-listing-reading-time-sort="16.76" data-listing-title-sort="ngram Language Models" data-listing-filename-sort="index.qmd">
 <td class="listing-date">
 2022-09-28
 </td>
 <td class="listing-file-modified">
-2022-10-02
+2022-10-18
 </td>
 <td class="listing-title">
 <a href="./lectures/ngram/index.html" class="title">ngram Language Models</a>
 </td>
 <td class="listing-categories">
+ngram
 </td>
 </tr>
 <tr data-index="12" data-categories="python" data-listing-date-sort="1664510400000" data-listing-file-modified-sort="1665343752251" data-listing-reading-time-sort="3.32" data-listing-title-sort="Making and Counting Bigrams" data-listing-filename-sort="04_session5.qmd">
@@ -473,43 +552,86 @@ python
 python
 </td>
 </tr>
-<tr data-index="13" data-listing-date-sort="1664769600000" data-listing-file-modified-sort="1664750234609" data-listing-reading-time-sort="15.28" data-listing-title-sort="Evaluating models" data-listing-filename-sort="index.qmd">
+<tr data-index="13" data-categories="models" data-listing-date-sort="1664769600000" data-listing-file-modified-sort="1666123799380" data-listing-reading-time-sort="15.28" data-listing-title-sort="Evaluating models" data-listing-filename-sort="index.qmd">
 <td class="listing-date">
 2022-10-03
 </td>
 <td class="listing-file-modified">
-2022-10-02
+2022-10-18
 </td>
 <td class="listing-title">
 <a href="./lectures/evaluation/index.html" class="title">Evaluating models</a>
 </td>
 <td class="listing-categories">
+models
 </td>
 </tr>
-<tr data-index="14" data-listing-date-sort="1665374400000" data-listing-file-modified-sort="1665513186575" data-listing-reading-time-sort="10.86" data-listing-title-sort="ngrams - Perplexity" data-listing-filename-sort="01-ngram-eval.qmd">
+<tr data-index="14" data-categories="ngram,models" data-listing-date-sort="1665374400000" data-listing-file-modified-sort="1666123874846" data-listing-reading-time-sort="10.86" data-listing-title-sort="ngrams - Perplexity" data-listing-filename-sort="01-ngram-eval.qmd">
 <td class="listing-date">
 2022-10-10
 </td>
 <td class="listing-file-modified">
-2022-10-11
+2022-10-18
 </td>
 <td class="listing-title">
 <a href="./lectures/ngram/01-ngram-eval.html" class="title">ngrams - Perplexity</a>
 </td>
 <td class="listing-categories">
+ngram,models
 </td>
 </tr>
-<tr data-index="15" data-listing-date-sort="1665460800000" data-listing-file-modified-sort="1665545302759" data-listing-reading-time-sort="17.635" data-listing-title-sort="ngram - Smoothing" data-listing-filename-sort="02_smoothing.qmd">
+<tr data-index="15" data-categories="ngram" data-listing-date-sort="1665460800000" data-listing-file-modified-sort="1666123896760" data-listing-reading-time-sort="17.535" data-listing-title-sort="ngram - Smoothing" data-listing-filename-sort="02_smoothing.qmd">
 <td class="listing-date">
 2022-10-11
 </td>
 <td class="listing-file-modified">
-2022-10-11
+2022-10-18
 </td>
 <td class="listing-title">
 <a href="./lectures/ngram/02_smoothing.html" class="title">ngram - Smoothing</a>
 </td>
 <td class="listing-categories">
+ngram
+</td>
+</tr>
+<tr data-index="16" data-listing-date-sort="1665720000000" data-listing-file-modified-sort="1665616666915" data-listing-reading-time-sort="7.415" data-listing-title-sort="Functions" data-listing-filename-sort="05_session6.qmd">
+<td class="listing-date">
+2022-10-14
+</td>
+<td class="listing-file-modified">
+2022-10-12
+</td>
+<td class="listing-title">
+<a href="./python_sessions/05_session6.md" class="title">Functions</a>
+</td>
+<td class="listing-categories">
+</td>
+</tr>
+<tr data-index="17" data-categories="word vectors" data-listing-date-sort="1666756800000" data-listing-file-modified-sort="1666659477911" data-listing-reading-time-sort="18.075" data-listing-title-sort="Word Vectors - Concepts" data-listing-filename-sort="01_concept.qmd">
+<td class="listing-date">
+2022-10-26
+</td>
+<td class="listing-file-modified">
+2022-10-24
+</td>
+<td class="listing-title">
+<a href="./lectures/word_vectors/01_concept.html" class="title">Word Vectors - Concepts</a>
+</td>
+<td class="listing-categories">
+word vectors
+</td>
+</tr>
+<tr data-index="18" data-categories="word vectors" data-listing-file-modified-sort="1666657659899" data-listing-reading-time-sort="0.21" data-listing-title-sort="Word Vectors" data-listing-filename-sort="index.qmd">
+<td class="listing-date">
+</td>
+<td class="listing-file-modified">
+2022-10-24
+</td>
+<td class="listing-title">
+<a href="./lectures/word_vectors/index.html" class="title">Word Vectors</a>
+</td>
+<td class="listing-categories">
+word vectors
 </td>
 </tr>
 </tbody>
@@ -560,7 +682,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -596,24 +735,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
