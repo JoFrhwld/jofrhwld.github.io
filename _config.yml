@@ -38,6 +38,11 @@ minima:
   social_links:
     twitter: jofrhwld
     github: jofrhwld
+    mastodon:
+      - username: jofrhwld
+        instance: lingo.lol
+      - username: jofrhwld
+        instance: jawns.club
 # this is too old    
 #  skin: dark
 #remote_theme: pages-themes/minimal@v0.2.0
