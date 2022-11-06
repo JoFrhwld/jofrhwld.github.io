@@ -6,3 +6,5 @@ _site
 vendor
 oldsite
 .Rproj.user
+
+/.luarc.json

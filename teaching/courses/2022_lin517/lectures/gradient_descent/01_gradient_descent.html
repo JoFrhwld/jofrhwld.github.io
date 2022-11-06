@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.233">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Lin517: Natural Language Processing - Gradient Descent</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible">
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Gradient Descent</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Lin517: Natural Language Processing</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Resources</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/reading/index.html" class="sidebar-item-text sidebar-link">Reading a technical paper</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/notation/index.html" class="sidebar-item-text sidebar-link">Mathematical notation</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Lecture Notes</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Intro</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/what_is_nlp/index.html" class="sidebar-item-text sidebar-link">What is NLP?</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Data Sparsity and Processing</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/data_sparsity/data_sparsity.html" class="sidebar-item-text sidebar-link">Data Sparsity</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/data_processing/index.html" class="sidebar-item-text sidebar-link">Data processing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/data_processing/addendum.html" class="sidebar-item-text sidebar-link">Data processing – addendum</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lem_stem/index.html" class="sidebar-item-text sidebar-link">Lemmatizing and stemming</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">ngrams</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/ngram/index.html" class="sidebar-item-text sidebar-link">ngram Language Models</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/ngram/01-ngram-eval.html" class="sidebar-item-text sidebar-link">ngrams - Perplexity</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/ngram/02_smoothing.html" class="sidebar-item-text sidebar-link">ngram - Smoothing</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lectures/word_vectors/index.html" class="sidebar-item-text sidebar-link">Word Vectors</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/word_vectors/01_concept.html" class="sidebar-item-text sidebar-link">Word Vectors - Concepts</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/word_vectors/02_vectors_examples.html" class="sidebar-item-text sidebar-link">Term-Document and Term-Context matrices</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/word_vectors/03_word2vec.html" class="sidebar-item-text sidebar-link">word2vec</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Models</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/evaluation/index.html" class="sidebar-item-text sidebar-link">Evaluating models</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">python sessions</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/00_session1.html" class="sidebar-item-text sidebar-link">Starting Python</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/01_session2.html" class="sidebar-item-text sidebar-link">Lists and Dictionaries</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/02_session3.html" class="sidebar-item-text sidebar-link">Loops Etc.</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/03_session4.html" class="sidebar-item-text sidebar-link">Comprehensions and Useful Things</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/04_session5.html" class="sidebar-item-text sidebar-link">Making and Counting Bigrams</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#getting-there-by-little-steps" id="toc-getting-there-by-little-steps" class="nav-link active" data-scroll-target="#getting-there-by-little-steps">Getting there by little steps</a>
+  <ul class="collapse">
+  <li><a href="#why-not-always-just-do-grid-search" id="toc-why-not-always-just-do-grid-search" class="nav-link" data-scroll-target="#why-not-always-just-do-grid-search">Why not always just do grid search?</a></li>
+  <li><a href="#without-seeing-the-whole-map-we-can-tell-which-way-is-the-right-direction." id="toc-without-seeing-the-whole-map-we-can-tell-which-way-is-the-right-direction." class="nav-link" data-scroll-target="#without-seeing-the-whole-map-we-can-tell-which-way-is-the-right-direction.">Without seeing the whole map, we can tell which way is the right direction.</a></li>
+  </ul></li>
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent">Gradient Descent</a></li>
+  <li><a href="#learning-rates-and-epochs" id="toc-learning-rates-and-epochs" class="nav-link" data-scroll-target="#learning-rates-and-epochs">Learning Rates and “Epochs”</a></li>
+  <li><a href="#this-will-all-work-with-more-parameters" id="toc-this-will-all-work-with-more-parameters" class="nav-link" data-scroll-target="#this-will-all-work-with-more-parameters">This will all work with more parameters</a></li>
+  <li><a href="#even-more-complex" id="toc-even-more-complex" class="nav-link" data-scroll-target="#even-more-complex">Even more complex</a></li>
+  <li><a href="#categorical-prediction" id="toc-categorical-prediction" class="nav-link" data-scroll-target="#categorical-prediction">Categorical prediction</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Gradient Descent</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="getting-there-by-little-steps" class="level2">
+<h2 class="anchored" data-anchor-id="getting-there-by-little-steps">Getting there by little steps</h2>
+<div class="cell">
+
+</div>
+<p>What if wanted to convert inches to centimeters, but didn’t know that the formula is inches * 2.54? But what we <em>did</em> have was the following table of belt sizes from the Gap!</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Waist Size</th>
+<th style="text-align: right;">Belt Length (in)</th>
+<th style="text-align: right;">Belt Length (cm)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">30.5</td>
+<td style="text-align: right;">77</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">32.5</td>
+<td style="text-align: right;">83</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">34.5</td>
+<td style="text-align: right;">88</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">36.5</td>
+<td style="text-align: right;">93</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">38.5</td>
+<td style="text-align: right;">98</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">40.5</td>
+<td style="text-align: right;">103</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">42.5</td>
+<td style="text-align: right;">108</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">44.5</td>
+<td style="text-align: right;">113</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">46.5</td>
+<td style="text-align: right;">118</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">48.5</td>
+<td style="text-align: right;">123</td>
+</tr>
+</tbody>
+</table>
+<p>What we could do is <em>guess</em> the multiplier, and see how wrong it is.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>belt_in <span class="op">=</span> np.array([<span class="fl">30.5</span>, <span class="fl">32.5</span>, <span class="fl">34.5</span>, <span class="fl">36.5</span>, <span class="fl">38.5</span>, <span class="fl">40.5</span>, <span class="fl">42.5</span>, <span class="fl">44.5</span>, <span class="fl">46.5</span>, <span class="fl">48.5</span>])</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>belt_cm <span class="op">=</span> np.array([<span class="dv">77</span>, <span class="dv">83</span>, <span class="dv">88</span>, <span class="dv">93</span>, <span class="dv">98</span>, <span class="dv">103</span>, <span class="dv">108</span>, <span class="dv">113</span>, <span class="dv">118</span>, <span class="dv">123</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>multiplier_guess <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cm_guess <span class="op">=</span> belt_in <span class="op">*</span> multiplier_guess</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If our guess was right, this should all be 0</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cm_guess <span class="op">-</span> belt_cm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([-31.25, -34.25, -36.25, -38.25, -40.25, -42.25, -44.25, -46.25,
+       -48.25, -50.25])</code></pre>
+</div>
+</div>
+<p>Our guess wasn’t a great guess. With this multiplier, our guesses are all too small. Let’s describe how bad our guess was with one number, and call it the “loss.” The usual loss function for data like this is the Mean Squared Error.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mse(actual, guess):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Given the actual target outcomes and the outcomes we guessed,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">    calculate the mean squared error.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  error <span class="op">=</span> actual<span class="op">-</span>guess</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  squared_error <span class="op">=</span> np.power(error, <span class="dv">2</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  mean_squared_error <span class="op">=</span> np.mean(squared_error)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(mean_squared_error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mse(belt_cm, cm_guess)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1728.2125</code></pre>
+</div>
+</div>
+<p>If we made our multiplier guess a little closer to what it ought to be, though, our mean squared error, or loss, should get smaller.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>multiplier_guess <span class="op">+=</span> <span class="fl">0.2</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>cm_guess <span class="op">=</span> belt_in <span class="op">*</span> multiplier_guess</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mse(belt_cm, cm_guess)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1128.2125</code></pre>
+</div>
+</div>
+<p>One thing we could try doing is make a long list of possible multipliers, and try them all to see which one has the smallest loss. This is also known as a “grid search”. I’ll have to re-write the loss function to calculate the loss for specific multipliers</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This gives us 50 evenly spaced numbers between 0 and 50</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>possible_mults <span class="op">=</span> np.linspace(start <span class="op">=</span> <span class="fl">0.</span>, stop <span class="op">=</span> <span class="fl">5.</span>, num <span class="op">=</span> <span class="dv">50</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mse_loss(multiplier, inches, cm):</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">    given a multiplier, and a set of traning data,</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">    (inches and their equivalent centimeters), return the </span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">    mean squared error obtained by using the given multiplier</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  cm_guess <span class="op">=</span> inches <span class="op">*</span> multiplier</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  loss <span class="op">=</span> mse(cm_guess, cm)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(loss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>losses <span class="op">=</span> np.array([mse_loss(m, belt_in, belt_cm) <span class="cf">for</span> m <span class="kw">in</span> possible_mults])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>It’s probably best to visualize the relationship between the multiplier and the loss in a graph.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="01_gradient_descent_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="480"></p>
+</div>
+</div>
+<p>If we get the index of the smallest loss and get the associated multiplier, we can see that we’re not too far off!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>possible_mults[losses.argmin()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2.5510204081632653</code></pre>
+</div>
+</div>
+<section id="why-not-always-just-do-grid-search" class="level3">
+<h3 class="anchored" data-anchor-id="why-not-always-just-do-grid-search">Why not always just do grid search?</h3>
+<p>One thing that is going to remain the same no matter how complicated the models get is the measure of how well they’ve done, or the loss, is going to get boiled down to one number. But in real modelling situations, or neural networks, the number of <em>parameters</em> is going to get huge. Here we have only one parameter, but if we had even just 5 parameters, and tried doing a grid search over 50 evenly spaced values of each parameter, the number of possible combinations of parameter values will get intractable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>(<span class="dv">5</span> <span class="op">**</span> <span class="dv">50</span>)<span class="sc">:,}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'88,817,841,970,012,523,233,890,533,447,265,625'</code></pre>
+</div>
+</div>
+</section>
+<section id="without-seeing-the-whole-map-we-can-tell-which-way-is-the-right-direction." class="level3">
+<h3 class="anchored" data-anchor-id="without-seeing-the-whole-map-we-can-tell-which-way-is-the-right-direction.">Without seeing the whole map, we can tell which way is the right direction.</h3>
+<p>Let’s look at the plot of our parameter vs the loss again:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="01_gradient_descent_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="480"></p>
+</div>
+</div>
+<p>There are a few really important features of this loss function:</p>
+<ol type="1">
+<li>As the estimate gets further away from the ideal value in either direction, the loss increases.</li>
+<li>The increase is “monotonic”, meaning it’s not bumpy or sometime going up, sometimes going down.</li>
+<li>The further away the guess gets from the optimal value, the <em>steeper</em> the “walls” of the curve get.</li>
+</ol>
+<p>Let’s say we were just these two point here, and we couldn’t “see” the whole curve, but we knew features 1 through 3 were true. With that in hand, and information about how the loss function is calculated, we <em>can</em> get the <em>slope</em> of the function at each point (indicated by the arrows).</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="01_gradient_descent_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="480"></p>
+</div>
+</div>
+<p>If we were able to to update our parameter in a way that is proportional to the slope of the loss, then we would gradually get closer and closer to the optimal value. The updates would be very large at first, while the parameter values are far away from the optimal value, and then would start updating by smaller and smaller amounts as we home in on the optimal value because the slopes get shallower and shallower the closer we get.</p>
+<p>The slope of the loss function at any given point is the <strong>gradient</strong>, and this process of gradually descending downwards is called <strong>gradient descent</strong>.</p>
+</section>
+</section>
+<section id="gradient-descent" class="level2">
+<h2 class="anchored" data-anchor-id="gradient-descent">Gradient Descent</h2>
+<p>“But Joe!” you exclaim, “How <em>do</em> you calculate the slope of the loss for a single point without seeing the whole distribution?”</p>
+<p>The answer to that question used to be “with calculus.” But nowadays, people do it with “autograd” or “autodiff”, which basically means “we let the computer figure it out.” There isn’t autograd functionality in numpy, but there is in a closely related library called <a href="https://jax.readthedocs.io/en/latest/#">Jax, which is being developed by Google</a>. Jax has a module called <code>numpy</code> which is designed to operate exactly the same way as <code>numpy</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> grad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I’m going to rewrite the inches to centimeter functions over again, this time making sure to use jax functions to ensure everything runs smoothly.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> inch_to_cm_jax(multiplier, inches):</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">    a function that converts inches to cm</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  cm <span class="op">=</span> jnp.dot(inches, multiplier)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(cm)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cm_loss_jax(multiplier, inches, cm):</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">    estimate the mismatch between the</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  est <span class="op">=</span> inch_to_cm_jax(multiplier, inches)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  diff <span class="op">=</span> est <span class="op">-</span> cm</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  sq_err <span class="op">=</span> jnp.power(diff, <span class="dv">2</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  mean_sq_err <span class="op">=</span> jnp.mean(sq_err)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(mean_sq_err)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then we pass the new loss function to a jax function called <code>grad()</code> to create a new gradient function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cm_loss_grad_jax <span class="op">=</span> grad(cm_loss_jax, argnums<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Where <code>cm_loss_jax()</code> will give use the mean-squared error for a specific multiplier, <code>cm_loss_grad_jax()</code> will give us the <em>slope</em> for that multiplier, automatically.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(multiplier_guess)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.7</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the mean-squared-error</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cm_loss_jax(multiplier_guess, belt_in, belt_cm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1128.2124</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the slope</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cm_loss_grad_jax(multiplier_guess, belt_in, belt_cm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-2681.3499</code></pre>
+</div>
+</div>
+</section>
+<section id="learning-rates-and-epochs" class="level2">
+<h2 class="anchored" data-anchor-id="learning-rates-and-epochs">Learning Rates and “Epochs”</h2>
+<p>Now we can write a for-loop to iteratively update out multiplier guess, changing it just a little bit proportional to the gradient. There are two “hyper parameters” we need to choose here.</p>
+<ol type="1">
+<li>The “learning rate”. We can’t go adding the gradient <em>itself</em> to the multiplier. The gradient right now is in the thousands, and we’re trying to nudge 1.7 to 2.54. So, we pick a “learning rate”, which is just a very small decimal to multiply the gradient by before we add it to the parameter. I’ll say let’s start at 1/100,000</li>
+<li>The number of “epochs.” We need to decide how many for loops we’re going to go through before we decide to call it and check on how the learning has gone. I’ll say let’s go for 1000.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>learning_rate <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">100_000</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I want to be able to plot everything after, so I'm going to create collectors.</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>epoch_list    <span class="op">=</span> []</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>param_list    <span class="op">=</span> []</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>loss_list     <span class="op">=</span> []</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>gradient_list <span class="op">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>multiplier_guess <span class="op">=</span> <span class="fl">0.</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># append the current epoch</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  epoch_list.append(i)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># append the current guess</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  param_list.append(multiplier_guess)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  loss <span class="op">=</span> cm_loss_jax(multiplier_guess, belt_in, belt_cm)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  loss_list.append(loss)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  gradient <span class="op">=</span> cm_loss_grad_jax(multiplier_guess, belt_in, belt_cm)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  gradient_list.append(gradient)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  multiplier_guess <span class="op">+=</span> <span class="op">-</span>(gradient <span class="op">*</span> learning_rate)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The final guess was </span><span class="sc">{</span>multiplier_guess<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The final guess was 2.541</code></pre>
+</div>
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="01_gradient_descent_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+</section>
+<section id="this-will-all-work-with-more-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="this-will-all-work-with-more-parameters">This will all work with more parameters</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>bill_length <span class="op">=</span> np.array(penguins.dropna()[<span class="st">"bill_length_mm"</span>])</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>body_mass <span class="op">=</span> np.array(penguins.dropna()[<span class="st">"body_mass_g"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>bill_length_z <span class="op">=</span> (bill_length <span class="op">-</span> bill_length.mean())<span class="op">/</span>bill_length.std()</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>body_mass_z <span class="op">=</span> (body_mass <span class="op">-</span> body_mass.mean())<span class="op">/</span>body_mass.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>bill_length_X <span class="op">=</span> np.stack([np.ones(bill_length_z.size), bill_length_z], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>bill_length_X[<span class="dv">0</span>:<span class="dv">10</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([[ 1.        , -0.89604189],
+       [ 1.        , -0.82278787],
+       [ 1.        , -0.67627982],
+       [ 1.        , -1.33556603],
+       [ 1.        , -0.85941488],
+       [ 1.        , -0.9326689 ],
+       [ 1.        , -0.87772838],
+       [ 1.        , -0.52977177],
+       [ 1.        , -0.98760942],
+       [ 1.        , -1.72014965]])</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>param_guess <span class="op">=</span> np.array([<span class="fl">0.</span>, <span class="fl">0.</span>])</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>mass_guess <span class="op">=</span> np.dot(bill_length_X, param_guess)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>np.mean(np.power(body_mass_z <span class="op">-</span> mass_guess, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.0000000000000004</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fit_mass(params, X):</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Given some values and parameters</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">    guess the outcome </span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  est <span class="op">=</span> jnp.dot(X, params)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(est)</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fit_loss(params, X, actual):</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Return the loss of the params</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  est <span class="op">=</span> fit_mass(params, X)</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  err <span class="op">=</span> est <span class="op">-</span> actual</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  sq_err <span class="op">=</span> jnp.power(err, <span class="dv">2</span>)</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  mse <span class="op">=</span> jnp.mean(sq_err)</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(mse)</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>fit_grad <span class="op">=</span> grad(fit_loss, argnums<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>fit_loss(param_guess, bill_length_X, body_mass_z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DeviceArray(1.0000001, dtype=float32)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>fit_grad(param_guess, bill_length_X, body_mass_z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DeviceArray([ 1.3271347e-08, -1.1789025e+00], dtype=float32)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>epoch_list    <span class="op">=</span> []</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>param_list    <span class="op">=</span> []</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>loss_list     <span class="op">=</span> []</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>gradient_list <span class="op">=</span> []</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co"># I'm cheating starting out so close, just so this'll run quickly</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>param_guess <span class="op">=</span> np.array([<span class="fl">6.</span>, <span class="fl">4.</span>])</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>learning_rate <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co">#vt = np.array([0., 0.])</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># append the current epoch</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  epoch_list.append(i)</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>  param_list.append(param_guess)</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>  loss <span class="op">=</span> fit_loss(param_guess, bill_length_X, body_mass_z)</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>  loss_list.append(loss)</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>  gradient <span class="op">=</span> fit_grad(param_guess,  bill_length_X, body_mass_z)</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>  gradient_list.append(gradient)</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>  param_guess <span class="op">+=</span> <span class="op">-</span>(gradient <span class="op">*</span> learning_rate)</span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Final param guess was </span><span class="sc">{</span>param_guess<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Final param guess was [1.0582281e-08 5.8945251e-01]</code></pre>
+</div>
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>param_df <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">500</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> epoch)) <span class="sc">+</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> penguins, </span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x =</span> bill_length_z, <span class="at">y =</span> body_mass_z),</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">group =</span> <span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">slope =</span> slope, <span class="at">intercept =</span> intercept, <span class="at">color =</span> loss)) <span class="sc">+</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"serif"</span>, <span class="at">size =</span> <span class="dv">16</span>))<span class="sc">+</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transition_states</span>(<span class="at">states =</span> epoch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="01_gradient_descent_files/figure-html/unnamed-chunk-42-1.gif" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="even-more-complex" class="level2">
+<h2 class="anchored" data-anchor-id="even-more-complex">Even more complex</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>body_mass <span class="op">=</span> jnp.array(penguins.dropna()[<span class="st">"body_mass_g"</span>])</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>bill_length <span class="op">=</span> jnp.array(penguins.dropna()[<span class="st">"bill_length_mm"</span>])</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>bill_depth <span class="op">=</span> jnp.array(penguins.dropna()[<span class="st">"bill_depth_mm"</span>])</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>flipper_length <span class="op">=</span> jnp.array(penguins.dropna()[<span class="st">"flipper_length_mm"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>body_mass_z <span class="op">=</span> (body_mass<span class="op">-</span>body_mass.mean())<span class="op">/</span>body_mass.std()</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>bill_length_z <span class="op">=</span> (bill_length<span class="op">-</span>bill_length.mean())<span class="op">/</span>bill_length.std()</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>bill_depth_z <span class="op">=</span> (bill_depth<span class="op">-</span>bill_depth.mean())<span class="op">/</span>bill_depth.std()</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>flipper_length_z <span class="op">=</span> (flipper_length<span class="op">-</span>flipper_length.mean())<span class="op">/</span>flipper_length.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> jnp.vstack([bill_length_z, bill_depth_z, flipper_length_z])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> random</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax.nn <span class="im">import</span> relu</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>key <span class="op">=</span> random.PRNGKey(<span class="dv">42</span>)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>subkeys <span class="op">=</span> random.split(key, <span class="dv">3</span>)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>layer_1 <span class="op">=</span> random.uniform(key <span class="op">=</span> subkeys[<span class="dv">0</span>], shape <span class="op">=</span> (<span class="dv">3</span>,<span class="dv">5</span>))</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>layer_2 <span class="op">=</span> random.uniform(key <span class="op">=</span> subkeys[<span class="dv">1</span>], shape <span class="op">=</span> (<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>layer_3 <span class="op">=</span> random.uniform(key <span class="op">=</span> subkeys[<span class="dv">1</span>], shape <span class="op">=</span> (<span class="dv">5</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#jnp.dot(relu(jnp.dot(data.T, layer_1)), layer_2).squeeze()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> estimate_mass(layers, data):</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  l0_out <span class="op">=</span> jnp.dot(data.T, layers[<span class="dv">0</span>])</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#l0_act = relu(l0_out)</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  l1_out <span class="op">=</span> jnp.dot(l0_out, layers[<span class="dv">1</span>])</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#l1_act = relu(l1_out)</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  estimate <span class="op">=</span> jnp.dot(l1_out, layers[<span class="dv">2</span>])</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#estimate = jnp.dot(jnp.dot(jnp.dot(data.T, layers[0]), layers[1]), layers[2])</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(estimate)</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mass_loss(layers, data, body_mass_z):</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>  estimate <span class="op">=</span> estimate_mass(layers, data)</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  err <span class="op">=</span> estimate.squeeze() <span class="op">-</span> body_mass_z</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>  sq_err <span class="op">=</span> jnp.power(err, <span class="dv">2</span>)</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>  mean_sq_err <span class="op">=</span> sq_err.mean()</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(mean_sq_err)</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>mass_grad <span class="op">=</span> grad(mass_loss, argnums <span class="op">=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>est_list <span class="op">=</span> []</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>loss_list <span class="op">=</span> []</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>key <span class="op">=</span> random.PRNGKey(<span class="dv">42</span>)</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>subkeys <span class="op">=</span> random.split(key, <span class="dv">3</span>)</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>layer_1 <span class="op">=</span> random.uniform(key <span class="op">=</span> subkeys[<span class="dv">0</span>], shape <span class="op">=</span> (<span class="dv">3</span>,<span class="dv">5</span>))</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>layer_2 <span class="op">=</span> random.uniform(key <span class="op">=</span> subkeys[<span class="dv">1</span>], shape <span class="op">=</span> (<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>layer_3 <span class="op">=</span> random.uniform(key <span class="op">=</span> subkeys[<span class="dv">2</span>], shape <span class="op">=</span> (<span class="dv">5</span>,<span class="dv">1</span>))</span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>learning_rate <span class="op">=</span> <span class="fl">0.001</span></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>  est <span class="op">=</span> estimate_mass((layer_1, layer_2, layer_3), data)</span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>  loss <span class="op">=</span> mass_loss((layer_1, layer_2, layer_3), data, body_mass_z)</span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>  est_list.append(est)</span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>  loss_list.append(loss)</span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>  gradient <span class="op">=</span> mass_grad((layer_1, layer_2, layer_3), data, body_mass_z)</span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>  layer_1 <span class="op">+=</span> <span class="op">-</span>(gradient[<span class="dv">0</span>] <span class="op">*</span> learning_rate)</span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>  layer_2 <span class="op">+=</span> <span class="op">-</span>(gradient[<span class="dv">1</span>] <span class="op">*</span> learning_rate)</span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>  layer_3 <span class="op">+=</span> <span class="op">-</span>(gradient[<span class="dv">2</span>] <span class="op">*</span> learning_rate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>loss_arr <span class="op">=</span> np.array(loss_list)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>est_arr <span class="op">=</span> np.array(est_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(py<span class="sc">$</span>est_arr) <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">epoch =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">starts_with</span>(<span class="st">"X"</span>)) <span class="ot">-&gt;</span> fits</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gganimate)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_z =</span> <span class="fu">scale</span>(body_mass_g)) <span class="sc">%&gt;%</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_mass_z, species) <span class="sc">%&gt;%</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">paste0</span>(<span class="st">"X"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">333</span>)) <span class="ot">-&gt;</span> real_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>fits <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(real_data) <span class="sc">%&gt;%</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(epoch <span class="sc">%%</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(body_mass_z, value))<span class="sc">+</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"grey"</span>)<span class="sc">+</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"serif"</span>, <span class="at">size =</span> <span class="dv">16</span>))<span class="sc">+</span></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_bright</span>()<span class="sc">+</span></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transition_states</span>(<span class="at">states =</span> epoch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="01_gradient_descent_files/figure-html/unnamed-chunk-53-1.gif" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="categorical-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="categorical-prediction">Categorical prediction</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax.nn <span class="im">import</span> one_hot, softmax</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>unique_species <span class="op">=</span> <span class="bu">set</span>(penguins.dropna()[<span class="st">"species"</span>])</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>species_to_index <span class="op">=</span> {s:idx <span class="cf">for</span> idx, s <span class="kw">in</span> <span class="bu">enumerate</span>(unique_species)}</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>species_index <span class="op">=</span> np.array([species_to_index[s] <span class="cf">for</span> s <span class="kw">in</span> penguins.dropna()[<span class="st">"species"</span>]])</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>species_arr <span class="op">=</span> jnp.array(species_index)</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>species_one_hot <span class="op">=</span> one_hot(species_arr, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> jnp.vstack([bill_length_z, bill_depth_z, flipper_length_z, body_mass_z])</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>data_idx <span class="op">=</span> np.array(<span class="bu">list</span>(<span class="bu">range</span>(data.shape[<span class="dv">1</span>])))</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>n_train <span class="op">=</span> <span class="bu">int</span>(np.floor(data.shape[<span class="dv">1</span>] <span class="op">*</span> <span class="fl">0.8</span>))</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>train_idx <span class="op">=</span> np.random.choice(<span class="bu">list</span>(<span class="bu">range</span>(data.shape[<span class="dv">1</span>])), size <span class="op">=</span> n_train)</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>test_idx <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">list</span>(<span class="bu">range</span>(data.shape[<span class="dv">1</span>])) <span class="cf">if</span> <span class="kw">not</span> x <span class="kw">in</span> train_idx]</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>data_train <span class="op">=</span> data[:, train_idx]</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>data_test <span class="op">=</span> data[:, test_idx]</span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>label_train <span class="op">=</span> species_one_hot[train_idx,]</span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>label_test <span class="op">=</span> species_one_hot[test_idx,]</span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>species_index_train <span class="op">=</span> species_index[train_idx]</span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a>species_index_test <span class="op">=</span> species_index[test_idx]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>label_train.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(266, 3)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> estimate_species(layers, biases, data):</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  l0_out <span class="op">=</span> jnp.dot(data.T, layers[<span class="dv">0</span>]) <span class="op">+</span> biases[<span class="dv">0</span>]</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  l0_act <span class="op">=</span> relu(l0_out)</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  l1_out <span class="op">=</span> jnp.dot(l0_out, layers[<span class="dv">1</span>]) <span class="op">+</span> biases[<span class="dv">1</span>]</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>  l1_act <span class="op">=</span> relu(l1_out)</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>  l2_out <span class="op">=</span> jnp.dot(l1_out, layers[<span class="dv">2</span>]) <span class="op">+</span> biases[<span class="dv">2</span>]</span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>  estimate <span class="op">=</span> softmax(l2_out, axis <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#estimate = jnp.dot(jnp.dot(jnp.dot(data.T, layers[0]), layers[1]), layers[2])</span></span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(estimate)</span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> estimate_loss(layers, biases, data, species_one_hot):</span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>  est <span class="op">=</span> estimate_species(layers, biases, data)</span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a>  loss <span class="op">=</span> <span class="op">-</span><span class="dv">1</span> <span class="op">*</span> (jnp.log(est) <span class="op">*</span> species_one_hot).<span class="bu">sum</span>()</span>
+<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(loss)</span>
+<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> accuracy(est, species_index):</span>
+<span id="cb63-17"><a href="#cb63-17" aria-hidden="true" tabindex="-1"></a>  acc <span class="op">=</span> <span class="bu">sum</span>(est.argmax(<span class="dv">1</span>) <span class="op">==</span> species_index)<span class="op">/</span>species_index.size</span>
+<span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(acc)</span>
+<span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a>estimate_grad <span class="op">=</span> grad(estimate_loss, argnums <span class="op">=</span> (<span class="dv">0</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>key <span class="op">=</span> random.PRNGKey(<span class="dv">42</span>)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>layer_1 <span class="op">=</span> random.uniform(key <span class="op">=</span> subkeys[<span class="dv">0</span>], shape <span class="op">=</span> (<span class="dv">4</span>,<span class="dv">5</span>))</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>biases_1 <span class="op">=</span> random.uniform(key <span class="op">=</span> subkeys[<span class="dv">1</span>], shape <span class="op">=</span> (<span class="dv">5</span>,))</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>layer_2 <span class="op">=</span> random.uniform(key <span class="op">=</span> subkeys[<span class="dv">2</span>], shape <span class="op">=</span> (<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>biases_2 <span class="op">=</span> random.uniform(key <span class="op">=</span> subkeys[<span class="dv">3</span>], shape <span class="op">=</span> (<span class="dv">5</span>,))</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>layer_3 <span class="op">=</span> random.uniform(key <span class="op">=</span> subkeys[<span class="dv">4</span>], shape <span class="op">=</span> (<span class="dv">5</span>,<span class="dv">3</span>))</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>biases_3 <span class="op">=</span> random.uniform(key <span class="op">=</span> subkeys[<span class="dv">5</span>], shape <span class="op">=</span> (<span class="dv">3</span>,))</span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">900</span></span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>learning_rate <span class="op">=</span> <span class="fl">0.001</span></span>
+<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a>train_loss_list <span class="op">=</span> []</span>
+<span id="cb64-14"><a href="#cb64-14" aria-hidden="true" tabindex="-1"></a>test_loss_list <span class="op">=</span> []</span>
+<span id="cb64-15"><a href="#cb64-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-16"><a href="#cb64-16" aria-hidden="true" tabindex="-1"></a>train_acc_list <span class="op">=</span> []</span>
+<span id="cb64-17"><a href="#cb64-17" aria-hidden="true" tabindex="-1"></a>test_acc_list <span class="op">=</span> []</span>
+<span id="cb64-18"><a href="#cb64-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-19"><a href="#cb64-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-20"><a href="#cb64-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
+<span id="cb64-21"><a href="#cb64-21" aria-hidden="true" tabindex="-1"></a>  est <span class="op">=</span> estimate_species((layer_1, layer_2, layer_3),</span>
+<span id="cb64-22"><a href="#cb64-22" aria-hidden="true" tabindex="-1"></a>                         (biases_1, biases_2, biases_3),</span>
+<span id="cb64-23"><a href="#cb64-23" aria-hidden="true" tabindex="-1"></a>                          data_train)</span>
+<span id="cb64-24"><a href="#cb64-24" aria-hidden="true" tabindex="-1"></a>  train_loss <span class="op">=</span> estimate_loss((layer_1, layer_2, layer_3),</span>
+<span id="cb64-25"><a href="#cb64-25" aria-hidden="true" tabindex="-1"></a>                       (biases_1, biases_2, biases_3),</span>
+<span id="cb64-26"><a href="#cb64-26" aria-hidden="true" tabindex="-1"></a>                       data_train, label_train)</span>
+<span id="cb64-27"><a href="#cb64-27" aria-hidden="true" tabindex="-1"></a>  train_loss_list.append(train_loss)</span>
+<span id="cb64-28"><a href="#cb64-28" aria-hidden="true" tabindex="-1"></a>  train_acc <span class="op">=</span> accuracy(est, species_index_train)</span>
+<span id="cb64-29"><a href="#cb64-29" aria-hidden="true" tabindex="-1"></a>  train_acc_list.append(train_acc)</span>
+<span id="cb64-30"><a href="#cb64-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb64-31"><a href="#cb64-31" aria-hidden="true" tabindex="-1"></a>  test_est <span class="op">=</span>  estimate_species((layer_1, layer_2, layer_3),</span>
+<span id="cb64-32"><a href="#cb64-32" aria-hidden="true" tabindex="-1"></a>                         (biases_1, biases_2, biases_3),</span>
+<span id="cb64-33"><a href="#cb64-33" aria-hidden="true" tabindex="-1"></a>                          data_test)</span>
+<span id="cb64-34"><a href="#cb64-34" aria-hidden="true" tabindex="-1"></a>  test_loss <span class="op">=</span> estimate_loss((layer_1, layer_2, layer_3),</span>
+<span id="cb64-35"><a href="#cb64-35" aria-hidden="true" tabindex="-1"></a>                       (biases_1, biases_2, biases_3),</span>
+<span id="cb64-36"><a href="#cb64-36" aria-hidden="true" tabindex="-1"></a>                       data_test, label_test)</span>
+<span id="cb64-37"><a href="#cb64-37" aria-hidden="true" tabindex="-1"></a>  test_loss_list.append(test_loss)</span>
+<span id="cb64-38"><a href="#cb64-38" aria-hidden="true" tabindex="-1"></a>  test_acc <span class="op">=</span> accuracy(test_est, species_index_test)</span>
+<span id="cb64-39"><a href="#cb64-39" aria-hidden="true" tabindex="-1"></a>  test_acc_list.append(test_acc)</span>
+<span id="cb64-40"><a href="#cb64-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb64-41"><a href="#cb64-41" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb64-42"><a href="#cb64-42" aria-hidden="true" tabindex="-1"></a>  gradient <span class="op">=</span> estimate_grad((layer_1, layer_2, layer_3),</span>
+<span id="cb64-43"><a href="#cb64-43" aria-hidden="true" tabindex="-1"></a>                           (biases_1, biases_2, biases_3),</span>
+<span id="cb64-44"><a href="#cb64-44" aria-hidden="true" tabindex="-1"></a>                            data_train, label_train)</span>
+<span id="cb64-45"><a href="#cb64-45" aria-hidden="true" tabindex="-1"></a>  layer_1 <span class="op">+=</span> <span class="op">-</span>(learning_rate <span class="op">*</span> gradient[<span class="dv">0</span>][<span class="dv">0</span>])</span>
+<span id="cb64-46"><a href="#cb64-46" aria-hidden="true" tabindex="-1"></a>  layer_2 <span class="op">+=</span> <span class="op">-</span>(learning_rate <span class="op">*</span> gradient[<span class="dv">0</span>][<span class="dv">1</span>])</span>
+<span id="cb64-47"><a href="#cb64-47" aria-hidden="true" tabindex="-1"></a>  layer_3 <span class="op">+=</span> <span class="op">-</span>(learning_rate <span class="op">*</span> gradient[<span class="dv">0</span>][<span class="dv">2</span>])</span>
+<span id="cb64-48"><a href="#cb64-48" aria-hidden="true" tabindex="-1"></a>  biases_1 <span class="op">+=</span> <span class="op">-</span>(learning_rate <span class="op">*</span> gradient[<span class="dv">1</span>][<span class="dv">0</span>])</span>
+<span id="cb64-49"><a href="#cb64-49" aria-hidden="true" tabindex="-1"></a>  biases_2 <span class="op">+=</span> <span class="op">-</span>(learning_rate <span class="op">*</span> gradient[<span class="dv">1</span>][<span class="dv">1</span>])</span>
+<span id="cb64-50"><a href="#cb64-50" aria-hidden="true" tabindex="-1"></a>  biases_3 <span class="op">+=</span> <span class="op">-</span>(learning_rate <span class="op">*</span> gradient[<span class="dv">1</span>][<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>train_acc_arr <span class="op">=</span> np.array(train_acc_list)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>test_acc_arr <span class="op">=</span> np.array(test_acc_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(py<span class="sc">$</span>train_acc_arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="01_gradient_descent_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>train_loss_arr <span class="op">=</span> np.array(train_loss_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>py<span class="sc">$</span>train_loss_arr[<span class="dv">900</span><span class="sc">:</span><span class="dv">1000</span>] <span class="sc">*</span> <span class="fl">0.001</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] NaN  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+ [19]  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+ [37]  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+ [55]  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+ [73]  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+ [91]  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
