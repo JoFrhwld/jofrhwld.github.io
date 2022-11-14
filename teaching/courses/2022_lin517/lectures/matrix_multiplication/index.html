@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Josef Fruehwald">
+<meta name="dcterms.date" content="2022-11-16">
 
 <title>Lin517: Natural Language Processing - Matrix Multiplication</title>
 <style>
@@ -353,7 +354,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-is-matrix-multiplication-used-for" id="toc-what-is-matrix-multiplication-used-for" class="nav-link active" data-scroll-target="#what-is-matrix-multiplication-used-for">What is Matrix Multiplication used for?</a></li>
+  <li><a href="#how-does-it-work" id="toc-how-does-it-work" class="nav-link" data-scroll-target="#how-does-it-work">How does it work?</a>
+  <ul class="collapse">
+  <li><a href="#what-just-happened." id="toc-what-just-happened." class="nav-link" data-scroll-target="#what-just-happened.">What just happened.</a></li>
+  <li><a href="#some-rules-for-matrix-multiplication" id="toc-some-rules-for-matrix-multiplication" class="nav-link" data-scroll-target="#some-rules-for-matrix-multiplication">Some rules for matrix multiplication</a></li>
+  <li><a href="#a-more-interesting-conversion-matrix" id="toc-a-more-interesting-conversion-matrix" class="nav-link" data-scroll-target="#a-more-interesting-conversion-matrix">A more interesting conversion matrix</a></li>
+  </ul></li>
+  <li><a href="#the-way-this-relates-to-neural-networks" id="toc-the-way-this-relates-to-neural-networks" class="nav-link" data-scroll-target="#the-way-this-relates-to-neural-networks">The way this relates to neural networks</a>
+  <ul class="collapse">
+  <li><a href="#things-to-note" id="toc-things-to-note" class="nav-link" data-scroll-target="#things-to-note">Things to note</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -361,7 +378,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">Matrix Multiplication</h1>
-</div>
+  <div class="quarto-categories">
+    <div class="quarto-category">Neural Networks</div>
+  </div>
+  </div>
 
 
 
@@ -374,6 +394,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 16, 2022</p>
+    </div>
+  </div>
   
     
   </div>
@@ -381,66 +407,250 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>In the lecture notes on <a href="../../lectures/gradient_descent/01_gradient_descent.html">gradient descent</a>, we already saw the use of matrix multiplication used to do linear regression, and I framed it as a kind of extension of dot products. Let’s</p>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In the lecture notes on <a href="../../lectures/gradient_descent/01_gradient_descent.html">gradient descent</a>, we already saw the use of matrix multiplication used to do linear regression, and I framed it as a kind of extension of dot products. Let’s expand upon that.</p>
+<section id="what-is-matrix-multiplication-used-for" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-matrix-multiplication-used-for">What is Matrix Multiplication used for?</h2>
+<p>Matrix multiplication is what makes almost everything work.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> thing <span class="kw">in</span> set_of_all_things:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   <span class="cf">if</span> matrix_multiplication <span class="kw">in</span> thing:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      works <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      works <span class="op">=</span> Maybe?</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It’s so fundamental to so many areas of mathematics, statistics, machine learning, etc this is how mathematicians talk about trying to discover new matrix multiplication algorithms:</p>
+<blockquote class="blockquote">
+<p>“It’s hard to distinguish scientific thinking from wishful thinking,” said <a href="http://users.cms.caltech.edu/~umans/">Chris Umans</a> of the California Institute of Technology. “I want the exponent to be two because it’s beautiful.”</p>
+<p>“Exponent two” refers to the ideal speed — in terms of number of steps required — of performing one of the most fundamental operations in math: matrix multiplication. If exponent two is achievable, then it’s possible to carry out matrix multiplication as fast as physically possible. If it’s not, then we’re stuck in a world misfit to our dreams. —<a href="https://www.quantamagazine.org/mathematicians-inch-closer-to-matrix-multiplication-goal-20210323/"><em>Quanta Magazine</em></a></p>
+</blockquote>
+<p>Any regression model, principle components analysis, neural network, word2vec model, automatic speech recognition, self driving car, and even this rotating map of Kentucky, all use matrix multiplication for their basic operation.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.gif" class="img-fluid"></p>
 </div>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>foot_in_tocm <span class="op">=</span> np.array([[<span class="fl">2.54</span> <span class="op">*</span> <span class="dv">12</span>], </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                         [<span class="fl">2.54</span>]])</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>foot_in_tocm                         </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+</div>
+</section>
+<section id="how-does-it-work" class="level2">
+<h2 class="anchored" data-anchor-id="how-does-it-work">How does it work?</h2>
+<p>We’ll be using numpy to do matrix multiplication, and we’ll revisit the task of converting heights in feet and inches to centimeters. To convert feet to centimeters, we need to multiply it by 30.48, and to convert inches to centimeters, we need to multiply them by 2.54. Let’s set up a column vector with these values</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>foot_in_tocm <span class="op">=</span> np.array([[<span class="fl">30.48</span>], </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                         [ <span class="fl">2.54</span>]])</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>foot_in_tocm                         </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>array([[30.48],
        [ 2.54]])</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>heights_ft <span class="op">=</span> np.array([[<span class="dv">5</span>,<span class="dv">10</span>],</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                       [<span class="dv">5</span>, <span class="dv">11</span>],</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                       [<span class="dv">5</span>, <span class="dv">4</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>heights_ft[<span class="dv">1</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>array([ 5, 11])</code></pre>
+<p>I’ve called it a “column” vector, because it a actually has two rows, and one column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>foot_in_tocm.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(2, 1)</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>np.dot(heights_ft[<span class="dv">1</span>, ], foot_in_tocm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>array([180.34])</code></pre>
+<p>And let’s set up a matrix of heights in feet and inches for an away mission with Jen Luc Picard, Lt. Data, and Deanna Troi. We’ll have one row per away team member, and one column for the foot component of their height and another for the inches component of their height.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>heights_ft <span class="op">=</span> np.array([[<span class="dv">5</span>, <span class="dv">10</span>],</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                       [<span class="dv">5</span>, <span class="dv">11</span>],</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                       [<span class="dv">5</span>,  <span class="dv">5</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In order to convert each away team member’s height into centimeters, we need to</p>
+<ul>
+<li><p>Multiply their feet component by 30.48</p></li>
+<li><p>Multiply their inches component by 2.54</p></li>
+<li><p>Sum the result.</p></li>
+</ul>
+<p>a.k.a a dot product. We’ve got heights as rows…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>heights_ft[<span class="dv">0</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([ 5, 10])</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>np.dot(heights_ft, foot_in_tocm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<p>… and the conversion factors as columns…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>foot_in_tocm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([[30.48],
+       [ 2.54]])</code></pre>
+</div>
+</div>
+<p>But this is the <em>usual</em> organization of values for doing a dot product. You take the values across columns of matrix A, multiply them by the values across rows in matrix B, and sum up the result.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>np.dot(heights_ft[<span class="dv">0</span>, ], foot_in_tocm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([177.8])</code></pre>
+</div>
+</div>
+<p>So, Jean Luc Picard is 177.8 centimeters tall. If we take the dot product of the whole <code>heights_ft</code> matrix, without doing any indexing, and <code>foot_in_tocm</code> we’ll get back a column vector of every away team member’s height.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>np.dot(heights_ft, foot_in_tocm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>array([[177.8 ],
        [180.34],
-       [162.56]])</code></pre>
+       [165.1 ]])</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>heights_ft <span class="op">@</span> foot_in_tocm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<p>There’s also a convenience operator built in to do matrix multiplication: <code>@</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>heights_ft <span class="op">@</span> foot_in_tocm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>array([[177.8 ],
        [180.34],
-       [162.56]])</code></pre>
+       [165.1 ]])</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>foot_in_foo <span class="op">=</span> np.array([[<span class="dv">30</span>, <span class="dv">60</span>],</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                        [<span class="fl">2.54</span>, <span class="dv">5</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="what-just-happened." class="level3">
+<h3 class="anchored" data-anchor-id="what-just-happened.">What just happened.</h3>
+<p>Matrix multiplication goes rowwise down the first matrix, and pulls out a row. Then it takes the dot product of that row and the first column of the second matrix. Then, the result gets saved as the first row, first column of the result matrix.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/matmul.gif" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>heights_ft <span class="op">@</span> foot_in_foo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>array([[175.4 , 350.  ],
-       [177.94, 355.  ],
-       [160.16, 320.  ]])</code></pre>
+</section>
+<section id="some-rules-for-matrix-multiplication" class="level3">
+<h3 class="anchored" data-anchor-id="some-rules-for-matrix-multiplication">Some rules for matrix multiplication</h3>
+<p>Matrix multiplication isn’t “commutative”. That is to say, while <code>heights_ft @ foot_in_tocm</code> works, if we flipped the arguments to <code>foot_in_tocm @ heights_ft</code>, we’ll get an error.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>foot_in_tocm <span class="op">@</span> heights_ft</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in py_call_impl(callable, dots$args, dots$keywords): ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)-&gt;(n?,m?) (size 3 is different from 1)</code></pre>
 </div>
 </div>
+<p>This is because the number of columns in the first matrix always need to match the number of rows in the second matrix. You can kind of visualize this requirement by lining up the matrix <code>.shape</code>s like this:</p>
+<pre><code>✅ Good!
+Matrix A shape    (3,   2)
+Matrix B Shape         (2,   1)
+
+🚫 Bad!
+Matrix B shape   (2,   1)
+Matrix A shpe         (2,   3)</code></pre>
+<p>The resulting matrix will have the same number of rows from matrix A and the same number of columns as matrix B, which we can also visualize like this:</p>
+<pre><code>Matrix A shape    (3,   2)
+Matrix B Shape         (2,   1)
+Result Shape      (3,        1)</code></pre>
+</section>
+<section id="a-more-interesting-conversion-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="a-more-interesting-conversion-matrix">A more interesting conversion matrix</h3>
+<p>To convert feet and inches in to centimeters, we created a matrix with a two rows, and one column. Let’s say we wanted to simultaneously convert the crew’s heights into meters and into yards. We just need to add columns to the conversion matrix with what we need to multiply feet and inches by for these other measurement units.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">##                          cm      m      yd                         </span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>foot_in_other <span class="op">=</span> np.array([[<span class="fl">30.48</span>, <span class="fl">0.3048</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>],   <span class="co"># foot multiplier</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                          [<span class="fl">2.54</span>,  <span class="fl">0.0254</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">36</span>]]) <span class="co"># inch multiplier</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then, we matrix multiply the</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>heights_ft <span class="op">@</span> foot_in_other</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([[177.8       ,   1.778     ,   1.94444444],
+       [180.34      ,   1.8034    ,   1.97222222],
+       [165.1       ,   1.651     ,   1.80555556]])</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="the-way-this-relates-to-neural-networks" class="level2">
+<h2 class="anchored" data-anchor-id="the-way-this-relates-to-neural-networks">The way this relates to neural networks</h2>
+<p>Let’s start with an imaginary task of trying to guess which species a penguin is, based on one of 4 body measurements. This code loads the penguins data set and pulls out a matrix of the body length measures, and a vector of species.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>peng</code> dataset is in a format called a pandas dataframe that we haven’t gotten a chance to learn about yet.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>peng <span class="op">=</span> load_penguins()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>body_meas <span class="op">=</span> peng[[<span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>, </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"flipper_length_mm"</span>, <span class="st">"body_mass_g"</span>]].<span class="op">\</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                  dropna()</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>species <span class="op">=</span> peng.dropna()[<span class="st">"species"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s pull out one row of body measurements for an individual penguin</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>one_penguin <span class="op">=</span> np.array(body_meas)[<span class="dv">0</span>,:]</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>one_penguin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([  39.1,   18.7,  181. , 3750. ])</code></pre>
+</div>
+</div>
+<p>With our neural network, we’ll want to use these 4 Input values to try to predict which one of 3 species this individual penguin is, ad we’ll try to do that with a “hidden” layer of 10 nodes. That kind of model is conventionally represented like so:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/nn.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>To get the value that’s supposed to be in the first hidden layer node, we multiply each of the 4 body measurement by some number, then sum them together.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/nod1.svg" class="img-fluid figure-img" width="400"></p>
+</figure>
+</div>
+<p>That should be starting to sound like a familiar process! To do that for a single node, we just do a dot product, but to repeat it simultaneously for all hidden layer nodes, we need a matrix of weights to do matrix multiplication with. To work out the shape of the matrix we need, we can go back to thinking about how the shapes of the matrices we multiply relate to the outputs</p>
+<pre><code>Input shape      (1,     4)
+weights shape?          (?,     ?)
+hidden shape     (1,           10)</code></pre>
+<p>It looks like we need a 4 by 10 matrix to convert the 4 input data dimensions into 10 hidden dimensions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>to_hidden_layer <span class="op">=</span> np.random.random((<span class="dv">4</span>, <span class="dv">10</span>))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>hidden_layer <span class="op">=</span> one_penguin <span class="op">@</span> to_hidden_layer</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>hidden_layer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([3175.93114323, 2702.37376047, 1110.83116497, 3804.36145994,
+       2313.42332874,  932.48112235, 1124.20627424, 2613.57451926,
+       3782.15394471, 2235.27438217])</code></pre>
+</div>
+</div>
+<p>Then, we need translate the values for these 10 hidden nodes into 3 values for the output nodes.</p>
+<pre><code>hidden shape      (1,   10)
+weights shape?         ( ?    ?)
+output shape      (1,         3)</code></pre>
+<p>Looks like we’ll need a 10 by 3 matrix.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>to_output <span class="op">=</span> np.random.random((<span class="dv">10</span>, <span class="dv">3</span>))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> hidden_layer <span class="op">@</span> to_output</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([13675.30911592, 14396.21097368, 12356.73246635])</code></pre>
+</div>
+</div>
+<p>And then, we’d probably convert the output to probabilities using softmax, and whichever node has the largest probability we choose as the species.</p>
+<section id="things-to-note" class="level3">
+<h3 class="anchored" data-anchor-id="things-to-note">Things to note</h3>
+<p>First, a nifty thing is that the matrices we created to convert one penguin’s data to 3 output nodes will work just as well converting an arbitrary number of penguin’s data to output nodes.</p>
+<pre><code>input            (N,  4)
+hidden weights       (4, 10)
+hidden nodes     (N,     10)
+output weights          (10, 3)
+output           (N,          3)</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>np.array(body_meas)[<span class="dv">0</span>:<span class="dv">6</span>, ] <span class="op">@</span> to_hidden_layer <span class="op">@</span> to_output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([[13675.30911592, 14396.21097368, 12356.73246635],
+       [13861.02138365, 14592.08783466, 12525.73684929],
+       [11994.01605001, 12649.71028111, 10875.00265924],
+       [12669.50632969, 13353.26275848, 11474.57692904],
+       [13363.04411164, 14076.829745  , 12089.55057138],
+       [13240.78045567, 13942.14368914, 11969.5783128 ]])</code></pre>
+</div>
+</div>
+<p>The second thing to note is that these numbers we just got, based on random weights in the matrices, are obviously bad. But, they can be improved with <a href="&quot;../gradient_descent/01_gradient_descent.qmd&quot;">gradient descent</a>!</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

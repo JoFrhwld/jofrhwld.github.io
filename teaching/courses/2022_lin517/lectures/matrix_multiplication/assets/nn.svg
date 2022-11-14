@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="637.12067"
+   height="565.29901"
+   version="1.1"
+   id="svg302"
+   sodipodi:docname="nn.svg"
+   inkscape:version="1.2.1 (9c6d41e, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview304"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.72222222"
+     inkscape:cx="218.76923"
+     inkscape:cy="355.15385"
+     inkscape:window-width="1728"
+     inkscape:window-height="961"
+     inkscape:window-x="0"
+     inkscape:window-y="38"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg302" />
+  <g
+     transform="matrix(1.0021006,0,0,1.0021006,-600.06058,-166.3487)"
+     id="g295">
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,345.5 265,-108"
+       style="opacity:1;stroke:#2121ff;stroke-width:0.87;stroke-opacity:1"
+       id="path132" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,345.5 265,-54"
+       style="opacity:1;stroke:#ffebeb;stroke-width:0.87;stroke-opacity:1"
+       id="path134" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="M 633,345.5 H 898"
+       style="opacity:1;stroke:#ff2222;stroke-width:0.87;stroke-opacity:1"
+       id="path136" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,345.5 265,54"
+       style="opacity:1;stroke:#d2d2ff;stroke-width:0.87;stroke-opacity:1"
+       id="path138" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,345.5 265,108"
+       style="opacity:1;stroke:#7777ff;stroke-width:0.87;stroke-opacity:1"
+       id="path140" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,345.5 265,162"
+       style="opacity:1;stroke:#a6a6ff;stroke-width:0.87;stroke-opacity:1"
+       id="path142" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,345.5 265,216"
+       style="opacity:1;stroke:#0404ff;stroke-width:0.87;stroke-opacity:1"
+       id="path144" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,345.5 265,270"
+       style="opacity:1;stroke:#e1e1ff;stroke-width:0.87;stroke-opacity:1"
+       id="path146" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,345.5 265,324"
+       style="opacity:1;stroke:#efefff;stroke-width:0.87;stroke-opacity:1"
+       id="path148" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,399.5 265,-162"
+       style="opacity:1;stroke:#c1c1ff;stroke-width:0.87;stroke-opacity:1"
+       id="path150" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,399.5 265,-108"
+       style="opacity:1;stroke:#9595ff;stroke-width:0.87;stroke-opacity:1"
+       id="path152" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,399.5 265,-54"
+       style="opacity:1;stroke:#9292ff;stroke-width:0.87;stroke-opacity:1"
+       id="path154" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="M 633,399.5 H 898"
+       style="opacity:1;stroke:#8181ff;stroke-width:0.87;stroke-opacity:1"
+       id="path156" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,399.5 265,54"
+       style="opacity:1;stroke:#c4c4ff;stroke-width:0.87;stroke-opacity:1"
+       id="path158" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,399.5 265,108"
+       style="opacity:1;stroke:#ff9b9b;stroke-width:0.87;stroke-opacity:1"
+       id="path160" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,399.5 265,162"
+       style="opacity:1;stroke:#aeaeff;stroke-width:0.87;stroke-opacity:1"
+       id="path162" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,399.5 265,216"
+       style="opacity:1;stroke:#2424ff;stroke-width:0.87;stroke-opacity:1"
+       id="path164" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,399.5 265,270"
+       style="opacity:1;stroke:#fffefe;stroke-width:0.87;stroke-opacity:1"
+       id="path166" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,453.5 265,-216"
+       style="opacity:1;stroke:#2626ff;stroke-width:0.87;stroke-opacity:1"
+       id="path168" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,453.5 265,-162"
+       style="opacity:1;stroke:#4242ff;stroke-width:0.87;stroke-opacity:1"
+       id="path170" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,453.5 265,-108"
+       style="opacity:1;stroke:#ff3a3a;stroke-width:0.87;stroke-opacity:1"
+       id="path172" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,453.5 265,-54"
+       style="opacity:1;stroke:#ffc1c1;stroke-width:0.87;stroke-opacity:1"
+       id="path174" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="M 633,453.5 H 898"
+       style="opacity:1;stroke:#3939ff;stroke-width:0.87;stroke-opacity:1"
+       id="path176" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,453.5 265,54"
+       style="opacity:1;stroke:#1d1dff;stroke-width:0.87;stroke-opacity:1"
+       id="path178" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,453.5 265,108"
+       style="opacity:1;stroke:#0909ff;stroke-width:0.87;stroke-opacity:1"
+       id="path180" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,453.5 265,162"
+       style="opacity:1;stroke:#ff5151;stroke-width:0.87;stroke-opacity:1"
+       id="path182" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,453.5 265,216"
+       style="opacity:1;stroke:#ff4848;stroke-width:0.87;stroke-opacity:1"
+       id="path184" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,507.5 265,-270"
+       style="opacity:1;stroke:#f6f6ff;stroke-width:0.87;stroke-opacity:1"
+       id="path186" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,507.5 265,-216"
+       style="opacity:1;stroke:#8b8bff;stroke-width:0.87;stroke-opacity:1"
+       id="path188" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,507.5 265,-162"
+       style="opacity:1;stroke:#ff4d4d;stroke-width:0.87;stroke-opacity:1"
+       id="path190" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,507.5 265,-108"
+       style="opacity:1;stroke:#ff8f8f;stroke-width:0.87;stroke-opacity:1"
+       id="path192" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,507.5 265,-54"
+       style="opacity:1;stroke:#7b7bff;stroke-width:0.87;stroke-opacity:1"
+       id="path194" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="M 633,507.5 H 898"
+       style="opacity:1;stroke:#8484ff;stroke-width:0.87;stroke-opacity:1"
+       id="path196" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,507.5 265,54"
+       style="opacity:1;stroke:#f3f3ff;stroke-width:0.87;stroke-opacity:1"
+       id="path198" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,507.5 265,108"
+       style="opacity:1;stroke:#0202ff;stroke-width:0.87;stroke-opacity:1"
+       id="path200" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,507.5 265,162"
+       style="opacity:1;stroke:#ff7878;stroke-width:0.87;stroke-opacity:1"
+       id="path202" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,183.5 265,243"
+       style="opacity:1;stroke:#5f5fff;stroke-width:0.87;stroke-opacity:1"
+       id="path204" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,237.5 265,189"
+       style="opacity:1;stroke:#2e2eff;stroke-width:0.87;stroke-opacity:1"
+       id="path206" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,291.5 265,135"
+       style="opacity:1;stroke:#5a5aff;stroke-width:0.87;stroke-opacity:1"
+       id="path208" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,345.5 265,81"
+       style="opacity:1;stroke:#0909ff;stroke-width:0.87;stroke-opacity:1"
+       id="path210" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,399.5 265,27"
+       style="opacity:1;stroke:#e8e8ff;stroke-width:0.87;stroke-opacity:1"
+       id="path212" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,453.5 265,-27"
+       style="opacity:1;stroke:#ff4444;stroke-width:0.87;stroke-opacity:1"
+       id="path214" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,507.5 265,-81"
+       style="opacity:1;stroke:#ff8484;stroke-width:0.87;stroke-opacity:1"
+       id="path216" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,561.5 265,-135"
+       style="opacity:1;stroke:#e0e0ff;stroke-width:0.87;stroke-opacity:1"
+       id="path218" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,615.5 265,-189"
+       style="opacity:1;stroke:#ff1616;stroke-width:0.87;stroke-opacity:1"
+       id="path220" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,669.5 265,-243"
+       style="opacity:1;stroke:#ffbdbd;stroke-width:0.87;stroke-opacity:1"
+       id="path222" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,345.5 265,-162"
+       style="opacity:1;stroke:#6565ff;stroke-width:0.87;stroke-opacity:1"
+       id="path224" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,399.5 265,-216"
+       style="opacity:1;stroke:#9999ff;stroke-width:0.87;stroke-opacity:1"
+       id="path226" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,453.5 265,-270"
+       style="opacity:1;stroke:#3131ff;stroke-width:0.87;stroke-opacity:1"
+       id="path228" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 633,507.5 265,-324"
+       style="opacity:1;stroke:#5555ff;stroke-width:0.87;stroke-opacity:1"
+       id="path230" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,183.5 265,189"
+       style="opacity:1;stroke:#7272ff;stroke-width:0.87;stroke-opacity:1"
+       id="path232" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,237.5 265,135"
+       style="opacity:1;stroke:#4444ff;stroke-width:0.87;stroke-opacity:1"
+       id="path234" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,291.5 265,81"
+       style="opacity:1;stroke:#ffc7c7;stroke-width:0.87;stroke-opacity:1"
+       id="path236" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,345.5 265,27"
+       style="opacity:1;stroke:#ffc2c2;stroke-width:0.87;stroke-opacity:1"
+       id="path238" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,399.5 265,-27"
+       style="opacity:1;stroke:#ff9191;stroke-width:0.87;stroke-opacity:1"
+       id="path240" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,453.5 265,-81"
+       style="opacity:1;stroke:#b6b6ff;stroke-width:0.87;stroke-opacity:1"
+       id="path242" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,507.5 265,-135"
+       style="opacity:1;stroke:#a4a4ff;stroke-width:0.87;stroke-opacity:1"
+       id="path244" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,561.5 265,-189"
+       style="opacity:1;stroke:#5f5fff;stroke-width:0.87;stroke-opacity:1"
+       id="path246" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,615.5 265,-243"
+       style="opacity:1;stroke:#9696ff;stroke-width:0.87;stroke-opacity:1"
+       id="path248" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,669.5 265,-297"
+       style="opacity:1;stroke:#ff0505;stroke-width:0.87;stroke-opacity:1"
+       id="path250" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,183.5 265,297"
+       style="opacity:1;stroke:#c1c1ff;stroke-width:0.87;stroke-opacity:1"
+       id="path252" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,237.5 265,243"
+       style="opacity:1;stroke:#1515ff;stroke-width:0.87;stroke-opacity:1"
+       id="path254" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,291.5 265,189"
+       style="opacity:1;stroke:#dbdbff;stroke-width:0.87;stroke-opacity:1"
+       id="path256" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,345.5 265,135"
+       style="opacity:1;stroke:#ffe8e8;stroke-width:0.87;stroke-opacity:1"
+       id="path258" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,399.5 265,81"
+       style="opacity:1;stroke:#7f7fff;stroke-width:0.87;stroke-opacity:1"
+       id="path260" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,453.5 265,27"
+       style="opacity:1;stroke:#ff3030;stroke-width:0.87;stroke-opacity:1"
+       id="path262" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,507.5 265,-27"
+       style="opacity:1;stroke:#ff2d2d;stroke-width:0.87;stroke-opacity:1"
+       id="path264" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,561.5 265,-81"
+       style="opacity:1;stroke:#ffe5e5;stroke-width:0.87;stroke-opacity:1"
+       id="path266" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,615.5 265,-135"
+       style="opacity:1;stroke:#ff4646;stroke-width:0.87;stroke-opacity:1"
+       id="path268" />
+    <path
+       class="link"
+       marker-end="url(#arrow)"
+       d="m 898,669.5 265,-189"
+       style="opacity:1;stroke:#ff8383;stroke-width:0.87;stroke-opacity:1"
+       id="path270" />
+    <circle
+       r="17"
+       class="node"
+       id="0_0"
+       cx="633"
+       cy="345.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="0_1"
+       cx="633"
+       cy="399.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="0_2"
+       cx="633"
+       cy="453.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="0_3"
+       cx="633"
+       cy="507.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="1_0"
+       cx="898"
+       cy="183.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="1_1"
+       cx="898"
+       cy="237.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="1_2"
+       cx="898"
+       cy="291.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="1_3"
+       cx="898"
+       cy="345.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="1_4"
+       cx="898"
+       cy="399.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="1_5"
+       cx="898"
+       cy="453.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="1_6"
+       cx="898"
+       cy="507.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="1_7"
+       cx="898"
+       cy="561.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="1_8"
+       cx="898"
+       cy="615.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="1_9"
+       cx="898"
+       cy="669.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="2_0"
+       cx="1163"
+       cy="372.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <circle
+       r="17"
+       class="node"
+       id="2_1"
+       cx="1163"
+       cy="426.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+    <text
+       class="text"
+       dy="0.34999999em"
+       x="598"
+       y="723.5"
+       style="font-size:12px"
+       id="text288">Input Layer ∈ ℝ⁴</text>
+    <text
+       class="text"
+       dy="0.34999999em"
+       x="863"
+       y="723.5"
+       style="font-size:12px"
+       id="text290">Hidden Layer ∈ ℝ¹⁰</text>
+    <text
+       class="text"
+       dy="0.34999999em"
+       x="1128"
+       y="723.5"
+       style="font-size:12px"
+       id="text292">Output Layer ∈ ℝ³</text>
+    <circle
+       r="17"
+       class="node"
+       id="2_2"
+       cx="1163"
+       cy="480.5"
+       style="opacity:1;fill:#ffffff;stroke:#333333" />
+  </g>
+  <defs
+     id="defs300">
+    <marker
+       id="arrow"
+       viewBox="0 -5 10 10"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto"
+       refX="59.599998">
+      <path
+         d="M 0,-5 10,0 0,5"
+         style="fill:none;stroke:#505050"
+         id="path297" />
+    </marker>
+  </defs>
+</svg>
