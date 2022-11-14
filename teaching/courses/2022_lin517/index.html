@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-file-modified','listing-title','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
       searchColumns: ["listing-date","listing-title","listing-author"],
     };
@@ -252,12 +252,27 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Models</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Neural Networks</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectures/gradient_descent/01_gradient_descent.html" class="sidebar-item-text sidebar-link">Gradient Descent</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">Models</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lectures/evaluation/index.html" class="sidebar-item-text sidebar-link">Evaluating models</a>
@@ -269,12 +284,12 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">python sessions</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">python sessions</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_sessions/00_session1.html" class="sidebar-item-text sidebar-link">Starting Python</a>
@@ -308,7 +323,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(22)</span></div><div class="category" data-category="data">data <span class="quarto-category-count">(4)</span></div><div class="category" data-category="intro">intro <span class="quarto-category-count">(1)</span></div><div class="category" data-category="models">models <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ngram">ngram <span class="quarto-category-count">(3)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(5)</span></div><div class="category" data-category="word vectors">word vectors <span class="quarto-category-count">(4)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(23)</span></div><div class="category" data-category="Neural Networks">Neural Networks <span class="quarto-category-count">(1)</span></div><div class="category" data-category="data">data <span class="quarto-category-count">(4)</span></div><div class="category" data-category="intro">intro <span class="quarto-category-count">(1)</span></div><div class="category" data-category="models">models <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ngram">ngram <span class="quarto-category-count">(3)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(5)</span></div><div class="category" data-category="word vectors">word vectors <span class="quarto-category-count">(4)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -371,9 +386,6 @@ ul.task-list li input[type="checkbox"] {
 <a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
 </th>
 <th>
-Modified
-</th>
-<th>
 <a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
 </th>
 <th>
@@ -386,9 +398,6 @@ Categories
 <td class="listing-date">
 2022-08-20
 </td>
-<td class="listing-file-modified">
-2022-10-29
-</td>
 <td class="listing-title">
 <a href="./resources/notation/index.html" class="title">Mathematical Notation</a>
 </td>
@@ -399,9 +408,6 @@ Categories
 <td class="listing-date">
 2022-08-22
 </td>
-<td class="listing-file-modified">
-2022-10-29
-</td>
 <td class="listing-title">
 <a href="./resources/reading/index.html" class="title">Reading a Technical Paper</a>
 </td>
@@ -411,9 +417,6 @@ Categories
 <tr data-index="2" data-categories="intro" data-listing-date-sort="1661313600000" data-listing-file-modified-sort="1667092740116" data-listing-reading-time-sort="8.885" data-listing-title-sort="What is NLP?<br>(for this course)" data-listing-filename-sort="index.qmd">
 <td class="listing-date">
 2022-08-24
-</td>
-<td class="listing-file-modified">
-2022-10-29
 </td>
 <td class="listing-title">
 <a href="./lectures/what_is_nlp/index.html" class="title">What is NLP?<br>(for this course)</a>
@@ -426,9 +429,6 @@ intro
 <td class="listing-date">
 2022-08-31
 </td>
-<td class="listing-file-modified">
-2022-10-29
-</td>
 <td class="listing-title">
 <a href="./lectures/data_sparsity/data_sparsity.html" class="title">Data Sparsity</a>
 </td>
@@ -439,9 +439,6 @@ data
 <tr data-index="4" data-categories="python" data-listing-date-sort="1662091200000" data-listing-file-modified-sort="1667092740117" data-listing-reading-time-sort="7.145" data-listing-title-sort="Starting Python" data-listing-filename-sort="00_session1.qmd">
 <td class="listing-date">
 2022-09-02
-</td>
-<td class="listing-file-modified">
-2022-10-29
 </td>
 <td class="listing-title">
 <a href="./python_sessions/00_session1.html" class="title">Starting Python</a>
@@ -454,9 +451,6 @@ python
 <td class="listing-date">
 2022-09-06
 </td>
-<td class="listing-file-modified">
-2022-10-29
-</td>
 <td class="listing-title">
 <a href="./lectures/data_processing/index.html" class="title">Data Processing</a>
 </td>
@@ -467,9 +461,6 @@ data
 <tr data-index="6" data-categories="python" data-listing-date-sort="1662696000000" data-listing-file-modified-sort="1667092740117" data-listing-reading-time-sort="6.57" data-listing-title-sort="Lists and Dictionaries" data-listing-filename-sort="01_session2.qmd">
 <td class="listing-date">
 2022-09-09
-</td>
-<td class="listing-file-modified">
-2022-10-29
 </td>
 <td class="listing-title">
 <a href="./python_sessions/01_session2.html" class="title">Lists and Dictionaries</a>
@@ -482,9 +473,6 @@ python
 <td class="listing-date">
 2022-09-13
 </td>
-<td class="listing-file-modified">
-2022-10-29
-</td>
 <td class="listing-title">
 <a href="./lectures/data_processing/addendum.html" class="title">Addendum</a>
 </td>
@@ -495,9 +483,6 @@ data
 <tr data-index="8" data-categories="data" data-listing-date-sort="1663041600000" data-listing-file-modified-sort="1667092740115" data-listing-reading-time-sort="3.725" data-listing-title-sort="Lemmatizing and Stemming" data-listing-filename-sort="index.qmd">
 <td class="listing-date">
 2022-09-13
-</td>
-<td class="listing-file-modified">
-2022-10-29
 </td>
 <td class="listing-title">
 <a href="./lectures/lem_stem/index.html" class="title">Lemmatizing and Stemming</a>
@@ -510,9 +495,6 @@ data
 <td class="listing-date">
 2022-09-16
 </td>
-<td class="listing-file-modified">
-2022-10-29
-</td>
 <td class="listing-title">
 <a href="./python_sessions/02_session3.html" class="title">Loops Etc.</a>
 </td>
@@ -523,9 +505,6 @@ python
 <tr data-index="10" data-categories="python" data-listing-date-sort="1663905600000" data-listing-file-modified-sort="1667092740117" data-listing-reading-time-sort="4.025" data-listing-title-sort="Comprehensions and Useful Things" data-listing-filename-sort="03_session4.qmd">
 <td class="listing-date">
 2022-09-23
-</td>
-<td class="listing-file-modified">
-2022-10-29
 </td>
 <td class="listing-title">
 <a href="./python_sessions/03_session4.html" class="title">Comprehensions and Useful Things</a>
@@ -538,9 +517,6 @@ python
 <td class="listing-date">
 2022-09-28
 </td>
-<td class="listing-file-modified">
-2022-10-29
-</td>
 <td class="listing-title">
 <a href="./lectures/ngram/index.html" class="title">ngram Language Models</a>
 </td>
@@ -551,9 +527,6 @@ ngram
 <tr data-index="12" data-categories="python" data-listing-date-sort="1664510400000" data-listing-file-modified-sort="1667092740117" data-listing-reading-time-sort="3.32" data-listing-title-sort="Making and Counting Bigrams" data-listing-filename-sort="04_session5.qmd">
 <td class="listing-date">
 2022-09-30
-</td>
-<td class="listing-file-modified">
-2022-10-29
 </td>
 <td class="listing-title">
 <a href="./python_sessions/04_session5.html" class="title">Making and Counting Bigrams</a>
@@ -566,9 +539,6 @@ python
 <td class="listing-date">
 2022-10-03
 </td>
-<td class="listing-file-modified">
-2022-10-29
-</td>
 <td class="listing-title">
 <a href="./lectures/evaluation/index.html" class="title">Evaluating models</a>
 </td>
@@ -579,9 +549,6 @@ models
 <tr data-index="14" data-categories="ngram,models" data-listing-date-sort="1665374400000" data-listing-file-modified-sort="1667092740115" data-listing-reading-time-sort="10.86" data-listing-title-sort="ngrams - Perplexity" data-listing-filename-sort="01-ngram-eval.qmd">
 <td class="listing-date">
 2022-10-10
-</td>
-<td class="listing-file-modified">
-2022-10-29
 </td>
 <td class="listing-title">
 <a href="./lectures/ngram/01-ngram-eval.html" class="title">ngrams - Perplexity</a>
@@ -594,9 +561,6 @@ ngram,models
 <td class="listing-date">
 2022-10-11
 </td>
-<td class="listing-file-modified">
-2022-10-29
-</td>
 <td class="listing-title">
 <a href="./lectures/ngram/02_smoothing.html" class="title">ngram - Smoothing</a>
 </td>
@@ -608,9 +572,6 @@ ngram
 <td class="listing-date">
 2022-10-14
 </td>
-<td class="listing-file-modified">
-2022-10-29
-</td>
 <td class="listing-title">
 <a href="./python_sessions/05_session6.md" class="title">Functions</a>
 </td>
@@ -621,9 +582,6 @@ ngram
 <td class="listing-date">
 2022-10-26
 </td>
-<td class="listing-file-modified">
-2022-10-29
-</td>
 <td class="listing-title">
 <a href="./lectures/word_vectors/01_concept.html" class="title">Word Vectors - Concepts</a>
 </td>
@@ -631,12 +589,9 @@ ngram
 word vectors
 </td>
 </tr>
-<tr data-index="18" data-categories="word vectors" data-listing-date-sort="1667275200000" data-listing-file-modified-sort="1667701953632" data-listing-reading-time-sort="15.355" data-listing-title-sort="Term-Document and Term-Context matrices" data-listing-filename-sort="02_vectors_examples.qmd">
+<tr data-index="18" data-categories="word vectors" data-listing-date-sort="1667275200000" data-listing-file-modified-sort="1667843091059" data-listing-reading-time-sort="15.355" data-listing-title-sort="Term-Document and Term-Context matrices" data-listing-filename-sort="02_vectors_examples.qmd">
 <td class="listing-date">
 2022-11-01
-</td>
-<td class="listing-file-modified">
-2022-11-05
 </td>
 <td class="listing-title">
 <a href="./lectures/word_vectors/02_vectors_examples.html" class="title">Term-Document and Term-Context matrices</a>
@@ -645,11 +600,8 @@ word vectors
 word vectors
 </td>
 </tr>
-<tr data-index="19" data-categories="word vectors" data-listing-date-sort="1667797200000" data-listing-file-modified-sort="1667832801622" data-listing-reading-time-sort="18.385" data-listing-title-sort="word2vec" data-listing-filename-sort="03_word2vec.qmd">
+<tr data-index="19" data-categories="word vectors" data-listing-date-sort="1667797200000" data-listing-file-modified-sort="1667843091028" data-listing-reading-time-sort="18.395" data-listing-title-sort="word2vec" data-listing-filename-sort="03_word2vec.qmd">
 <td class="listing-date">
-2022-11-07
-</td>
-<td class="listing-file-modified">
 2022-11-07
 </td>
 <td class="listing-title">
@@ -659,23 +611,28 @@ word vectors
 word vectors
 </td>
 </tr>
-<tr data-index="20" data-listing-file-modified-sort="1667680921620" data-listing-reading-time-sort="15.98" data-listing-title-sort="Gradient Descent" data-listing-filename-sort="01_gradient_descent.qmd">
+<tr data-index="20" data-categories="Neural Networks" data-listing-date-sort="1668402000000" data-listing-file-modified-sort="1668433362913" data-listing-reading-time-sort="21.845" data-listing-title-sort="Gradient Descent" data-listing-filename-sort="01_gradient_descent.qmd">
 <td class="listing-date">
-</td>
-<td class="listing-file-modified">
-2022-11-05
+2022-11-14
 </td>
 <td class="listing-title">
 <a href="./lectures/gradient_descent/01_gradient_descent.html" class="title">Gradient Descent</a>
 </td>
 <td class="listing-categories">
+Neural Networks
 </td>
 </tr>
-<tr data-index="21" data-categories="word vectors" data-listing-file-modified-sort="1667092740117" data-listing-reading-time-sort="0.21" data-listing-title-sort="Word Vectors" data-listing-filename-sort="index.qmd">
+<tr data-index="21" data-listing-file-modified-sort="1668284950321" data-listing-reading-time-sort="0.885" data-listing-title-sort="Matrix Multiplication" data-listing-filename-sort="index.qmd">
 <td class="listing-date">
 </td>
-<td class="listing-file-modified">
-2022-10-29
+<td class="listing-title">
+<a href="./lectures/matrix_multiplication/index.html" class="title">Matrix Multiplication</a>
+</td>
+<td class="listing-categories">
+</td>
+</tr>
+<tr data-index="22" data-categories="word vectors" data-listing-file-modified-sort="1667092740117" data-listing-reading-time-sort="0.21" data-listing-title-sort="Word Vectors" data-listing-filename-sort="index.qmd">
+<td class="listing-date">
 </td>
 <td class="listing-title">
 <a href="./lectures/word_vectors/index.html" class="title">Word Vectors</a>
