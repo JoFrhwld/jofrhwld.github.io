@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.233">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Josef Fruehwald">
+<meta name="dcterms.date" content="2022-12-05">
+
+<title>Lin517: Natural Language Processing - Sequence Models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Sequence Models</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Lin517: Natural Language Processing</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Resources</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/reading/index.html" class="sidebar-item-text sidebar-link">Reading a technical paper</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/notation/index.html" class="sidebar-item-text sidebar-link">Mathematical notation</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Lecture Notes</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Intro</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/what_is_nlp/index.html" class="sidebar-item-text sidebar-link">What is NLP?</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Data Sparsity and Processing</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/data_sparsity/data_sparsity.html" class="sidebar-item-text sidebar-link">Data Sparsity</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/data_processing/index.html" class="sidebar-item-text sidebar-link">Data processing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/data_processing/addendum.html" class="sidebar-item-text sidebar-link">Data processing – addendum</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lem_stem/index.html" class="sidebar-item-text sidebar-link">Lemmatizing and stemming</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">ngrams</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/ngram/index.html" class="sidebar-item-text sidebar-link">ngram Language Models</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/ngram/01-ngram-eval.html" class="sidebar-item-text sidebar-link">ngrams - Perplexity</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/ngram/02_smoothing.html" class="sidebar-item-text sidebar-link">ngram - Smoothing</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lectures/word_vectors/index.html" class="sidebar-item-text sidebar-link">Word Vectors</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/word_vectors/01_concept.html" class="sidebar-item-text sidebar-link">Word Vectors - Concepts</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/word_vectors/02_vectors_examples.html" class="sidebar-item-text sidebar-link">Term-Document and Term-Context matrices</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/word_vectors/03_word2vec.html" class="sidebar-item-text sidebar-link">word2vec</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Neural Networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/gradient_descent/01_gradient_descent.html" class="sidebar-item-text sidebar-link">Gradient Descent</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/matrix_multiplication/index.html" class="sidebar-item-text sidebar-link">Matrix Multiplication</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/neural_networks/index.html" class="sidebar-item-text sidebar-link">Neural Nets</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/neural_networks/word_embeddings.html" class="sidebar-item-text sidebar-link">Additional Neural Network Concepts</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">Models</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/evaluation/index.html" class="sidebar-item-text sidebar-link">Evaluating models</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">python sessions</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/00_session1.html" class="sidebar-item-text sidebar-link">Starting Python</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/01_session2.html" class="sidebar-item-text sidebar-link">Lists and Dictionaries</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/02_session3.html" class="sidebar-item-text sidebar-link">Loops Etc.</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/03_session4.html" class="sidebar-item-text sidebar-link">Comprehensions and Useful Things</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python_sessions/04_session5.html" class="sidebar-item-text sidebar-link">Making and Counting Bigrams</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-models-weve-seen" id="toc-the-models-weve-seen" class="nav-link active" data-scroll-target="#the-models-weve-seen">The Models We’ve seen</a></li>
+  <li><a href="#what-about-sequences" id="toc-what-about-sequences" class="nav-link" data-scroll-target="#what-about-sequences">What about <em>sequences</em>?</a></li>
+  <li><a href="#recurrent-neural-networks" id="toc-recurrent-neural-networks" class="nav-link" data-scroll-target="#recurrent-neural-networks">Recurrent Neural Networks</a>
+  <ul class="collapse">
+  <li><a href="#long-short-term-memory" id="toc-long-short-term-memory" class="nav-link" data-scroll-target="#long-short-term-memory">Long Short-Term Memory</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Sequence Models</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Neural Networks</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Josef Fruehwald </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 5, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="the-models-weve-seen" class="level2">
+<h2 class="anchored" data-anchor-id="the-models-weve-seen">The Models We’ve seen</h2>
+<p>The models we (tried) training on Friday looked something like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/linear.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>There could have been more or less layers in between the input and output, and we could have had different activation functions. But essentially, we were trying to classify each verb one at time in isolation.</p>
+</section>
+<section id="what-about-sequences" class="level2">
+<h2 class="anchored" data-anchor-id="what-about-sequences">What about <em>sequences</em>?</h2>
+<p>For other kinds of tasks, though, this “one at a time in isolation” isn’t a great idea! Let’s say that we were trying to build a part of speech classifier, where we would assign each word in a sentence to a part of speech. The words that come before and after contain crucial information for that purpose.</p>
+<ul>
+<li><p>I went to the <strong>bank</strong>. (should be Noun)</p></li>
+<li><p>You can <strong>bank</strong> on us! (should be verb)</p></li>
+</ul>
+<p>We could approach this problem a lot like the ngram models we were working with before, and just concatenate together the two word vectors preceding our target word.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/ngram_nn.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="recurrent-neural-networks" class="level2">
+<h2 class="anchored" data-anchor-id="recurrent-neural-networks">Recurrent Neural Networks</h2>
+<p>But what people found to be a little bit more effective was to use “recurrent neural networks” or RNNs. An important conceptual addition for RNNs is that we don’t have to map our hidden layer to <em>only</em> the output layer. If our matrix <code>V</code> maps the hidden state <code>h</code> out to the prediction layer, we could use another matrix <code>U</code> to map our hidden state out as input to the next word. The network processing the second word then has two input sources: the incoming word vector <em>and</em> the transformed hidden state from the previous word.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/rnn.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>The idea of what’s going on here is a little bit of information about the previous word is being passed on to the next word and affecting its hidden state, which then gets mapped to the prediction layer.</p>
+<p>More technically speaking, order of operations here is:</p>
+<ul>
+<li><p>the values in the hidden layer <span class="math inline">\(h_{t-1}\)</span> are being transformed a bit by the matrix <span class="math inline">\(U\)</span>, and then passed forward. (<span class="math inline">\(Uh_{t-1}\)</span>)</p></li>
+<li><p>the word vector at time <span class="math inline">\(t\)</span>, <span class="math inline">\(w_t\)</span>, is being transformed by matrix <span class="math inline">\(W\)</span> and fed into the network. (<span class="math inline">\(Ww_{t}\)</span>)</p></li>
+<li><p>The output of <span class="math inline">\(Ww_{t}\)</span> is then elementwise added to the output of <span class="math inline">\(Uh_{t-1}\)</span> and passed through an activation layer to make <span class="math inline">\(h_t\)</span>. (<span class="math inline">\(h_t = \sigma(Ww_t + Uh_{t-1})\)</span>).</p></li>
+<li><p>Then, <span class="math inline">\(h_t\)</span> gets sent off to the output layer, by being multiplied by <span class="math inline">\(V\)</span> and passed through softmax (<span class="math inline">\(y_t = \sigma(Vh_t)\)</span>)</p></li>
+<li><p><span class="math inline">\(h_t\)</span>, also gets passed onto the next word’s network by <span class="math inline">\(U\)</span> (<span class="math inline">\(Uh_t\)</span>)</p></li>
+</ul>
+<p>The matrices of weights which pass word vectors and hidden states into and out of the networks, <span class="math inline">\(W\)</span>, <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>, are the same throughout the whole process, so it’s their weights that get updated by backpropogation.</p>
+<p>The detail of every matrix, vector, and activation function often get elided over in simplified diagrams of RNNs which depict them as a sequence of cells.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/rnn_lines.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>The thing to assume is that every arrow indicates a matrix multiplication followed by an activation function.</p>
+<p>This first RNN diagram represents a “many to many” model. In the illustration example, we’re trying to classify each word in the sequence with a part of speech, using a little bit of information that came from the word before.</p>
+<p>There are other ways you could wire up an RNN. For example, maybe we want to feed it words from a product review, one by one, and have it make just one prediction of how many stars to give it at the very end. The only tweak we’d make is to not send the hidden state to output until the very last cell.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/rnn_many_2_one.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Or, if wanted a model that would output a new sequence of words after being given an input sequence of words (e.g.&nbsp;summarizing a long article into a short paragraph, or just continuing a story after being given a prompt), you would tweak this architecture to take input word vectors for the first however many nodes, then just generate output vectors for the rest.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/rnn_summary.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Or, if your RNN isn’t performing well, you could try stacking one sequence on top of the other.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/rnn_stacked.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<section id="setting-up-an-rnn-in-tensorflow" class="level4">
+<h4 class="anchored" data-anchor-id="setting-up-an-rnn-in-tensorflow">Setting up an RNN in Tensorflow</h4>
+<p>Setting up an RNN network in tensor flow is a bit more involved than the models we’ve looked at before (see this tutorial on <a href="https://www.tensorflow.org/text/tutorials/text_generation">text generation</a>), but the RNN cell itself is available at <code>tf.keras.layers.SimpleRNN()</code>.</p>
+</section>
+<section id="long-short-term-memory" class="level3">
+<h3 class="anchored" data-anchor-id="long-short-term-memory">Long Short-Term Memory</h3>
+<p>One issue with RNNs is that they have a relatively short “memory”. The hidden state from the previous cell is always added to the input from the current cell, but isn’t passed along any further, except to the extent its values influence the current cell’s hidden state. It also means that longer term dependencies can get washed out in training. For example, if we’d built an RNN to try and guess the final word of each of these sentences, the most important information to guess the right answer is many words before the guessing point.</p>
+<ul>
+<li><p>Bob is a <span style="color: red">man</span> who I’ve known for a very long time, and after all we’ve been through, I feel comfortable speaking my mind to <code>[him? her? them?]</code></p></li>
+<li><p>I grew up in <span style="color: red">Philadelphia</span>, and even though it’s been many years since I’ve actually lived there, I still cheer for our Major League Baseball team, the <code>[Phillies? Yankees? Dodgers?]</code></p></li>
+</ul>
+<p>If the simple RNN model made a bad prediction for this final word, the error would have to propagate through every node back to the word highlighted in red in order to change the way information about that word gets passed forward. The problem is that the error signal at time <span class="math inline">\(t\)</span> gets weaker and weaker the further back it travels through the chain of RNN cells.</p>
+<p>In an attempt to provide a sequence of cells a longer “memory”, Long Short-Term Memory, or LSTM models try to explicitly manage “forgetting” and “updating” information, with a “cell state” that gets minimally adjusted and passed all the way down the chain of the sequence.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/lstm_0.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>Let’s look at each of these “gates”</p>
+<section id="forget-and-update-gates" class="level4">
+<h4 class="anchored" data-anchor-id="forget-and-update-gates">Forget and Update Gates</h4>
+<p>The forget and update gates both contain the same basic operations. The output state from the previous cell and the new input are added together (after each being multiplied by a matrix) then passed through the sigmoid function, which maps all values to between 0 and 1.</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/forget_gate.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/update_gate.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>The output from the forget gate is immediately elementwise multiplied by the previous cell state. Where the output from the forget gate is close to 0, the information from the previous cell state will also be zeroed out, “forgetting” the information. Where the output of the forget gate is closer to 1, the information in the cell state is “remembered.”</p>
+<p>The output from the update gate is used to modulate the new information from the add gate.</p>
+</section>
+<section id="the-add-gate" class="level4">
+<h4 class="anchored" data-anchor-id="the-add-gate">The add gate</h4>
+<p>The “add gate” decides what new information is going to get added to the cell state. The previous output state and the new input data get pointwise added, and then passed through a tanh activation function, which converts all of the values to range between -1 and 1.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/add_gate.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>The output from this gate gets elementwise multiplied by the output from the update gate. So, some of the values between -1 and 1 are getting zeroed out, while others are passing on as-is.</p>
+<p>After this multiplication, this new information gets added to the cell state.</p>
+</section>
+<section id="output" class="level4">
+<h4 class="anchored" data-anchor-id="output">Output</h4>
+<p>After removing some information with the forget gate and adding some information with the update &amp; add gates, the cell state is both passed on to the next LSTM cell, and is combined with the previous hidden state and the new data to generate the new hidden state.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/output_gate.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>This new output state can then be used for whatever purpose you’re building the network for. It could be used in a many-to-many model to predict part of speech, or only be used in the last cell for classification of the whole sequence.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/lstm_seq.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</section>
+<section id="using-lstms-in-tensorflow" class="level4">
+<h4 class="anchored" data-anchor-id="using-lstms-in-tensorflow">Using LSTMs in Tensorflow</h4>
+<p>Again, there’s just an LSTM layer available at <code>tf.keras.layers.LSTM()</code>.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
