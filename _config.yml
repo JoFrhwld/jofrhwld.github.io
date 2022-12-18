@@ -52,7 +52,7 @@ plugins:
   - jekyll-paginate
 
 header_pages:
- - blog/index.md
+ - blog.html
  - teaching/courses/2017_lsa/index.html
  - research/index.html
  - teaching/index.md
