@@ -10,3 +10,5 @@ oldsite
 /.luarc.json
 
 /.quarto/
+.zotero
+.python-version
