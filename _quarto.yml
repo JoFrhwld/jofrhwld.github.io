@@ -2,6 +2,7 @@ project:
   type: website
   render:
     - index.qmd
+    - research/*
 
 website:
   title: "Josef Fruehwald"
@@ -10,7 +11,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-
+      - href: research/index.qmd
+        text: research
 format:
   html:
     theme: darkly
