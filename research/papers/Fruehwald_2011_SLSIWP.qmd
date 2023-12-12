@@ -6,17 +6,26 @@ abstract: "Bakovi\u0107 (2005) proposes that patterns of sufficiently-similar se
   \ segments in English are shown to follow, however, from extragrammatical considerations.\
   \ Several case studies provide evidence against the major predictions of CDF."
 author:
-- Josef Fruehwald
-- Kyle Gorman
-category: paper
-layout: publication
-p_url: https://www.ideals.illinois.edu/handle/2142/25512
-pages: 36--50
-published: Studies in the Linguistic Sciences Illinois Working Papers
-tags:
-- language change
-- phonology
-- phonetics
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Gorman
+    given: Kyle
+citation:
+  container-title: 'Studies in the Linguistic Sciences: Illinois Working Papers'
+  issue: ''
+  issued: '2011'
+  page: 36-50
+  type: article-journal
+  url: https://www.ideals.illinois.edu/handle/2142/25512
+  volume: ''
+date: '2011'
+date-format: YYYY
+description: 'Studies in the Linguistic Sciences: Illinois Working Papers'
+doi: ''
+params:
+  notes: ''
 title: Cross-derivational feeding is epiphenomenal
-year: '2011'
+
 ---

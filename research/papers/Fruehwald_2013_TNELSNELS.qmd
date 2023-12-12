@@ -10,17 +10,28 @@ abstract: 'The detailed quantitative study of language change, as found in studi
   termed "devoicing") in the history of German, and concludes that the answer to both
   questions above is "yes".'
 author:
-- Josef Fruehwald
-- Jonathan Gress Wright
-- Joel Wallenberg
-category: paper
-layout: publication
-published: The proceedings of the NorthEastern Linguistic Society NELS
-tags:
-- language change
-- phonology
-- historical linguistics
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Gress Wright
+    given: Jonathan
+- name:
+    family: Wallenberg
+    given: Joel
+citation:
+  container-title: The proceedings of the North-Eastern Linguistic Society (NELS)
+  issue: ''
+  issued: '2013'
+  type: article-journal
+  url: ''
+  volume: '40'
+date: '2013'
+date-format: YYYY
+description: The proceedings of the North-Eastern Linguistic Society (NELS)
+doi: ''
+params:
+  notes: ''
 title: 'Phonological Rule Change: The Constant Rate Effect'
-volume: '40'
-year: '2013'
+
 ---

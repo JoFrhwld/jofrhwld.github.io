@@ -13,21 +13,28 @@ abstract: "The study and formalization of intra-speaker variation within variati
   \ a look towards the future of variation study that is incorporating more insights\
   \ from psycholinguistics."
 author:
-- Josef Fruehwald
-category: paper
-doi: 10.1093/oso/9780198796800.003.0027
-layout: publication
-p_url: https://oxford.universitypressscholarship.com/view/10.1093/oso/9780198796800.001.0001/oso-9780198796800-chapter-27
-pages: 569--590
-published: The Oxford History of Phonology
-tags:
-- sociolinguistics
-- language change
-- phonology
-- phonetics
-- language variation
-- sociolinguistic variable
-- variable rules
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  container-title: The Oxford History of Phonology
+  editor:
+  - name:
+      family: Dresher
+      given: B Elan
+  - name:
+      family: Van der Hulst
+      given: Harry
+  issued: '2022-03-24'
+  page: 569-590
+  type: chapter
+  url: https://oxford.universitypressscholarship.com/view/10.1093/oso/9780198796800.001.0001/oso-9780198796800-chapter-27
+  volume: ''
+date: '2022-03-24'
+date-format: YYYY
+description: The Oxford History of Phonology
+params:
+  notes: ''
 title: The study of variation
-year: '2022'
+
 ---

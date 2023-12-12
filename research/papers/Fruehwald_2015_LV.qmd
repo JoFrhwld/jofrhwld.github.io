@@ -12,24 +12,26 @@ abstract: "We present an analysis of an understudied construction found in Phila
   \ with respect to the availability of this construction is accounted for by variation\
   \ in the selectional restrictions on the a head."
 author:
-- Josef Fruehwald
-- Neil Myler
-category: paper
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Myler
+    given: Neil
+citation:
+  container-title: Linguistic Variation
+  issue: '2'
+  issued: '2015'
+  page: 141-168
+  type: article-journal
+  url: http://www.jbe-platform.com/content/journals/10.1075/lv.15.2.01fru
+  volume: '15'
+date: '2015'
+date-format: YYYY
+description: Linguistic Variation
 doi: 10.1075/lv.15.2.01fru
-layout: publication
-number: '2'
-p_url: http://www.jbe-platform.com/content/journals/10.1075/lv.15.2.01fru
-pages: 141--168
-published: Linguistic Variation
-tags:
-- philadelphia english
-- adjective
-- canadian english
-- case assignment
-- microvariation
-- stative passive
-- vermont english
+params:
+  notes: ''
 title: "I\u2019m done my homework\u2014Case assignment in a stative passive"
-volume: '15'
-year: '2015'
+
 ---

@@ -10,21 +10,23 @@ abstract: "In this paper, I argue that filled pause selection (um/uh) is a socio
   \ but rather constitutes a separate domain of knowledge, perhaps what Preston (2004)\
   \ called the \u201Csociocultural selection device.\u201D"
 author:
-- Josef Fruehwald
-category: paper
-layout: publication
-number: '2'
-p_url: https://repository.upenn.edu/pwpl/vol22/iss2/6/
-pages: 41--49
-published: U Penn Working Papers in Linguistics
-tags:
-- language change
-- philadelphia english
-- filled pauses
-- hesitation markers
-- sociolinguistic variable
-- variable rules
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  container-title: U. Penn Working Papers in Linguistics
+  issue: '2'
+  issued: '2016'
+  page: 41-49
+  type: article-journal
+  url: https://repository.upenn.edu/pwpl/vol22/iss2/6/
+  volume: '22'
+date: '2016'
+date-format: YYYY
+description: U. Penn Working Papers in Linguistics
+doi: ''
+params:
+  notes: ''
 title: Filled Pause Choice as a Sociolinguistic Variable
-volume: '22'
-year: '2016'
+
 ---

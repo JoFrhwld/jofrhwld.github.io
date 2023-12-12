@@ -14,21 +14,23 @@ abstract: 'This paper is equal parts methodological recommendation and an empiri
   weak evidence for lifespan effects in these changes, robust generational effects,
   and in one case, evidence of a zeitgeist effect.'
 author:
-- Josef Fruehwald
-category: paper
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  container-title: Language Variation and Change
+  issue: '1'
+  issued: '2017'
+  page: 1-27
+  type: article-journal
+  url: https://www.cambridge.org/core/product/identifier/S0954394517000060/type/journal_article
+  volume: '29'
+date: '2017'
+date-format: YYYY
+description: Language Variation and Change
 doi: 10.1017/S0954394517000060
-layout: publication
-number: '1'
-p_url: https://www.cambridge.org/core/product/identifier/S0954394517000060/type/journal_article
-pages: 1--27
-published: Language Variation and Change
-tags:
-- language change
-- philadelphia english
-- apparent time
-- gams
-- lifespan change
+params:
+  notes: ''
 title: Generations, lifespans, and the zeitgeist
-volume: '29'
-year: '2017'
+
 ---

@@ -11,25 +11,38 @@ abstract: In this study, we investigate crosslinguistic patterns in the alternat
   of possible explanations for this surprising change in hesitation marker usage that
   is currently taking place across Germanic languages.
 author:
-- Martijn Wieling
-- Jack Grieve
-- Gosse Bouma
-- Josef Fruehwald
-- John Coleman
-- M. Liberman
-category: paper
+- name:
+    family: Wieling
+    given: Martijn
+- name:
+    family: Grieve
+    given: Jack
+- name:
+    family: Bouma
+    given: Gosse
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Coleman
+    given: John
+- name:
+    family: Liberman
+    given: M.
+citation:
+  container-title: Language Dynamics and Change
+  issue: '2'
+  issued: '2016'
+  page: 199-234
+  type: article-journal
+  url: ''
+  volume: '6'
+date: '2016'
+date-format: YYYY
+description: Language Dynamics and Change
 doi: 10.1163/22105832-00602001
-layout: publication
-number: '2'
-pages: 199--234
-published: Language Dynamics and Change
-tags:
-- language change
-- filled pauses
-- hesitation markers
-- corpus linguistics
-- crosslinguistic change
+params:
+  notes: ''
 title: Variation and Change in the Use of Hesitation Markers in Germanic Languages
-volume: '6'
-year: '2016'
+
 ---

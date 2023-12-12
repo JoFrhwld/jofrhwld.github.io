@@ -11,29 +11,35 @@ abstract: "Language acquisition is a well-established avenue for language change
   \ competing explanations of the ongoing change and determine that the allophonic\
   \ restructuring of /\xE6/ in Philadelphia English is mostly likely the result of\
   \ children acquiring language from mixed dialect input, consisting of approximately\
-  \ 40\\% input from speakers with a nasal /\xE6/ split. We show that applying our\
-  \ simulation to a phonological change allows us to make precise quantitative predications\
-  \ about the progress of this change. Moreover, it forces us to reassess intuitively\
-  \ plausible hypotheses about language change, such as grammatical simplification,\
-  \ in a quantitative and independently motivated framework of acquisition."
+  \ 40% input from speakers with a nasal /\xE6/ split. We show that applying our simulation\
+  \ to a phonological change allows us to make precise quantitative predications about\
+  \ the progress of this change. Moreover, it forces us to reassess intuitively plausible\
+  \ hypotheses about language change, such as grammatical simplification, in a quantitative\
+  \ and independently motivated framework of acquisition."
 author:
-- Betsy Sneller
-- Josef Fruehwald
-- Charles Yang
-category: paper
+- name:
+    family: Sneller
+    given: Betsy
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Yang
+    given: Charles
+citation:
+  container-title: Language Variation and Change
+  issue: '1'
+  issued: '2019-03-02'
+  page: 1-20
+  type: article-journal
+  url: https://www.cambridge.org/core/product/identifier/S0954394519000061/type/journal_article
+  volume: '31'
+date: '2019-03-02'
+date-format: YYYY
+description: Language Variation and Change
 doi: 10.1017/S0954394519000061
-layout: publication
-number: '1'
-p_url: https://www.cambridge.org/core/product/identifier/S0954394519000061/type/journal_article
-pages: 1--20
-published: Language Variation and Change
-tags:
-- language change
-- phonology
-- phonological change
-- modeling
-- tolerance principle
+params:
+  notes: ''
 title: Using the Tolerance Principle to predict phonological change
-volume: '31'
-year: '2019'
+
 ---

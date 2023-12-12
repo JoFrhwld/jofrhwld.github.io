@@ -16,25 +16,33 @@ abstract: "Recent advances in access to spoken-language corpora and development 
   \ and illustrates how large-scale studies, such as those carried out within SPADE,\
   \ can be applied to other questions in phonetic and sociolinguistic research."
 author:
-- James Tanner
-- Morgan Sonderegger
-- Jane Stuart-Smith
-- Josef Fruehwald
-category: paper
+- name:
+    family: Tanner
+    given: James
+- name:
+    family: Sonderegger
+    given: Morgan
+- name:
+    family: Stuart-Smith
+    given: Jane
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  container-title: Frontiers in Artificial Intelligence
+  issue: ''
+  issued: 2020-5-29
+  page: '38'
+  type: article-journal
+  url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7861323/
+  volume: '3'
+date: 2020-5-29
+date-format: YYYY
+description: Frontiers in Artificial Intelligence
 doi: 10.3389/frai.2020.00038
-layout: publication
-p_url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7861323/
-pages: '38'
-published: Frontiers in Artificial Intelligence
-tags:
-- voicing effect
-- bayesian modeling
-- dialectal variation
-- english
-- phonetic variability
-- speaker variability
+params:
+  notes: ''
 title: "Toward \u201CEnglish\u201D Phonetics: Variability in the Pre-consonantal Voicing\
   \ Effect Across English Dialects and Speakers"
-volume: '3'
-year: '2020'
+
 ---

@@ -13,23 +13,29 @@ abstract: "This study reports the results of a crosslinguistic matched guise tes
   \ languages. French and German listener results show how the enregistered status\
   \ of /s/ variation affects perception, despite crosslinguistic similarities in production."
 author:
-- Zac Boyd
-- Josef Fruehwald
-- Lauren Hall-Lew
-category: paper
+- name:
+    family: Boyd
+    given: Zac
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Hall-Lew
+    given: Lauren
+citation:
+  container-title: Language Variation and Change
+  issue: '2'
+  issued: 2021-07
+  page: 165-191
+  type: article-journal
+  url: https://www.cambridge.org/core/product/identifier/S0954394521000089/type/journal_article
+  volume: '33'
+date: 2021-07
+date-format: YYYY
+description: Language Variation and Change
 doi: 10.1017/S0954394521000089
-layout: publication
-number: '2'
-p_url: https://www.cambridge.org/core/product/identifier/S0954394521000089/type/journal_article
-pages: 165--191
-published: Language Variation and Change
-tags:
-- sociolinguistics
-- identity
-- indexicality
-- /s/
-- experimental sociolinguistics
+params:
+  notes: ''
 title: Crosslinguistic perceptions of /s/ among English, French, and German listeners
-volume: '33'
-year: '2021'
+
 ---

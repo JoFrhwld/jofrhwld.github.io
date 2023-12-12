@@ -13,25 +13,43 @@ abstract: "To test the hypothesis that intraspeaker variation in vowel formants 
   \ explain why fronting and unrounding of high back vowels are common shifts across\
   \ languages."
 author:
-- Jeff Mielke
-- Erik R Thomas
-- Josef Fruehwald
-- Michael McAuliffe
-- Morgan Sonderegger
-- Jane Stuart-Smith
-- Robin Dodsworth
-category: paper
-layout: publication
-p_url: https://assta.org/proceedings/ICPhS2019/papers/ICPhS_1307.pdf
-published: Proceedings of the 19th International Congress of Phonetic Sciences Melbourne
-  Australia 2019
-tags:
-- variation
-- vowels
-- change
-- automatics
-- formants
+- name:
+    family: Mielke
+    given: Jeff
+- name:
+    family: Thomas
+    given: Erik R
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: McAuliffe
+    given: Michael
+- name:
+    family: Sonderegger
+    given: Morgan
+- name:
+    family: Stuart-Smith
+    given: Jane
+- name:
+    family: Dodsworth
+    given: Robin
+citation:
+  container-title: Proceedings of the 19th International Congress of Phonetic Sciences,
+    Melbourne, Australia 2019
+  issue: ''
+  issued: '2019'
+  type: article-journal
+  url: https://assta.org/proceedings/ICPhS2019/papers/ICPhS_1307.pdf
+  volume: ''
+date: '2019'
+date-format: YYYY
+description: Proceedings of the 19th International Congress of Phonetic Sciences,
+  Melbourne, Australia 2019
+doi: ''
+params:
+  notes: ''
 title: Age vectors vs. axes of intraspeaker variation in vowel formants measured automatically
   from several English speech corpora.
-year: '2019'
+
 ---

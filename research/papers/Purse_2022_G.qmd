@@ -18,22 +18,28 @@ abstract: "Broad interest in probabilistic aspects of language has reignited deb
   \ of asking these fundamental questions about usage measures, and suggest that contemporary\
   \ approaches to frequency should take morphological complexity into account."
 author:
-- Ruaridh Purse
-- Josef Fruehwald
-- Meredith Tamminga
-category: paper
+- name:
+    family: Purse
+    given: Ruaridh
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Tamminga
+    given: Meredith
+citation:
+  container-title: 'Glossa: a journal of general linguistics'
+  issue: '1'
+  issued: '2022-09-29'
+  type: article-journal
+  url: https://www.glossa-journal.org/article/id/5839/
+  volume: '7'
+date: '2022-09-29'
+date-format: YYYY
+description: 'Glossa: a journal of general linguistics'
 doi: 10.16995/glossa.5839
-layout: publication
-number: '1'
-p_url: https://www.glossa-journal.org/article/id/5839/
-published: Glossa a journal of general linguistics
-tags:
-- csd
-- frequency
-- quantitative methods
-- td deletion
-- variation
+params:
+  notes: ''
 title: Frequency and morphological complexity in variation
-volume: '7'
-year: '2022'
+
 ---

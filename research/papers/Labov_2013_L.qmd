@@ -17,24 +17,30 @@ abstract: "The study of sound change in progress in Philadelphia has been facili
   \ as subject to phonological generalizations but driven by social evaluation as\
   \ features rise in level of salience for members of the speech community."
 author:
-- William Labov
-- Ingrid Rosenfelder
-- Josef Fruehwald
-category: paper
+- name:
+    family: Labov
+    given: William
+- name:
+    family: Rosenfelder
+    given: Ingrid
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  container-title: Language
+  issue: '1'
+  issued: '2013'
+  page: 30-65
+  type: article-journal
+  url: https://muse.jhu.edu/article/503024
+  volume: '89'
+date: '2013'
+date-format: YYYY
+description: Language
 doi: 10.1353/lan.2013.0015
-layout: publication
-number: '1'
-p_url: https://muse.jhu.edu/article/503024
-pages: 30--65
-published: Language
-tags:
-- sociolinguistics
-- variation
-- sound change
-- dialect geography
-- philadelphia english
+params:
+  notes: ''
 title: 'One hundred years of sound change in Philadelphia: Linear Incrementaion, Reversal,
   and Reanalysis'
-volume: '89'
-year: '2013'
+
 ---

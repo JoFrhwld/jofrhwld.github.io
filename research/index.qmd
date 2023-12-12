@@ -1,0 +1,13 @@
+---
+title: "Research"
+listing:
+    contents:
+        - papers/
+    date-format: YYYY
+    sort: date desc
+    type: default
+    max-description-length: 280
+    fields: [date, author, title, description]
+    field-display-names: 
+        description: "In" 
+---
