@@ -1,0 +1,12 @@
+---
+title: "LSA 2017 Statistical Modelling with R"
+---
+
+-   [Meeting 1: Introduction to R](lectures/Session_1.nb.html)
+-   Meeting 2: Data and Data Frames
+-   Meeting 3: Piping and Split-Apply-Combine
+-   Meeting 4: Plotting in ggplot2
+-   Meeting 5: Fitting Linear Models
+-   Meeting 6: More on interpreting & fitting linear models
+-   Meeting 7: Mixed Effects models
+-   Meeting 8: Model Comparison and Bootstrapping

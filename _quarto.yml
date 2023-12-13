@@ -1,9 +1,13 @@
 project:
   type: website
+  resources: 
+    - workshops
+    - teaching/2017_lsa
   render:
-    - index.qmd
-    - research/*
-
+    - "*.qmd"
+    - "!papers/*/*qmd"
+    - "!teaching/courses/2022_lin517/src"
+    - "!*/skeleton"
 website:
   title: "Josef Fruehwald"
   favicon: fav/favicon-32x32.png
@@ -12,10 +16,14 @@ website:
       - href: index.qmd
         text: Home
       - href: research/index.qmd
-        text: research
+        text: Research
+      - href: teaching/index.qmd
+        text: teaching
 format:
   html:
-    theme: darkly
+    theme:
+      light: flatly
+      dark: darkly
     css: styles.css
     toc: true
 

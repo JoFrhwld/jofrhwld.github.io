@@ -6,6 +6,7 @@ output:
   html_document:
     self_contained: no
     theme: readable
+execute: false
 ---
 
 
