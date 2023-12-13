@@ -2,7 +2,8 @@ project:
   type: website
   resources: 
     - workshops
-    - teaching/2017_lsa
+    - teaching
+    - papers
   render:
     - "*.qmd"
     - "!papers/*/*qmd"
