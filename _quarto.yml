@@ -19,7 +19,7 @@ website:
       - href: research/index.qmd
         text: Research
       - href: teaching/index.qmd
-        text: teaching
+        text: Teaching
 format:
   html:
     theme:
