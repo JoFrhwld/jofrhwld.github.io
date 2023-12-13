@@ -1,13 +1,16 @@
 ---
 title: "Research"
+format: html
+toc: true
 listing:
     contents:
         - papers/
+    template: ../assets/research.ejs
     date-format: YYYY
     sort: date desc
-    type: default
-    max-description-length: 280
-    fields: [date, author, title, description]
-    field-display-names: 
-        description: "In" 
+    # type: default
+    # max-description-length: 280
+    # fields: [date, author, title, description]
+    # field-display-names: 
+    #     description: "In" 
 ---
