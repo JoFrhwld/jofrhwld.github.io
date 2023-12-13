@@ -10,8 +10,12 @@ project:
     - "!teaching/courses/2022_lin517/src"
     - "!*/skeleton"
 website:
+  google-analytics: 
+    tracking-id: "G-C00S3NPL7B"
+    ananonymize-ip: true
+  cookie-consent: true
   title: "Josef Fruehwald"
-  favicon: fav/favicon-32x32.png
+  favicon: assets/logo.svg
   navbar:
     left:
       - href: index.qmd
@@ -23,9 +27,8 @@ website:
 format:
   html:
     theme:
-      light: flatly
-      dark: darkly
-    css: styles.css
+      light: [flatly, styles/light.scss]
+      dark: [darkly, styles/dark.scss]
     toc: true
 
 editor: visual
