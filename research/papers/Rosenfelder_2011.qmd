@@ -14,7 +14,6 @@ author:
     family: Yuan
     given: Jiahong
 citation:
-  container-title: ''
   issued: '2011'
   type: software
   url: http://fave.ling.upenn.edu/

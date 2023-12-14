@@ -26,13 +26,12 @@ author:
     family: Yuan
     given: Jiahong
 citation:
-  container-title: ''
   issued: '2022'
   type: software
   url: https://github.com/JoFrhwld/FAVE
 date: '2022'
 date-format: YYYY
-description: ''
+description: v2.0.0
 params:
   notes: ''
 title: FAVE (Forced Alignment and Vowel Extraction) Program Suite v2.0.0
