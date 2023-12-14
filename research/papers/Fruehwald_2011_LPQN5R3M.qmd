@@ -1,0 +1,32 @@
+---
+abstract: "Bakovi\u0107 (2005) proposes that patterns of sufficiently-similar segment\
+  \ avoidance are the result of interacting agreement and antigemination constraints,\
+  \ a pattern known as cross-derivational feeding (CDF). The bleeding interactions\
+  \ between epenthesis and assimilation which prevent adjacent sufficiently-similar\
+  \ segments in English are shown to follow, however, from extragrammatical considerations.\
+  \ Several case studies provide evidence against the major predictions of CDF."
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Gorman
+    given: Kyle
+citation:
+  container-title: 'Studies in the Linguistic Sciences: Illinois Working Papers'
+  issue: ''
+  issued: '2011'
+  page: 36-50
+  type: article-journal
+  url: https://www.ideals.illinois.edu/handle/2142/25512
+  volume: ''
+date: '2011'
+date-format: YYYY
+description: 'Studies in the Linguistic Sciences: Illinois Working Papers'
+doi: ''
+params:
+  key: LPQN5R3M
+  notes: ''
+title: Cross-derivational feeding is epiphenomenal
+
+---

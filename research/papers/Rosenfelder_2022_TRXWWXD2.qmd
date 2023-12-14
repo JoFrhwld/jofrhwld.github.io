@@ -1,0 +1,41 @@
+---
+abstract: ''
+author:
+- name:
+    family: Rosenfelder
+    given: Ingrid
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Brickhouse
+    given: Christian
+- name:
+    family: Evanini
+    given: Keelan
+- name:
+    family: Seyfarth
+    given: Scott
+- name:
+    family: Gorman
+    given: Kyle
+- name:
+    family: Prichard
+    given: Hilary
+- name:
+    family: Yuan
+    given: Jiahong
+citation:
+  issued: '2022'
+  type: software
+  url: https://github.com/JoFrhwld/FAVE
+  version: v2.0.0
+date: '2022'
+date-format: YYYY
+description: v2.0.0
+params:
+  key: TRXWWXD2
+  notes: ''
+title: FAVE (Forced Alignment and Vowel Extraction) Program Suite v2.0.0
+
+---

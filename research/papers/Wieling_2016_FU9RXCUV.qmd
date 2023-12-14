@@ -1,0 +1,49 @@
+---
+abstract: In this study, we investigate crosslinguistic patterns in the alternation
+  between um, a hesitation marker consisting of a neutral vowel followed by a final
+  labial nasal, and uh, a hesitation marker consisting of a neutral vowel in an open
+  syllable. Based on a quantitative analysis of a range of spoken and written corpora,
+  we identify clear and consistent patterns of change in the use of these forms in
+  various Germanic languages (English, Dutch, German, Norwegian, Danish, Faroese)
+  and dialects (American English, British English), with the use of um increasing
+  over time relative to the use of uh. We also find that this pattern of change is
+  generally led by women and more educated speakers. Finally, we propose a series
+  of possible explanations for this surprising change in hesitation marker usage that
+  is currently taking place across Germanic languages.
+author:
+- name:
+    family: Wieling
+    given: Martijn
+- name:
+    family: Grieve
+    given: Jack
+- name:
+    family: Bouma
+    given: Gosse
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Coleman
+    given: John
+- name:
+    family: Liberman
+    given: M.
+citation:
+  container-title: Language Dynamics and Change
+  issue: '2'
+  issued: '2016'
+  page: 199-234
+  type: article-journal
+  url: ''
+  volume: '6'
+date: '2016'
+date-format: YYYY
+description: Language Dynamics and Change
+doi: 10.1163/22105832-00602001
+params:
+  key: FU9RXCUV
+  notes: ''
+title: Variation and Change in the Use of Hesitation Markers in Germanic Languages
+
+---
