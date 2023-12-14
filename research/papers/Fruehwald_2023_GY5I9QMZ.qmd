@@ -1,5 +1,5 @@
 ---
-abstract: ''
+abstract: 'The aligned-textgrid package provides a python interface for representing and operating on TextGrids produced by forced aligners like FAVE or the Montreal Forced Aligner. Classes provided by aligned-textgrid represent hierarchical and precedence relationships among data stored in TextGrid formats allowing for simplified and more accessible analysis of aligned speech data.'
 author:
 - name:
     family: Fruehwald
@@ -15,6 +15,7 @@ citation:
 date: '2023-11-22'
 date-format: YYYY
 description: v0.5.0
+doi: 10.5281/zenodo.10190692
 params:
   key: GY5I9QMZ
   notes: 'DOI: 10.5281/ZENODO.10190692'
