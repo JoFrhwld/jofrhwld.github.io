@@ -27,8 +27,14 @@ website:
 format:
   html:
     theme:
-      light: [flatly, styles/light.scss]
-      dark: [darkly, styles/dark.scss]
+      light:
+        - flatly
+        - styles/light.scss
+        - styles/styles.scss
+      dark:
+        - darkly
+        - styles/dark.scss
+        - styles/styles.scss
     toc: true
 
 editor: visual

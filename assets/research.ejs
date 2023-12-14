@@ -1,0 +1,59 @@
+```{=html}
+
+<% 
+var newthing =  new Object;
+for (const item of items){
+  if (item.date in newthing){
+    newthing[item.date].push(item)
+  } else {
+    newthing[item.date] = [item]
+  }
+}
+%>
+
+<div class="grid">
+<% 
+for (const  [year, pubs] of Object.entries(newthing).reverse()){
+%>
+  <div class="g-col-2">
+    <h3>
+      <%= year %>
+    </h3>
+  </div>
+  <div class="g-col-10">
+    <% for (const pub of pubs){ %>
+      <h4><a href="<%- pub.path %>" class="listing-name"><%= pub["title"] %></a></h4>
+    <div class="grid bibinfo" style="row-gap: 0;">
+      <div class="g-col-1 bibinfo">
+        <span class="bibinfo bibprefix">with:</span>
+      </div>
+      <div class="g-col-10 bibinfo">
+        <span class="bibinfo">
+          <%=  pub["author"]%>
+        </span>
+      </div>
+      <div class="g-col-1 bibinfo">
+      </div>
+      <% 
+      if ("container-title" in pub["citation"]) {
+      %>
+      <div class="g-col-1 bibinfo">
+        <span class="bibinfo bibprefix">in:</span>
+      </div>
+      <div class="g-col-10 bibinfo">
+        <span class="bibinfo">
+          <%= pub["citation"]["container-title"]%>
+        </span>
+      </div>
+      <div class="g-col-1 bibinfo">
+      </div>
+
+      <% }%>
+
+    </div>
+    <% }%>
+
+  </div>
+<% }%>
+</div>
+```
