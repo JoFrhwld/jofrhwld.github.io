@@ -21,7 +21,7 @@ citation:
   type: article-journal
   url: https://repository.upenn.edu/pwpl/vol22/iss2/6/
   volume: '22'
-date: '2016'
+date: '2016-01'
 date-format: YYYY
 description: U. Penn Working Papers in Linguistics
 doi: ''

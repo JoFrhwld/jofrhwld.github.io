@@ -36,7 +36,7 @@ citation:
   issued: '2013'
   type: thesis
   url: ''
-date: '2013'
+date: '2013-01'
 date-format: YYYY
 description: ''
 params:

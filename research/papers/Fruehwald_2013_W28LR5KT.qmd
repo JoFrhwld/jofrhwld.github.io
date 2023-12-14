@@ -26,7 +26,7 @@ citation:
   type: article-journal
   url: ''
   volume: '40'
-date: '2013'
+date: '2013-01'
 date-format: YYYY
 description: The proceedings of the North-Eastern Linguistic Society (NELS)
 doi: ''

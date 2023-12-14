@@ -33,7 +33,7 @@ citation:
   type: article-journal
   url: http://repository.upenn.edu/pwpl/vol18/iss1/10/
   volume: '18'
-date: '2012'
+date: '2012-01'
 date-format: YYYY
 description: Penn Working Papers in Linguistics
 doi: ''

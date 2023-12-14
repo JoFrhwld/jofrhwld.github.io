@@ -30,7 +30,7 @@ citation:
   type: software
   url: https://github.com/JoFrhwld/FAVE
   version: v2.0.0
-date: '2022'
+date: '2022-01'
 date-format: YYYY
 description: v2.0.0
 params:

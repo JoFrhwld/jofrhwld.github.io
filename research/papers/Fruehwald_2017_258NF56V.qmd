@@ -14,7 +14,7 @@ author:
 citation:
   container-title: Language
   issue: '3'
-  issued: '2017'
+  issued: '2017-01'
   type: article-journal
   url: ''
   volume: '93'

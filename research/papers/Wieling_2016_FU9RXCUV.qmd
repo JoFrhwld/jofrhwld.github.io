@@ -37,7 +37,7 @@ citation:
   type: article-journal
   url: ''
   volume: '6'
-date: '2016'
+date: '2016-01'
 date-format: YYYY
 description: Language Dynamics and Change
 doi: 10.1163/22105832-00602001

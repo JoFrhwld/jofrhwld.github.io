@@ -42,7 +42,7 @@ citation:
   type: article-journal
   url: http://repository.upenn.edu/pwpl/vol14/iss2/11/
   volume: '14'
-date: '2008'
+date: '2008-01'
 date-format: YYYY
 description: Penn Working Papers in Linguistics
 doi: ''

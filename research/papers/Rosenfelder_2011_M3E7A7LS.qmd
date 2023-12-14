@@ -18,7 +18,7 @@ citation:
   type: software
   url: http://fave.ling.upenn.edu/
   version: v0.0.0
-date: '2011'
+date: '2011-01'
 date-format: YYYY
 description: v0.0.0
 params:

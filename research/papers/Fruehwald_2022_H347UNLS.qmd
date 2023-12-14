@@ -28,14 +28,16 @@ citation:
   issued: '2022-03-24'
   page: 569-590
   type: chapter
-  url: https://oxford.universitypressscholarship.com/view/10.1093/oso/9780198796800.001.0001/oso-9780198796800-chapter-27
   volume: ''
 date: '2022-03-24'
 date-format: YYYY
 description: The Oxford History of Phonology
+doi: 10.1093/oso/9780198796800.003.0027
 params:
   key: H347UNLS
   notes: ''
 title: The study of variation
 
 ---
+
+[Preprint version](../../papers/27RE.Fruehwald-study_of_variation_JTF.pdf)

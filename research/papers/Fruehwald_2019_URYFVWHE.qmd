@@ -24,7 +24,7 @@ citation:
   type: article-journal
   url: https://www.internationalphoneticassociation.org/icphs-proceedings/ICPhS2019/papers/ICPhS_730.pdf
   volume: ''
-date: '2019'
+date: '2019-01'
 date-format: YYYY
 description: Proceedings of the 19th International Congress of Phonetic Sciences,
   Melbourne, Australia 2019

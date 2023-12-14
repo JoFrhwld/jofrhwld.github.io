@@ -34,7 +34,7 @@ citation:
   type: article-journal
   url: https://muse.jhu.edu/article/503024
   volume: '89'
-date: '2013'
+date: '2013-01'
 date-format: YYYY
 description: Language
 doi: 10.1353/lan.2013.0015

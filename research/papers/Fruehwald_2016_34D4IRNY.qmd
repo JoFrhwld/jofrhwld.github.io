@@ -21,7 +21,7 @@ citation:
   type: article-journal
   url: https://muse.jhu.edu/article/621188
   volume: '92'
-date: '2016'
+date: '2016-01-01'
 date-format: YYYY
 description: Language
 doi: 10.1353/lan.2016.0041
