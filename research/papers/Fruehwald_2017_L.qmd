@@ -1,0 +1,30 @@
+---
+abstract: Berkson, Davis, and Strickler (2017) provide an invaluable report on incipient
+  /ay/-raising in Fort Wayne, Indiana. Their data suggest that /ay/-raising conditioned
+  strictly by phonetic voice-lessness is a possible early stage in the development
+  of /ay/-raising. This raises a particularly vexing question of why /ay/-raising
+  has gone on to be conditioned by phonological voicing in all North American varieties
+  for which its interaction with /t, d/ flapping has been examined. It suggests that
+  the process of phonologization reorganizes the distribution of phonetic variants,
+  rather than simply discretizing phonetic precursors.
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  container-title: Language
+  issue: '3'
+  issued: '2017'
+  type: article-journal
+  url: ''
+  volume: '93'
+date: '2017'
+date-format: YYYY
+description: Language
+doi: 10.1353/lan.2017.0051
+params:
+  notes: ''
+title: "Response to Berkson, Davis, & Strickler, \u2018What does incipient /ay/-raising\
+  \ look like?\u2019"
+
+---

@@ -1,0 +1,35 @@
+project:
+  type: website
+  resources: 
+    - workshops
+    - teaching
+    #- papers
+  render:
+    - "*.qmd"
+    - "!papers/*/*qmd"
+    - "!teaching/courses/2022_lin517/src"
+    - "!*/skeleton"
+website:
+  google-analytics: 
+    tracking-id: "G-C00S3NPL7B"
+    anonymize-ip: true
+  cookie-consent: true
+  title: "Josef Fruehwald"
+  favicon: assets/logo.svg
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: research/index.qmd
+        text: Research
+      - href: teaching/index.qmd
+        text: Teaching
+format:
+  html:
+    theme:
+      light: [flatly, styles/light.scss]
+      dark: [darkly, styles/dark.scss]
+    toc: true
+
+editor: visual
+

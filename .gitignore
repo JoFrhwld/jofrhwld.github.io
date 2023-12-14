@@ -8,4 +8,9 @@ oldsite
 .Rproj.user
 
 /.luarc.json
+
+/.quarto/
+.zotero
+.python-version
+.ipynb_checkpoints
 /.quarto/

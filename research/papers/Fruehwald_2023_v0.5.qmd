@@ -1,0 +1,21 @@
+---
+abstract: ''
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Brickhouse
+    given: Christian
+citation:
+  issued: '2023-11-22'
+  type: software
+  url: https://forced-alignment-and-vowel-extraction.github.io/alignedTextGrid/
+date: '2023-11-22'
+date-format: YYYY
+description: v0.5.0
+params:
+  notes: 'DOI: 10.5281/ZENODO.10190692'
+title: aligned-textgrid
+
+---

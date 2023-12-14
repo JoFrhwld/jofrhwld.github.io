@@ -1,0 +1,15 @@
+---
+title: "Home"
+about:
+  template: solana
+  image: assets/profile.jpg
+---
+
+I am an Assistant Professor in [the Linguistics Department](https://linguistics.as.uky.edu/) at the [University of Kentucky](https://www.as.uky.edu/). My interests within linguistics are sociolinguistics, variation and change, phonetics, and phonology.
+
+### Contact
+
+|         |                             |
+|---------|-----------------------------|
+| email   | josef.fruehwald\@uky.edu    |
+| office: | 1671 Patterson Office Tower |
