@@ -20,9 +20,10 @@ for (const  [year, pubs] of Object.entries(newthing).reverse()){
       <%= year %>
     </h3>
   </div>
+  <!-- Begin pub div -->
   <div class="g-col-10">
     <% for (const pub of pubs){ %>
-      <h4><a href="<%- pub.path %>" class="listing-name"><%= pub["title"] %></a></h4>
+    <h4><a href="<%- pub.path %>" class="listing-name"><%= pub["title"] %></a></h4>
     <div class="grid bibinfo" style="row-gap: 0;">
       <div class="g-col-1 bibinfo">
         <span class="bibinfo bibprefix">with:</span>
@@ -34,6 +35,9 @@ for (const  [year, pubs] of Object.entries(newthing).reverse()){
       </div>
       <div class="g-col-1 bibinfo">
       </div>
+
+      <!-- start container if -->
+
       <% 
       if ("container-title" in pub["citation"]) {
       %>
@@ -49,9 +53,49 @@ for (const  [year, pubs] of Object.entries(newthing).reverse()){
       </div>
 
       <% }%>
+      <!-- end container if -->
+        
+      <!-- start version if -->
+      <% 
+      if ("version" in pub["citation"]) {
+      %>
+      <div class="g-col-1 bibinfo">
+        <span class="bibinfo bibprefix">version:</span>
+      </div>
+      <div class="g-col-10 bibinfo">
+        <span class="bibinfo">
+          <%= pub["citation"]["version"]%>
+        </span>
+      </div>
+      <div class="g-col-1 bibinfo">
+      </div>
+
+      <% }%>
+      <!-- end version if -->
+
+        <!-- start abstract if -->
+        <% 
+        if ("abstract" in pub) {
+        %>
+        <div class="g-col-1 bibinfo">
+            <span class="bibinfo bibprefix">abstract:</span>
+        </div>
+        
+        <div class="g-col-11 bibinfo">
+            <details>
+            <span class="bibinfo">
+            <%= pub["abstract"]%>
+            </span>
+            </details>
+        </div>
+
+        <% }%>
+        <!-- end abstract if -->
+
 
     </div>
     <% }%>
+    <!-- end pub div -->
 
   </div>
 <% }%>
