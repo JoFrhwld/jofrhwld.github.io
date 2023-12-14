@@ -3,7 +3,7 @@ project:
   resources: 
     - workshops
     - teaching
-    - papers
+    #- papers
   render:
     - "*.qmd"
     - "!papers/*/*qmd"
@@ -12,7 +12,7 @@ project:
 website:
   google-analytics: 
     tracking-id: "G-C00S3NPL7B"
-    ananonymize-ip: true
+    anonymize-ip: true
   cookie-consent: true
   title: "Josef Fruehwald"
   favicon: assets/logo.svg

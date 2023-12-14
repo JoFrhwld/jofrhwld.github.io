@@ -85,16 +85,6 @@
       ],
       "Hash": "5da89b9b10d98a7820adb426939900a7"
     },
-    "ISwR": {
-      "Package": "ISwR",
-      "Version": "2.0-8",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "151f9c8e5551243cdacb521cb85ae250"
-    },
     "MASS": {
       "Package": "MASS",
       "Version": "7.3-58.4",
@@ -949,19 +939,6 @@
         "withr"
       ],
       "Hash": "fc0b272e5847c58cd5da9b20eedbd026"
-    },
-    "gdata": {
-      "Package": "gdata",
-      "Version": "3.0.0",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "gtools",
-        "methods",
-        "stats",
-        "utils"
-      ],
-      "Hash": "d3d6e4c174b8a5f251fd273f245f2471"
     },
     "generics": {
       "Package": "generics",

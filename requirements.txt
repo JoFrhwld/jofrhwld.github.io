@@ -56,4 +56,4 @@ traitlets==5.14.0
 Unidecode==1.3.7
 urllib3==2.1.0
 wcwidth==0.2.12
-zotero2qmd @ git+https://github.com/JoFrhwld/zotero2qmd.git@358bbd94d7979531edab9f8c963918d3d013bc98
+zotero2qmd @ git+https://github.com/JoFrhwld/zotero2qmd.git@d869b519f748e8e5deabc5acbea3557bddd9e49d
