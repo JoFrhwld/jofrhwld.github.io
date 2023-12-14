@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="147.40625"
+   height="255.73438"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="cross_back.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="85.609914"
+     inkscape:cy="91.188177"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="10"
+     fit-margin-right="10"
+     fit-margin-bottom="10"
+     fit-margin-left="10"
+     inkscape:window-width="1279"
+     inkscape:window-height="755"
+     inkscape:window-x="4"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3038"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       originx="-30.624023px"
+       originy="-666.32781px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-30.624023,-130.3)">
+    <g
+       id="g2991"
+       transform="matrix(1.5,0,0,1.5,-20.313477,-188.0125)">
+      <text
+         sodipodi:linespacing="125%"
+         id="text3891"
+         y="246.36652"
+         x="63.199219"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Franklin Gothic Book;-inkscape-font-specification:Franklin Gothic Book"
+         xml:space="preserve"><tspan
+           y="246.36652"
+           x="63.199219"
+           id="tspan3893"
+           sodipodi:role="line">uw</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text3895"
+         y="353.07898"
+         x="64.245117"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Franklin Gothic Book;-inkscape-font-specification:Franklin Gothic Book"
+         xml:space="preserve"><tspan
+           y="353.07898"
+           x="64.245117"
+           id="tspan3897"
+           sodipodi:role="line">aw</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text3899"
+         y="300.93613"
+         x="64.217773"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Franklin Gothic Book;-inkscape-font-specification:Franklin Gothic Book"
+         xml:space="preserve"><tspan
+           y="300.93613"
+           x="64.217773"
+           id="tspan3901"
+           sodipodi:role="line">ow</tspan></text>
+      <rect
+         style="opacity:0.31739131;fill:#ff4200;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="use3917"
+         width="63.92857"
+         height="102.14285"
+         x="61.126953"
+         y="219.38214"
+         rx="5"
+         ry="5" />
+      <rect
+         ry="5"
+         rx="5"
+         y="273.38214"
+         x="41.126953"
+         height="102.14285"
+         width="63.92857"
+         id="use3967"
+         style="opacity:0.31739131;fill:#0046ff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+  </g>
+</svg>

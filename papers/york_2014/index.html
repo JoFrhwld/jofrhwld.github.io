@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+  <meta name="author" content="Josef Fruehwald, University of Edinburgh  January 22, 2014" />
+  <title>The Phonological Influence on Phonetic Change</title>
+  <style type="text/css">code{white-space: pre;}</style>
+<style>
+  html { background-color: black; }
+  body { background-color: white; border-radius: 12px}
+  /* A section is a slide. It's size is 800x600, and this will never change */
+  section {
+      font-family: Arial, serif;
+      font-size: 20pt;
+    }
+  address, blockquote, dl, fieldset, form, h1, h2, h3, h4, h5, h6, hr, ol, p, pre, table, ul, dl { padding: 10px 20px 10px 20px; }
+  h1, h2, h3 {
+    text-align: center;
+    margin: 10pt 10pt 20pt 10pt;
+  }
+  ul, ol {
+    margin: 10px 10px 10px 50px;
+  }
+  section.titleslide h1 { margin-top: 200px; }
+  h1.title { margin-top: 150px; }
+  h1 { font-size: 180%; }
+  h2 { font-size: 120%; }
+  h3 { font-size: 100%; }
+  q { quotes: "“" "”" "‘" "’"; }
+  blockquote { font-style: italic }
+  /* Figures are displayed full-page, with the caption on
+     top of the image/video */
+  figure {
+    background-color: black;
+  }
+  figcaption {
+    margin: 70px;
+  }
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 40px;
+    text-align: right;
+    background-color: #F3F4F8;
+    border-top: 1px solid #CCC;
+  }
+
+  /* Transition effect */
+  /* Feel free to change the transition effect for original
+     animations. See here:
+     https://developer.mozilla.org/en/CSS/CSS_transitions
+     How to use CSS3 Transitions: */
+  section {
+      -moz-transition: left 400ms linear 0s;
+      -webkit-transition: left 400ms linear 0s;
+      -ms-transition: left 400ms linear 0s;
+      transition: left 400ms linear 0s;
+  }
+
+  /* Before */
+  section { left: -150%; }
+  /* Now */
+  section[aria-selected] { left: 0; }
+  /* After */
+  section[aria-selected] ~ section { left: +150%; }
+
+  /* Incremental elements */
+
+  /* By default, visible */
+  .incremental > * { opacity: 1; }
+
+  /* The current item */
+  .incremental > *[aria-selected] { color: red; opacity: 1; }
+
+  /* The items to-be-selected */
+  .incremental > *[aria-selected] ~ * { opacity: 0.2; }
+</style>
+  <link rel="stylesheet" href="assets/scianimator.css" />  
+  <script src="assets/jquery-1.4.4.min.js"></script>
+  <script src="assets/jquery.scianimator.min.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Numans' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="assets/mystyle2.css">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', 'UA-835627-8', 'jofrhwld.github.io');
+    ga('send', 'pageview');
+  
+  </script>
+</head>
+<body>
+<section>
+  <h1 class="title">The Phonological Influence on Phonetic Change</h1>
+  <h2 class="author">Josef Fruehwald, University of Edinburgh <br> January 22, 2014</h2>
+  <h3 class="date"></h3>
+</section>
+<section id="introduction" class="slide level1">
+<h1>Introduction</h1>
+<div class = "incremental">
+
+<p>I'll be making the case that the conventional wisdom surrounding the transition of phenomena from phonetic to phonological is not that well supported by studies of language change in progress.</p>
+<p>Minimally, many changes exhibit categorical, phonological conditioning at their <em>onset</em>, not as late or mid range reanalyses.</p>
+<p>I'll also argue that phonological reanalysis also occurs at the onset of sound changes.</p>
+<p>In the process I'll also be trying to make the case that the difference between &quot;phonetic&quot; and &quot;phonological&quot; is not just a matter of degree, but of quality, hilighting the importance of explanation and mutliple levels.</p>
+</div>
+
+</section>
+<section id="the-birth-of-a-category" class="slide level1">
+<h1>The birth of a category</h1>
+<p>There is a conventional wisdom that <em>the</em> source of sound change works approximately like this:</p>
+<div class = "incremental">
+  
+<img src="assets/gradual_1.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img> <img src="assets/gradual_3.svg" style="position:absolute; z-index=1520;left:10%;width:75%;"></img> <img src="assets/gradual_5.svg" style="position:absolute; z-index=1540;left:10%;width:75%;"></img> <img src="assets/gradual_7.svg" style="position:absolute; z-index=1560;left:10%;width:75%;"></img> <img src="assets/gradual_9.svg" style="position:absolute; z-index=1580;left:10%;width:75%;"></img> <img src="assets/gradual_11.svg" style="position:absolute; z-index=1600;left:10%;width:75%;"></img><br />
+</div>
+
+</section>
+<section id="error-accumulation" class="slide level1">
+<h1>Error Accumulation</h1>
+<p><img src = "assets/ohala1981.png" style = "width:70%"></img></p>
+<p>Ohala (1981)</p>
+</section>
+<section id="terminological-issues" class="slide level1">
+<h1>Terminological issues</h1>
+<h4 id="some-work">Some work:</h4>
+<ul>
+<li>Phonetic processes = small phonetic differences</li>
+<li>Phonological processes = large phonetic differences.</li>
+</ul>
+<h4 id="what-i-mean">What I mean:</h4>
+<ul>
+<li>Phonetic processes = operate over and manipulate continuous phonetic dimensions.</li>
+<li>Phonological processes = operate over and manipulate categorical, featural representations</li>
+</ul>
+</section>
+<section id="the-pnc" class="slide level1">
+<h1>The PNC</h1>
+<ul>
+<li>Interviews collected between 1972 and 2010
+<ul>
+<li>Fieldwork associated with the Ling 560 Class</li>
+<li>Goal: interview as many residents on a city block as possible</li>
+<li>1,107 interviews in catalog from mostly working class neighborhoods</li>
+</ul></li>
+<li>The PNC
+<ul>
+<li>358 speakers transcribed and analyzed so far</li>
+<li>Dates of Birth ranging from 1888 to 1991</li>
+<li>860,000 automated vowel measurements.</li>
+</ul></li>
+<li>This talk
+<ul>
+<li>A subset of 735,408 measurements from 308 speakers from the PNC.</li>
+</ul></li>
+</ul>
+<!-- http://www.flickr.com/photos/usnationalarchives/sets/72157630314917356/with/7455138062/ -->
+
+
+</section>
+<section class="slide level1">
+
+<div style="background:black;height:100%;width:100%">
+<myfig> <img src="assets/blocks1.jpg" alt="Philadelphia Row Homes, 1973" />  
+<figcaption>
+Philadelphia Row Homes, 1973
+</figcaption>
+</myfig>
+</div>
+
+</section>
+<section class="slide level1">
+
+<div style="background:black;height:100%;width:100%">
+<myfig> <img src="assets/block1.jpg" alt="North Philadelphia Row Homes, 1973" />
+<figcaption>
+North Philadelphia Row Homes, 1973
+</figcaption>
+</myfig>
+</div>
+
+
+</section>
+<section class="slide level1">
+
+<div style="background:black;height:100%;width:100%">
+<myfig> <img src="assets/block2.jpg" alt="North Philadelphia Row Homes, 1973" />
+<figcaption>
+North Philadelphia Row Homes, 1973
+</figcaption>
+</myfig>
+</div>
+
+
+</section>
+<section class="slide level1">
+
+<div style="background:black;height:100%;width:100%">
+<myfig> <img src="assets/block3.jpg" alt="South Philadelphia Row Homes, 2012" />
+<figcaption>
+South Philadelphia Row Homes, 2012
+</figcaption>
+</myfig>
+</div>
+
+</section>
+<section class="slide level1">
+
+<div style="background:black;height:100%;width:100%">
+<myfig> <img src="assets/block4.jpg" alt="South Philadelphia Row Homes, 2012" />  
+<figcaption>
+South Philadelphia Row Homes, 2012
+</figcaption>
+</myfig>
+</div>
+
+</section>
+<section id="the-pnc-1" class="slide level1">
+<h1>The PNC</h1>
+<h4 id="automating-acoustic-analysis">Automating Acoustic Analysis</h4>
+<blockquote>
+<p>Much of the time spent on measurement consists of locating the words of interest and storing these segments. More than one member of our research staff has projected a program for automatic location, segmentation, and measurement of vowel nuclei, but so far, all such attempts have led to an increase in gross error rates of several orders of magnitude. <strong>At present, we find there is no effective substitute for the careful examination and measurement of the formant trajectories of each individual vowel token by an analyst relying on both auditory and visual information</strong>, double-checking the computer’s analysis against auditory impressions.</p>
+</blockquote>
+<p><cite> Labov, Ash &amp; Boberg (2006)</cite></p>
+</section>
+<section id="the-pnc-2" class="slide level1">
+<h1>The PNC</h1>
+<h5 id="step-1-transcription">Step 1: Transcription</h5>
+<p><img src = "assets/elan.png" width=100%></img></p>
+</section>
+<section id="the-pnc-3" class="slide level1">
+<h1>The PNC</h1>
+<h5 id="step-2-forced-alignment">Step 2: Forced Alignment</h5>
+<p><img src = "assets/alignment.png" width ="100%"></img></p>
+</section>
+<section id="the-pnc-4" class="slide level1">
+<h1>The PNC</h1>
+<h5 id="step-3-formant-analysis">Step 3: Formant Analysis</h5>
+<p><img src="figure/means_plot.svg" title="plot of chunk means_plot" alt="plot of chunk means_plot" width="70%" /> </p>
+</section>
+<section id="the-pnc-5" class="slide level1">
+<h1>The PNC</h1>
+<p><a href="http://fave.ling.upenn.edu/">FAVE online suite</a> | <a href="https://github.com/JoFrhwld/FAVE">FAVE Github Repository</a> | <a href="https://groups.google.com/forum/#!forum/fave-users">FAVE Users' Group</a></p>
+<object type="text/html" data="http://fave.ling.upenn.edu/", style="width:100%;height:70%;"></object>
+
+</section>
+<section id="large-volumes-of-data" class="slide level1">
+<h1>Large Volumes of Data</h1>
+<div class="scianimator">
+<div id="test_jean_zoom1" style="display: inline-block;">
+</div>
+</div>
+<script type="text/javascript">
+  (function($) {
+    $(document).ready(function() {
+      var imgs = Array(13);
+      for (i=0; ; i++) {
+        if (i == imgs.length) break;
+        imgs[i] = "figure/test_jean_zoom1" + (i + 1) + ".png";
+      }
+      $("#test_jean_zoom1").scianimator({
+          "images": imgs,
+          "delay": 1000,
+          "controls": ["first", "previous", "play", "next", "last", "loop", "speed"],
+      });
+      $("#test_jean_zoom1").scianimator("play");
+    });
+  })(jQuery);
+</script>
+
+
+
+
+
+</section>
+<section id="the-use-of-change-in-progress" class="slide level1">
+<h1>The Use of Change in Progress</h1>
+<p>When we observe a language change in progress, the change is taking place in speakers' knowledge of their language from generation to generation.</p>
+<ul>
+<li>Speakers' supraglottal tracts are not changing meaningfully.</li>
+<li>The speed of sound at sea level isn't changing.</li>
+<li>Speakers' motor-planning abilities aren't changing meaningfully.</li>
+</ul>
+<p>To know <em>which</em> aspect of their knowledge is changing, we really need to observe the sound change in progress.</p>
+</section>
+<section id="the-use-of-change-in-progress-1" class="slide level1">
+<h1>The Use of Change in Progress</h1>
+<h4 id="metathesis">Metathesis</h4>
+<ol type="1">
+<li>It could be lexically gradual, moving one word at a time, possibly due to perceptual confusion (Blevins &amp; Garret 2004)
+<ul>
+<li>e.g. chipotle -&gt; chipolte</li>
+</ul></li>
+<li>It could be due to a new phonological process being added to the grammar, which produces phonetically abrupt variation.</li>
+<li>It could even be phonetically gradual
+<ul>
+<li>Andalusian pre-aspiration becoming post aspiration (Parrel, 2012; Ruch 2012)
+<ul>
+<li>ht &gt; hth &gt; th</li>
+</ul></li>
+</ul></li>
+</ol>
+<p>In all three cases, the outcome is the same, but result from changes to three very different aspects of linguistic knowledge.</p>
+</section>
+<section id="phonological-innovation" class="slide level1">
+<h1>Phonological innovation</h1>
+<p>Tucker (1944) on the Philadelphia dialect (emphasis mine).</p>
+<blockquote>
+<p>Both the [aɪ]-type diphthong and the [aʊ]-type diphthong exist in only one quality, whereas in most American dialects the first element is shortened and modified in quality before a voiceless consonant [...] No such distinction is made in the Philadelphia dialect.</p>
+</blockquote>
+</section>
+<section id="phonological-innovation-1" class="slide level1">
+<h1>Phonological Innovation</h1>
+<p>Today:</p>
+<p>'Raymond', who was interviewed in 2010, was 19 (DOB 1981).</p>
+<div style = "width:100%;float:left;">
+<div style = "width:50%;float:left;">
+<table style="width:80%">
+<tr>
+<td>
+&quot;I grew up here my whole life.&quot;
+</td>
+</tr>
+<tr>
+<td>
+<audio controls style="width:90%;float:left;"> <source src = "file:///Users/joseffruehwald/Documents/Classes/Fall_2013/misc/mFiL_assets/life_long.wav" type = "audio/wav"> </audio>
+</td>
+</tr>
+</table>
+<table style="width:80%">
+<tr>
+<td>
+&quot;Um, right now I'm undecided.&quot;
+</td>
+</tr>
+<tr>
+<td>
+<audio controls style="width:90%;float:left;"> <source src = "file:///Users/joseffruehwald/Documents/Classes/Fall_2013/misc/mFiL_assets/undecided_long.wav" type = "audio/wav"> </audio>
+</td>
+</tr>
+</table>
+
+</div>
+
+<div style = "width:50%;float:left;">
+<table style="width:80%">
+<tr>
+<td>
+&quot;life&quot;
+</td>
+</tr>
+<tr>
+<td>
+<audio controls style="width:90%;float:left;"> <source src = "file:///Users/joseffruehwald/Documents/Classes/Fall_2013/misc/mFiL_assets/life_short.wav" type = "audio/wav"> </audio>
+</td>
+</tr>
+</table>
+<table style="width:80%">
+<tr>
+<td>
+&quot;undecided.&quot;
+</td>
+</tr>
+<tr>
+<td>
+<audio controls style="width:90%;float:left;"> <source src = "file:///Users/joseffruehwald/Documents/Classes/Fall_2013/misc/mFiL_assets/undecided_short.wav" type = "audio/wav"> </audio>
+</td>
+</tr>
+</table>
+
+</div>
+
+</div>
+
+
+</section>
+<section id="phonological-innovation-2" class="slide level1">
+<h1>Phonological Innovation</h1>
+<p>It looks like between Tucker's description, and Raymond's birth, there was a phonological innovation in Philadelphia.</p>
+<div style = "margin-left:25%">
+    
+ay → -low/ __[-voice]
+</div>
+<div style = "width:100%" class = "incremental">
+  <div style = "width:50%;float:left;" align = "center" class = "inslide">
+    <table padding=10px>
+      <tr>
+        <td >
+/ay/
+</td>
+        <td>
+          <!-- { -->
+          <embed src = "assets/bracket.svg"  type="image/svg+xml" />
+        </td>
+        <td >
+            
+- high<br> <b>+ low</b><br> + back<br> - round<br> …<br>
+</td>
+      </tr>
+    </table>
+  </div>
+  <div style = "width:50%;float:right;" align = "left" class = "inslide">
+    <table padding=10px>
+      <tr>
+        <td>
+/ay/
+</td>
+        <td>
+          <embed src = "assets/bracket.svg"  type="image/svg+xml" />
+        </td>
+        <td>
+            
+- high<br> <b>- low</b><br> + back<br> - round<br> …<br>
+</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+</section>
+<section class="slide level1">
+
+<h2 id="phonological-innovation-3"><a href="https://jofrhwld.github.ioassets/motion_chart.html">Phonological Innovation?</a></h2>
+<object data="http://jofrhwld.github.io/assets/motion_chart.html" style="width:100%;height:90%;"></object>
+
+
+
+</section>
+<section id="phonological-innovation-4" class="slide level1">
+<h1>Phonological Innovation?</h1>
+<p><img src="figure/ay_plot.svg" title="plot of chunk ay_plot" alt="plot of chunk ay_plot" width="80%" /></p>
+</section>
+<section id="phonological-innovation-5" class="slide level1">
+<h1>Phonological Innovation?</h1>
+<p><img src="figure/ay_plot_2.svg" title="plot of chunk ay_plot_2" alt="plot of chunk ay_plot_2" width="80%" /></p>
+</section>
+<section id="phonological-innovation-6" class="slide level1">
+<h1>Phonological Innovation?</h1>
+<h4 id="continuous-change">Continuous Change</h4>
+<p>It looks like /ay/ rose continuously across the 20th century.</p>
+<p>There isn't any point in time where there is an obvious discontinuity, either across the community or within speakers, where there was a transition from a phonetic change to a phonological one.</p>
+<h4 id="conclusion">Conclusion?</h4>
+<p>Is there any meaningful distinction to be made between a phonetic change and a phonological one?</p>
+</section>
+<section id="error-accumulation-1" class="slide level1">
+<h1>Error Accumulation</h1>
+<p><img src = "assets/ohala1981.png" style = "width:70%"></img></p>
+<p>Ohala (1981)</p>
+</section>
+<section id="error-accumulation-2" class="slide level1">
+<h1>Error Accumulation</h1>
+<h4 id="prediction">Prediction</h4>
+<p>Regular articulatory and perceptual biases will lead to gradual phonetic shift, and perhaps later stage phonological or phonemic reanalysis.</p>
+</section>
+<section id="non-phonologization" class="slide level1">
+<h1>Non-phonologization</h1>
+<p><img src="figure/aw_basic_plot.svg" title="plot of chunk aw_basic_plot" alt="plot of chunk aw_basic_plot" width="80%" /></p>
+</section>
+<section id="non-phonologization-1" class="slide level1">
+<h1>Non-phonologization</h1>
+<p><img src="figure/aw_cohen_plot.svg" title="plot of chunk aw_cohen_plot" alt="plot of chunk aw_cohen_plot" width="80%" /></p>
+</section>
+<section id="phonologization-and-non-phonologization" class="slide level1">
+<h1>Phonologization and Non-Phonologization</h1>
+<p><img src="figure/ay_aw_comp_plot.svg" title="plot of chunk ay_aw_comp_plot" alt="plot of chunk ay_aw_comp_plot" width="80%" /></p>
+</section>
+<section id="phonologization-and-non-phonologization-1" class="slide level1">
+<h1>Phonologization and Non-Phonologization</h1>
+<p>In comparing these two phonetic changes, we can see that phonologization is not the deterministic outcome of a reliable and large phonetic phenomenon.</p>
+<p>This result is even more striking when looking at the phonetic precursors of /ay/ alone</p>
+</section>
+<section id="mismatches" class="slide level1">
+<h1>Mismatches</h1>
+<p>The model of gradual reanalysis would predict that phonetic changes should progress from the most favoring environment to the least.</p>
+<p>In some cases, there is a mismatch between contexts which phonetically favor a change, and the eventual phonological conditioning in its outcome.</p>
+</section>
+<section id="mismatches-1" class="slide level1">
+<h1>Mismatches</h1>
+<h4 id="ay-raising">/ay/ raising</h4>
+<p><img src="assets/mismatch.svg" width = "70%"></p>
+<p>(Joos, 1942; Chambers, 1973; Moreton &amp; Thomas, 2007)</p>
+</section>
+<section id="mismatches-2" class="slide level1">
+<h1>Mismatches</h1>
+<p><img src="figure/early_ay.svg" title="plot of chunk early_ay" alt="plot of chunk early_ay" width="80%" /></p>
+<p>Faithful /d/ (235 ms) &gt; Flapped /d/ (156 ms); Faithful /t/ (143 ms); Flapped /t/ (113 ms)</p>
+</section>
+<section id="mismatches-3" class="slide level1">
+<h1>Mismatches</h1>
+<p><img src="figure/ingrid_plot.svg" title="plot of chunk ingrid_plot" alt="plot of chunk ingrid_plot" width="80%" /></p>
+<p>Data from Rosenfelder (2005)</p>
+</section>
+<section id="mismatches-4" class="slide level1">
+<h1>Mismatches</h1>
+<p>Depending on what the phonetic precursor is, we'd expect to see one of these two patterns of sound change initiation and reanalysis.</p>
+<div style="width:100%;float:left;">
+<div style="width:50%;float:left;">
+
+<p><img src="figure/plot_dur_rean.svg" title="plot of chunk plot_dur_rean" alt="plot of chunk plot_dur_rean" width="100%" /></p>
+</div>
+<div style="width:50%;float:left;">
+
+<p><img src="figure/plot_glide_rean.svg" title="plot of chunk plot_glide_rean" alt="plot of chunk plot_glide_rean" width="100%" /></p>
+</div>
+</div>
+</section>
+<section id="mismatches-5" class="slide level1">
+<h1>Mismatches</h1>
+<p>It looks like /ay/ raising differentiates along phonological, not phonetic dimensions.</p>
+<p><img src="figure/plot_flaps.svg" title="plot of chunk plot_flaps" alt="plot of chunk plot_flaps" width="80%" /></p>
+</section>
+<section id="mismatches-6" class="slide level1">
+<h1>Mismatches</h1>
+<p>I constructed a statistical model defining these relationships between /ay/ in these different contexts, utilizing b-splines (a non-linear curve fitting method) to model the effects over date of birth. Also included were random intercepts for speaker and for word.</p>
+<p><img src="assets/model.png" width = "60%"></p>
+<p>The model was implemented in Stan, which used Hamiltonion Monte Carlo to estimate the effects. All priors were non-informative</p>
+<div class = "incremental">
+
+<p>Question: When, across the time course of the change, is /ay/ raising conditioned by phonological voicing?</p>
+</div>
+
+</section>
+<section id="mismatches-7" class="slide level1">
+<h1>Mismatches</h1>
+<p>Answer: At the very onset of the change.</p>
+<p>/ay/ differentiates between pre-/t/ and pre-/d/ contexts in the exact same way whether the /t/ and /d/ are faithful, or flapped.</p>
+<p><img src="figure/plot_diffs.svg" title="plot of chunk plot_diffs" alt="plot of chunk plot_diffs" width="80%" /></p>
+</section>
+<section id="mismatches-8" class="slide level1">
+<h1>Mismatches</h1>
+<div class = "incremental">
+<div>
+
+<h4 id="counter-proposal-analogy">Counter-proposal: Analogy</h4>
+<p>Most of the /ay/ followed by flapped /t/ were from morphologically complex words (e.g <em>writer</em>)</p>
+<p>Maybe the immediate participation of these contexts in /ay/ raising was analogy with the morphologically simplex forms (<em>write</em>).</p>
+</div>
+<div>
+
+<h4 id="response-part-1">Response, Part 1</h4>
+<p>Well, the analogy appears to have immediately spread to all of the relevant cases all at once.</p>
+</div>
+</section>
+<section id="mismatches-9" class="slide level1">
+<h1>Mismatches</h1>
+<h4 id="response-part-2">Response, Part 2</h4>
+<p><img src="figure/day_plot.svg" title="plot of chunk day_plot" alt="plot of chunk day_plot" width="80%" /></p>
+</section>
+<section id="ey-raising" class="slide level1">
+<h1>/ey/ Raising</h1>
+<div style = "width:100%;float:left;">
+
+<p>&quot;Mary&quot;, born 1895</p>
+<div style = "width:50%;float:left;">
+
+
+<table style="width:80%">
+<tr>
+<td>
+&quot;He comes from the same town&quot;
+</td>
+</tr>
+<tr>
+<td>
+<audio controls style="width:90%;float:left;"> <source src = "file:///Users/joseffruehwald/Documents/Classes/Spring_2014/york_assets/early_same_long.wav" type = "audio/wav"> </audio>
+</td>
+</tr>
+</table>
+<table style="width:80%">
+<tr>
+<td>
+&quot;What's I saying, I forgot.&quot;
+</td>
+</tr>
+<tr>
+<td>
+<audio controls style="width:90%;float:left;"> <source src = "file:///Users/joseffruehwald/Documents/Classes/Spring_2014/york_assets/early_saying_long.wav" type = "audio/wav"> </audio>
+</td>
+</tr>
+</table>
+
+</div>
+
+<div style = "width:50%;float:left;">
+<table style="width:80%">
+<tr>
+<td>
+&quot;same&quot;
+</td>
+</tr>
+<tr>
+<td>
+<audio controls style="width:90%;float:left;"> <source src = "file:///Users/joseffruehwald/Documents/Classes/Spring_2014/york_assets/early_same_short.wav" type = "audio/wav"> </audio>
+</td>
+</tr>
+</table>
+<table style="width:80%">
+<tr>
+<td>
+&quot;saying&quot;
+</td>
+</tr>
+<tr>
+<td>
+<audio controls style="width:90%;float:left;"> <source src = "file:///Users/joseffruehwald/Documents/Classes/Spring_2014/york_assets/early_saying_short.wav" type = "audio/wav"> </audio>
+</td>
+</tr>
+</table>
+
+</div>
+
+<p>
+</p>
+
+<p>&quot;Michelle&quot;, born 1988</p>
+<div style = "width:50%;float:left;">
+
+<table style="width:80%">
+<tr>
+<td>
+&quot;...you walk everywhere and you run into the same people, over and over...&quot;
+</td>
+</tr>
+<tr>
+<td>
+<audio controls style="width:90%;float:left;"> <source src = "file:///Users/joseffruehwald/Documents/Classes/Spring_2014/york_assets/late_same_long.wav" type = "audio/wav"> </audio>
+</td>
+</tr>
+</table>
+<table style="width:80%">
+<tr>
+<td>
+&quot;I'm kinda saying it now.&quot;
+</td>
+</tr>
+<tr>
+<td>
+<audio controls style="width:90%;float:left;"> <source src = "file:///Users/joseffruehwald/Documents/Classes/Spring_2014/york_assets/late_saying_long.wav" type = "audio/wav"> </audio>
+</td>
+</tr>
+</table>
+
+</div>
+
+<div style = "width:50%;float:left;">
+<table style="width:80%">
+<tr>
+<td>
+&quot;same&quot;
+</td>
+</tr>
+<tr>
+<td>
+<audio controls style="width:90%;float:left;"> <source src = "file:///Users/joseffruehwald/Documents/Classes/Spring_2014/york_assets/late_same_short.wav" type = "audio/wav"> </audio>
+</td>
+</tr>
+</table>
+<table style="width:80%">
+<tr>
+<td>
+&quot;saying&quot;
+</td>
+</tr>
+<tr>
+<td>
+<audio controls style="width:90%;float:left;"> <source src = "file:///Users/joseffruehwald/Documents/Classes/Spring_2014/york_assets/late_saying_short.wav" type = "audio/wav"> </audio>
+</td>
+</tr>
+</table>
+
+</div>
+
+</div>
+
+
+
+</section>
+<section id="mismatches-10" class="slide level1">
+<h1>Mismatches</h1>
+<h4 id="ey-raising-1">/ey/ raising</h4>
+<p><img src="figure/plot_ey_raising.svg" title="plot of chunk plot_ey_raising" alt="plot of chunk plot_ey_raising" width="80%" /></p>
+</section>
+<section id="mismatches-11" class="slide level1">
+<h1>Mismatches</h1>
+<p><code>lmer(Diag ~ Decade*FolSeg + (FolSeg | Speaker) + (1|Word))</code></p>
+<p>Decade is date of birth minus 1900 divided by 10.</p>
+<div text-align = "center">
+<table rules="groups">
+
+<th>
+<td colspan = 2 align = "left" padding="0"> 
+  
+C Estimates
+</td>
+<td></td>
+<td colspan = 3 align = "left">
+  
+Interactions
+</td>
+</th>
+<tbody>
+<tr>
+<td rowspan = "2" valign = "top">
+Intercept
+</td>
+<td align="right">
+0.67
+</td>
+<td align="right" style="font-size:8pt;">
+t = 17.02
+</td>
+<td></td>
+<td align="right">
+-0.59
+</td>
+<td align="right" style="font-size:8pt;">
+t = -4.83
+</td>
+<td >
+FolSeg = V
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td></td>
+<td align="right" style = "font-weight:800;color:#7570B3;">
+0.28
+</td>
+<td align="right" style="font-size:8pt;font-weight:800;color:#7570B3;">
+t = 2.53
+</td>
+<td style = "font-weight:800;color:#7570B3;">
+FolSeg = /l/
+</td>
+</tr>
+</tbody>
+
+<tbody>
+<tr>
+<td rowspan = "2" valign = "top">
+Decade
+</td>
+<td align="right">
+0.12
+</td>
+<td align="right" style="font-size:8pt;">
+t = 15.56
+</td>
+<td></td>
+<td align="right">
+-0.12
+</td>
+<td align="right" style="font-size:8pt;">
+t = -6.35
+</td>
+<td >
+FolSeg = V × Decade
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td></td>
+<td align="right" style = "font-weight:800;color:#7570B3;">
+-0.08
+</td>
+<td align="right" style="font-size:8pt;font-weight:800;color:#7570B3;">
+t = -4.12
+</td>
+<td style = "font-weight:800;color:#7570B3;">
+FolSeg = /l/ × Decade
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</section>
+<section id="ey-raising-2" class="slide level1">
+<h1>/ey/ Raising</h1>
+<p>Generalization appears to be just &quot;following consonant.&quot; Didn't start in some context, then spread to others.</p>
+<p><img src="figure/plot_ey_manner.svg" title="plot of chunk plot_ey_manner" alt="plot of chunk plot_ey_manner" width="80%" /></p>
+</section>
+<section id="mismatches-12" class="slide level1">
+<h1>Mismatches</h1>
+<h4 id="wrapup">Wrapup</h4>
+<p>Phonetic favoribility is a weak predictor of which variants will undergo a change.</p>
+<p>First is not fastest.</p>
+<p><em>Phonological</em> conditioning is present at the onset of these changes.</p>
+</section>
+<section id="conclusions-and-analysis" class="slide level1">
+<h1>Conclusions and Analysis</h1>
+<p>The conventional wisdom regarding the gradual phonological reanalysis of phonetic effects:</p>
+<ol type="1">
+<li>Either doesn't happen, or happens too rarely to be observed in the sound changes I've analyzed.</li>
+<li>Can't account for a number of the patterns in sound changes that I've observed.</li>
+</ol>
+</section>
+<section id="conclusions-and-analysis-1" class="slide level1">
+<h1>Conclusions and Analysis</h1>
+<p>How do we resolve the the apparently early phonological differentiation with the gradual phonetic change?</p>
+<div class = "incremental">
+  
+<img src="assets/ay_stage_1.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img> <img src="assets/ay_stage_2.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img> <img src="assets/ay_stage_3.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img>
+</div>
+
+
+
+</section>
+<section id="conclusions-and-analysis-2" class="slide level1">
+<h1>Conclusions and Analysis</h1>
+<p>How do we resolve the the apparently early phonological differentiation with the gradual phonetic change?</p>
+<div class = "incremental">
+  
+<img src="assets/aw_stage_1.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img> <img src="assets/aw_stage_2.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img> <img src="assets/aw_stage_3.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img>
+</div>
+
+</section>
+<section id="conclusions-and-analysis-3" class="slide level1">
+<h1>Conclusions and Analysis</h1>
+<p>How do we resolve the the apparently early phonological differentiation with the gradual phonetic change?</p>
+<div class = "incremental">
+  
+<img src="assets/ey_stage_1.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img> <img src="assets/ey_stage_2.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img> <img src="assets/ey_stage_3.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img>
+</div>
+
+</section>
+<section id="other-kinds-of-phonological-influence" class="slide level1">
+<h1>Other Kinds of Phonological Influence</h1>
+<h4 id="parallel-shifts">Parallel Shifts</h4>
+<p><img src="figure/vw_parallel_plot.svg" title="plot of chunk vw_parallel_plot" alt="plot of chunk vw_parallel_plot" width="80%" /></p>
+<p>This is unlike the billiard balls behavior. The unifying factor is their phonological natural class.</p>
+</section>
+<section id="parallel-shifts-1" class="slide level1">
+<h1>Parallel Shifts</h1>
+<div style = "width:100%">
+<div style = "width:32.5%;float:left">
+  
+<p><img src="figure/plot_aw_ow.svg" title="plot of chunk plot_aw_ow" alt="plot of chunk plot_aw_ow" width="100%" /></p>
+</div>
+<div style = "width:32.5%;float:left">
+  
+<p><img src="figure/plot_ow_uw.svg" title="plot of chunk plot_ow_uw" alt="plot of chunk plot_ow_uw" width="100%" /></p>
+</div>
+
+<div style = "width:32.5%;float:left">
+  
+<p><img src="figure/plot_aw_uw.svg" title="plot of chunk plot_aw_uw" alt="plot of chunk plot_aw_uw" width="100%" /></p>
+</div>
+
+</div>
+
+<p>When controlling for sociolinguistic factors, these correlations remain just as strong (pace Watt (2000)).</p>
+</section>
+<section id="parallel-shifts-2" class="slide level1">
+<h1>Parallel Shifts</h1>
+<p>Parallel Shifts are fairly common.</p>
+<ul>
+<li>Back Vowel Fronting
+<ul>
+<li>North America: Nucleus only, sometimes FOOT, sometimes STRUT</li>
+<li>UK: Nucleus and glide, frequently</li>
+</ul></li>
+<li>Short Front Vowel Backing
+<ul>
+<li>Montreal, Canada (Boberg)</li>
+<li>Columbus, Ohio (Durian)</li>
+</ul></li>
+<li>Mid Vowel Diphthongization
+<ul>
+<li>Tyneside (Watt)</li>
+<li>York (Haddican, Foulkes, Hughes, Richards)</li>
+</ul></li>
+</ul>
+</section>
+<section id="parallel-shifts-3" class="slide level1">
+<h1>Parallel Shifts</h1>
+<div class = "incremental">
+  
+<img src="assets/Vw_stage_1.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img> <img src="assets/Vw_stage_2.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img> <img src="assets/Vw_stage_3.svg" style="position:absolute; z-index=1500;left:10%;width:75%;"></img>
+</div>
+
+</section>
+<section id="conclusions-and-analysis-4" class="slide level1">
+<h1>Conclusions and Analysis</h1>
+<p>I have observed that when there is clear phonological conditioning of a sound change towards its end, that phonological conditioning is also in place at the sound change's onset.</p>
+<h4 id="proposal">Proposal</h4>
+<p>New phonological processes enter the grammar as strictly phonological innovations, not reanalyses of phonetic processes, and have relatively small phonetic correlates at first. This is similar to the &quot;Big Bang&quot; theory of Joseph &amp; Janda.</p>
+</section>
+<section id="conclusions-and-analysis-5" class="slide level1">
+<h1>Conclusions and Analysis</h1>
+<h4 id="phonological-conditioning"><em>Phonological</em> Conditioning</h4>
+<p>These phonological processes must have been present in the grammar either before or at the onset of the phonetic changes.</p>
+<ol start="2" type="1">
+<li>ay → -low/ __ [-voice]</li>
+<li>ey → +peripheral/ __ C[-lat]</li>
+</ol>
+</section>
+<section id="is-this-plausible" class="slide level1">
+<h1>Is this Plausible?</h1>
+<p>There are plenty of examples children briefly entertaining phonological hypotheses which are markedly absent from the adult grammar, like Consonant Harmony.</p>
+<table>
+<tr>
+  <td>
+    
+Word
+</td>
+  <td>
+    
+Ahmal
+</td>
+<tr>
+  <td>
+    
+<i>duck</i>
+</td>
+  <td>
+    
+g̊ʌk
+</td>
+<tr>
+<tr>
+  <td>
+    
+<i>kiss</i>
+</td>
+  <td>
+    
+g̊ik
+</td>
+</tr>
+<tr>
+  <td>
+    
+<i>stop</i>
+</td>
+  <td>
+    
+d̥ɔp ~b̥ɔp
+</td>
+</tr>
+
+</table>
+
+<p>(Smith (1973), quoted in Goad (1997))</p>
+</section>
+<section id="is-this-plausible-1" class="slide level1">
+<h1>Is this Plausible?</h1>
+<h4 id="why-arent-we-in-phonological-chaos">Why aren't we in phonological chaos?</h4>
+<p>Learning, both linguistic and social, could iron out a lot of idiosyncratic variation.</p>
+</section>
+<section id="is-this-plausible-2" class="slide level1">
+<h1>Is this Plausible?</h1>
+<h4 id="why-arent-we-in-phonological-chaos-1">Why aren't we in phonological chaos?</h4>
+<p>How do we know we aren't?</p>
+<div style = "width:100%">
+<div style = "width:50%;float:left">
+<img src="assets/mielke_r.png" width = "100%"></img>
+</div>
+<div style = "width:50%;float:left">
+
+<p>Mielke, Baker, Archangeli (forthcoming)</p>
+</div>
+</div>
+
+</section>
+<section id="conclusions" class="slide level1">
+<h1>Conclusions</h1>
+<h4 id="future-questions">Future questions</h4>
+<ul>
+<li>What factors influence some phonological innovations to be more likely than others?
+<ul>
+<li>Consonant harmony is common, but only for children. It's rare typologically.</li>
+<li>Most new phonological processes apply at the phrase level, as the relatively settled debate on rule insertion has found.</li>
+<li>Phonetic precursors play a weak role, but no role?</li>
+<li>Structural analogy?</li>
+</ul></li>
+<li>Is it possible to observe the abandonment of idiosyncratic phonological processes across young speakers' lifespans? Is it possible to catch them spreading?</li>
+</ul>
+</section>
+<section id="conclusions-1" class="slide level1">
+<h1>Conclusions</h1>
+<ul>
+<li>A model of phonetic change taking into account a strong but distinct role of phonology does a better job analyzing and predicting the observed patterns of sound change than one without.</li>
+<li>The study of sound change in progress offers unique insight into the interrelationship between phonology and phonetics, and vice versa.</li>
+<li>This approach, and its consequences for understanding sound change introduces many more interesting questions and avenues of research.</li>
+</ul>
+</section>
+<section id="thanks" class="slide level1">
+<h1>Thanks</h1>
+<p>Bill Labov, Gene Buckley, Charles Yang, Ricardo Bermúz-Otero, Gillian Sankoff, Tony Kroch, Ingrid Rosenfelder, Meredith Tamminga, Hilary Prichard, Joel Wallenberg and Caitlin Light.</p>
+<p>The 40 years worth of fieldworkers who constructed the PNC.</p>
+<p>And to attendees at NAPhC, the mfm, NELS, NWAV, mFiL, The Symposium on Historical Sound Change</p>
+</section>
+<section id="references" class="slide level1">
+<h1>References</h1>
+<div class = "ref">
+
+<ul>
+<li>Ash, S. (1982). The Vocalization of /l/ in Philadelphia. University of Pennsylvania.</li>
+<li>Baker, A., Archangeli, D., &amp; Mielke, J. (2011). Variability in American English s-retraction suggests a solution to the actuation problem. Language Variation and Change, 23, 347–374.</li>
+<li>Bailey, C.-J. (1973). Variation and Linguistic Theory. Washington.</li>
+<li>Bermúdez-Otero, R. (2007). 21 Diachronic Phonology. In P. de Lacy (Ed.), The Cambridge Handbook of Phonology (pp. 497–517). Cambridge: Cambridge University Press.</li>
+<li>Blevins, J. (2004). Evolutionary phonology: the emergence of sound patterns. Cambridge University Press.</li>
+<li>Blevins, J., &amp; Garrett, A. (2004). The Evolution of Metathesis. In B. Hayes, R. Kirchner, &amp; D. Steriade (Eds.), {Phonetically Based Phonology} (pp. 117–156). New York: Cambridge University Press.</li>
+<li>Chambers, J. K. (1973). Canadian Raising. Canadian Journal of Linguistics, 18, 131–135.</li>
+<li>Dinkin, A (2011). What's Really Happening to Short A Before L in Philadelphia? Talk presented at NWAV 40, Washington, D.C.</li>
+<li>Fruehwald, J. (2008). The Spread of Raising : Opacity , Lexicalization , and Diffusion. Penn Working Papers in Linguistics, 14(2), 83–92.</li>
+<li>Conn, J. (2005). Of 'moice' and men: The evolution of a male-led sound change. University of Pennsylvania.</li>
+<li>Hyman, L. (1976). Phonologization. In A. Juilland, A. M. Devine, &amp; L. D. Stephens (Eds.), Linguistic studies offered to Joseph Greenberg on the Occasion of His Sixtieth Birthday (Vol. 4, pp. 407–418). Anima Libri.</li>
+<li>Joos, M. (1942). A phonological dilemma in Canadian English. Language, 18, 141–144.</li>
+<li>Labov, W. (2001). Principles of linguistic change. Volume 2: Social Factors. Language in Society. Oxford: Blackwell.</li>
+<li>Labov, W., Rosenfelder, I., &amp; Fruehwald, J. (2013). One hundred years of sound change in Philadelphia: Linear Incrementaion, Reversal, and Reanalysis. Language, 89(1), 30–65.</li>
+</ul>
+</div>
+
+</section>
+<section id="references-1" class="slide level1">
+<h1>References</h1>
+<div class = "ref">
+
+
+<ul>
+<li>Moreton, E., &amp; Thomas, E. R. (2004). Origins of Canadian Raising in voiceless-coda effects: a case study in phonologization. In J. Cole &amp; J. I. Hualde (Eds.), Papers in Laboratory Phonology 9. Cambridge University Press.</li>
+<li>Ohala, J. (1981). The listener as a source of language change. In C. S. Masek, R. A. Hendrick, &amp; M. F. Miller (Eds.), Papers from the Parasession on Language and Behavior. Chicago Linguistics Society.</li>
+<li>Ohala, J. J. (1990). The phonetics and phonology of aspects of assimilation. In J. Kingston &amp; M. E. Beckman (Eds.), Papers in laboratory phonology 1: Between the grammar and physics of speech (pp. 258–282). Cambridge: Cambridge University Press.</li>
+<li>The Philadelphia Neighborhood Corpus.</li>
+<li>Stan Development Team. (2012). Stan: A C++ Library for Probability and Sampling. Retrieved from http://mc-stan.org/</li>
+<li>Tucker, R. W. (1944). Notes on the Philadelphia dialect. American Speech, 19(1), 37–42.</li>
+<li>Wagner, S. E. (2007). We act like girls and we don’t act like men: The use of the male-associated variable (ay0) in South Philadelphia. In T. Scheffler, J. Tauberer, A. Eilam, &amp; L. Mayol (Eds.), Penn Working Papers in Linguistics (Vol. 13.1, pp. 393–406). Philadelphia: University of Pennsylvania Press.</li>
+</ul>
+</div>
+
+
+</section>
+<!-- {{{{ dzslides core
+#
+#
+#     __  __  __       .  __   ___  __
+#    |  \  / /__` |    | |  \ |__  /__`
+#    |__/ /_ .__/ |___ | |__/ |___ .__/ core :€
+#
+#
+# The following block of code is not supposed to be edited.
+# But if you want to change the behavior of these slides,
+# feel free to hack it!
+#
+-->
+
+<div id="progress-bar"></div>
+
+<!-- Default Style -->
+<style>
+  * { margin: 0; padding: 0; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+  details { display: none; }
+  body {
+    width: 800px; height: 600px;
+    margin-left: -400px; margin-top: -300px;
+    position: absolute; top: 50%; left: 50%;
+    overflow: hidden;
+  }
+  section {
+    position: absolute;
+    pointer-events: none;
+    width: 100%; height: 100%;
+  }
+  section[aria-selected] { pointer-events: auto; }
+  html { overflow: hidden; }
+  body { display: none; }
+  body.loaded { display: block; }
+  .incremental {visibility: hidden; }
+  .incremental[active] {visibility: visible; }
+  #progress-bar{
+    bottom: 0;
+    position: absolute;
+    -moz-transition: width 400ms linear 0s;
+    -webkit-transition: width 400ms linear 0s;
+    -ms-transition: width 400ms linear 0s;
+    transition: width 400ms linear 0s;
+  }
+  figure {
+    width: 100%;
+    height: 100%;
+  }
+  figure > * {
+    position: absolute;
+  }
+  figure > img, figure > video {
+    width: 100%; height: 100%;
+  }
+</style>
+
+<script>
+  var Dz = {
+    remoteWindows: [],
+    idx: -1,
+    step: 0,
+    slides: null,
+    progressBar : null,
+    params: {
+      autoplay: "1"
+    }
+  };
+
+  Dz.init = function() {
+    document.body.className = "loaded";
+    this.slides = $$("body > section");
+    this.progressBar = $("#progress-bar");
+    this.setupParams();
+    this.onhashchange();
+    this.setupTouchEvents();
+    this.onresize();
+  }
+  
+  Dz.setupParams = function() {
+    var p = window.location.search.substr(1).split('&');
+    p.forEach(function(e, i, a) {
+      var keyVal = e.split('=');
+      Dz.params[keyVal[0]] = decodeURIComponent(keyVal[1]);
+    });
+  // Specific params handling
+    if (!+this.params.autoplay)
+      $$.forEach($$("video"), function(v){ v.controls = true });
+  }
+
+  Dz.onkeydown = function(aEvent) {
+    // Don't intercept keyboard shortcuts
+    if (aEvent.altKey
+      || aEvent.ctrlKey
+      || aEvent.metaKey
+      || aEvent.shiftKey) {
+      return;
+    }
+    if ( aEvent.keyCode == 37 // left arrow
+      || aEvent.keyCode == 38 // up arrow
+      || aEvent.keyCode == 33 // page up
+    ) {
+      aEvent.preventDefault();
+      this.back();
+    }
+    if ( aEvent.keyCode == 39 // right arrow
+      || aEvent.keyCode == 40 // down arrow
+      || aEvent.keyCode == 34 // page down
+    ) {
+      aEvent.preventDefault();
+      this.forward();
+    }
+    if (aEvent.keyCode == 35) { // end
+      aEvent.preventDefault();
+      this.goEnd();
+    }
+    if (aEvent.keyCode == 36) { // home
+      aEvent.preventDefault();
+      this.goStart();
+    }
+    if (aEvent.keyCode == 32) { // space
+      aEvent.preventDefault();
+      this.toggleContent();
+    }
+    if (aEvent.keyCode == 70) { // f
+      aEvent.preventDefault();
+      this.goFullscreen();
+    }
+  }
+
+  /* Touch Events */
+
+  Dz.setupTouchEvents = function() {
+    var orgX, newX;
+    var tracking = false;
+
+    var db = document.body;
+    db.addEventListener("touchstart", start.bind(this), false);
+    db.addEventListener("touchmove", move.bind(this), false);
+
+    function start(aEvent) {
+      aEvent.preventDefault();
+      tracking = true;
+      orgX = aEvent.changedTouches[0].pageX;
+    }
+
+    function move(aEvent) {
+      if (!tracking) return;
+      newX = aEvent.changedTouches[0].pageX;
+      if (orgX - newX > 100) {
+        tracking = false;
+        this.forward();
+      } else {
+        if (orgX - newX < -100) {
+          tracking = false;
+          this.back();
+        }
+      }
+    }
+  }
+
+  /* Adapt the size of the slides to the window */
+
+  Dz.onresize = function() {
+    var db = document.body;
+    var sx = db.clientWidth / window.innerWidth;
+    var sy = db.clientHeight / window.innerHeight;
+    var transform = "scale(" + (1/Math.max(sx, sy)) + ")";
+
+    db.style.MozTransform = transform;
+    db.style.WebkitTransform = transform;
+    db.style.OTransform = transform;
+    db.style.msTransform = transform;
+    db.style.transform = transform;
+  }
+
+
+  Dz.getDetails = function(aIdx) {
+    var s = $("section:nth-of-type(" + aIdx + ")");
+    var d = s.$("details");
+    return d ? d.innerHTML : "";
+  }
+
+  Dz.onmessage = function(aEvent) {
+    var argv = aEvent.data.split(" "), argc = argv.length;
+    argv.forEach(function(e, i, a) { a[i] = decodeURIComponent(e) });
+    var win = aEvent.source;
+    if (argv[0] === "REGISTER" && argc === 1) {
+      this.remoteWindows.push(win);
+      this.postMsg(win, "REGISTERED", document.title, this.slides.length);
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+      return;
+    }
+    if (argv[0] === "BACK" && argc === 1)
+      this.back();
+    if (argv[0] === "FORWARD" && argc === 1)
+      this.forward();
+    if (argv[0] === "START" && argc === 1)
+      this.goStart();
+    if (argv[0] === "END" && argc === 1)
+      this.goEnd();
+    if (argv[0] === "TOGGLE_CONTENT" && argc === 1)
+      this.toggleContent();
+    if (argv[0] === "SET_CURSOR" && argc === 2)
+      window.location.hash = "#" + argv[1];
+    if (argv[0] === "GET_CURSOR" && argc === 1)
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+    if (argv[0] === "GET_NOTES" && argc === 1)
+      this.postMsg(win, "NOTES", this.getDetails(this.idx));
+  }
+
+  Dz.toggleContent = function() {
+    // If a Video is present in this new slide, play it.
+    // If a Video is present in the previous slide, stop it.
+    var s = $("section[aria-selected]");
+    if (s) {
+      var video = s.$("video");
+      if (video) {
+        if (video.ended || video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+    }
+  }
+
+  Dz.setCursor = function(aIdx, aStep) {
+    // If the user change the slide number in the URL bar, jump
+    // to this slide.
+    aStep = (aStep != 0 && typeof aStep !== "undefined") ? "." + aStep : ".0";
+    window.location.hash = "#" + aIdx + aStep;
+  }
+
+  Dz.onhashchange = function() {
+    var cursor = window.location.hash.split("#"),
+        newidx = 1,
+        newstep = 0;
+    if (cursor.length == 2) {
+      newidx = ~~cursor[1].split(".")[0];
+      newstep = ~~cursor[1].split(".")[1];
+      if (newstep > Dz.slides[newidx - 1].$$('.incremental > *').length) {
+        newstep = 0;
+        newidx++;
+      }
+    }
+    this.setProgress(newidx, newstep);
+    if (newidx != this.idx) {
+      this.setSlide(newidx);
+    }
+    if (newstep != this.step) {
+      this.setIncremental(newstep);
+    }
+    for (var i = 0; i < this.remoteWindows.length; i++) {
+      this.postMsg(this.remoteWindows[i], "CURSOR", this.idx + "." + this.step);
+    }
+  }
+
+  Dz.back = function() {
+    if (this.idx == 1 && this.step == 0) {
+      return;
+    }
+    if (this.step == 0) {
+      this.setCursor(this.idx - 1,
+                     this.slides[this.idx - 2].$$('.incremental > *').length);
+    } else {
+      this.setCursor(this.idx, this.step - 1);
+    }
+  }
+
+  Dz.forward = function() {
+    if (this.idx >= this.slides.length &&
+        this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+        return;
+    }
+    if (this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+      this.setCursor(this.idx + 1, 0);
+    } else {
+      this.setCursor(this.idx, this.step + 1);
+    }
+  }
+
+  Dz.goStart = function() {
+    this.setCursor(1, 0);
+  }
+
+  Dz.goEnd = function() {
+    var lastIdx = this.slides.length;
+    var lastStep = this.slides[lastIdx - 1].$$('.incremental > *').length;
+    this.setCursor(lastIdx, lastStep);
+  }
+
+  Dz.setSlide = function(aIdx) {
+    this.idx = aIdx;
+    var old = $("section[aria-selected]");
+    var next = $("section:nth-of-type("+ this.idx +")");
+    if (old) {
+      old.removeAttribute("aria-selected");
+      var video = old.$("video");
+      if (video) {
+        video.pause();
+      }
+    }
+    if (next) {
+      next.setAttribute("aria-selected", "true");
+      var video = next.$("video");
+      if (video && !!+this.params.autoplay) {
+        video.play();
+      }
+    } else {
+      // That should not happen
+      this.idx = -1;
+      // console.warn("Slide doesn't exist.");
+    }
+  }
+
+  Dz.setIncremental = function(aStep) {
+    this.step = aStep;
+    var old = this.slides[this.idx - 1].$('.incremental > *[aria-selected]');
+    if (old) {
+      old.removeAttribute('aria-selected');
+    }
+    var incrementals = $$('.incremental');
+    if (this.step <= 0) {
+      $$.forEach(incrementals, function(aNode) {
+        aNode.removeAttribute('active');
+      });
+      return;
+    }
+    var next = this.slides[this.idx - 1].$$('.incremental > *')[this.step - 1];
+    if (next) {
+      next.setAttribute('aria-selected', true);
+      next.parentNode.setAttribute('active', true);
+      var found = false;
+      $$.forEach(incrementals, function(aNode) {
+        if (aNode != next.parentNode)
+          if (found)
+            aNode.removeAttribute('active');
+          else
+            aNode.setAttribute('active', true);
+        else
+          found = true;
+      });
+    } else {
+      setCursor(this.idx, 0);
+    }
+    return next;
+  }
+
+  Dz.goFullscreen = function() {
+    var html = $('html'),
+        requestFullscreen = html.requestFullscreen || html.requestFullScreen || html.mozRequestFullScreen || html.webkitRequestFullScreen;
+    if (requestFullscreen) {
+      requestFullscreen.apply(html);
+    }
+  }
+  
+  Dz.setProgress = function(aIdx, aStep) {
+    var slide = $("section:nth-of-type("+ aIdx +")");
+    if (!slide)
+      return;
+    var steps = slide.$$('.incremental > *').length + 1,
+        slideSize = 100 / (this.slides.length - 1),
+        stepSize = slideSize / steps;
+    this.progressBar.style.width = ((aIdx - 1) * slideSize + aStep * stepSize) + '%';
+  }
+  
+  Dz.postMsg = function(aWin, aMsg) { // [arg0, [arg1...]]
+    aMsg = [aMsg];
+    for (var i = 2; i < arguments.length; i++)
+      aMsg.push(encodeURIComponent(arguments[i]));
+    aWin.postMessage(aMsg.join(" "), "*");
+  }
+  
+  function init() {
+    Dz.init();
+    window.onkeydown = Dz.onkeydown.bind(Dz);
+    window.onresize = Dz.onresize.bind(Dz);
+    window.onhashchange = Dz.onhashchange.bind(Dz);
+    window.onmessage = Dz.onmessage.bind(Dz);
+  }
+
+  window.onload = init;
+</script>
+
+
+<script> // Helpers
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function (oThis) {
+
+      // closest thing possible to the ECMAScript 5 internal IsCallable
+      // function 
+      if (typeof this !== "function")
+      throw new TypeError(
+        "Function.prototype.bind - what is trying to be fBound is not callable"
+      );
+
+      var aArgs = Array.prototype.slice.call(arguments, 1),
+          fToBind = this,
+          fNOP = function () {},
+          fBound = function () {
+            return fToBind.apply( this instanceof fNOP ? this : oThis || window,
+                   aArgs.concat(Array.prototype.slice.call(arguments)));
+          };
+
+      fNOP.prototype = this.prototype;
+      fBound.prototype = new fNOP();
+
+      return fBound;
+    };
+  }
+
+  var $ = (HTMLElement.prototype.$ = function(aQuery) {
+    return this.querySelector(aQuery);
+  }).bind(document);
+
+  var $$ = (HTMLElement.prototype.$$ = function(aQuery) {
+    return this.querySelectorAll(aQuery);
+  }).bind(document);
+
+  $$.forEach = function(nodeList, fun) {
+    Array.prototype.forEach.call(nodeList, fun);
+  }
+
+</script>
+<!-- vim: set fdm=marker: }}} -->
+</body>
+</html>

@@ -1,0 +1,974 @@
+---
+title: "Doing sociophonetics with LAP data"
+author: "Josef Fruehwald"
+format: 
+  revealjs:
+    transition: slide
+    theme: solarized
+csl: glossa.csl
+bibliography: references.bib
+nocite: |
+  @baevski, @bredin, @mcfee2022
+---
+
+## Introduction
+
+```{r}
+#| label: rsetup
+
+library(reticulate)
+use_condaenv("audioprocess")
+
+library(tidyverse)
+library(maps)
+
+```
+
+```{python}
+#| label: pythonsetup
+
+import librosa
+import librosa.display
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy
+
+
+
+plt.rcParams['axes.facecolor']=(1.0, 1.0, 1.0, 0)
+plt.rcParams['savefig.facecolor']=(1.0, 1.0, 1.0, 0)
+
+import IPython
+```
+
+-   Quick intro to the LAP data
+
+-   Overview of the contemporary sociophonetics workflow
+
+-   The unique issues posed by the LAP data
+
+-   Initial approach to addressing the issues
+
+# LAP Data
+
+## Linguistic Atlas of the North-Central States
+
+```{r}
+#| label: load_lancs
+lancs_demo <- read_csv("../lancs_metadata/LANCS_informants.csv") %>%
+  filter(Longitude < 0, Latitude < 50)
+```
+
+```{r}
+#| label: code_decade
+lancs_demo %>%
+  mutate(decade = floor(as.numeric(`Year interviewed`)/10)*10,
+         year_in_decade = as.numeric(`Year interviewed`) %% 10 ) %>%
+  arrange(decade) -> lancs_demo
+```
+
+```{r}
+#| label: state_basemap
+us_state  <- map_data("state")
+us_state%>%
+  ggplot(aes(long, lat))+
+    geom_polygon(aes(group = group), fill = "grey80", color = "black", size = 0.1)+
+    geom_point(data = lancs_demo, aes(x = Longitude, y = Latitude), size = 0.5)+
+    coord_map("conic", lat0 = 30)+
+    theme_void()+
+    theme(rect = element_rect(fill = "transparent", color = NA),
+          panel.background = element_rect(fill = "transparent",
+                                  colour = NA_character_))
+```
+
+## LANCS data
+
+```{r}
+#| label: lancs_counties
+state_trans = tolower(state.name)
+names(state_trans) <- state.abb
+state_lancs <- state_trans[unique(lancs_demo$State)]
+lancs_counties <- map_data("county", region = state_lancs)
+lancs_states <- map_data("state", region = state_lancs)
+```
+
+```{r}
+#| label: plot_lancs_counties
+lancs_counties%>%
+  ggplot(aes(long, lat))+
+    geom_polygon(aes(group = group), fill = "grey80", color = "black", size = 0.1)+
+    geom_polygon(data = lancs_states,
+                 aes(group = group), fill = NA, color = "black", size = 0.3)+
+    geom_point(data = lancs_demo, aes(x = Longitude, y = Latitude,
+                                      color = factor(decade)), size = 2)+
+    scale_color_viridis_d("Decade of interview", option = "magma")+
+    coord_map("conic", lat0 = 30)+
+    theme_void()+
+    theme(rect = element_rect(fill = "transparent", color = NA),
+          panel.background = element_rect(fill = "transparent",
+                                  colour = NA_character_))
+```
+
+## Kentucky Data
+
+```{r}
+#| label: ky_durations
+Sys.glob("../lancs_data/audio_pieces/KY*wav") ->wav_files
+audio_df <- tibble(wav = wav_files)
+audio_df %>%
+  rowwise() %>%
+  mutate(dur = purrr::map(wav, ~system2("soxi", args = c("-D", .x), stdout = T) %>% as.numeric())) %>%
+  unnest(dur) %>%
+  mutate(speaker = wav %>% basename() %>% str_remove("_\\d.wav")) %>%
+  group_by(speaker) %>%
+  summarise(dur = sum(dur),
+            hours = (dur/60)/60)-> lancs_length
+```
+
+```{r}
+#| label: join_durations
+lancs_demo %>%
+  filter(State == "KY") -> lancs_ky
+
+lancs_ky %>%
+  filter(`Informant #` %in% lancs_length$speaker) %>%
+  mutate(speaker = `Informant #`) %>%
+  left_join(lancs_length) -> lancs_len_geo
+```
+
+```{r}
+#| label: duration_plot
+lancs_counties %>%
+  filter(region == "kentucky") %>%
+  ggplot(aes(long, lat))+
+    geom_polygon(aes(group = group),  fill = "grey80", color = "black", size = 0.1)+
+    geom_point(data = lancs_ky, aes(Longitude, Latitude), size = 0.5)+
+    geom_point(data = lancs_len_geo, aes(Longitude, Latitude, size=hours), 
+               shape = 17, color = "steelblue")+
+    coord_map("conic", lat0 = 30)+
+    theme_void()+
+    theme(rect = element_rect(fill = "transparent", color = NA),
+          panel.background = element_rect(fill = "transparent",
+                                  colour = NA_character_))
+```
+
+# Using Automatic Speech Recognition on the LAP
+
+## A Typical Sociophonetics workflow {.scrollable}
+
+![](assets/workflow1.svg){fig-align="center"}
+
+## Time intensiveness
+
+This first portion of the diagram is the most time intensive part of the process after fieldwork is over and before analysis begins.
+
+![](assets/workflow1_sub.svg){fig-align="center"}
+
+Best case scenario is 10 hours of transcription for every 1 hour of audio.
+
+## Time intensiveness
+
++--------------------------+----------------------+
+| LANCS Audio              | \~177 hours          |
++--------------------------+----------------------+
+| Total Transcription time | 1770 to 2700 hours   |
++--------------------------+----------------------+
+| Time to Transcription    | 2.5 to 3.5 years     |
+|                          |                      |
+| (1 RA \@ 15 hr/wk)       |                      |
++--------------------------+----------------------+
+| Cost of Transcription    | \$26,500 to \$40,500 |
+|                          |                      |
+| (\@ \$15/hr)             |                      |
++--------------------------+----------------------+
+
+## My Original Plan for LAP data
+
+Replace this
+
+![](assets/workflow1_sub.svg){fig-align="center"}
+
+## My Original Plan for LAP data
+
+With this
+
+![](assets/auto_flow.svg)
+
+## wav2vec fine tuning
+
+Initial experiments fine tuning [a pretrained wav2vec2 model](https://huggingface.co/facebook/wav2vec2-base-960h "huggingface:facebook / wav2vec2-base-960h") on 3.5 hours of PNC data resulted in
+
+-   eval word error rate = 0.34
+
+-   eval character error rate = 0.189
+
+## However
+
+![](assets/auto_flow.svg)
+
+## Audio
+
+All ASR systems are trained with labelled audio. When properties of the training audio and the use case audio are very different, they may not perform well. This includes
+
+-   Different kinds of speech [@tatman2017; @wassink2022]
+
+-   Different kinds of *recordings*
+
+## Audio
+
+::: columns
+::: {.column width="50%"}
+An example of training audio
+
+```{python}
+#| label: librispeech_example
+native_sr = librosa.get_samplerate("assets/audio.wav")
+y_train, sr = librosa.load("assets/audio.wav", sr = native_sr)
+D = librosa.stft(y_train, n_fft = 512)  # STFT of y
+S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(S_db, y_axis="hz", sr = sr, x_axis = "s", ax = ax)
+#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = y_train, rate = sr)
+```
+
+    which circumstances do not permit him to employ
+
+(source: LibriSpeech [@panayotov2015])
+:::
+
+::: {.column width="50%"}
+An example of LANCS audio
+
+```{python}
+#| label: weekday_example
+native_sr = librosa.get_samplerate("assets/weekday_short.wav")
+y_week, sr = librosa.load("assets/weekday_short.wav", sr = native_sr)
+D = librosa.stft(y_week, n_fft = 512)  # STFT of y
+S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(S_db, y_axis="hz", sr = sr, x_axis = "s", ax = ax)
+#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = y_week, rate = sr)
+```
+
+    well, uh, you mean monday, tuesday, wednesday, thursday, friday, saturday
+:::
+:::
+
+# <strike>Using Automatic Speech Recognition on the LAP</strike>
+
+[Pre-processing LAP Audio]{.underline}
+
+## Consistent issues
+
+To the extent there are consistent issues across LANCS data, we can develop pre-processing workflows for them.
+
+## Issue 1: 60hz (and harmonics) mains hum
+
+```{python}
+#| label: show_buzz
+native_sr = librosa.get_samplerate("assets/fireplace_short.wav")
+y_fireplace, sr = librosa.load("assets/fireplace_short.wav", sr = native_sr)
+D = librosa.stft(y_fireplace, n_fft = 2048)  # STFT of y
+S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(S_db, y_axis="log", sr = sr, x_axis = "s", ax = ax)
+#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = y_fireplace, rate = sr)
+```
+
+    A: would you describe the fireplace please
+    B: well it was just a, I guess about three foot wide
+
+## Issue 2: Microphone Hits
+
+```{python}
+#| label: show_pops
+fig, ax = plt.subplots(1)
+wavform = librosa.display.waveshow(y_fireplace, sr = sr, ax = ax)
+plt.show()
+plt.close()
+```
+
+    A: would you describe the fireplace please
+    B: well it was just a, I guess about three foot wide
+
+## Issue 3: Low signal to noise ratio
+
+```{python}
+#| label: show_snr
+fig, ax = plt.subplots(1)
+wavform = librosa.display.waveshow(y_week, sr = sr, ax = ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = y_week, rate = sr)
+```
+
+    well, uh, you mean monday, tuesday, wednesday, thursday, friday, saturday
+
+## Meta Issue: Different Recording sessions on one tape
+
+```{python}
+#| label: show_multi
+native_sr = librosa.get_samplerate("../lancs_data/audio_16000/KY1A__1B_02_b.wav")
+y_multi, sr = librosa.load("../lancs_data/audio_16000/KY1A__1B_02_b.wav", sr = native_sr)
+fig, ax = plt.subplots(1)
+wavform = librosa.display.waveshow(y_multi, sr = sr, ax = ax)
+plt.show()
+plt.close()
+```
+
+## Meta Issue: The available metadata
+
+![Audio metadata](assets/KY1A__1B_02_AssetBack.JPG){fig-align="center"}
+
+# The Processing
+
+## Open Tools
+
+Most of the processing I'm showing here was done with the [librosa library](https://librosa.org/doc/latest/index.html) in python
+
+## Step 1: Session separation
+
+Time stamps for separate sessions were recorded in a yaml file
+
+``` yaml
+KY1A__1B_02_b:
+  - KYUNK1:
+      part: 2
+      start: 0.00
+      end: 1650.0
+  - KY1B:
+      part: 2
+      start: 1650.0
+      end: 5745.75
+```
+
+## Step 2: Addressing the Buzz {.scrollable}
+
+To deal with the low frequency hum, preemphasis and a high-pass filter were applied to the audio.
+
+```{python}
+#| label: preemph_highpass
+#| echo: true
+#loading the audio
+y_fireplace, sr = librosa.load("assets/fireplace_short.wav", sr = 16000)
+
+# default librosa preemphasis
+y_fireplace2 = librosa.effects.preemphasis(y_fireplace)
+
+# getting parameters for the highpass filter
+b, a = scipy.signal.butter(N = 1,            # a fairly gradual slope
+                           Wn = 180,         # critical frequency at 60*3
+                           btype="highpass", # highpass filter
+                           fs = 16000,       # sampling rate
+                           output= "ba")     # kind of output
+
+# The actual filtering
+y_fireplace2 = scipy.signal.filtfilt(b = b, a = a, x = y_fireplace2)
+```
+
+```{python}
+#| label: highpass_function
+#| echo: true
+#| code-fold: true
+#| code-summary: "code as a function"
+def highpass(y, sr = 16000, order = 1, critical_freq = 180):
+  """
+  return a highpass filter of the signal y
+  """
+  
+  b, a = scipy.signal.butter(N = order, 
+                             Wn = critical_freq,
+                             btype= "highpass",
+                             fs = sr,
+                             output = "ba")
+  out_signal = scipy.signal.filtfilt(b = b, a = a, x = y)
+  return(out_signal)
+```
+
+## Step2: Addressing the Buzz
+
+::: columns
+::: {.column width="50%"}
+Before:
+
+```{python}
+#| label: buzz_before
+D = librosa.stft(y_fireplace, n_fft = 2048)  # STFT of y
+S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(S_db, y_axis="log", sr = sr, x_axis = "s", ax = ax)
+#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = y_fireplace, rate = sr)
+```
+
+    A: would you describe the fireplace please
+    B: well it was just a, I guess about three foot wide
+:::
+
+::: {.column width="50%"}
+After:
+
+```{python}
+#| label: buzz_after
+D = librosa.stft(y_fireplace2, n_fft = 2048)  # STFT of y
+S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(S_db, y_axis="log", sr = sr, x_axis = "s", ax = ax)
+#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = y_fireplace2, rate = sr)
+```
+
+    A: would you describe the fireplace please
+    B: well it was just a, I guess about three foot wide
+:::
+:::
+
+## Addressing the mic hits
+
+The librosa package has implemented [a method for decomposing audio into its percussive vs harmonic components](https://librosa.org/doc/latest/generated/librosa.decompose.hpss.html), intended to separate drum tracks from melodies. [@fitzgerald2010; @driedger2014]
+
+## Addressing the mic hits {.scrollable}
+
+```{python}
+#| label: fireplace_norm1
+y_fireplace2 = librosa.util.normalize(y_fireplace2)
+```
+
+```{python}
+#| label: hit_damp
+#| echo: true
+# short-time fourier transform
+D = librosa.stft(y_fireplace2, n_fft = 2048, win_length = 512, hop_length = 512//4)
+
+# decomposition into harmonic and percussive
+D_harm, D_perc = librosa.decompose.hpss(D, margin = 3)
+
+# capture residual component
+D_resid = D - (D_harm + D_perc)
+
+# separating magnitude from phase
+D_perc_m, D_perc_p = librosa.magphase(D_perc)
+
+# converting to db
+D_perc_db = librosa.amplitude_to_db(D_perc_m)
+
+# just subtrating 20db from percussive
+D_perc_db = D_perc_db-20
+
+#back to amplitude
+D_perc_new_m = librosa.db_to_amplitude(D_perc_db)
+
+# recombining with phase
+D_perc_new = D_perc_new_m * D_perc_p
+
+# adding it all together
+new_D = D_harm + D_perc_new + D_resid
+
+# back to signal
+y_fireplace3 = librosa.istft(new_D, n_fft = 2048, win_length = 512, hop_length = 512//4)
+
+# re-normalize the output
+y_fireplace3 = librosa.util.normalize(y_fireplace3)
+```
+
+```{python}
+#| label: hit_damp_func
+#| echo: true
+#| code-fold: true
+#| code-summary: "code as a function"
+def dampen_hit(y, 
+               sr = 16000, 
+               n_fft = 2048,
+               win_length = 512,
+               hop_length = 512//4,
+               margin = 3, 
+               by_db = 20):
+    """
+    using harmonic/percussive decomposition, dampen mic hits
+    """
+    D = librosa.stft(y, n_fft = n_fft, win_length = win_length, hop_length = hop_length)
+    
+    # decomposition into harmonic and percussive
+    D_harm, D_perc = librosa.decompose.hpss(D, margin = margin)
+  
+    # capture residual component
+    D_resid = D - (D_harm + D_perc)
+    
+    # separating magnitude from phase
+    D_perc_m, D_perc_p = librosa.magphase(D_perc)
+    
+    # converting to db
+    D_perc_db = librosa.amplitude_to_db(D_perc_m)
+    
+    # just subtrating 20db from percussive
+    D_perc_db = D_perc_db-by_db
+    
+    #back to amplitude
+    D_perc_new_m = librosa.db_to_amplitude(D_perc_db)
+    
+    # recombining with phase
+    D_perc_new = D_perc_new_m * D_perc_p
+    
+    # adding it all together
+    new_D = D_harm + D_perc_new + D_resid
+    
+    # back to signal
+    out_signal = librosa.istft(new_D, n_fft = n_fft, win_length = win_length, hop_length = hop_length)
+    
+    # re-normalize the output
+    out_signal = librosa.util.normalize(out_signal)
+    
+    return(out_signal)
+```
+
+## Addressing mic hits
+
+::: columns
+::: {.column width="50%"}
+Before
+
+```{python}
+#| label: hit_before
+fig, ax = plt.subplots(1)
+img = librosa.display.waveshow(librosa.util.normalize(y_fireplace2))
+#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = librosa.util.normalize(y_fireplace2), rate = sr)
+```
+
+    A: would you describe the fireplace please
+    B: well it was just a, I guess about three foot wide
+:::
+
+::: {.column width="50%"}
+After
+
+```{python}
+#| label: hit_after
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.waveshow(y_fireplace3)#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = y_fireplace3, rate = sr)
+```
+
+    A: would you describe the fireplace please
+    B: well it was just a, I guess about three foot wide
+:::
+:::
+
+## Noise Reduction
+
+There are a few methods out there for noise reduction, including "Per Channel Energy Normalization" [@wang; @lostanlen2019] and "Spectral Gating" [@sainburg2020; @sainburg2022]. I've found spectral gating to have better results for the final audio.
+
+## Spectral gating
+
+You start off with a spectrogram
+
+```{python}
+#| label: spec_gate1
+sig_stft = librosa.stft(y_fireplace3,n_fft=2048, win_length = 512, hop_length = 512//4)
+sig_abs = np.abs(sig_stft)
+S_db = librosa.amplitude_to_db(sig_abs, ref=np.max)
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(S_db, y_axis="hz", sr = sr, x_axis = "s", ax = ax)
+cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+## Spectral Gating
+
+Then, you smear it out across the time domain. Since I'm dealing with pretty stable consistent noise, I've chosen a long window for smearing (3 seconds).
+
+```{python}
+#| label: spec_gate2
+nsec = 3
+t_frames = (nsec * sr) / float(512//4)
+b = (np.sqrt(1 + 4 * t_frames ** 2) - 1) / (2 * t_frames ** 2)
+sig_stft_smooth = scipy.signal.filtfilt([b], [1, b - 1], sig_abs, axis=-1, padtype=None)
+S_db2 = librosa.amplitude_to_db(sig_stft_smooth, ref=np.max)
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img2 = librosa.display.specshow(S_db2, y_axis="hz", sr = sr, x_axis = "s", ax = ax)
+#plt.pcolor(vmin = S_db.min(), vmax = S_db.max())
+#plt.clim(S_db.min(), S_db.max())
+cb = fig.colorbar(img2, ax=ax)
+plt.show()
+plt.close()
+```
+
+## Spectral Gating
+
+::: columns
+::: {.column width="50%"}
+see how much above background the signal is
+
+```{python}
+#| label: spec_gate3
+#| out-width: 100%
+fig, ax = plt.subplots(1)
+sig_mult_above_thresh = (sig_abs-sig_stft_smooth) / sig_stft_smooth
+img = librosa.display.specshow(sig_mult_above_thresh, y_axis="hz", sr = sr, x_axis = "s", ax = ax)
+cb = fig.colorbar(img, ax=ax, label="N above background")
+plt.show()
+plt.close()
+```
+:::
+
+::: {.column width="50%"}
+...convert that into a multiplier between 0 and 1
+
+```{python}
+#| label: spec_gate4
+#| out-width: 100%
+def sigmoid(x, shift, mult):
+    return 1 / (1 + np.exp(-(x + shift) * mult))
+
+sig_mask = sigmoid(sig_mult_above_thresh, 
+                   shift = -1, 
+                   mult = 2)
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(sig_mask, y_axis="hz", sr = sr, x_axis = "s", ax = ax)
+cb = fig.colorbar(img, ax=ax, label="multiplier")
+plt.show()
+plt.close()
+```
+:::
+:::
+
+## Spectral Gating
+
+::: columns
+::: {.column width="50%"}
+Soften out the edges a bit more
+
+```{python}
+#| label: spec_gate5
+#| out-width: 100%
+def _smoothing_filter(n_grad_freq, n_grad_time):
+    """Generates a filter to smooth the mask for the spectrogram
+    Arguments:
+        n_grad_freq {[type]} -- [how many frequency channels to smooth over with the mask.]
+        n_grad_time {[type]} -- [how many time channels to smooth over with the mask.]
+    """
+    smoothing_filter = np.outer(
+        np.concatenate(
+            [
+                np.linspace(0, 1, n_grad_freq + 1, endpoint=False),
+                np.linspace(1, 0, n_grad_freq + 2),
+            ]
+        )[1:-1],
+        np.concatenate(
+            [
+                np.linspace(0, 1, n_grad_time + 1, endpoint=False),
+                np.linspace(1, 0, n_grad_time + 2),
+            ]
+        )[1:-1],
+    )
+    smoothing_filter = smoothing_filter / np.sum(smoothing_filter)
+    return smoothing_filter
+
+smooth_hz = 100
+smooth_ms = 50
+
+
+this_smoothf = _smoothing_filter(12, 6)
+
+sig_mask = scipy.signal.fftconvolve(sig_mask, this_smoothf, mode="same")
+sig_mask = sig_mask/sig_mask.max()
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(sig_mask, y_axis="hz", sr = sr, x_axis = "s", ax = ax)
+cb = fig.colorbar(img, ax=ax, label="multiplier")
+plt.show()
+plt.close()
+```
+:::
+
+::: {.column width="50%"}
+Multiply it by the original spectrogram
+
+```{python}
+#| label: spec_gate6
+#| out-width: 100%
+sig_stft_denoised = sig_stft * sig_mask
+S_db = librosa.amplitude_to_db(np.abs(sig_stft_denoised))
+S_db2 = S_db - S_db.max()
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+
+img = librosa.display.specshow(S_db2, y_axis="hz", sr = sr, x_axis = "s", ax = ax)
+cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+:::
+:::
+
+## Noise Reduction
+
+```{python}
+#| label: spec_gate7
+denoised_signal = librosa.istft(sig_stft_denoised, n_fft = 2048, win_length = 512, hop_length = 512//4)
+```
+
+::: columns
+::: {.column width="50%"}
+before
+
+```{python}
+#| label: spec_gate8
+D = librosa.stft(y_fireplace3, n_fft = 2048)  # STFT of y
+S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(S_db, y_axis="log", sr = sr, x_axis = "s", ax = ax)
+#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = y_fireplace3, rate = sr)
+```
+:::
+
+::: {.column width="50%"}
+after
+
+```{python}
+#| label: spec_gate9
+D = librosa.stft(denoised_signal, n_fft = 2048)  # STFT of y
+S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(S_db, y_axis="log", sr = sr, x_axis = "s", ax = ax)
+#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = denoised_signal, rate = sr)
+```
+:::
+:::
+
+## The end
+
+::: columns
+::: {.column width="50%"}
+The Very Start
+
+```{python}
+#| label: spec_gate10
+D = librosa.stft(y_fireplace, n_fft = 2048)  # STFT of y
+S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(S_db, y_axis="hz", sr = sr, x_axis = "s", ax = ax)
+#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = y_fireplace, rate = sr)
+```
+:::
+
+::: {.column width="50%"}
+The end
+
+```{python}
+#| label: spec_gate11
+denoised_deem = librosa.util.normalize(librosa.effects.deemphasis(denoised_signal))
+D = librosa.stft(denoised_deem, n_fft = 2048)  # STFT of y
+S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(S_db, y_axis="hz", sr = sr, x_axis = "s", ax = ax)
+#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = denoised_deem, rate = sr)
+```
+:::
+:::
+
+## A more challenging case
+
+```{python}
+#| label: spec_gate12
+D = librosa.stft(y_week, n_fft = 2048, win_length = 512)  # STFT of y
+S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(S_db, y_axis="hz", sr = sr, x_axis = "s", ax = ax)
+#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = y_week, rate = sr)
+```
+
+    well, uh, you mean monday, tuesday, wednesday, thursday, friday, saturday
+
+## A more challenging case
+
+```{python}
+#| label: spec_gate13
+#| echo: true
+from noisereduce import reduce_noise
+y_week, sr = librosa.load("assets/weekday_short.wav", sr = 16000)
+y_week2 = librosa.effects.preemphasis(y_week)
+y_week3 = highpass(y = y_week2)
+y_week4 = librosa.util.normalize(dampen_hit(y_week3))
+y_week5 = librosa.effects.deemphasis(y_week4)
+y_week6 = reduce_noise(y_week5, 
+                       sr=16000, 
+                       n_fft=2048,
+                       win_length = 512,
+                       hop_length=512//4,
+                       time_constant_s=3,
+                       thresh_n_mult_nonstationary=3,
+                       sigmoid_slope_nonstationary=3.5,
+                       freq_mask_smooth_hz=500,
+                       time_mask_smooth_ms=100)
+y_week7 = librosa.util.normalize(y_week6)
+```
+
+## Result
+
+```{python}
+#| label: spec_gate14
+D = librosa.stft(y_week7, n_fft = 2048, win_length = 512)  # STFT of y
+S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+fig, ax = plt.subplots(1)
+#ax.set_facecolor(color=(1.0, 1.0, 1.0, 0))
+img = librosa.display.specshow(S_db, y_axis="hz", sr = sr, x_axis = "s", ax = ax)
+#cb = fig.colorbar(img, ax=ax)
+plt.show()
+plt.close()
+```
+
+```{python}
+IPython.display.Audio(data = y_week7, rate = sr)
+```
+
+    well, uh, you mean monday, tuesday, wednesday, thursday, friday, saturday
+
+## Doing this yourself
+
+1.  Install [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
+2.  Download the [conda environment](audioprocess.yml) I'm using
+3.  run `conda env create -f audioprocess.yml` to install all the dependencies
+4.  run `conda activate audioprocess.yml`
+5.  Experiment with the code from the slides or the [source file](methods.qmd).
+
+# Moving Forward
+
+## Different preprocessing for different purposes?
+
+![](assets/multiprocess.svg)
+
+## Speeding up human labeling with automation
+
+It might be possible to speed up the diarization process by
+
+1.  Running automated voice activity detection on the processed audio
+2.  Exporting identified areas of voice activity to an elan file with a "constrained vocabulary" for diarization.
+
+## Preliminary results
+
+```{r}
+#| label: read_fave_data
+dat <- read_tsv("~/Google Drive/My Drive/LANCS_align/fave_extract/KY25A_1_meas.txt")
+```
+
+```{r}
+#| label: vowel_plot
+#| fig-width: 4
+#| fig-height: 4
+#| out-width: 100%
+dat %>%
+  mutate(plt_vclass = case_when(str_detect(word, "HOG") ~ "oh",
+                                TRUE ~ plt_vclass)) %>%
+  mutate(vclass = recode(plt_vclass, `*hr` = "ɚ", ae = "æ", 
+                         iy = "i", i = "ɪ", ay = "aɪ", e = "ɛ", aw = "aʊ",
+                         `@` = "ə", uh = "ʌ", ahr = "ar", ey = "eɪ",
+                         o = "ɑ", ow = "oʊ", uw = "u", oh = "ɔ",oy = "oi", 
+                         u = "ʊ")) %>%
+  filter(str_detect(vclass, "F|T|0|r", negate = T),
+         !fol_seg == "L",
+          stress == 1) %>%
+  group_by(vclass) %>%
+  summarise(F1 = mean(F1),
+            F2 = mean(F2)) %>%
+  ggplot(aes(F2, F1))+
+    geom_text(aes(label = vclass))+
+    scale_y_reverse()+
+    scale_x_reverse()+
+    theme_minimal()+
+    labs(title = "Vowel Means for KY25A: dob 1867")
+```
+
+# References
+
+::: {#refs}
+:::

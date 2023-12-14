@@ -1,0 +1,20 @@
+.reveal blockquote p {
+  text-align: left;
+}
+
+.reveal p {
+  text-align: left;
+}
+
+.reveal p img {
+  text-align: center;
+  margin:auto;
+}
+
+
+.fullscreen h1 {
+  color: #DD4A3E;
+  background-color: rgba(7, 86, 97, 0.6);
+  box-shadow: 10px 10px 5px rgba(1, 63, 72, 0.3);
+  border:2px black solid;
+}
