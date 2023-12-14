@@ -1,0 +1,31 @@
+---
+title: aligned-textgrid
+author:
+    - name:
+        family: Fruehwald
+        given: Josef
+    - name:
+        family: Brickhouse
+        given: Christian
+doi: 10.5281/zenodo.10190692
+abstract: 'The aligned-textgrid package provides a python interface for representing and operating on TextGrids produced by forced aligners like FAVE or the Montreal Forced Aligner. Classes provided by aligned-textgrid represent hierarchical and precedence relationships among data stored in TextGrid formats allowing for simplified and more accessible analysis of aligned speech data.'
+image: ../assets/fave_logo.png
+citation:
+  issued: '2023-11-22'
+  type: software
+  url: https://forced-alignment-and-vowel-extraction.github.io/alignedTextGrid/
+  version: v0.5.0
+---
+
+```{r}
+#| echo: false
+library(epoxy)
+```
+
+```{epoxy}
+Most recent version: {rmarkdown::metadata$citation$version}
+
+Read the documentation [here]({rmarkdown::metadata$citation$url})
+```
+
+![](assets/aligned-textgrid.svg){fig-align="center"}
