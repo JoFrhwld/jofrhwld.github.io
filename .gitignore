@@ -13,3 +13,4 @@ oldsite
 .zotero
 .python-version
 .ipynb_checkpoints
+/.quarto/
