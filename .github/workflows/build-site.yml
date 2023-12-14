@@ -1,0 +1,26 @@
+name: Build Site
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-docs:
+     runs-on: ubuntu-latest
+     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.11"
+      - uses: r-lib/actions/setup-r@v2
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+      - uses: r-lib/actions/setup-renv@v2
+      - name: Install Reticulate
+        run: Rscript -e 'renv::install("reticulate")'
+      - name: Set up quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+      - name: Render and publish to gh pages
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
