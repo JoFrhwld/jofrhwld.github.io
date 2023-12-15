@@ -1,0 +1,24 @@
+---
+abstract: 'The idea behind fave-recode is that no matter how much you may adjust the
+  dictionary of a forced-aligner, you may still want to make programmatic changes
+  to the output.'
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  issued: '2023-11-21'
+  type: software
+  url: https://forced-alignment-and-vowel-extraction.github.io/fave-recode/
+  version: v0.2.0
+date: '2023-11-21'
+date-format: YYYY
+description: v0.2.0
+doi: 10.5281/ZENODO.10392791
+params:
+  key: MW4ESNC8
+  notes: 'DOI: '
+title: fave-recode
+---
+
+Documentation: [Docs](https://forced-alignment-and-vowel-extraction.github.io/fave-recode/)
