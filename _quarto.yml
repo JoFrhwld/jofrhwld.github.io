@@ -64,6 +64,7 @@ format:
         - styles/dark.scss
         - styles/styles.scss
     toc: true
+    smooth-scroll: true
     
 
 editor: visual
