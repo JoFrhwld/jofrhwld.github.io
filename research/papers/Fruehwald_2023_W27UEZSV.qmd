@@ -1,0 +1,21 @@
+---
+abstract: Areas of Bivarate Density Distributions
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  issued: '2023-10-02'
+  type: software
+  url: https://jofrhwld.github.io/densityarea/
+  version: v0.1.0
+date: '2023-10-02'
+date-format: YYYY
+description: v0.1.0
+doi: 10.5281/ZENODO.10393190
+params:
+  key: W27UEZSV
+  notes: 'DOI: 10.5281/ZENODO.10393190'
+title: 'densityarea: Polygons of Bivariate Density Distributions'
+
+---

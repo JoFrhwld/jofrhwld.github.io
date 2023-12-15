@@ -1,0 +1,24 @@
+---
+title: fave-recode
+author:
+    - name:
+        family: Fruehwald
+        given: Josef
+doi: 10.5281/ZENODO.10392791
+categories: 
+  - fave
+  - textgrids
+  - python
+abstract: 'The idea behind fave-recode is that no matter how much you may adjust the dictionary of a forced-aligner, you may still want to make programmatic changes to the output.'
+date: 2023-11-21
+image: assets/fave_logo.png
+citation:
+  issued: '2023-11-21'
+  type: software
+  url: https://forced-alignment-and-vowel-extraction.github.io/fave-recode/
+  version: v0.2.0
+---
+[![Static Badge](https://img.shields.io/badge/GH-get_it_on_Github-blue?logo=github)](https://github.com/Forced-Alignment-and-Vowel-Extraction/fave-recode)
+[![PyPI](https://img.shields.io/pypi/v/fave-recode.png)](https://pypi.org/project/fave-recode/)
+[![BuildDocs](https://github.com/Forced-Alignment-and-Vowel-Extraction/fave-recode/actions/workflows/build-docs.yml/badge.svg)](https://forced-alignment-and-vowel-extraction.github.io/fave-recode/)
+[![DOI](https://zenodo.org/badge/605740158.svg)](https://zenodo.org/badge/latestdoi/605740158)

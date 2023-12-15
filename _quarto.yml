@@ -5,10 +5,15 @@ project:
     - teaching
     #- papers
   render:
-    - "*.qmd"
+    - "*qmd"
+    - "*ipynb"
     - "!papers/*/*qmd"
     - "!teaching/courses/2022_lin517/src"
-    - "!*/skeleton"
+    - "!**/*_files/"
+
+filters:
+    - codeblocklabel
+    
 website:
   google-analytics: 
     tracking-id: "G-C00S3NPL7B"
@@ -22,8 +27,20 @@ website:
         text: Home
       - href: research/index.qmd
         text: Research
+      - href: software/index.qmd
+        text: Software
       - href: teaching/index.qmd
         text: Teaching
+    right:
+      - href: https://jofrhwld.github.io/blog/
+        text: Blog
+        icon: newspaper
+      - href: https://bsky.app/profile/jofrhwld.bsky.social
+        icon: clouds
+        text: bsky
+      - href: https://github.com/JoFrhwld
+        icon: github
+        
 format:
   html:
     theme:
@@ -36,6 +53,7 @@ format:
         - styles/dark.scss
         - styles/styles.scss
     toc: true
+    
 
 editor: visual
 

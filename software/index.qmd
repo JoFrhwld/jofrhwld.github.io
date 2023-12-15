@@ -1,0 +1,8 @@
+---
+title: Software
+listing:
+  contents: packages
+  type: grid
+  categories: true
+  max-description-length: 100
+---

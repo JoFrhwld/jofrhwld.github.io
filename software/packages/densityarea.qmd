@@ -1,0 +1,26 @@
+---
+title: 'densityarea: Polygons of Bivariate Density Distributions'
+abstract: Areas of Bivarate Density Distributions
+categories:
+    - R
+    - phonetics
+    - "data-viz"
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  issued: '2023-10-02'
+  type: software
+  url: https://jofrhwld.github.io/densityarea/
+  version: v0.1.0
+date: '2023-10-02'
+date-format: YYYY
+doi: 10.5281/ZENODO.10393190
+image: assets/densityarea_logo.svg
+---
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/densityarea)](https://CRAN.R-project.org/package=densityarea)
+[![pkgdown](https://github.com/JoFrhwld/densityarea/actions/workflows/pkgdown.yaml/badge.svg)](https://jofrhwld.github.io/densityarea/)
+[![DOI](https://zenodo.org/badge/691165861.svg)](https://zenodo.org/badge/latestdoi/691165861)
