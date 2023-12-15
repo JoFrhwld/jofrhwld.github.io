@@ -1,0 +1,23 @@
+---
+abstract: This is a python implementation of the FastTrack method.
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Barreda
+    given: Santiago
+citation:
+  issued: '2023-11-28'
+  type: software
+  url: https://fasttrackiverse.github.io/fasttrackpy/
+  version: v0.3.0
+date: '2023-11-28'
+date-format: YYYY
+description: v0.3.0
+doi: 10.5281/ZENODO.10212099
+params:
+  key: BNWT43F9
+  notes: 'DOI: 10.5281/ZENODO.10212099'
+title: fasttrackpy
+---
