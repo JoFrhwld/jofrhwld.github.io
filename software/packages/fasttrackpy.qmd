@@ -25,3 +25,7 @@ params:
   notes: 'DOI: 10.5281/ZENODO.10212099'
 
 ---
+
+[![PyPI](https://img.shields.io/pypi/v/fasttrackpy)](https://pypi.org/project/fasttrackpy/)
+[![Static Badge](https://img.shields.io/badge/docs-blue)](https://fasttrackiverse.github.io/fasttrackpy/)
+[![DOI](https://zenodo.org/badge/580169086.svg)](https://zenodo.org/doi/10.5281/zenodo.10212099)
