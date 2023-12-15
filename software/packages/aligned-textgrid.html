@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2016-01-01">
-<meta name="description" content="Language">
+<meta name="dcterms.date" content="2023-11-22">
 
-<title>Josef Fruehwald - The early influence of phonology on a phonetic change</title>
+<title>Josef Fruehwald - aligned-textgrid</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -166,29 +165,30 @@ cookieconsent.run({
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The early influence of phonology on a phonetic change</h1>
-</div>
-
-<div>
-  <div class="description">
-    Language
+<h1 class="title">aligned-textgrid</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">fave</div>
+    <div class="quarto-category">textgrids</div>
+    <div class="quarto-category">python</div>
   </div>
-</div>
+  </div>
+
 
 
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Authors</div>
     <div class="quarto-title-meta-contents">
              <p>Josef Fruehwald </p>
+             <p>Christian Brickhouse </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2016</p>
+      <p class="date">November 22, 2023</p>
     </div>
   </div>
   
@@ -197,7 +197,7 @@ cookieconsent.run({
     <div class="quarto-title-meta-heading">Doi</div>
     <div class="quarto-title-meta-contents">
       <p class="doi">
-        <a href="https://doi.org/10.1353/lan.2016.0041">10.1353/lan.2016.0041</a>
+        <a href="https://doi.org/10.5281/zenodo.10190692">10.5281/zenodo.10190692</a>
       </p>
     </div>
   </div>
@@ -206,43 +206,39 @@ cookieconsent.run({
 <div>
   <div class="abstract">
     <div class="abstract-title">Abstract</div>
-    The conventional wisdom regarding the diachronic process whereby phonetic phenomena become phonologized appears to be the ‘error accumulation’ model, so called by Baker, Archangeli, and Mielke (2011). Under this model, biases in the phonetic context result in production or perception errors, which are misapprehended by listeners as target productions, and over time accumulate into new target productions. In this article, I explore the predictions of the hypocorrection model for one phonetic change (prevoiceless /ay/-raising) in detail. I argue that properties of the phonetic context underpredict and mischaracterize the contextual conditioning on this phonetic change. Rather, it appears that categorical, phonological conditioning is present from the very onset of this change.
+    The aligned-textgrid package provides a python interface for representing and operating on TextGrids produced by forced aligners like FAVE or the Montreal Forced Aligner. Classes provided by aligned-textgrid represent hierarchical and precedence relationships among data stored in TextGrid formats allowing for simplified and more accessible analysis of aligned speech data.
   </div>
 </div>
 
 </header>
 
+<p><a href="https://github.com/Forced-Alignment-and-Vowel-Extraction/alignedTextGrid"><img src="https://img.shields.io/badge/GH-get_it_on_Github-blue?logo=github.png" class="img-fluid" alt="Static Badge"></a> <a href="https://pypi.org/project/aligned-textgrid/"><img src="https://img.shields.io/pypi/v/aligned-textgrid.png" class="img-fluid" alt="PyPI"></a> <a href="https://forced-alignment-and-vowel-extraction.github.io/alignedTextGrid/"><img src="https://github.com/Forced-Alignment-and-Vowel-Extraction/alignedTextGrid/actions/workflows/build-docs.yml/badge.svg" class="img-fluid" alt="Build Docs"></a> <a href="https://zenodo.org/badge/latestdoi/552633207"><img src="https://zenodo.org/badge/552633207.svg" class="img-fluid" alt="DOI"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/aligned-textgrid.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{fruehwald2016,
-  author = {Fruehwald, Josef},
-  title = {The Early Influence of Phonology on a Phonetic Change},
-  journal = {Language},
-  volume = {92},
-  number = {2},
-  pages = {376-410},
-  date = {2016},
-  url = {https://muse.jhu.edu/article/621188},
-  doi = {10.1353/lan.2016.0041},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@software{fruehwald2023,
+  author = {Fruehwald, Josef and Brickhouse, Christian},
+  title = {Aligned-Textgrid},
+  version = {v0.5.0},
+  date = {2023-11-22},
+  url = {https://forced-alignment-and-vowel-extraction.github.io/alignedTextGrid/},
+  doi = {10.5281/zenodo.10190692},
   langid = {en},
-  abstract = {The conventional wisdom regarding the diachronic process
-    whereby phonetic phenomena become phonologized appears to be the
-    “error accumulation” model, so called by Baker, Archangeli, and
-    Mielke (2011). Under this model, biases in the phonetic context
-    result in production or perception errors, which are misapprehended
-    by listeners as target productions, and over time accumulate into
-    new target productions. In this article, I explore the predictions
-    of the hypocorrection model for one phonetic change (prevoiceless
-    /ay/-raising) in detail. I argue that properties of the phonetic
-    context underpredict and mischaracterize the contextual conditioning
-    on this phonetic change. Rather, it appears that categorical,
-    phonological conditioning is present from the very onset of this
-    change.}
+  abstract = {The aligned-textgrid package provides a python interface
+    for representing and operating on TextGrids produced by forced
+    aligners like FAVE or the Montreal Forced Aligner. Classes provided
+    by aligned-textgrid represent hierarchical and precedence
+    relationships among data stored in TextGrid formats allowing for
+    simplified and more accessible analysis of aligned speech data.}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2016" class="csl-entry quarto-appendix-citeas" role="listitem">
-Fruehwald, Josef. 2016. <span>“The Early Influence of Phonology on a
-Phonetic Change.”</span> <em>Language</em> 92 (2): 376–410. <a href="https://doi.org/10.1353/lan.2016.0041">https://doi.org/10.1353/lan.2016.0041</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+Fruehwald, Josef, and Christian Brickhouse. 2023.
+<span>“Aligned-Textgrid.”</span> <a href="https://doi.org/10.5281/zenodo.10190692">https://doi.org/10.5281/zenodo.10190692</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

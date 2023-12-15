@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2016-01-01">
-<meta name="description" content="Language">
 
-<title>Josef Fruehwald - The early influence of phonology on a phonetic change</title>
+<title>Josef Fruehwald - Make research pages</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,31 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../assets/logo.svg" rel="icon" type="image/svg+xml">
-<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
-<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./assets/logo.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -103,7 +135,7 @@ cookieconsent.run({
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Josef Fruehwald</span>
     </a>
   </div>
@@ -114,19 +146,19 @@ cookieconsent.run({
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
+    <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../research/index.html" rel="" target="">
+    <a class="nav-link" href="./research/index.html" rel="" target="">
  <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../software/index.html" rel="" target="">
+    <a class="nav-link" href="./software/index.html" rel="" target="">
  <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../teaching/index.html" rel="" target="">
+    <a class="nav-link" href="./teaching/index.html" rel="" target="">
  <span class="menu-text">Teaching</span></a>
   </li>  
 </ul>
@@ -166,84 +198,130 @@ cookieconsent.run({
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The early influence of phonology on a phonetic change</h1>
+<h1 class="title">Make research pages</h1>
 </div>
 
-<div>
-  <div class="description">
-    Language
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Josef Fruehwald </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">2016</p>
-    </div>
-  </div>
   
     
-    <div>
-    <div class="quarto-title-meta-heading">Doi</div>
-    <div class="quarto-title-meta-contents">
-      <p class="doi">
-        <a href="https://doi.org/10.1353/lan.2016.0041">10.1353/lan.2016.0041</a>
-      </p>
-    </div>
-  </div>
   </div>
   
-<div>
-  <div class="abstract">
-    <div class="abstract-title">Abstract</div>
-    The conventional wisdom regarding the diachronic process whereby phonetic phenomena become phonologized appears to be the ‘error accumulation’ model, so called by Baker, Archangeli, and Mielke (2011). Under this model, biases in the phonetic context result in production or perception errors, which are misapprehended by listeners as target productions, and over time accumulate into new target productions. In this article, I explore the predictions of the hypocorrection model for one phonetic change (prevoiceless /ay/-raising) in detail. I argue that properties of the phonetic context underpredict and mischaracterize the contextual conditioning on this phonetic change. Rather, it appears that categorical, phonological conditioning is present from the very onset of this change.
-  </div>
-</div>
 
 </header>
 
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> pip install pyzotero</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>JoFrhwld<span class="op">/</span>zotero2qmd.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>zoetero2qmd</code> is a quick and dirty package I wrote to convert the output from <code>pyzotero</code> to compatible data structures for quarto headers.</p>
+<div class="cell" data-execution_count="2">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyzotero <span class="im">import</span> zotero</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> zotero2qmd.zotero2qmd <span class="im">import</span> item2main, main2qmd, filter_pubs</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yaml</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you are reusing this code, you’ll need to get your own API key: <a href="https://pyzotero.readthedocs.io/en/latest/#getting-started-short-version">pyzotero getting started</a></p>
+<div class="cell" data-execution_count="3">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>keypath <span class="op">=</span> Path(<span class="st">".zotero"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> keypath.<span class="bu">open</span>() <span class="im">as</span> keyfile:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    key_text <span class="op">=</span> keyfile.readline().strip()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>zot <span class="op">=</span> zotero.Zotero(library_id<span class="op">=</span><span class="st">'7642731'</span>, library_type<span class="op">=</span><span class="st">'user'</span>, api_key<span class="op">=</span>key_text)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>zotero.Zotero.publications()</code> method pulls down all citations you’ve added to “My Publications”.</p>
+<div class="cell" data-execution_count="4">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pubs <span class="op">=</span> zot.publications()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Everything that isn’t a talk is going into one big pile for now. I’ll figure out what to do with talks later. Also, I don’t know why I started using “main” to refer to the publication info.</p>
+<div class="cell" data-execution_count="5">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>filtered_pubs <span class="op">=</span> filter_pubs(pubs)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>all_mains <span class="op">=</span> [item2main(x) <span class="cf">for</span> x <span class="kw">in</span> filtered_pubs]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Each dictionary can be yaml dumped into valid quarto headings.</p>
+<div class="cell" data-execution_count="6">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>all_mains[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>{'params': {'key': 'BNWT43F9', 'notes': 'DOI: 10.5281/ZENODO.10212099'},
+ 'author': [{'name': {'given': 'Josef', 'family': 'Fruehwald'}},
+  {'name': {'given': 'Santiago', 'family': 'Barreda'}}],
+ 'title': 'fasttrackpy',
+ 'date': '2023-11-28',
+ 'date-format': 'YYYY',
+ 'description': 'v0.3.0',
+ 'abstract': 'This is a python implementation of the FastTrack method.',
+ 'citation': {'type': 'software',
+  'issued': '2023-11-28',
+  'url': 'https://fasttrackiverse.github.io/fasttrackpy/',
+  'version': 'v0.3.0'}}</code></pre>
+</div>
+</div>
+<p>It took a bit of work to generate mostly legible but unique file names. I decided to append the Zotero <code>key</code> value to each.</p>
+<div class="cell" data-execution_count="7">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_file_names(all_mains):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    first_aut <span class="op">=</span> [x[<span class="st">"author"</span>][<span class="dv">0</span>][<span class="st">"name"</span>][<span class="st">"family"</span>] <span class="cf">for</span> x <span class="kw">in</span> all_mains]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    years <span class="op">=</span> [x[<span class="st">"date"</span>].split(<span class="st">"-"</span>)[<span class="dv">0</span>] <span class="cf">for</span> x <span class="kw">in</span> all_mains]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    keys <span class="op">=</span> [x[<span class="st">"params"</span>][<span class="st">"key"</span>] <span class="cf">for</span> x <span class="kw">in</span> all_mains]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    all_stem <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>aut<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>key<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> aut, year, key <span class="kw">in</span> <span class="bu">zip</span>(first_aut, years, keys)]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    all_stem <span class="op">=</span> [re.sub(<span class="vs">r"_$"</span>, <span class="st">""</span>, x) <span class="cf">for</span> x <span class="kw">in</span> all_stem]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> all_stem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>all_stems <span class="op">=</span> make_file_names(all_mains)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I started dumping everything into “papers”… so now I’m stuck with it.</p>
+<div class="cell" data-execution_count="9">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>out_path <span class="op">=</span> Path(<span class="st">"research"</span>,<span class="st">"papers"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I only want to write new files, since I may manually edit the results here and there.</p>
+<div class="cell" data-execution_count="10">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> stem, item <span class="kw">in</span> <span class="bu">zip</span>(all_stems, all_mains):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    out_file <span class="op">=</span> out_path.joinpath(stem).with_suffix(<span class="st">".qmd"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> out_file.exists():</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> out_file.<span class="bu">open</span>(mode <span class="op">=</span> <span class="st">"w"</span>):</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>            qmd_string <span class="op">=</span> <span class="st">"---</span><span class="ch">\n</span><span class="st">"</span><span class="op">+</span>yaml.dump(item)<span class="op">+</span><span class="st">"</span><span class="ch">\n</span><span class="st">---"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>            out_file.write_text(qmd_string)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{fruehwald2016,
-  author = {Fruehwald, Josef},
-  title = {The Early Influence of Phonology on a Phonetic Change},
-  journal = {Language},
-  volume = {92},
-  number = {2},
-  pages = {376-410},
-  date = {2016},
-  url = {https://muse.jhu.edu/article/621188},
-  doi = {10.1353/lan.2016.0041},
-  langid = {en},
-  abstract = {The conventional wisdom regarding the diachronic process
-    whereby phonetic phenomena become phonologized appears to be the
-    “error accumulation” model, so called by Baker, Archangeli, and
-    Mielke (2011). Under this model, biases in the phonetic context
-    result in production or perception errors, which are misapprehended
-    by listeners as target productions, and over time accumulate into
-    new target productions. In this article, I explore the predictions
-    of the hypocorrection model for one phonetic change (prevoiceless
-    /ay/-raising) in detail. I argue that properties of the phonetic
-    context underpredict and mischaracterize the contextual conditioning
-    on this phonetic change. Rather, it appears that categorical,
-    phonological conditioning is present from the very onset of this
-    change.}
-}
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2016" class="csl-entry quarto-appendix-citeas" role="listitem">
-Fruehwald, Josef. 2016. <span>“The Early Influence of Phonology on a
-Phonetic Change.”</span> <em>Language</em> 92 (2): 376–410. <a href="https://doi.org/10.1353/lan.2016.0041">https://doi.org/10.1353/lan.2016.0041</a>.
-</div></div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

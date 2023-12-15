@@ -46,6 +46,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,9 +77,10 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-website','listing-format','listing-editor','listing-language','listing-abstract','listing-author','listing-citation','listing-date','listing-date-format','listing-description','listing-doi','listing-params','listing-title','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
-      
-      searchColumns: ["listing-project","listing-website","listing-format","listing-editor","listing-language","listing-abstract","listing-author","listing-citation","listing-date","listing-date-format","listing-description","listing-doi","listing-params","listing-title","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time"],
+      valueNames: ['listing-project','listing-filters','listing-website','listing-format','listing-editor','listing-language','listing-abstract','listing-author','listing-citation','listing-date','listing-date-format','listing-description','listing-doi','listing-params','listing-title','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      page: 25,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-project","listing-filters","listing-website","listing-format","listing-editor","listing-language","listing-abstract","listing-author","listing-citation","listing-date","listing-date-format","listing-description","listing-doi","listing-params","listing-title","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -152,11 +154,32 @@ cookieconsent.run({
  <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../software/index.html" rel="" target="">
+ <span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../teaching/index.html" rel="" target="">
  <span class="menu-text">Teaching</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://jofrhwld.github.io/blog/" rel="" target=""><i class="bi bi-newspaper" role="img">
+</i> 
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://bsky.app/profile/jofrhwld.bsky.social" rel="" target=""><i class="bi bi-clouds" role="img">
+</i> 
+ <span class="menu-text">bsky</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JoFrhwld" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
           </div> <!-- /navcollapse -->
@@ -190,6 +213,7 @@ cookieconsent.run({
 
 </header>
 
+<p><a href="../make_qmd.html">Generated from my Zotero publications</a>.</p>
 
 
 
@@ -204,6 +228,45 @@ cookieconsent.run({
   </div>
   <!-- Begin pub div -->
   <div class="g-col-10">
+    <h4 class="anchored"><a href="../research/papers/Fruehwald_2023_BNWT43F9.html" class="listing-name">fasttrackpy</a></h4>
+    <div class="grid bibinfo" style="row-gap: 0;">
+      <div class="g-col-1 bibinfo">
+        <span class="bibinfo bibprefix">with:</span>
+      </div>
+      <div class="g-col-10 bibinfo">
+        <span class="bibinfo">
+          Josef Fruehwald, Santiago Barreda
+        </span>
+      </div>
+      <div class="g-col-1 bibinfo">
+      </div>
+      <!-- start container if -->
+      <!-- end container if -->
+      <!-- start version if -->
+      <div class="g-col-1 bibinfo">
+        <span class="bibinfo bibprefix">version:</span>
+      </div>
+      <div class="g-col-10 bibinfo">
+        <span class="bibinfo">
+          v0.3.0
+        </span>
+      </div>
+      <div class="g-col-1 bibinfo">
+      </div>
+      <!-- end version if -->
+        <!-- start abstract if -->
+        <div class="g-col-1 bibinfo">
+            <span class="bibinfo bibprefix">abstract:</span>
+        </div>
+        <div class="g-col-11 bibinfo">
+            <details>
+            <span class="bibinfo">
+            This is a python implementation of the FastTrack method.
+            </span>
+            </details>
+        </div>
+        <!-- end abstract if -->
+    </div>
     <h4 class="anchored"><a href="../research/papers/Fruehwald_2023_GY5I9QMZ.html" class="listing-name">aligned-textgrid</a></h4>
     <div class="grid bibinfo" style="row-gap: 0;">
       <div class="g-col-1 bibinfo">
@@ -238,6 +301,84 @@ cookieconsent.run({
             <details>
             <span class="bibinfo">
             The aligned-textgrid package provides a python interface for representing and operating on TextGrids produced by forced aligners like FAVE or the Montreal Forced Aligner. Classes provided by aligned-textgrid represent hierarchical and precedence relationships among data stored in TextGrid formats allowing for simplified and more accessible analysis of aligned speech data.
+            </span>
+            </details>
+        </div>
+        <!-- end abstract if -->
+    </div>
+    <h4 class="anchored"><a href="../research/papers/Fruehwald_2023_MW4ESNC8.html" class="listing-name">fave-recode</a></h4>
+    <div class="grid bibinfo" style="row-gap: 0;">
+      <div class="g-col-1 bibinfo">
+        <span class="bibinfo bibprefix">with:</span>
+      </div>
+      <div class="g-col-10 bibinfo">
+        <span class="bibinfo">
+          Josef Fruehwald
+        </span>
+      </div>
+      <div class="g-col-1 bibinfo">
+      </div>
+      <!-- start container if -->
+      <!-- end container if -->
+      <!-- start version if -->
+      <div class="g-col-1 bibinfo">
+        <span class="bibinfo bibprefix">version:</span>
+      </div>
+      <div class="g-col-10 bibinfo">
+        <span class="bibinfo">
+          v0.2.0
+        </span>
+      </div>
+      <div class="g-col-1 bibinfo">
+      </div>
+      <!-- end version if -->
+        <!-- start abstract if -->
+        <div class="g-col-1 bibinfo">
+            <span class="bibinfo bibprefix">abstract:</span>
+        </div>
+        <div class="g-col-11 bibinfo">
+            <details>
+            <span class="bibinfo">
+            The idea behind fave-recode is that no matter how much you may adjust the dictionary of a forced-aligner, you may still want to make programmatic changes to the output.
+            </span>
+            </details>
+        </div>
+        <!-- end abstract if -->
+    </div>
+    <h4 class="anchored"><a href="../research/papers/Fruehwald_2023_W27UEZSV.html" class="listing-name">densityarea: Polygons of Bivariate Density Distributions</a></h4>
+    <div class="grid bibinfo" style="row-gap: 0;">
+      <div class="g-col-1 bibinfo">
+        <span class="bibinfo bibprefix">with:</span>
+      </div>
+      <div class="g-col-10 bibinfo">
+        <span class="bibinfo">
+          Josef Fruehwald
+        </span>
+      </div>
+      <div class="g-col-1 bibinfo">
+      </div>
+      <!-- start container if -->
+      <!-- end container if -->
+      <!-- start version if -->
+      <div class="g-col-1 bibinfo">
+        <span class="bibinfo bibprefix">version:</span>
+      </div>
+      <div class="g-col-10 bibinfo">
+        <span class="bibinfo">
+          v0.1.0
+        </span>
+      </div>
+      <div class="g-col-1 bibinfo">
+      </div>
+      <!-- end version if -->
+        <!-- start abstract if -->
+        <div class="g-col-1 bibinfo">
+            <span class="bibinfo bibprefix">abstract:</span>
+        </div>
+        <div class="g-col-11 bibinfo">
+            <details>
+            <span class="bibinfo">
+            Areas of Bivarate Density Distributions
             </span>
             </details>
         </div>
@@ -425,6 +566,45 @@ cookieconsent.run({
   </div>
   <!-- Begin pub div -->
   <div class="g-col-10">
+    <h4 class="anchored"><a href="../research/papers/Fruehwald_2020_6IQH5VV5.html" class="listing-name">syllabifyr: v0.1.1</a></h4>
+    <div class="grid bibinfo" style="row-gap: 0;">
+      <div class="g-col-1 bibinfo">
+        <span class="bibinfo bibprefix">with:</span>
+      </div>
+      <div class="g-col-10 bibinfo">
+        <span class="bibinfo">
+          Josef Fruehwald
+        </span>
+      </div>
+      <div class="g-col-1 bibinfo">
+      </div>
+      <!-- start container if -->
+      <!-- end container if -->
+      <!-- start version if -->
+      <div class="g-col-1 bibinfo">
+        <span class="bibinfo bibprefix">version:</span>
+      </div>
+      <div class="g-col-10 bibinfo">
+        <span class="bibinfo">
+          v0.1.1
+        </span>
+      </div>
+      <div class="g-col-1 bibinfo">
+      </div>
+      <!-- end version if -->
+        <!-- start abstract if -->
+        <div class="g-col-1 bibinfo">
+            <span class="bibinfo bibprefix">abstract:</span>
+        </div>
+        <div class="g-col-11 bibinfo">
+            <details>
+            <span class="bibinfo">
+            The goal of `syllabifyr` is to provide tidy syllabification of phonetic transcriptions. So far, only CMU dict transcriptions are supported.
+            </span>
+            </details>
+        </div>
+        <!-- end abstract if -->
+    </div>
     <h4 class="anchored"><a href="../research/papers/Tanner_2020_GH2LZM4Y.html" class="listing-name">Toward “English” Phonetics: Variability in the Pre-consonantal Voicing Effect Across English Dialects and Speakers</a></h4>
     <div class="grid bibinfo" style="row-gap: 0;">
       <div class="g-col-1 bibinfo">
@@ -1253,6 +1433,9 @@ In this paper, I will be focusing on the difference between semiweak and regular
 <div class="listing-no-matching d-none">
 No matching items
 </div>
+<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

@@ -1,12 +1,26 @@
 [
   {
+    "listing": "/software/index.html",
+    "items": [
+      "/software/packages/aligned-textgrid.html",
+      "/software/packages/densityarea.html",
+      "/software/packages/fasttrackpy.html",
+      "/software/packages/fave-recode.html",
+      "/software/packages/syllabifyr.html"
+    ]
+  },
+  {
     "listing": "/research/index.html",
     "items": [
+      "/research/papers/Fruehwald_2023_BNWT43F9.html",
       "/research/papers/Fruehwald_2023_GY5I9QMZ.html",
+      "/research/papers/Fruehwald_2023_MW4ESNC8.html",
+      "/research/papers/Fruehwald_2023_W27UEZSV.html",
       "/research/papers/Purse_2022_LIGPGR5R.html",
       "/research/papers/Fruehwald_2022_H347UNLS.html",
       "/research/papers/Rosenfelder_2022_TRXWWXD2.html",
       "/research/papers/Boyd_2021_733Q4MMI.html",
+      "/research/papers/Fruehwald_2020_6IQH5VV5.html",
       "/research/papers/Tanner_2020_GH2LZM4Y.html",
       "/research/papers/Sneller_2019_8ERVHBSG.html",
       "/research/papers/Fruehwald_2019_URYFVWHE.html",

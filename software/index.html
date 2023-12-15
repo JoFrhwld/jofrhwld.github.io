@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2016-01-01">
-<meta name="description" content="Language">
 
-<title>Josef Fruehwald - The early influence of phonology on a phonetic change</title>
+<title>Josef Fruehwald - Software</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,28 +23,30 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../assets/logo.svg" rel="icon" type="image/svg+xml">
-<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
-<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/logo.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-C00S3NPL7B"></script>
 
 <script type="text/plain" cookie-consent="tracking">
@@ -93,6 +122,8 @@ cookieconsent.run({
 </script> 
   
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -103,7 +134,7 @@ cookieconsent.run({
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Josef Fruehwald</span>
     </a>
   </div>
@@ -114,19 +145,19 @@ cookieconsent.run({
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../research/index.html" rel="" target="">
+    <a class="nav-link" href="../research/index.html" rel="" target="">
  <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../software/index.html" rel="" target="">
+    <a class="nav-link active" href="../software/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../teaching/index.html" rel="" target="">
+    <a class="nav-link" href="../teaching/index.html" rel="" target="">
  <span class="menu-text">Teaching</span></a>
   </li>  
 </ul>
@@ -160,90 +191,209 @@ cookieconsent.run({
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(2)</span></div><div class="category" data-category="data-viz">data-viz <span class="quarto-category-count">(1)</span></div><div class="category" data-category="fave">fave <span class="quarto-category-count">(2)</span></div><div class="category" data-category="phonetics">phonetics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(3)</span></div><div class="category" data-category="textgrids">textgrids <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The early influence of phonology on a phonetic change</h1>
+<h1 class="title">Software</h1>
 </div>
 
-<div>
-  <div class="description">
-    Language
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Josef Fruehwald </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">2016</p>
-    </div>
-  </div>
   
     
-    <div>
-    <div class="quarto-title-meta-heading">Doi</div>
-    <div class="quarto-title-meta-contents">
-      <p class="doi">
-        <a href="https://doi.org/10.1353/lan.2016.0041">10.1353/lan.2016.0041</a>
-      </p>
-    </div>
-  </div>
   </div>
   
-<div>
-  <div class="abstract">
-    <div class="abstract-title">Abstract</div>
-    The conventional wisdom regarding the diachronic process whereby phonetic phenomena become phonologized appears to be the ‘error accumulation’ model, so called by Baker, Archangeli, and Mielke (2011). Under this model, biases in the phonetic context result in production or perception errors, which are misapprehended by listeners as target productions, and over time accumulate into new target productions. In this article, I explore the predictions of the hypocorrection model for one phonetic change (prevoiceless /ay/-raising) in detail. I argue that properties of the phonetic context underpredict and mischaracterize the contextual conditioning on this phonetic change. Rather, it appears that categorical, phonological conditioning is present from the very onset of this change.
-  </div>
-</div>
 
 </header>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{fruehwald2016,
-  author = {Fruehwald, Josef},
-  title = {The Early Influence of Phonology on a Phonetic Change},
-  journal = {Language},
-  volume = {92},
-  number = {2},
-  pages = {376-410},
-  date = {2016},
-  url = {https://muse.jhu.edu/article/621188},
-  doi = {10.1353/lan.2016.0041},
-  langid = {en},
-  abstract = {The conventional wisdom regarding the diachronic process
-    whereby phonetic phenomena become phonologized appears to be the
-    “error accumulation” model, so called by Baker, Archangeli, and
-    Mielke (2011). Under this model, biases in the phonetic context
-    result in production or perception errors, which are misapprehended
-    by listeners as target productions, and over time accumulate into
-    new target productions. In this article, I explore the predictions
-    of the hypocorrection model for one phonetic change (prevoiceless
-    /ay/-raising) in detail. I argue that properties of the phonetic
-    context underpredict and mischaracterize the contextual conditioning
-    on this phonetic change. Rather, it appears that categorical,
-    phonological conditioning is present from the very onset of this
-    change.}
-}
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2016" class="csl-entry quarto-appendix-citeas" role="listitem">
-Fruehwald, Josef. 2016. <span>“The Early Influence of Phonology on a
-Phonetic Change.”</span> <em>Language</em> 92 (2): 376–410. <a href="https://doi.org/10.1353/lan.2016.0041">https://doi.org/10.1353/lan.2016.0041</a>.
-</div></div></section></div></main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="fave,textgrids,python" data-listing-date-sort="1700611200000" data-listing-file-modified-sort="1702677062270" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<a href="../software/packages/aligned-textgrid.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="../software/packages/assets/fave_logo.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+aligned-textgrid
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('fave'); return false;">
+fave
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('textgrids'); return false;">
+textgrids
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
+python
+</div>
+</div>
+<div class="card-text listing-description">
+The aligned-textgrid package provides a python interface for representing and operating on…
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Josef Fruehwald, Christian Brickhouse
+</div>
+<div class="listing-date">
+Nov 22, 2023
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="R,phonetics,data-viz" data-listing-date-sort="1696204800000" data-listing-file-modified-sort="1702677062270" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<a href="../software/packages/densityarea.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="../software/packages/assets/densityarea_logo.svg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+densityarea: Polygons of Bivariate Density Distributions
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('phonetics'); return false;">
+phonetics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('data-viz'); return false;">
+data-viz
+</div>
+</div>
+<div class="card-text listing-description">
+Areas of Bivarate Density Distributions
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Josef Fruehwald
+</div>
+<div class="listing-date">
+Oct 2, 2023
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="2" data-categories="python,phonetics" data-listing-date-sort="1701129600000" data-listing-file-modified-sort="1702677062270" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<a href="../software/packages/fasttrackpy.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="../software/packages/assets/fasttrack_logo.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+fasttrackpy
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
+python
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('phonetics'); return false;">
+phonetics
+</div>
+</div>
+<div class="card-text listing-description">
+This is a python implementation of the FastTrack method.
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Josef Fruehwald, Santiago Barreda
+</div>
+<div class="listing-date">
+Nov 28, 2023
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="3" data-categories="fave,textgrids,python" data-listing-date-sort="1700524800000" data-listing-file-modified-sort="1702677062270" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<a href="../software/packages/fave-recode.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="../software/packages/assets/fave_logo.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+fave-recode
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('fave'); return false;">
+fave
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('textgrids'); return false;">
+textgrids
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
+python
+</div>
+</div>
+<div class="card-text listing-description">
+The idea behind fave-recode is that no matter how much you may adjust the dictionary of a…
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Josef Fruehwald
+</div>
+<div class="listing-date">
+Nov 21, 2023
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="4" data-categories="R" data-listing-date-sort="1603497600000" data-listing-file-modified-sort="1702677062270" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<a href="../software/packages/syllabifyr.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="../software/packages/assets/syllabifyr_logo.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+syllabifyr: Syllabifier for CMU Dictionary Transcriptions
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
+</div>
+</div>
+<div class="card-text listing-description">
+The goal of <code>syllabifyr</code> is to provide tidy syllabification of phonetic transcriptions. So far…
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Josef Fruehwald
+</div>
+<div class="listing-date">
+Oct 24, 2020
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
