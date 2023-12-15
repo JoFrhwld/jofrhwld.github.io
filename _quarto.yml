@@ -47,6 +47,45 @@ website:
     - title: "Research"
       contents: 
         - research/index.qmd
+        - make_qmd.ipynb
+        - section: "year nav"
+          contents:
+            - section: "2020s"
+              contents: 
+                - text: "2023"
+                  href: "research/#2023"            
+                - text: "2022"
+                  href: "research/#2022"  
+                - text: "2021"
+                  href: "research/#2021"          
+                - text: "2020"
+                  href: "research/#2020"
+            - section: "2010s"
+              contents:
+                - text: "2019"
+                  href: "research/#2019"
+                - text: "2018"
+                  href: "research/#2018"
+                - text: "2017"
+                  href: "research/#2017"
+                - text: "2016"
+                  href: "research/#2016"
+                - text: "2015"
+                  href: "research/#2015"              
+                - text: "2014"
+                  href: "research/#2014"
+                - text: "2013"
+                  href: "research/#2013"
+                - text: "2012"
+                  href: "research/#2012"              
+                - text: "2011"
+                  href: "research/#2011"
+            - section: "2000s"
+              contents:
+                - text: "2008"
+                  href: "research/#2008"              
+                - text: "2007"
+                  href: "research/#2007"              
     - title: "LSA 2017 Course"
       contents: 
         - teaching/courses/2017_lsa/index.qmd
