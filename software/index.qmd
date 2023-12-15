@@ -3,4 +3,5 @@ title: Software
 listing:
   contents: packages
   type: grid
+  categories: true
 ---

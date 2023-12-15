@@ -8,6 +8,9 @@ author:
         family: Brickhouse
         given: Christian
 doi: 10.5281/zenodo.10190692
+categories: 
+  - fave
+  - textgrids
 abstract: 'The aligned-textgrid package provides a python interface for representing and operating on TextGrids produced by forced aligners like FAVE or the Montreal Forced Aligner. Classes provided by aligned-textgrid represent hierarchical and precedence relationships among data stored in TextGrid formats allowing for simplified and more accessible analysis of aligned speech data.'
 image: ../assets/fave_logo.png
 citation:
@@ -16,16 +19,10 @@ citation:
   url: https://forced-alignment-and-vowel-extraction.github.io/alignedTextGrid/
   version: v0.5.0
 ---
+[![Static Badge](https://img.shields.io/badge/GH-get_it_on_Github-blue?logo=github)](https://github.com/Forced-Alignment-and-Vowel-Extraction/alignedTextGrid)
+[![PyPI](https://img.shields.io/pypi/v/aligned-textgrid.png)](https://pypi.org/project/aligned-textgrid/)
+[![Build Docs](https://github.com/Forced-Alignment-and-Vowel-Extraction/alignedTextGrid/actions/workflows/build-docs.yml/badge.svg)](https://forced-alignment-and-vowel-extraction.github.io/alignedTextGrid/)
+[![DOI](https://zenodo.org/badge/552633207.svg)](https://zenodo.org/badge/latestdoi/552633207)
 
-```{r}
-#| echo: false
-library(epoxy)
-```
-
-```{epoxy}
-Most recent version: {rmarkdown::metadata$citation$version}
-
-Read the documentation [here]({rmarkdown::metadata$citation$url})
-```
 
 ![](assets/aligned-textgrid.svg){fig-align="center"}
