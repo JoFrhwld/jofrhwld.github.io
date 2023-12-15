@@ -1,5 +1,7 @@
 ---
 title: "LSA 2017 Statistical Modelling with R"
+listing: 
+  contents: lectures
 ---
 
 -   [Meeting 1: Introduction to R](lectures/Session_1.nb.html)

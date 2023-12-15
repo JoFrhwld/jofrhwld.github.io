@@ -31,6 +31,8 @@ website:
         text: Software
       - href: teaching/index.qmd
         text: Teaching
+      - href: teaching/courses/2017_lsa/index.qmd
+        text: "LSA 2017 Course"
     right:
       - href: https://jofrhwld.github.io/blog/
         text: Blog
@@ -40,7 +42,16 @@ website:
         text: bsky
       - href: https://github.com/JoFrhwld
         icon: github
-        
+  sidebar:
+    - title: "Home"
+    - title: "Research"
+      contents: 
+        - research/index.qmd
+    - title: "LSA 2017 Course"
+      contents: 
+        - teaching/courses/2017_lsa/index.qmd
+        - auto: teaching/courses/2017_lsa/lectures/
+    
 format:
   html:
     theme:

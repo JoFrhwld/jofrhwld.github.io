@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg2"
+   viewBox="0 0 607.9229 336.86785"
+   height="95.071594mm"
+   width="171.56935mm">
+  <defs
+     id="defs4">
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4557"
+       style="overflow:visible">
+      <path
+         id="path4559"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4535"
+       style="overflow:visible">
+      <path
+         id="path4537"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mend"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path4268" />
+    </marker>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(24.290214,54.385152)"
+     id="layer1">
+    <text
+       id="text4138"
+       y="69.988853"
+       x="78.286819"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Palatino;-inkscape-font-specification:'Palatino, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="69.988853"
+         x="78.286819"
+         id="tspan4140" /></text>
+    <g
+       id="g4233">
+      <g
+         id="g4169"
+         transform="translate(-1.5497208e-6,-0.50507796)">
+        <rect
+           ry="10"
+           rx="10"
+           y="47.260422"
+           x="64.649765"
+           height="68.690376"
+           width="123.23861"
+           id="rect4136"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#216d65;stroke-width:1.79999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <text
+           id="text4144"
+           y="87.309357"
+           x="79.292938"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Palatino;-inkscape-font-specification:'Palatino, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro'"
+             y="87.309357"
+             x="79.292938"
+             id="tspan4146">Speaker A</tspan></text>
+      </g>
+      <g
+         transform="translate(172.53303,-0.50507796)"
+         id="g4169-7">
+        <rect
+           ry="10"
+           rx="10"
+           y="47.260422"
+           x="64.649765"
+           height="68.690376"
+           width="123.23861"
+           id="rect4136-3"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#216d65;stroke-width:1.79999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <text
+           id="text4144-7"
+           y="87.309357"
+           x="79.292938"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Palatino;-inkscape-font-specification:'Palatino, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro'"
+             y="87.309357"
+             x="79.292938"
+             id="tspan4146-5">Speaker A</tspan></text>
+      </g>
+      <g
+         transform="translate(345.06606,-0.50507796)"
+         id="g4169-7-6">
+        <rect
+           ry="10"
+           rx="10"
+           y="47.260422"
+           x="64.649765"
+           height="68.690376"
+           width="123.23861"
+           id="rect4136-3-6"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#216d65;stroke-width:1.79999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <text
+           id="text4144-7-0"
+           y="87.309357"
+           x="79.292938"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Palatino;-inkscape-font-specification:'Palatino, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro'"
+             y="87.309357"
+             x="79.292938"
+             id="tspan4146-5-4">Speaker A</tspan></text>
+      </g>
+    </g>
+    <g
+       transform="translate(35.538765,30.857143)"
+       id="g4228">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#b08534;stroke-width:1.79999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect4222"
+         width="496.99506"
+         height="75.761444"
+         x="14.765806"
+         y="139.53105"
+         rx="10"
+         ry="10" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Palatino;-inkscape-font-specification:'Palatino, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="228.79955"
+         y="188.68178"
+         id="text4224"><tspan
+           id="tspan4226"
+           x="228.79955"
+           y="188.68178"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35px;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro'">Data</tspan></text>
+    </g>
+    <path
+       id="path4247"
+       d="m 127.14286,115.21935 37.14285,80"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4557)" />
+    <path
+       id="path4249"
+       d="m 298.57143,113.79078 1.42857,70"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend)" />
+    <path
+       id="path4251"
+       d="m 481.42857,110.93363 -45.71428,77.14286"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4535)" />
+    <text
+       id="text4591"
+       y="16.647919"
+       x="7.1428571"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Palatino;-inkscape-font-specification:'Palatino, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro'"
+         y="16.647919"
+         x="7.1428571"
+         id="tspan4593">&quot;Complete Pooling&quot;</tspan></text>
+  </g>
+</svg>
