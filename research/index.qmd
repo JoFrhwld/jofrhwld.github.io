@@ -8,3 +8,5 @@ listing:
     sort: date desc
     max-description-length: 280
 ---
+
+[Generated from my Zotero publications](../make_qmd.ipynb).
