@@ -8,6 +8,7 @@ doi: 10.5281/ZENODO.10392791
 categories: 
   - fave
   - textgrids
+  - python
 abstract: 'The idea behind fave-recode is that no matter how much you may adjust the dictionary of a forced-aligner, you may still want to make programmatic changes to the output.'
 image: ../assets/fave_logo.png
 citation:
