@@ -3,6 +3,7 @@ project:
   resources: 
     - workshops
     - teaching
+    - data
     #- papers
   render:
     - "*qmd"
@@ -13,6 +14,9 @@ project:
 
 filters:
     - codeblocklabel
+    
+execute:
+  freeze: auto  # re-render only when source changes    
     
 website:
   google-analytics: 
@@ -48,7 +52,7 @@ website:
       contents: 
         - research/index.qmd
         - make_qmd.ipynb
-        - section: "year nav"
+        - section: "By Year"
           contents:
             - section: "2020s"
               contents: 
@@ -105,6 +109,5 @@ format:
     toc: true
     smooth-scroll: true
     
-
 editor: visual
 
