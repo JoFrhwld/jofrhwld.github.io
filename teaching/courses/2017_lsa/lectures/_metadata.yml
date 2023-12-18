@@ -8,3 +8,10 @@ date-modified: 2023-12-18
 format:
   html: 
     code-tools: true
+    code-link: true
+    fontsize: large
+knitr: 
+  opts_chunk: 
+    error: true
+    warning: false
+    message: false    

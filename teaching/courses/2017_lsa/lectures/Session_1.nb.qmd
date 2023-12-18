@@ -55,7 +55,7 @@ Most of the content of the course is devoted to core R programming (things you s
 The course will follow the workflow outlined at the beginning: `begin → summarize → visualize → analyze`.
 
 | Week |               Monday                |            Thursday            |
-|------------------:|:-------------------------:|:------------------------:|
+|-----:|:-----------------------------------:|:------------------------------:|
 |    1 |                 --                  |  Intro - Basics & R Notebooks  |
 |    2 |        Data Frames & Factors        | Split-Apply-Combine, Reshaping |
 |    3 |               ggplot2               |     Fitting Linear Models      |
