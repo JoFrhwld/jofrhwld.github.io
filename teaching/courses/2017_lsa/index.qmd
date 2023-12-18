@@ -2,6 +2,8 @@
 title: "LSA 2017 Statistical Modelling with R"
 listing: 
   contents: lectures
+  type: table
+  fields: [image, order, title, reading-time]
 ---
 
 -   [Meeting 1: Introduction to R](lectures/Session_1.nb.html)

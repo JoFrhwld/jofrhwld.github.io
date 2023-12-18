@@ -1,8 +1,11 @@
 ---
 title: "Introduction to R"
+image: figures/cran_package.png
+order: 1
 knitr: 
   opts_chunk: 
     error: true
+    warning: false
 ---
 
 ## Hellos
@@ -27,7 +30,7 @@ These are some of the core areas I figure are necessary to getting good at stati
 
 These are all skills you can achieve through practice, experience, and occasional guidance from someone more skilled than you. It is exactly like acquiring any other skill or craft. At first it will be confusing, you'll make some mistakes, and it won't look so good. I think
 
-::: {layout="[40,-20,40]"}
+::: {layout="[45,-10,45]"}
 ![The first hat I ever knit](figures/firsthat.jpg)
 
 ![The most recent hat I knit](figures/lasthat.jpg)
@@ -52,7 +55,7 @@ Most of the content of the course is devoted to core R programming (things you s
 The course will follow the workflow outlined at the beginning: `begin → summarize → visualize → analyze`.
 
 | Week |               Monday                |            Thursday            |
-|------------------:|:--------------------------:|:------------------------:|
+|------------------:|:-------------------------:|:------------------------:|
 |    1 |                 --                  |  Intro - Basics & R Notebooks  |
 |    2 |        Data Frames & Factors        | Split-Apply-Combine, Reshaping |
 |    3 |               ggplot2               |     Fitting Linear Models      |
@@ -160,9 +163,7 @@ I'm going to recommend (for now at least) that you run all of your code though a
 
 My earlier advice would have been to write all of your code in an R script file, but that also separates the code from its results, which can be hard for beginners to keep track of.
 
-<hr>
-
-</hr>
+------------------------------------------------------------------------
 
 ## Installing R Packages
 
@@ -170,7 +171,7 @@ R comes with a lot of functionality installed, but one way that R is extensible 
 
 Here's a basic diagram of how R packages work:
 
-![](figures/cran_package.png)
+![](figures/cran_package.png){fig-align="center" width="100%"}
 
 ### Installing Packages
 
@@ -200,14 +201,15 @@ library("ggplot2")
 foo <- ggplot()
 ```
 
-::: {.box .break}
-[\~2 Minute Activity]{.big-label}
+::: callout-note
+## \~2 minute activity
 
 Let's install all of the packages we're going to use in the course. Double check that you're connected to the internet.
 
 Create a notebook for this lecture called `01_lecture.Rmd`. Copy-paste the following into an R code chunk and run it:
 
 ```{r}
+#| eval: false
 install.packages(
   c("tidyverse",
     "devtools")
@@ -281,10 +283,8 @@ In short, you can use these variables `x` and `y` like they *are* the values you
 -   You could have chosen *almost* any name for these variables.
 -   You can just as easily assign *new* values to these variables.
 
-::: {.box .idiom}
-[Idiom]{.label}
-
-#### Naming Things
+::: callout-tip
+## Naming Things
 
 `x` and `y` are lousy names for variables. When it comes to naming variables, there's a famous saying:
 
@@ -298,7 +298,7 @@ For best practices on naming variables, I'll refer you to [the tidyverse style g
 
 Also, be guided by The Principle of Least Effort. Use the minimal amount of characters that are still clearly interpretable.
 
-```{r}
+```         
 # Good Names
 model_1
 model_full
@@ -457,8 +457,8 @@ Of course, if you now wanted to know what year these speakers turned 17, you cou
 (interview_year - ages) + 17
 ```
 
-::: {.box .break}
-[\~5 Minute Activity]{.big-label}
+::: callout-note
+## \~5 minute activity
 
 A Starbucks Grande filter coffee in the UK currently costs £1.85. The value of £1 before the Brexit vote was about \$1.49. After the vote, it dropped down to about \$1.31, and lately it's been closer to \$1.27.
 
@@ -474,7 +474,7 @@ If you have a bunch of values stored in a vector, and you want to pull out speci
 Let's start by indexing by position.
 
 ::: {style="font-family:monospace;font-size:xx-large;text-align:center;"}
-[vector]{style="color:#747474"}\[[</span>]{style="color:red"}[position]{style="color:#747474"}<span style="color:red"><span style="color:red">\]
+[vector]{style="color:#747474"}[\[]{style="color:red"}[position]{style="color:#747474"}[\]]{style="color:red"}
 :::
 
 R has some built in vectors for you to use, like one called `letters`. We haven't defined `letters`, and it's not listed as being in your R environment, but it's there.
@@ -504,7 +504,7 @@ letters[abba]
 You can also index by logical values.
 
 ::: {style="font-family:monospace;font-size:xx-large;text-align:center;"}
-[vector]{style="color:#747474"}\[[</span>]{style="color:red"}[true false vector]{style="color:#747474"}<span style="color:red"><span style="color:red">\]
+[vector]{style="color:#747474"}[\[]{style="color:red"}[true false vector]{style="color:#747474"}[\]]{style="color:red"}
 :::
 
 Let's come back to our vector of speaker's ages
@@ -529,8 +529,8 @@ ages > 40
 ages[ages > 40]
 ```
 
-::: {.box .break}
-[\~2 Minute Activity]{.big-label}
+::: callout-note
+## \~2 minute activity
 
 Let's assume our speakers had the following names:
 
@@ -545,9 +545,8 @@ Using logical indexing and the ages in `ages` and year of interview in `intervie
 
 The following operators will return a vector of `TRUE` and `FALSE` values.
 
-::: {style="width=50%"}
 | Operator | Meaning                  |
-|:---------|:-------------------------|
+|----------|--------------------------|
 | `==`     | exactly equal to         |
 | `!=`     | not equal to             |
 | `>`      | greater than             |
@@ -555,7 +554,6 @@ The following operators will return a vector of `TRUE` and `FALSE` values.
 | `>=`     | greater than or equal to |
 | `<`      | less than                |
 | `<=`     | less than or equal to    |
-:::
 
 You can use these to compare vectors to single values, as we've seen, but you can also compare vectors to vectors *if they are the same length*. Comparison is done elementwise.
 
@@ -568,13 +566,11 @@ group_a < group_b
 
 There are three more operators that have an effect on `TRUE` and `FALSE` vectors.
 
-::: {style="width:50%"}
 | Operator | Meaning                                          |
-|:---------|:-------------------------------------------------|
+|----------|--------------------------------------------------|
 | `!`      | not x <br> changes all `T` to `F` and `F` to `T` |
-| `|`      | x or y                                           |
-| `&`      | x and y                                          |
-:::
+| \|       | `x` or `y`                                       |
+| `&`      | `x` and `y`                                      |
 
 ```{r}
 x <- c(T, T, F, F)
@@ -625,6 +621,4 @@ check_names[check_names %in% speaker_names]
 check_names[!(check_names %in% speaker_names)]
 ```
 
-<hr />
-
-<!--- http://www.babynames1000.com/gender-neutral/ -->
+------------------------------------------------------------------------
