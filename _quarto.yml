@@ -90,10 +90,10 @@ website:
                   href: "research/#2008"              
                 - text: "2007"
                   href: "research/#2007"              
-    - title: "LSA 2017 Course"
-      contents: 
-        - teaching/courses/2017_lsa/index.qmd
-        - auto: teaching/courses/2017_lsa/lectures/
+    # - title: "LSA 2017 Course"
+    #   contents: 
+    #     - teaching/courses/2017_lsa/index.qmd
+    #     - auto: teaching/courses/2017_lsa/lectures/
     
 format:
   html:
