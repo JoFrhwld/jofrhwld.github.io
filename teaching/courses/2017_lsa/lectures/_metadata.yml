@@ -1,0 +1,10 @@
+author: 
+  - name: 
+      given: Josef
+      family: Fruehwald
+date: 2017-7-5
+date-format: "MMMM YYYY"
+date-modified: 2023-12-18
+format:
+  html: 
+    code-tools: true

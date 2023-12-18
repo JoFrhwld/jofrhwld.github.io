@@ -1,5 +1,12 @@
 [
   {
+    "listing": "/teaching/courses/2017_lsa/index.html",
+    "items": [
+      "/teaching/courses/2017_lsa/lectures/Session_1.nb.html",
+      "/teaching/courses/2017_lsa/lectures/Session_2.nb.html"
+    ]
+  },
+  {
     "listing": "/software/index.html",
     "items": [
       "/software/packages/aligned-textgrid.html",
