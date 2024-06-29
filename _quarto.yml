@@ -56,6 +56,8 @@ website:
           contents:
             - section: "2020s"
               contents: 
+                - text: "2024"
+                  href: "research/#2024"            
                 - text: "2023"
                   href: "research/#2023"            
                 - text: "2022"
@@ -90,10 +92,10 @@ website:
                   href: "research/#2008"              
                 - text: "2007"
                   href: "research/#2007"              
-    # - title: "LSA 2017 Course"
-    #   contents: 
-    #     - teaching/courses/2017_lsa/index.qmd
-    #     - auto: teaching/courses/2017_lsa/lectures/
+    - title: "LSA 2017 Course"
+      contents: 
+        - teaching/courses/2017_lsa/index.qmd
+        - auto: teaching/courses/2017_lsa/lectures/
     
 format:
   html:

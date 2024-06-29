@@ -5,7 +5,6 @@ knitr:
   opts_chunk: 
     error: true
     warning: false
-    message: false
 ---
 
 # The Agenda
@@ -410,17 +409,19 @@ Please never do this. I would caution against using it in any code, scripts or n
 -   ensure that you're using the same data file every single time
 :::
 
-One pretty cool thing is that if a data file is up on a website somewhere, you can just access it by passing the url to `read.csv()` or `read.delim()`. Here is some sample data on the Donner Party.[^2]
+One pretty cool thing is that if a data file is up on a website somewhere, you can just access it by passing the url to `read.csv()` or `read.delim()`.[^2] Here is some sample data on the Donner Party.[^3]
 
-[^2]: "The Donner Party (sometimes called the Donner-Reed Party) was a group of American pioneer migrants who set out for California in a wagon train. Delayed by a series of mishaps, they spent the winter of 1846--47 snowbound in the Sierra Nevadas. Some of the migrants resorted to cannibalism to survive, eating those who had succumbed to starvation and sickness." <https://en.wikipedia.org/wiki/Donner_Party>
+[^2]: This doesn't work if the file is behind encryption, i.e. if it begins with `https://`.
+
+[^3]: "The Donner Party (sometimes called the Donner-Reed Party) was a group of American pioneer migrants who set out for California in a wagon train. Delayed by a series of mishaps, they spent the winter of 1846--47 snowbound in the Sierra Nevadas. Some of the migrants resorted to cannibalism to survive, eating those who had succumbed to starvation and sickness." <https://en.wikipedia.org/wiki/Donner_Party>
 
 ```{r}
 donner <- read.csv("https://jofrhwld.github.io/data/donner.csv")
 head(donner)
 ```
 
-::: callout-note
-## \~5 minute activity
+::: {.box .break}
+[\~5 minute activity]{.big-label}
 
 Download the file `joe_vowels.csv` from the course Canvas. Save it to the data directory for the course, or wherever you would like to keep it. Read it into R. What's my mean F1 and F2 across all of my vowels?
 :::
@@ -453,18 +454,14 @@ We can do this easily with the functions `gather()`, `separate()` and `spread()`
 For a smaller illustrative purpose for people who may feel uneasy about vowels and formants, I'll be illustrating each of these steps with a simpler data set about how many apples and oranges two people bought, and how many they ate.
 
 ```{r}
-fruit <- data.frame(
-  person = c("Oakley", "Charlie"),
-  apples_bought = c(5, 3),
-  apples_ate = c(1, 2),
-  oranges_bought = c(5, 4),
-  oranges_ate = c(3, 3)
-)
+fruit <- data.frame(person = c("Oakley", "Charlie"),
+                 apples_bought = c(5, 3),
+                 apples_ate = c(1, 2),
+                 oranges_bought = c(5, 4),
+                 oranges_ate = c(3, 3))
 ```
 
-```{r}
-#| echo: false
-#| results: asis
+```{r echo = F, results = 'asis'}
 library(knitr)
 kable(fruit)
 ```
@@ -535,32 +532,6 @@ iy_ah_step1
 
 For the fruit data, the only un-gathered column was `person`, but for `iy_ah_wide`, `idstring`, `age`, `sex`, and `year`, were all ungathered. Here you can see how all rows of ungathered columns are repeated as logically necessary.
 
-::: {.callout-tip collapse="true"}
-## 2023 Note
-
-The `gather()` function has been ["superseded"](https://lifecycle.r-lib.org/articles/stages.html#superseded) in favor of `pivot_longer()`.
-
-```{r}
-pivot_longer(
-  data = fruit,
-  cols = apples_bought:oranges_ate,
-  names_to = "fruit_behavior",
-  values_to = "number"
-)
-```
-
-```{r}
-pivot_longer(
-  data = iy_ah_wide, 
-  cols = ah_F1:iy_F2,
-  names_to = "vowel_formant",
-  values_to = "hz"
-) |> 
-  head() |> 
-  rmarkdown::paged_table()
-```
-:::
-
 ## Separating Columns
 
 There is still a problem with both the `fruit_long` and the `iy_ah_step1` data frames, which is that two different kinds of data are merged within one column. For `iy_ah_step1`, the vowel class and formant variable are merged together (e.g. `ah_F1`) and for `fruit_long`, the fruit and behavior are merged together (e.g. `apple_bought`). We need to separate these, with a very aptly named function called `separate()`
@@ -581,17 +552,13 @@ separate([data]{.pop}, [col]{.pop}, [into]{.pop}, [sep]{.pop})
 Here's how it works for `fruit_long`.
 
 ```{r}
-fruit_separate <- separate(
-  data = fruit_long,
-  col = fruit_behavior,
-  into = c("fruit", "behavior"),
-  sep = "_"
-)
+fruit_separate <- separate(data = fruit_long,
+                           col = fruit_behavior,
+                           into = c("fruit", "behavior"),
+                           sep = "_")
 ```
 
-```{r}
-#| echo: false
-#| results: asis
+```{r echo = F, results='asis'}
 kable(fruit_separate)
 ```
 
@@ -600,34 +567,17 @@ It has returned a new data frame with the `fruit_behavior` column split into two
 Let's do this for `iy_ah_step1` now.
 
 ```{r}
-iy_ah_step2 <- separate(
-  iy_ah_step1, 
-  vowel_formant, 
-  into = c("vowel", "formant"),
-  sep = "_"
-)
+iy_ah_step2 <- separate(iy_ah_step1, 
+                        vowel_formant, 
+                        into = c("vowel", "formant"),
+                        sep = "_")
 iy_ah_step2
 ```
 
 We now have two separate columns for `vowel` and `formant`.
 
-::: {.callout-tip collapse="true"}
-## 2023 Note
-
-The `separate()` function has also been superseded in favor of `separate_wider_delim()`
-
-```{r}
-separate_wider_delim(
-  iy_ah_step1, 
-  vowel_formant, 
-  names = c("vowel", "formant"),
-  delim = "_"
-)
-```
-:::
-
-::: callout-tip
-## Hygiene
+::: {.box .hygiene}
+[Hygiene]{.label}
 
 I have been very helpful and used underscores to merge together the values we want to separate. Be helpful to yourself, and be consistent in the semantics of how you used potential delimiters like `-` and `_`. Here's an example of being helpful to yourself:
 
@@ -683,16 +633,12 @@ spread([data]{.pop}, [key]{.pop}, [value]{.pop})
 Here's how that looks with the `fruit_separate` data.
 
 ```{r}
-fruit_spread <- spread(
-  data = fruit_separate,
-  key = behavior,
-  value = number
-)
+fruit_spread <- spread(data = fruit_separate,
+                       key = behavior,
+                       value = number)
 ```
 
-```{r}
-#| echo: false
-#| results: asis
+```{r echo = F, results = 'asis'}
 kable(fruit_spread)
 ```
 
@@ -701,34 +647,16 @@ This has created a new data frame. I told `spread()` to spread the values in `be
 Here's how that works with `iy_ah_step2`.
 
 ```{r}
-iy_ah_step3 <- spread(
-  data = iy_ah_step2,
-  key = formant,
-  value = hz
-)
+iy_ah_step3 <- spread(data = iy_ah_step2,
+                      key = formant,
+                      value = hz)
 iy_ah_step3
 ```
 
 Now, we've finally gotten to a tidy data format. In our next meeting, we'll discuss how to chain these three functions into one easy to read process.
 
-::: {.callout-tip collapse="true"}
-## 2023 Note
-
-`spread()` has been superseded in favor of `pivot_wider()` .
-
-```{r}
-pivot_wider(
-  data = iy_ah_step2,
-  names_from = formant,
-  values_from = hz
-) |> 
-  head() |> 
-  rmarkdown::paged_table()
-```
-:::
-
-::: callout-tip
-## Idiom
+::: {.box .idiom}
+[Idiom]{.label}
 
 You might have noticed that in the functions above, I've put a new line between individual function arguments. I've done this because white-space doesn't matter when it comes to R. I could have written these with just spaces between each argument, but that would be too visually crowded.
 
