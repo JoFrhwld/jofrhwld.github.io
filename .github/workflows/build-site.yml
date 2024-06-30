@@ -9,6 +9,8 @@ jobs:
      runs-on: ubuntu-latest
      steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
       - uses: actions/setup-python@v2
         with:
           python-version: "3.11"
@@ -24,11 +26,17 @@ jobs:
       - name: Build Research pages
         run: |
           python make_research_qmd.py --zotero_key  ${{ secrets.ZOTERO_KEY }}
-          git config user.name 'bot'
-          git config user.email '...'
-          git add research/papers/*
-          git commit -m "gh workflow build [skip actions]"
-          git push
+      - name: Commit if diff
+        run: |
+          if git diff --exit-code; then
+            echo "No Changes"
+          else:
+            git config user.name 'bot'
+            git config user.email '...'
+            git add research/papers/*
+            git commit -m "gh workflow build [skip actions]" --no-verify
+            git push
+          fi
       - name: Render and publish to gh pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:
