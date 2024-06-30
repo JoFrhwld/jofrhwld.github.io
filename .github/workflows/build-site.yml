@@ -30,7 +30,7 @@ jobs:
         run: |
           if git diff --exit-code; then
             echo "No Changes"
-          else:
+          else
             git config user.name 'bot'
             git config user.email '...'
             git add research/papers/*
