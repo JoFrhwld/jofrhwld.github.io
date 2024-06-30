@@ -1,1 +1,1 @@
-Sitemap: https://github.com/JoFrhwld/jofrhwld.github.io/sitemap.xml
+Sitemap: https://JoFrhwld.github.io/jofrhwld.github.io/sitemap.xml

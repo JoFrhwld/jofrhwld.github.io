@@ -7,10 +7,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Josef Fruehwald">
-<meta name="dcterms.date" content="2019-01-01">
-<meta name="description" content="Proceedings of the 19th International Congress of Phonetic Sciences, Melbourne, Australia 2019">
+<meta name="author" content="Christian Brickhouse">
+<meta name="dcterms.date" content="2024-01-01">
+<meta name="description" content="Proceedings of the Society for Computation in Linguistics (SCiL) 2024">
 
-<title>Josef Fruehwald - Is phonetic target uniformity phonologically, or sociolinguistically grounded?</title>
+<title>Josef Fruehwald - aligned-textgrid: Lightweight access to structured phonetic data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -181,12 +182,12 @@ cookieconsent.run({
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Is phonetic target uniformity phonologically, or sociolinguistically grounded?</h1>
+<h1 class="title">aligned-textgrid: Lightweight access to structured phonetic data</h1>
 </div>
 
 <div>
   <div class="description">
-    Proceedings of the 19th International Congress of Phonetic Sciences, Melbourne, Australia 2019
+    Proceedings of the Society for Computation in Linguistics (SCiL) 2024
   </div>
 </div>
 
@@ -194,26 +195,35 @@ cookieconsent.run({
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Authors</div>
     <div class="quarto-title-meta-contents">
              <p>Josef Fruehwald </p>
+             <p>Christian Brickhouse </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2019</p>
+      <p class="date">2024</p>
     </div>
   </div>
   
     
+    <div>
+    <div class="quarto-title-meta-heading">Doi</div>
+    <div class="quarto-title-meta-contents">
+      <p class="doi">
+        <a href="https://doi.org/10.7275/SCIL.2217">10.7275/SCIL.2217</a>
+      </p>
+    </div>
+  </div>
   </div>
   
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    In this paper, I investigate to what degree phonetic uniformity in diachronic vowels shifts can be accounted for in terms of a shared phonetic implementation rule of phonological features [6, 10], versus a shared social evaluation of the phonetic realizations [19]. I take a particular focus on the parallel fronting and subsequent retraction of the GOOSE, GOAT and MOUTH vowels, as well as the raising of the preconsonantal FACE and pre-voiceless PRICE vowels in Philadelphia, drawing data from the Philadelphia Neighborhood Corpus [15]. Using generalized additive models [21] I ﬁt models for these vowels accounting for gender, date of birth, educational attainment, and vowel duration using tensor product smooths. Looking at the correlation of the byspeaker random intercepts, back vowel fronting appears to be highly correlated, thus likely phonologically grounded, while FACE and PRICE raising is not, thus likely socially grounded.
+    The goal of aligned-textgrid is to provide lightweight, scriptable access to the structured data produced by forced-aligners. The library is written in python, and currently available on the Python Package Index.
   </div>
 </div>
 
@@ -224,37 +234,27 @@ cookieconsent.run({
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{fruehwald2019,
-  author = {Fruehwald, Josef},
-  title = {Is Phonetic Target Uniformity Phonologically, or
-    Sociolinguistically Grounded?},
-  journal = {Proceedings of the 19th International Congress of Phonetic
-    Sciences, Melbourne, Australia 2019},
-  pages = {5},
-  date = {2019},
-  url = {https://www.internationalphoneticassociation.org/icphs-proceedings/ICPhS2019/papers/ICPhS_730.pdf},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{fruehwald2024,
+  author = {Fruehwald, Josef and Brickhouse, Christian},
+  title = {Aligned-Textgrid: {Lightweight} Access to Structured Phonetic
+    Data},
+  journal = {Proceedings of the Society for Computation in Linguistics
+    (SCiL) 2024},
+  pages = {329-330},
+  date = {2024-06-24},
+  url = {https://openpublishing.library.umass.edu/scil/article/id/2217/},
+  doi = {10.7275/SCIL.2217},
   langid = {en},
-  abstract = {In this paper, I investigate to what degree phonetic
-    uniformity in diachronic vowels shifts can be accounted for in terms
-    of a shared phonetic implementation rule of phonological features
-    {[}6, 10{]}, versus a shared social evaluation of the phonetic
-    realizations {[}19{]}. I take a particular focus on the parallel
-    fronting and subsequent retraction of the GOOSE, GOAT and MOUTH
-    vowels, as well as the raising of the preconsonantal FACE and
-    pre-voiceless PRICE vowels in Philadelphia, drawing data from the
-    Philadelphia Neighborhood Corpus {[}15{]}. Using generalized
-    additive models {[}21{]} I ﬁt models for these vowels accounting for
-    gender, date of birth, educational attainment, and vowel duration
-    using tensor product smooths. Looking at the correlation of the
-    byspeaker random intercepts, back vowel fronting appears to be
-    highly correlated, thus likely phonologically grounded, while FACE
-    and PRICE raising is not, thus likely socially grounded.}
+  abstract = {The goal of aligned-textgrid is to provide lightweight,
+    scriptable access to the structured data produced by
+    forced-aligners. The library is written in python, and currently
+    available on the Python Package Index.}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2019" class="csl-entry quarto-appendix-citeas" role="listitem">
-Fruehwald, Josef. 2019. <span>“Is Phonetic Target Uniformity
-Phonologically, or Sociolinguistically Grounded?”</span> <em>Proceedings
-of the 19th International Congress of Phonetic Sciences, Melbourne,
-Australia 2019</em>, 5. <a href="https://www.internationalphoneticassociation.org/icphs-proceedings/ICPhS2019/papers/ICPhS_730.pdf">https://www.internationalphoneticassociation.org/icphs-proceedings/ICPhS2019/papers/ICPhS_730.pdf</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Fruehwald, Josef, and Christian Brickhouse. 2024.
+<span>“Aligned-Textgrid: Lightweight Access to Structured Phonetic
+Data.”</span> <em>Proceedings of the Society for Computation in
+Linguistics (SCiL) 2024</em>, June, 329–30. <a href="https://doi.org/10.7275/SCIL.2217">https://doi.org/10.7275/SCIL.2217</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
