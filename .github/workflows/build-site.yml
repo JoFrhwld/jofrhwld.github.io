@@ -2,6 +2,7 @@ name: Build Site
 on:
   push:
     branches: ["master"]
+  workflow_dispatch: 
 
 jobs:
   build-docs:
@@ -20,6 +21,14 @@ jobs:
         run: Rscript -e 'renv::install("reticulate")'
       - name: Set up quarto
         uses: quarto-dev/quarto-actions/setup@v2
+      - name: Build Research pages
+        run: |
+          python make_research_qmd.py --zotero_key  ${{ secrets.ZOTERO_KEY }}
+          git config user.name 'bot'
+          git config user.email '...'
+          git add research/papers/*
+          git commit -m "gh workflow build [skip actions]"
+          git push
       - name: Render and publish to gh pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:
