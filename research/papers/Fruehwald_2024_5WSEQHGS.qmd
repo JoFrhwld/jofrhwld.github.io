@@ -1,0 +1,25 @@
+---
+abstract: ''
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Brickhouse
+    given: Christian
+citation:
+  container-title: Poster presented at SCiL 2024
+  issued: '2024-06-24'
+  type: paper-conference
+  url: https://jofrhwld.github.io/scil_2024/
+  volume: ''
+date: '2024-06-24'
+date-format: YYYY
+description: Poster presented at SCiL 2024
+doi: ''
+params:
+  key: 5WSEQHGS
+  notes: ''
+title: 'aligned-textgrid: Lightweight access to structured phonetic data'
+
+---

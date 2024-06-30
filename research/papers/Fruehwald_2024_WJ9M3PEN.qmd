@@ -1,0 +1,30 @@
+---
+abstract: The goal of aligned-textgrid is to provide lightweight, scriptable access
+  to the structured data produced by forced-aligners. The library is written in python,
+  and currently available on the Python Package Index.
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Brickhouse
+    given: Christian
+citation:
+  container-title: Proceedings of the Society for Computation in Linguistics (SCiL)
+    2024
+  issue: ''
+  issued: '2024-06-24'
+  page: 329-330
+  type: article-journal
+  url: https://openpublishing.library.umass.edu/scil/article/id/2217/
+  volume: ''
+date: '2024-06-24'
+date-format: YYYY
+description: Proceedings of the Society for Computation in Linguistics (SCiL) 2024
+doi: 10.7275/SCIL.2217
+params:
+  key: WJ9M3PEN
+  notes: 'Publisher: University of Massachusetts Amherst Libraries'
+title: 'aligned-textgrid: Lightweight access to structured phonetic data'
+
+---
