@@ -1,22 +1,5 @@
 [
   {
-    "listing": "/teaching/courses/2017_lsa/index.html",
-    "items": [
-      "/teaching/courses/2017_lsa/lectures/Session_1.nb.html",
-      "/teaching/courses/2017_lsa/lectures/Session_2.nb.html"
-    ]
-  },
-  {
-    "listing": "/software/index.html",
-    "items": [
-      "/software/packages/aligned-textgrid.html",
-      "/software/packages/densityarea.html",
-      "/software/packages/fasttrackpy.html",
-      "/software/packages/fave-recode.html",
-      "/software/packages/syllabifyr.html"
-    ]
-  },
-  {
     "listing": "/research/index.html",
     "items": [
       "/research/papers/Fruehwald_2024_5WSEQHGS.html",
@@ -49,6 +32,23 @@
       "/research/papers/Rosenfelder_2011_M3E7A7LS.html",
       "/research/papers/Fruehwald_2008_IZLBZKZV.html",
       "/research/papers/Fruehwald_2007_MG8DFJEK.html"
+    ]
+  },
+  {
+    "listing": "/software/index.html",
+    "items": [
+      "/software/packages/aligned-textgrid.html",
+      "/software/packages/densityarea.html",
+      "/software/packages/fasttrackpy.html",
+      "/software/packages/fave-recode.html",
+      "/software/packages/syllabifyr.html"
+    ]
+  },
+  {
+    "listing": "/teaching/courses/2017_lsa/index.html",
+    "items": [
+      "/teaching/courses/2017_lsa/lectures/Session_1.nb.html",
+      "/teaching/courses/2017_lsa/lectures/Session_2.nb.html"
     ]
   }
 ]
