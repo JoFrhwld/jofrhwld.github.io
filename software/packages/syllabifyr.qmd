@@ -17,7 +17,4 @@ citation:
   version: v0.1.1
 ---
 
-[![Static Badge](https://img.shields.io/badge/GH-get_it_on_Github-blue?logo=github)](https://github.com/JoFrhwld/syllabifyr)
-[![CRAN status](https://www.r-pkg.org/badges/version/syllabifyr)](https://CRAN.R-project.org/package=syllabifyr)
-[![pkgdown](https://github.com/JoFrhwld/syllabifyr/actions/workflows/pkgdown.yaml/badge.svg)](https://jofrhwld.github.io/syllabifyr/)
-[![DOI](https://zenodo.org/badge/139162633.svg)](https://zenodo.org/badge/latestdoi/139162633)
+[![Static Badge](https://img.shields.io/badge/GH-get_it_on_Github-blue?logo=github)](https://github.com/JoFrhwld/syllabifyr) [![CRAN status](https://www.r-pkg.org/badges/version/syllabifyr)](https://CRAN.R-project.org/package=syllabifyr) [![pkgdown](https://github.com/JoFrhwld/syllabifyr/actions/workflows/pkgdown.yaml/badge.svg)](https://jofrhwld.github.io/syllabifyr/) [![DOI](https://zenodo.org/badge/139162633.svg)](https://zenodo.org/badge/latestdoi/139162633)

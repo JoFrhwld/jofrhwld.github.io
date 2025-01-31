@@ -1,0 +1,24 @@
+---
+abstract: Implements tidy syllabification of transcription.  Based on @kylebgorman's
+  'python' implementation <https://github.com/kylebgorman/syllabify>.
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  issued: '2018-07-10'
+  type: dataset
+  url: https://CRAN.R-project.org/package=syllabifyr
+  version: ''
+date: '2018-07-10'
+date-format: YYYY
+description: ''
+doi: 10.32614/CRAN.package.syllabifyr
+params:
+  key: 6LW387PT
+  notes: 'Institution: Comprehensive R Archive Network
+
+    Pages: 0.1.1'
+title: 'syllabifyr: Syllabifier for CMU Dictionary Transcriptions'
+
+---

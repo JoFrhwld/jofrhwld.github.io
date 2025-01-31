@@ -19,12 +19,9 @@ citation:
   issued: '2023-11-22'
   type: software
   url: https://forced-alignment-and-vowel-extraction.github.io/alignedTextGrid/
-  version: v0.5.0
+  version: v0.76
 ---
-[![Static Badge](https://img.shields.io/badge/GH-get_it_on_Github-blue?logo=github)](https://github.com/Forced-Alignment-and-Vowel-Extraction/alignedTextGrid)
-[![PyPI](https://img.shields.io/pypi/v/aligned-textgrid.png)](https://pypi.org/project/aligned-textgrid/)
-[![Build Docs](https://github.com/Forced-Alignment-and-Vowel-Extraction/alignedTextGrid/actions/workflows/build-docs.yml/badge.svg)](https://forced-alignment-and-vowel-extraction.github.io/alignedTextGrid/)
-[![DOI](https://zenodo.org/badge/552633207.svg)](https://zenodo.org/badge/latestdoi/552633207)
 
+[![Static Badge](https://img.shields.io/badge/GH-get_it_on_Github-blue?logo=github)](https://github.com/Forced-Alignment-and-Vowel-Extraction/alignedTextGrid) [![PyPI](https://img.shields.io/pypi/v/aligned-textgrid.png)](https://pypi.org/project/aligned-textgrid/) [![Build Docs](https://github.com/Forced-Alignment-and-Vowel-Extraction/alignedTextGrid/actions/workflows/build-docs.yml/badge.svg)](https://forced-alignment-and-vowel-extraction.github.io/alignedTextGrid/) [![DOI](https://zenodo.org/badge/552633207.svg)](https://zenodo.org/badge/latestdoi/552633207)
 
 ![](assets/aligned-textgrid.svg){fig-align="center"}

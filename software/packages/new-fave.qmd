@@ -1,0 +1,21 @@
+---
+title: new-fave
+author:
+    - name:
+        family: Fruehwald
+        given: Josef
+categories: 
+  - fave
+  - formant extraction
+  - python
+abstract: 'new-fave is a tool for automating and optimizing vowel formant extraction. It is philosophically similar (and named after) the FAVE-suite. However, new-fave has been completely written from scratch, and has some key differences from the FAVE-suite.'
+date: 2024-11-09
+image: assets/fave_logo.png
+citation:
+  issued: '2024-11-09'
+  type: software
+  url: https://forced-alignment-and-vowel-extraction.github.io/alignedTextGrid/
+  version: v1.0.2
+---
+
+[![PyPI](https://img.shields.io/pypi/v/new-fave.png)](https://pypi.org/project/new-fave/) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/fasttrackpy) [![Python CI](https://github.com/Forced-Alignment-and-Vowel-Extraction/new-fave/actions/workflows/test-and-run.yml/badge.svg)](https://github.com/Forced-Alignment-and-Vowel-Extraction/new-fave/actions/workflows/test-and-run.yml) [![codecov](https://codecov.io/gh/Forced-Alignment-and-Vowel-Extraction/new-fave/graph/badge.svg?token=8JRGOB9NMN)](https://codecov.io/gh/Forced-Alignment-and-Vowel-Extraction/new-fave) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)

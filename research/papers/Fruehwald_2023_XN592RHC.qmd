@@ -1,0 +1,24 @@
+---
+abstract: With bivariate data, it is possible to calculate 2-dimensional kernel density
+  estimates that return polygons at given levels of probability. 'densityarea' returns
+  these polygons for analysis, including for calculating their area.
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  issued: '2023-10-02'
+  type: dataset
+  url: https://CRAN.R-project.org/package=densityarea
+  version: ''
+date: '2023-10-02'
+date-format: YYYY
+description: ''
+doi: 10.32614/CRAN.package.densityarea
+params:
+  key: XN592RHC
+  notes: 'Institution: Comprehensive R Archive Network
+
+    Pages: 0.1.0'
+title: 'densityarea: Polygons of Bivariate Density Distributions'
+---

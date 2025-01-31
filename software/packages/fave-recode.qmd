@@ -18,7 +18,5 @@ citation:
   url: https://forced-alignment-and-vowel-extraction.github.io/fave-recode/
   version: v0.2.0
 ---
-[![Static Badge](https://img.shields.io/badge/GH-get_it_on_Github-blue?logo=github)](https://github.com/Forced-Alignment-and-Vowel-Extraction/fave-recode)
-[![PyPI](https://img.shields.io/pypi/v/fave-recode.png)](https://pypi.org/project/fave-recode/)
-[![BuildDocs](https://github.com/Forced-Alignment-and-Vowel-Extraction/fave-recode/actions/workflows/build-docs.yml/badge.svg)](https://forced-alignment-and-vowel-extraction.github.io/fave-recode/)
-[![DOI](https://zenodo.org/badge/605740158.svg)](https://zenodo.org/badge/latestdoi/605740158)
+
+[![Static Badge](https://img.shields.io/badge/GH-get_it_on_Github-blue?logo=github)](https://github.com/Forced-Alignment-and-Vowel-Extraction/fave-recode) [![PyPI](https://img.shields.io/pypi/v/fave-recode.png)](https://pypi.org/project/fave-recode/) [![BuildDocs](https://github.com/Forced-Alignment-and-Vowel-Extraction/fave-recode/actions/workflows/build-docs.yml/badge.svg)](https://forced-alignment-and-vowel-extraction.github.io/fave-recode/) [![DOI](https://zenodo.org/badge/605740158.svg)](https://zenodo.org/badge/latestdoi/605740158)
