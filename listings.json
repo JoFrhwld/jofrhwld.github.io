@@ -1,27 +1,38 @@
 [
   {
+    "listing": "/teaching/courses/2017_lsa/index.html",
+    "items": [
+      "/teaching/courses/2017_lsa/lectures/Session_1.nb.html",
+      "/teaching/courses/2017_lsa/lectures/Session_2.nb.html"
+    ]
+  },
+  {
     "listing": "/research/index.html",
     "items": [
+      "/research/papers/Fruehwald_2025_IBRKXRUA.html",
+      "/research/papers/Fruehwald_2025_2VDCSBR4.html",
       "/research/papers/Fruehwald_2024_5WSEQHGS.html",
       "/research/papers/Fruehwald_2024_WJ9M3PEN.html",
       "/research/papers/Fruehwald_2023_BNWT43F9.html",
       "/research/papers/Fruehwald_2023_GY5I9QMZ.html",
       "/research/papers/Fruehwald_2023_MW4ESNC8.html",
-      "/research/papers/Fruehwald_2023_W27UEZSV.html",
+      "/research/papers/Fruehwald_2023_XN592RHC.html",
       "/research/papers/Purse_2022_LIGPGR5R.html",
       "/research/papers/Fruehwald_2022_H347UNLS.html",
       "/research/papers/Rosenfelder_2022_TRXWWXD2.html",
       "/research/papers/Boyd_2021_733Q4MMI.html",
-      "/research/papers/Fruehwald_2020_6IQH5VV5.html",
       "/research/papers/Tanner_2020_GH2LZM4Y.html",
       "/research/papers/Sneller_2019_8ERVHBSG.html",
       "/research/papers/Fruehwald_2019_URYFVWHE.html",
       "/research/papers/Mielke_2019_U5C56KNR.html",
+      "/research/papers/Fruehwald_2018_6LW387PT.html",
+      "/research/papers/Fruehwald_2017_7WLJWA35.html",
       "/research/papers/Fruehwald_2017_258NF56V.html",
       "/research/papers/Fruehwald_2017_ETG527QQ.html",
       "/research/papers/Fruehwald_2016_34D4IRNY.html",
       "/research/papers/Fruehwald_2016_TCTQU8FS.html",
       "/research/papers/Wieling_2016_FU9RXCUV.html",
+      "/research/papers/Boyd_2015_LRR7PPEY.html",
       "/research/papers/Fruehwald_2015_TJI9T9W6.html",
       "/research/papers/Rosenfelder_2015_K57PJ2RE.html",
       "/research/papers/Fruehwald_2013_H3BZPAT7.html",
@@ -41,14 +52,8 @@
       "/software/packages/densityarea.html",
       "/software/packages/fasttrackpy.html",
       "/software/packages/fave-recode.html",
+      "/software/packages/new-fave.html",
       "/software/packages/syllabifyr.html"
-    ]
-  },
-  {
-    "listing": "/teaching/courses/2017_lsa/index.html",
-    "items": [
-      "/teaching/courses/2017_lsa/lectures/Session_1.nb.html",
-      "/teaching/courses/2017_lsa/lectures/Session_2.nb.html"
     ]
   }
 ]

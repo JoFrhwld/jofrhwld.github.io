@@ -10,3 +10,4 @@ title: "Teaching"
 -   [Spring 2023 Quantitative Investigations in the Social Sciences](https://jofrhwld.github.io/AandS500_2023/)
 -   [Spring 2024 Computational Linguistics](https://lin511-2024.github.io/)
 -   [Fall 2024 Quantitative Methods in Linguistics](https://lin611-2024.github.io/)
+-   [Spring 2025 NLP Course](https://lin517-2025.github.io/)
