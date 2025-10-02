@@ -1,0 +1,28 @@
+---
+abstract: This paper provides an overview of the discrete cosine transform (DCT) as
+  a method for smoothing vowel formant tracks, as well as a procedure to take any
+  speaker normalization method that has been defined for formant point measurements
+  and define an equivalent method to be applied directly to DCT coefficients. This
+  procedure is followed for three established normalization methods, and the difference
+  between DCT normalization and formant point normalization is found to be marginal.
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  container-title: Linguistics Vanguard
+  issue: ''
+  issued: '2025-08-20'
+  type: article-journal
+  url: https://www.degruyterbrill.com/document/doi/10.1515/lingvan-2024-0095/html
+  volume: ''
+date: '2025-08-20'
+date-format: YYYY
+description: Linguistics Vanguard
+doi: 10.1515/lingvan-2024-0095
+params:
+  key: IBRKXRUA
+  notes: 'Publisher: De Gruyter Mouton'
+title: Vowel formant track normalization using discrete cosine transform coefficients
+
+---

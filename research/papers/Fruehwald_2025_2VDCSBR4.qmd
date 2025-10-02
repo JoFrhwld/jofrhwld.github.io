@@ -1,0 +1,20 @@
+---
+abstract: new-fave is a tool for automating and optimizing vowel formant extraction.
+  It is philosophically similar (and named after) the FAVE-suite.
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  issued: '2025-03-03'
+  type: software
+  url: https://forced-alignment-and-vowel-extraction.github.io/new-fave/
+  version: v1.1.1
+date: '2025-03-03'
+date-format: YYYY
+description: v1.1.1
+params:
+  key: 2VDCSBR4
+  notes: 'DOI: 10.5281/ZENODO.14837885'
+title: new-fave
+---

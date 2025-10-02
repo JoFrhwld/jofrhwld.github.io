@@ -1,0 +1,39 @@
+---
+abstract: This study investigates the effects of different elicitation methods on
+  the speech of a single speaker of San Francisco English who is participating in
+  a systematic set of vocalic sound changes known as the California Vowel Shift [6].
+  We contrast data obtained from classic sociolinguistic interview methods with data
+  from self-recordings, as well as data from various methods for eliciting spontaneous
+  speech that are typically used in laboratory settings.
+author:
+- name:
+    family: Boyd
+    given: Zac
+- name:
+    family: Elliott
+    given: Zuzana
+- name:
+    family: Fruehwald
+    given: Josef
+- name:
+    family: Hall-Lew
+    given: Lauren
+- name:
+    family: Lawrence
+    given: Daniel
+citation:
+  container-title: Proceedings of the 18th International Congress of Phonetic Sciences.
+  issue: ''
+  issued: '2015'
+  type: article-journal
+  url: https://www.internationalphoneticassociation.org/icphs-proceedings/ICPhS2015/Papers/ICPHS0800.pdf
+  volume: ''
+date: '2015'
+date-format: YYYY
+description: Proceedings of the 18th International Congress of Phonetic Sciences.
+doi: ''
+params:
+  key: LRR7PPEY
+  notes: ''
+title: An Evaluation of Sociolinguistic Elicitation Methods
+---

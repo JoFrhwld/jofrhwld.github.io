@@ -18,7 +18,7 @@ citation:
   type: article-journal
   url: ''
   volume: '93'
-date: '2017'
+date: '2017-01-01'
 date-format: YYYY
 description: Language
 doi: 10.1353/lan.2017.0051
@@ -27,5 +27,4 @@ params:
   notes: ''
 title: "Response to Berkson, Davis, & Strickler, \u2018What does incipient /ay/-raising\
   \ look like?\u2019"
-
 ---

@@ -33,5 +33,4 @@ params:
   key: ETG527QQ
   notes: ''
 title: Generations, lifespans, and the zeitgeist
-
 ---
