@@ -4,6 +4,7 @@ project:
     - workshops
     - teaching
     - data
+    - "~joe"
     #- papers
   render:
     - "*qmd"
@@ -37,6 +38,8 @@ website:
         text: Teaching
       - href: teaching/courses/2017_lsa/index.qmd
         text: "LSA 2017 Course"
+      - href: "~joe/"
+        text: "~"
     right:
       - href: https://jofrhwld.github.io/blog/
         text: Blog
