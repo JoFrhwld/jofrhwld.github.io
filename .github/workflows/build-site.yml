@@ -8,6 +8,8 @@ jobs:
   build-docs:
      runs-on: ubuntu-latest
      steps:
+      - name: Install libcurl development files
+        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev      
       - uses: actions/checkout@v2
         with:
           fetch-depth: 2
