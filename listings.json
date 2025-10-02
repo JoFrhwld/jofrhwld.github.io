@@ -7,6 +7,18 @@
     ]
   },
   {
+    "listing": "/software/index.html",
+    "items": [
+      "/software/packages/aligned-textgrid.html",
+      "/software/packages/densityarea.html",
+      "/software/packages/fasttrackpy.html",
+      "/software/packages/fave-recode.html",
+      "/software/packages/new-fave.html",
+      "/software/packages/syllabifyr.html",
+      "/software/packages/tidynorm.html"
+    ]
+  },
+  {
     "listing": "/research/index.html",
     "items": [
       "/research/papers/Fruehwald_2025_IBRKXRUA.html",
@@ -43,17 +55,6 @@
       "/research/papers/Rosenfelder_2011_M3E7A7LS.html",
       "/research/papers/Fruehwald_2008_IZLBZKZV.html",
       "/research/papers/Fruehwald_2007_MG8DFJEK.html"
-    ]
-  },
-  {
-    "listing": "/software/index.html",
-    "items": [
-      "/software/packages/aligned-textgrid.html",
-      "/software/packages/densityarea.html",
-      "/software/packages/fasttrackpy.html",
-      "/software/packages/fave-recode.html",
-      "/software/packages/new-fave.html",
-      "/software/packages/syllabifyr.html"
     ]
   }
 ]
