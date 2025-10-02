@@ -1,0 +1,22 @@
+---
+title: 'tidynorm: Tools for Tidy Vowel Normalization'
+abstract: An implementation of tidy speaker vowel normalization.
+categories:
+    - R
+    - phonetics
+author:
+- name:
+    family: Fruehwald
+    given: Josef
+citation:
+  issued: '2025-06-16'
+  type: software
+  url: https://jofrhwld.github.io/tidynorm/
+  version: v0.3.1
+date: '2025-06-16'
+date-format: YYYY
+doi: 10.32614/CRAN.package.tidynorm
+image: assets/tidynorm_logo.png
+---
+
+[![CRAN status](https://www.r-pkg.org/badges/version/tidynorm)](https://CRAN.R-project.org/package=tidynorm) [![pkgdown](https://github.com/JoFrhwld/tidynorm/actions/workflows/pkgdown.yaml/badge.svg)](https://jofrhwld.github.io/tidynorm/)
