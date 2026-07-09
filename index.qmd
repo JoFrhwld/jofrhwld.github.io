@@ -5,7 +5,7 @@ about:
   image: assets/profile.jpg
 ---
 
-I am an Assistant Professor in [the Linguistics Department](https://linguistics.as.uky.edu/) at the [University of Kentucky](https://www.as.uky.edu/). My interests within linguistics are sociolinguistics, variation and change, phonetics, and phonology.
+I am an Associate Professor in [the Linguistics Department](https://linguistics.as.uky.edu/) at the [University of Kentucky](https://www.as.uky.edu/). My interests within linguistics are sociolinguistics, variation and change, phonetics, and phonology.
 
 ### Contact
 

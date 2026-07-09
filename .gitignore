@@ -14,3 +14,5 @@ oldsite
 .python-version
 .ipynb_checkpoints
 /.quarto/
+
+**/*.quarto_ipynb
